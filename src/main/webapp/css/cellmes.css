@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+.bor{
+	width:1347px;
+	height:500px;
+	background-color: white;
+	
+}
+.details{
+	background-color:#F2F2F2;
+	padding-top:10px;
+	padding-left:150px;
+	width:1195px;
+	height:30px;
+	font-size: 17px;
+}
+.cpimg{
+	float:left;
+	margin-left:100px;
+	width: 350px;
+	height: 430px;	
+	cursor: pointer;
+}
+.cptmp img:HOVER{
+	border: 1px solid orange;
+}
+.cptmp{
+	cursor: pointer;
+	margin-top:10px;
+	margin-left:20px;
+	/* border: 1px solid orange; */
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+.desc{
+	margin-left:470px;
+	width: 530px;
+	height: 430px;	
+	position: absolute;
+}
+.seller{
+	margin-left:1030px;
+	width: 300px;
+	height: 430px;	
+}
+.seller ul li{
+	margin-top: 20px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.desc ul li{
+	margin-top: 20px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

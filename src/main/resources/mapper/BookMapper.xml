@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sttx.bookmanager.dao.BookMapper">
+	<resultMap id="BookBaseResultMap" type="com.sttx.bookmanager.po.Book">
+		<id column="book_Id" property="bookId" jdbcType="VARCHAR" />
+		<result column="user_Id" property="userId" jdbcType="VARCHAR" />
+		<result column="book_Country" property="bookCountry" jdbcType="INTEGER" />
+		<result column="book_No" property="bookNo" jdbcType="VARCHAR" />
+		<result column="book_Img" property="bookImg" jdbcType="VARCHAR" />
+		<result column="book_Name" property="bookName" jdbcType="VARCHAR" />
+		<result column="book_Author" property="bookAuthor" jdbcType="VARCHAR" />
+		<result column="book_House" property="bookHouse" jdbcType="VARCHAR" />
+		<result column="book_Price" property="bookPrice" jdbcType="DOUBLE" />
+		<result column="book_Desc" property="bookDesc" jdbcType="VARCHAR" />
+		<result column="book_Count" property="bookCount" jdbcType="INTEGER" />
+		<result column="book_House" property="bookHouse" jdbcType="INTEGER" />
+		<result column="book_By_Time" property="bookByTime" jdbcType="INTEGER" />
+		<result column="book_Remain" property="bookRemain" jdbcType="INTEGER" />
+		<result column="book_Upload_Time" property="bookUploadTime"
+			jdbcType="VARCHAR" />
+		<result column="book_Type" property="bookType" jdbcType="INTEGER" />
+		<result column="book_Status" property="bookStatus" jdbcType="INTEGER" />
+		<result column="book_Flag" property="bookFlag" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="BookBase_Column_List">
+		book_Id, user_Id, book_No, book_Img, book_Name,
+		book_Author,book_House,book_Price,
+		book_Desc,
+		book_Count, book_Remain,
+		book_Upload_Time, book_Type,book_Status, book_Flag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="bookUserResultMap"
+		parameterType="java.lang.String" useCache="false">
+		select
+		b.*,u.*
+		from t_book
+		b,t_user u
+		where b.user_Id=u.user_Id
+		and book_Id = #{bookId,jdbcType=VARCHAR}
+		and book_Flag=1
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		update from t_book
+		set book_Flag=0
+		where book_Id = #{bookId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sttx.bookmanager.po.Book">
+		insert into t_book (book_Id,
+		user_Id, book_No,
+		book_Img, book_Name, book_Author,book_House
+		book_Price,
+		book_Desc, book_Count,
+		book_Remain, book_Upload_Time,
+		book_Type,book_Status,
+		book_Flag)
+		values (#{bookId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{bookNo,jdbcType=VARCHAR},
+		#{bookImg,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR},
+		#{bookAuthor,jdbcType=VARCHAR},
+		#{bookHouse,jdbcType=VARCHAR},
+		#{bookPrice,jdbcType=DOUBLE},
+		#{bookDesc,jdbcType=VARCHAR},
+		#{bookCount,jdbcType=INTEGER},
+		#{bookRemain,jdbcType=INTEGER},
+		#{bookUploadTime,jdbcType=VARCHAR},
+		#{bookType,jdbcType=INTEGER},
+		#{bookStatus,jdbcType=INTEGER},
+		#{bookFlag,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sttx.bookmanager.po.Book">
+		insert into t_book
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="bookId != null">
+				book_Id,
+			</if>
+			<if test="userId != null">
+				user_Id,
+			</if>
+			<if test="bookCountry != null">
+				book_Country,
+			</if>
+			<if test="bookNo != null">
+				book_No,
+			</if>
+			<if test="bookImg != null">
+				book_Img,
+			</if>
+			<if test="bookName != null">
+				book_Name,
+			</if>
+			<if test="bookAuthor != null">
+				book_Author,
+			</if>
+			<if test="bookHouse != null">
+				book_House,
+			</if>
+			<if test="bookPrice != null">
+				book_Price,
+			</if>
+			<if test="bookDesc != null">
+				book_Desc,
+			</if>
+			<if test="bookCount != null">
+				book_Count,
+			</if>
+			<if test="bookByTime != null">
+				book_By_Time,
+			</if>
+			<if test="bookRemain != null">
+				book_Remain,
+			</if>
+			<if test="bookUploadTime != null">
+				book_Upload_Time,
+			</if>
+			<if test="bookType != null">
+				book_Type,
+			</if>
+			<if test="bookStatus != null">
+				book_Status,
+			</if>
+			<if test="bookFlag != null">
+				book_Flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="bookId != null">
+				#{bookId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="bookCountry != null">
+				#{bookCountry,jdbcType=INTEGER},
+			</if>
+			<if test="bookNo != null">
+				#{bookNo,jdbcType=VARCHAR},
+			</if>
+			<if test="bookImg != null">
+				#{bookImg,jdbcType=VARCHAR},
+			</if>
+			<if test="bookName != null">
+				#{bookName,jdbcType=VARCHAR},
+			</if>
+			<if test="bookAuthor != null">
+				#{bookAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="bookHouse != null">
+				#{bookHouse,jdbcType=VARCHAR},
+			</if>
+			<if test="bookPrice != null">
+				#{bookPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="bookDesc != null">
+				#{bookDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="bookCount != null">
+				#{bookCount,jdbcType=INTEGER},
+			</if>
+			<if test="bookByTime != null">
+				#{bookByTime,jdbcType=INTEGER},
+			</if>
+			<if test="bookRemain != null">
+				#{bookRemain,jdbcType=INTEGER},
+			</if>
+			<if test="bookUploadTime != null">
+				#{bookUploadTime,jdbcType=VARCHAR},
+			</if>
+			<if test="bookType != null">
+				#{bookType,jdbcType=INTEGER},
+			</if>
+			<if test="bookStatus != null">
+				#{bookStatus,jdbcType=INTEGER},
+			</if>
+			<if test="bookFlag != null">
+				#{bookFlag,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sttx.bookmanager.po.Book">
+		update t_book
+		<set>
+			<if test="userId != null">
+				user_Id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="bookCountry != null">
+				book_Country= #{bookCountry,jdbcType=INTEGER},
+			</if>
+			<if test="bookNo != null">
+				book_No = #{bookNo,jdbcType=VARCHAR},
+			</if>
+			<if test="bookImg != null">
+				book_Img = #{bookImg,jdbcType=VARCHAR},
+			</if>
+			<if test="bookName != null">
+				book_Name = #{bookName,jdbcType=VARCHAR},
+			</if>
+			<if test="bookAuthor != null">
+				book_Author = #{bookAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="bookHouse != null">
+				book_House = #{bookHouse,jdbcType=VARCHAR},
+			</if>
+			<if test="bookPrice != null">
+				book_Price = #{bookPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="bookDesc != null">
+				book_Desc = #{bookDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="bookCount != null">
+				book_Count = #{bookCount,jdbcType=INTEGER},
+			</if>
+			<if test="bookByTime != null">
+				book_By_Time = #{bookByTime,jdbcType=INTEGER},
+			</if>
+			<if test="bookRemain != null">
+				book_Remain = #{bookRemain,jdbcType=INTEGER},
+			</if>
+			<if test="bookUploadTime != null">
+				book_Upload_Time = #{bookUploadTime,jdbcType=VARCHAR},
+			</if>
+			<if test="bookType != null">
+				book_Type = #{bookType,jdbcType=INTEGER},
+			</if>
+			<if test="bookStatus != null">
+				book_Status = #{bookStatus,jdbcType=INTEGER},
+			</if>
+			<if test="bookFlag != null">
+				book_Flag = #{bookFlag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where book_Id = #{bookId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sttx.bookmanager.po.Book">
+		update t_book
+		set
+		user_Id = #{userId,jdbcType=VARCHAR},
+		book_No =
+		#{bookNo,jdbcType=VARCHAR},
+		book_Img = #{bookImg,jdbcType=VARCHAR},
+		book_Name = #{bookName,jdbcType=VARCHAR},
+		book_Author =
+		#{bookAuthor,jdbcType=VARCHAR},
+		book_Price =
+		#{bookPrice,jdbcType=DOUBLE},
+		book_Desc = #{bookDesc,jdbcType=VARCHAR},
+		book_Count = #{bookCount,jdbcType=INTEGER},
+		book_Remain =
+		#{bookRemain,jdbcType=INTEGER},
+		book_Upload_Time =
+		#{bookUploadTime,jdbcType=VARCHAR},
+		book_Type =
+		#{bookType,jdbcType=INTEGER},
+		book_Status =
+		#{bookStatus,jdbcType=INTEGER},
+		book_Flag =
+		#{bookFlag,jdbcType=INTEGER}
+		where book_Id = #{bookId,jdbcType=VARCHAR}
+	</update>
+	<!-- 插件分页 多条件查 -->
+	<sql id="selectBookListWhere">
+		<if test="book.bookNo!=null and book.bookNo!=''">
+			and book_No=#{book.bookNo,jdbcType=VARCHAR}
+		</if>
+		<if test="book.bookName!=null and book.bookName!=''">
+			and book_Name like '%${book.bookName}%'
+		</if>
+		<if test="book.bookCountry!=null">
+			and book_Country=#{book.bookCountry,jdbcType=INTEGER}
+		</if>
+		<if test="book.bookAuthor!=null and book.bookAuthor!=''">
+			and book_Author like '%${book.bookAuthor}%'
+		</if>
+		<if test="book.bookHouse!=null and book.bookHouse!=''">
+			and book_House like '%${book.bookHouse}%'
+		</if>
+		<if test="book.bookDesc!=null and book.bookDesc!=''">
+			and book_Desc like '%${book.bookDesc}%'
+		</if>
+		<if test="book.bookByTime!=null and book.ByTime!=''">
+			and book_By_Time=#{book.bookByTime,jdbcType=VARCHAR}
+		</if>
+		<if test="book.bookUploadTime!=null and book.bookUploadTime!=''">
+			and book_Upload_Time like
+			'%${book.bookUploadTime}%'
+		</if>
+	</sql>
+	<!-- 映射书主人 -->
+	<resultMap type="com.sttx.bookmanager.po.Book" id="bookUserResultMap"
+		extends="BookBaseResultMap">
+		<association property="user" javaType="com.sttx.bookmanager.po.User">
+			<id column="user_Id" property="userId" />
+			<result column="login_Name" property="loginName" />
+			<result column="real_Name" property="realName" jdbcType="VARCHAR" />
+			<result column="user_Email" property="userEmail" jdbcType="VARCHAR" />
+			<result column="user_Tel" property="userTel" jdbcType="VARCHAR" />
+			<result column="user_Head" property="userHead" jdbcType="VARCHAR" />
+			<result column="user_Role" property="userRole" jdbcType="INTEGER" />
+			<result column="user_Sex" property="userSex" jdbcType="INTEGER" />
+			<result column="user_RegistTime" property="userRegisttime"
+				jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<select id="selectBookPages" resultMap="bookUserResultMap"
+		parameterType="com.sttx.bookmanager.po.Book" useCache="false">
+		SELECT
+		b.*,
+		u.login_Name,u.real_Name
+		FROM
+		t_book
+		b,t_user u
+		where b.user_Id=u.user_Id
+		<if test="book.userId!=null and book.userId!=''">
+			and u.user_Id=#{book.userId,jdbcType=VARCHAR}
+		</if>
+		and book_Flag=1
+		<include refid="selectBookListWhere"></include>
+		<if test="book.user.loginName!=null and book.user.loginName!=''">
+		and u.login_Name like '%${book.user.loginName}%'
+		</if>
+		ORDER BY book_Upload_Time DESC
+	</select>
+	
+	<select id="countByBookId" parameterType="java.lang.String" resultType="java.lang.Integer">
+	SELECT book_Remain FROM t_book WHERE book_Id=#{bookId}
+	</select>
+	
+</mapper>

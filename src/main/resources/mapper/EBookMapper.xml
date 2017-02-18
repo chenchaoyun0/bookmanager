@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sttx.bookmanager.dao.EBookMapper">
+	<resultMap id="BaseResultMap" type="com.sttx.bookmanager.po.EBook">
+		<id column="ebook_Id" property="ebookId" jdbcType="VARCHAR" />
+		<result column="user_Id" property="userId" jdbcType="VARCHAR" />
+		<result column="ebook_Name" property="ebookName" jdbcType="VARCHAR" />
+		<result column="ebook_Country" property="ebookCountry"
+			jdbcType="INTEGER" />
+		<result column="ebook_No" property="ebookNo" jdbcType="VARCHAR" />
+		<result column="ebook_House" property="ebookHouse" jdbcType="VARCHAR" />
+		<result column="ebook_Img" property="ebookImg" jdbcType="VARCHAR" />
+		<result column="ebook_Desc" property="ebookDesc" jdbcType="VARCHAR" />
+		<result column="ebook_Author" property="ebookAuthor" jdbcType="VARCHAR" />
+		<result column="ebook_Type" property="ebookType" jdbcType="VARCHAR" />
+		<result column="ebook_Size" property="ebookSize" jdbcType="INTEGER" />
+		<result column="ebook_Path" property="ebookPath" jdbcType="VARCHAR" />
+		<result column="ebook_Upload_Time" property="ebookUploadTime"
+			jdbcType="INTEGER" />
+		<result column="ebook_Download_Count" property="ebookDownloadCount"
+			jdbcType="VARCHAR" />
+		<result column="ebook_Flag" property="ebookFlag" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ebook_Id, user_Id, ebook_Name, ebook_Country,ebook_No,
+		ebook_House, ebook_Img, ebook_Desc,
+		ebook_Author,
+		ebook_Type,
+		ebook_Size, ebook_Path, ebook_Upload_Time, ebook_Download_Count,
+		ebook_Flag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_ebook
+		where ebook_Id = #{ebookId,jdbcType=VARCHAR}
+		and ebook_Flag=1
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		update t_ebook
+		set
+		ebook_Flag=0 where ebook_Id = #{ebookId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sttx.bookmanager.po.EBook">
+		insert into t_ebook (ebook_Id,
+		user_Id, ebook_Name,
+		ebook_No, ebook_House, ebook_Img,
+		ebook_Desc,
+		ebook_Author, ebook_Type,
+		ebook_Size, ebook_Path, ebook_Upload_Time,
+		ebook_Download_Count, ebook_Flag)
+		values (#{ebookId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{ebookName,jdbcType=VARCHAR},
+		#{ebookNo,jdbcType=VARCHAR}, #{ebookHouse,jdbcType=VARCHAR},
+		#{ebookImg,jdbcType=VARCHAR},
+		#{ebookDesc,jdbcType=VARCHAR},
+		#{ebookAuthor,jdbcType=VARCHAR},
+		#{ebookType,jdbcType=VARCHAR},
+		#{ebookSize,jdbcType=INTEGER}, #{ebookPath,jdbcType=VARCHAR},
+		#{ebookUploadTime,jdbcType=VARCHAR},
+		#{ebookDownloadCount,jdbcType=INTEGER}, #{ebookFlag,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sttx.bookmanager.po.EBook">
+		insert into t_ebook
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ebookId != null">
+				ebook_Id,
+			</if>
+			<if test="userId != null">
+				user_Id,
+			</if>
+			<if test="ebookName != null">
+				ebook_Name,
+			</if>
+			<if test="ebookCountry != null">
+				ebook_Country,
+			</if>
+			<if test="ebookNo != null">
+				ebook_No,
+			</if>
+			<if test="ebookHouse != null">
+				ebook_House,
+			</if>
+			<if test="ebookImg != null">
+				ebook_Img,
+			</if>
+			<if test="ebookDesc != null">
+				ebook_Desc,
+			</if>
+			<if test="ebookAuthor != null">
+				ebook_Author,
+			</if>
+			<if test="ebookType != null">
+				ebook_Type,
+			</if>
+			<if test="ebookSize != null">
+				ebook_Size,
+			</if>
+			<if test="ebookPath != null">
+				ebook_Path,
+			</if>
+			<if test="ebookUploadTime != null">
+				ebook_Upload_Time,
+			</if>
+			<if test="ebookDownloadCount != null">
+				ebook_Download_Count,
+			</if>
+			<if test="ebookFlag != null">
+				ebook_Flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ebookId != null">
+				#{ebookId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookName != null">
+				#{ebookName,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookCountry != null">
+				#{ebookCountry,jdbcType=INTEGER},
+			</if>
+			<if test="ebookNo != null">
+				#{ebookNo,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookHouse != null">
+				#{ebookHouse,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookImg != null">
+				#{ebookImg,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookDesc != null">
+				#{ebookDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookAuthor != null">
+				#{ebookAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookType != null">
+				#{ebookType,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookSize != null">
+				#{ebookSize,jdbcType=INTEGER},
+			</if>
+			<if test="ebookPath != null">
+				#{ebookPath,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookUploadTime != null">
+				#{ebookUploadTime,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookDownloadCount != null">
+				#{ebookDownloadCount,jdbcType=INTEGER},
+			</if>
+			<if test="ebookFlag != null">
+				#{ebookFlag,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sttx.bookmanager.po.EBook">
+		update t_ebook
+		<set>
+			<if test="userId != null">
+				user_Id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookName != null">
+				ebook_Name = #{ebookName,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookNo != null">
+				ebook_No = #{ebookNo,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookHouse != null">
+				ebook_House = #{ebookHouse,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookImg != null">
+				ebook_Img = #{ebookImg,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookDesc != null">
+				ebook_Desc = #{ebookDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookAuthor != null">
+				ebook_Author = #{ebookAuthor,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookType != null">
+				ebook_Type = #{ebookType,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookSize != null">
+				ebook_Size = #{ebookSize,jdbcType=INTEGER},
+			</if>
+			<if test="ebookPath != null">
+				ebook_Path = #{ebookPath,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookUploadTime != null">
+				ebook_Upload_Time = #{ebookUploadTime,jdbcType=VARCHAR},
+			</if>
+			<if test="ebookDownloadCount != null">
+				ebook_Download_Count =
+				#{ebookDownloadCount,jdbcType=INTEGER},
+			</if>
+			<if test="ebookFlag != null">
+				ebook_Flag = #{ebookFlag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ebook_Id = #{ebookId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sttx.bookmanager.po.EBook">
+		update t_ebook
+		set
+		user_Id = #{userId,jdbcType=VARCHAR},
+		ebook_Name =
+		#{ebookName,jdbcType=VARCHAR},
+		ebook_No = #{ebookNo,jdbcType=VARCHAR},
+		ebook_House = #{ebookHouse,jdbcType=VARCHAR},
+		ebook_Img =
+		#{ebookImg,jdbcType=VARCHAR},
+		ebook_Desc =
+		#{ebookDesc,jdbcType=VARCHAR},
+		ebook_Author =
+		#{ebookAuthor,jdbcType=VARCHAR},
+		ebook_Type =
+		#{ebookType,jdbcType=VARCHAR},
+		ebook_Size =
+		#{ebookSize,jdbcType=INTEGER},
+		ebook_Path =
+		#{ebookPath,jdbcType=VARCHAR},
+		ebook_Upload_Time =
+		#{ebookUploadTime,jdbcType=VARCHAR},
+		ebook_Download_Count =
+		#{ebookDownloadCount,jdbcType=INTEGER},
+		ebook_Flag =
+		#{ebookFlag,jdbcType=INTEGER}
+		where ebook_Id =
+		#{ebookId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateDownloadCount" parameterType="com.sttx.bookmanager.po.EBook">
+		update t_ebook set
+		ebook_Download_Count=ebook_Download_Count+1
+		where ebook_Id = #{ebookId,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 插件分页 多条件查 -->
+	<sql id="selectEBookListWhere">
+		<if test="eBook.ebookNo!=null and eBook.ebookNo!=''">
+			and eBook_No like '%${eBook.ebookNo}%'
+		</if>
+		<if test="eBook.ebookUploadTime!=null and eBook.ebookUploadTime!=''">
+			and ebook_Upload_Time like '%${eBook.ebookUploadTime}%'
+		</if>
+		<if test="eBook.ebookName!=null and eBook.ebookName!=''">
+			and ebook_Name like '%${eBook.ebookName}%'
+		</if>
+		<if test="eBook.ebookAuthor!=null and eBook.ebookAuthor!=''">
+			and ebook_Author like '%${eBook.ebookAuthor}%'
+		</if>
+		<if test="eBook.ebookCountry!=null">
+			and ebook_Country=#{eBook.ebookCountry,jdbcType=INTEGER}
+		</if>
+		<if test="eBook.ebookHouse!=null and eBook.ebookHouse!=''">
+			and ebook_House like '%${eBook.ebookHouse}%'
+		</if>
+		and ebook_Flag=1
+	</sql>
+
+	<!-- 映射书主人 -->
+	<resultMap type="com.sttx.bookmanager.po.EBook" id="EBookUserResultMap"
+		extends="BaseResultMap">
+		<association property="user" javaType="com.sttx.bookmanager.po.User">
+			<id column="user_Id" property="userId" />
+			<result column="login_Name" property="loginName" />
+		</association>
+	</resultMap>
+	<select id="selectEBookPages" resultMap="EBookUserResultMap"
+		parameterType="com.sttx.bookmanager.po.EBook">
+		SELECT e.*,u.login_Name
+		FROM t_ebook e,t_user u
+		WHERE e.user_Id=u.user_Id
+		<if test="eBook.userId!=null and eBook.userId!=''">
+			and u.user_Id=#{eBook.userId,jdbcType=VARCHAR}
+		</if>
+		<include refid="selectEBookListWhere"></include>
+		<if test="eBook.user.loginName!=null and eBook.user.loginName!=''">
+            and u.login_Name like '%${eBook.user.loginName}%'
+        </if>
+		ORDER BY ebook_Upload_Time DESC
+	</select>
+</mapper>

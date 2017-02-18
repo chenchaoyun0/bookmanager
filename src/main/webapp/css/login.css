@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+BODY{
+	background-color: white;
+	font-family:"微软雅黑";
+	width: 1341px;
+	color: orange;
+}
+a{
+	color:orange;
+}
+.topbox1{
+	//border: 1px solid blue;
+	height: 10%;
+	margin-top:30px;
+	margin-bottom: 8px;
+	background-color: #3AA8EE;
+}
+.topbox1 ul li{
+	font-family:"微软雅黑";
+	font-size:20px;
+	float: left;
+	text-align: center;/*表示放在该元素的其他元素会左右居中*/
+	margin-right: 30px;
+	list-style-type: none;
+	
+}
+a:LINK {
+	color:orange;
+	text-decoration: none;
+}
+a:HOVER{
+	color: red;
+}
+.topbox{
+	border: 1px solid blue;
+	height: 10%;
+}
+.topbox img{
+	margin-right:0px;
+}
+.table{
+	width: 100%;
+	margin-top: 100px;
+}
+.table ul li{
+	margin-right:300px;
+	float:left;
+	list-style-type: none;
+}
+.table_in{
+	color: orange;
+	font-size: 20px;
+}
+.about-tao{
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+}

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sttx.bookmanager.dao.OrderItemMapper">
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap id="ItemBaseResultMap" type="com.sttx.bookmanager.po.OrderItem">
+		<id column="item_Id" property="itemId" jdbcType="VARCHAR" />
+		<result column="book_Id" property="bookId" jdbcType="VARCHAR" />
+		<result column="user_Id" property="userId" jdbcType="VARCHAR" />
+		<result column="lend_Count" property="lendCount" jdbcType="INTEGER" />
+		<result column="lend_Time" property="lendTime" jdbcType="VARCHAR" />
+		<result column="return_Time" property="returnTime" jdbcType="VARCHAR" />
+		<result column="item_Total" property="itemTotal" jdbcType="DOUBLE" />
+		<result column="item_Status" property="itemStatus" jdbcType="INTEGER" />
+		<result column="item_Flag" property="itemFlag" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap type="com.sttx.bookmanager.po.OrderItem" id="ItemBookResultMap"
+		extends="ItemBaseResultMap">
+		<association property="book" javaType="com.sttx.bookmanager.po.Book">
+			<id column="book_Id" property="bookId" jdbcType="VARCHAR" />
+			<result column="book_user_Id" property="userId" jdbcType="VARCHAR" />
+			<result column="book_Country" property="bookCountry" jdbcType="INTEGER" />
+			<result column="book_No" property="bookNo" jdbcType="VARCHAR" />
+			<result column="book_Img" property="bookImg" jdbcType="VARCHAR" />
+			<result column="book_Name" property="bookName" jdbcType="VARCHAR" />
+			<result column="book_Author" property="bookAuthor" jdbcType="VARCHAR" />
+			<result column="book_Price" property="bookPrice" jdbcType="DOUBLE" />
+			<result column="book_Desc" property="bookDesc" jdbcType="VARCHAR" />
+			<result column="book_Count" property="bookCount" jdbcType="INTEGER" />
+			<result column="book_House" property="bookHouse" jdbcType="INTEGER" />
+			<result column="book_By_Time" property="bookByTime" jdbcType="INTEGER" />
+			<result column="book_Remain" property="bookRemain" jdbcType="INTEGER" />
+			<result column="book_Upload_Time" property="bookUploadTime"
+				jdbcType="VARCHAR" />
+			<result column="book_Type" property="bookType" jdbcType="INTEGER" />
+			<result column="book_Status" property="bookStatus" jdbcType="INTEGER" />
+			<result column="book_Flag" property="bookFlag" jdbcType="INTEGER" />
+			<association property="user" javaType="com.sttx.bookmanager.po.User">
+				<id column="book_user_Id" property="userId" jdbcType="VARCHAR" />
+				<result column="book_login_Name" property="loginName"
+					jdbcType="VARCHAR" />
+				<result column="book_real_Name" property="realName" jdbcType="VARCHAR" />
+				<result column="book_user_Sex" property="userSex" jdbcType="INTEGER" />
+				<result column="book_user_Pwd" property="userPwd" jdbcType="VARCHAR" />
+				<result column="book_user_Email" property="userEmail"
+					jdbcType="VARCHAR" />
+				<result column="book_user_Tel" property="userTel" jdbcType="VARCHAR" />
+				<result column="book_user_BirthDay" property="userBirthday"
+					jdbcType="VARCHAR" />
+				<result column="book_user_Head" property="userHead" jdbcType="VARCHAR" />
+				<result column="book_user_Code" property="userCode" jdbcType="VARCHAR" />
+				<result column="book_user_Status" property="userStatus"
+					jdbcType="INTEGER" />
+				<result column="book_user_RegistTime" property="userRegisttime"
+					jdbcType="VARCHAR" />
+				<result column="book_user_Role" property="userRole" jdbcType="INTEGER" />
+				<result column="book_user_Flag" property="userFlag" jdbcType="INTEGER" />
+			</association>
+		</association>
+		<association property="user" javaType="com.sttx.bookmanager.po.User">
+			<id column="user_Id" property="userId" jdbcType="VARCHAR" />
+			<result column="login_Name" property="loginName" jdbcType="VARCHAR" />
+			<result column="real_Name" property="realName" jdbcType="VARCHAR" />
+			<result column="user_Sex" property="userSex" jdbcType="INTEGER" />
+			<result column="user_Pwd" property="userPwd" jdbcType="VARCHAR" />
+			<result column="user_Email" property="userEmail" jdbcType="VARCHAR" />
+			<result column="user_Tel" property="userTel" jdbcType="VARCHAR" />
+			<result column="user_BirthDay" property="userBirthday"
+				jdbcType="VARCHAR" />
+			<result column="user_Head" property="userHead" jdbcType="VARCHAR" />
+			<result column="user_Code" property="userCode" jdbcType="VARCHAR" />
+			<result column="user_Status" property="userStatus" jdbcType="INTEGER" />
+			<result column="user_RegistTime" property="userRegisttime"
+				jdbcType="VARCHAR" />
+			<result column="user_Role" property="userRole" jdbcType="INTEGER" />
+			<result column="user_Flag" property="userFlag" jdbcType="INTEGER" />
+		</association>
+	</resultMap>
+
+	<resultMap type="com.sttx.bookmanager.po.OrderItem" id="ItemUserBookResultMap"
+		extends="ItemBookResultMap">
+		<association property="user" javaType="com.sttx.bookmanager.po.User">
+			<id column="book_user_Id" property="userId" jdbcType="VARCHAR" />
+			<result column="book_login_Name" property="loginName"
+				jdbcType="VARCHAR" />
+			<result column="book_real_Name" property="realName" jdbcType="VARCHAR" />
+			<result column="book_user_Sex" property="userSex" jdbcType="INTEGER" />
+			<result column="book_user_Pwd" property="userPwd" jdbcType="VARCHAR" />
+			<result column="book_user_Email" property="userEmail"
+				jdbcType="VARCHAR" />
+			<result column="book_user_Tel" property="userTel" jdbcType="VARCHAR" />
+			<result column="book_user_BirthDay" property="userBirthday"
+				jdbcType="VARCHAR" />
+			<result column="book_user_Head" property="userHead" jdbcType="VARCHAR" />
+			<result column="book_user_Code" property="userCode" jdbcType="VARCHAR" />
+			<result column="book_user_Status" property="userStatus"
+				jdbcType="INTEGER" />
+			<result column="book_user_RegistTime" property="userRegisttime"
+				jdbcType="VARCHAR" />
+			<result column="book_user_Role" property="userRole" jdbcType="INTEGER" />
+			<result column="book_user_Flag" property="userFlag" jdbcType="INTEGER" />
+		</association>
+	</resultMap>
+	<sql id="ItemBase_Column_List">
+		item_Id,user_Id ,book_Id, lend_Count, lend_Time, return_Time, item_Total,
+		item_Status,
+		item_Flag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ItemBaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="ItemBase_Column_List" />
+		from t_order_item
+		where item_Id = #{itemId,jdbcType=VARCHAR}
+		and item_Flag=1
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from t_order_item
+		where item_Id = #{itemId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sttx.bookmanager.po.OrderItem">
+		insert into t_order_item (item_Id,book_Id,user_Id,
+		lend_Count, lend_Time, return_Time,
+		item_Total, item_Status, item_Flag
+		)
+		values (#{itemId,jdbcType=VARCHAR}, #{bookId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{lendCount,jdbcType=INTEGER}, #{lendTime,jdbcType=VARCHAR}, #{returnTime,jdbcType=VARCHAR},
+		#{itemTotal,jdbcType=DOUBLE}, #{itemStatus,jdbcType=INTEGER},
+		#{itemFlag,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.sttx.bookmanager.po.OrderItem">
+		insert into t_order_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="itemId != null">
+				item_Id,
+			</if>
+			<if test="bookId != null">
+				book_Id,
+			</if>
+			<if test="userId != null">
+				user_Id,
+			</if>
+			<if test="lendCount != null">
+				lend_Count,
+			</if>
+			<if test="lendTime != null">
+				lend_Time,
+			</if>
+			<if test="returnTime != null">
+				return_Time,
+			</if>
+			<if test="itemTotal != null">
+				item_Total,
+			</if>
+			<if test="itemStatus != null">
+				item_Status,
+			</if>
+			<if test="itemFlag != null">
+				item_Flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="itemId != null">
+				#{itemId,jdbcType=VARCHAR},
+			</if>
+			<if test="bookId != null">
+				#{bookId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="lendCount != null">
+				#{lendCount,jdbcType=INTEGER},
+			</if>
+			<if test="lendTime != null">
+				#{lendTime,jdbcType=VARCHAR},
+			</if>
+			<if test="returnTime != null">
+				#{returnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="itemTotal != null">
+				#{itemTotal,jdbcType=DOUBLE},
+			</if>
+			<if test="itemStatus != null">
+				#{itemStatus,jdbcType=INTEGER},
+			</if>
+			<if test="itemFlag != null">
+				#{itemFlag,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sttx.bookmanager.po.OrderItem">
+		update t_order_item
+		<set>
+			<if test="bookId != null">
+				book_Id = #{bookId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_Id = #{bookId,jdbcType=VARCHAR},
+			</if>
+			<if test="lendCount != null">
+				lend_Count = #{lendCount,jdbcType=INTEGER},
+			</if>
+			<if test="lendTime != null">
+				lend_Time = #{lendTime,jdbcType=VARCHAR},
+			</if>
+			<if test="returnTime != null">
+				return_Time = #{returnTime,jdbcType=VARCHAR},
+			</if>
+			<if test="itemTotal != null">
+				item_Total = #{itemTotal,jdbcType=DOUBLE},
+			</if>
+			<if test="itemStatus != null">
+				item_Status = #{itemStatus,jdbcType=INTEGER},
+			</if>
+			<if test="itemFlag != null">
+				item_Flag = #{itemFlag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where item_Id = #{itemId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sttx.bookmanager.po.OrderItem">
+		update t_order_item
+		set
+		book_Id = #{bookId,jdbcType=VARCHAR},
+		user_Id = #{userId,jdbcType=VARCHAR},
+		lend_Count = #{lendCount,jdbcType=INTEGER},
+		lend_Time = #{lendTime,jdbcType=VARCHAR},
+		return_Time = #{returnTime,jdbcType=VARCHAR},
+		item_Total = #{itemTotal,jdbcType=DOUBLE},
+		item_Status = #{itemStatus,jdbcType=INTEGER},
+		item_Flag = #{itemFlag,jdbcType=INTEGER}
+		where item_Id = #{itemId,jdbcType=VARCHAR}
+	</update>
+	<select id="selectNowOrderByUserId" resultType="java.util.Map"
+		parameterType="java.lang.String">
+		SELECT
+		n.real_Name,m.*
+		FROM
+		t_user n,
+		(SELECT
+		a.item_Status,a.lend_Time,b.book_Author,b.user_Id,b.book_Desc,
+		b.book_Id,b.book_No,b.book_Name,b.book_Img,a.item_Id
+		FROM
+		t_order_item a,
+		t_book b
+		WHERE
+		a.book_Id = b.book_Id
+		AND a.item_Status IN (0, 1, 2 ,- 3)
+		AND a.user_Id = #{userId}) m
+		WHERE n.user_Id=m.user_Id
+	</select>
+
+	<select id="selectOrderItemPages" resultMap="ItemBookResultMap"
+		parameterType="com.sttx.bookmanager.po.OrderItem">
+	SELECT
+	    j.login_Name AS book_login_Name,
+	    j.real_Name AS book_login_Name,
+	    k.*
+	FROM
+	    t_user j,
+	    (
+	        SELECT
+	            n.user_Id AS book_user_Id,
+	            n.book_Author,
+	            n.book_Name,
+	            m.*
+	        FROM
+	            t_book n,
+	            (
+	                SELECT
+	                    a.*, b.login_Name,
+	                    b.real_Name,
+	                    b.user_BirthDay,
+	                    b.user_Sex
+	                FROM
+	                    t_order_item a,
+	                    t_user b
+	                WHERE
+	                    a.user_Id = b.user_Id
+	            ) m
+	        WHERE
+	            n.book_Id = m.book_Id
+	    ) k
+	WHERE
+	    j.user_Id = k.book_user_Id
+	ORDER BY
+    k.lend_Time DESC
+	</select>
+
+<select id="countThisOrder" resultType="java.lang.Integer" parameterType="com.sttx.bookmanager.po.OrderItem">
+    select count(*) from t_order_item where book_Id=#{bookId} and user_Id=#{userId} and lend_Time like '${lendTime}%'
+</select>
+</mapper>
