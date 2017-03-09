@@ -75,9 +75,8 @@ public class ControllerAOP {
             TLog tLog2 = logService.selectByUserIp(userIp);
             log.info("根据ip查询日志+++++result:" + JSONObject.toJSON(tLog2));
             if (tLog2 != null) {
-                tLog.setCount(tLog2.getCount() + 1);
-                tLog.setLogId(tLog2.getLogId());
-                logService.updateByPrimaryKey(tLog);
+                tLog2.setCount(tLog2.getCount() + 1);
+                logService.updateByPrimaryKey(tLog2);
             } else {
 
                 log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
