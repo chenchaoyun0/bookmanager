@@ -66,15 +66,17 @@
                 </div>
                 </c:if>                
                 <span class="vertical-line">|</span>
+                <a class="a-float-left" href="<c:url value='/'/>" style="color: white;">访客统计</a>
+                <span class="vertical-line">|</span>
                 <a class="a-float-left" href="<c:url value='book/selectBookPages.action'/>" style="color: white;">所有图书</a>
                 <span class="vertical-line">|</span>
                 <a class="a-float-left" href="<c:url value='ebook/selectEBookPages.action'/>" style="color: white;">所有电子书</a>
                 <span class="vertical-line">|</span>
 
+                    <a target="_bank" href="<c:url value='/druid/sql.html'/>" style="color: white;">Druid监控</a>
                 <c:if test="${sessionScope.userLogin.userRole eq 1}">
                 <div data-toggle="arrowdown" id="arrow7" class="user-name">
                     <i class="fa fa-list-ul fa-orange"></i>
-                    <a target="_bank" href="<c:url value='/druid/sql.html'/>" style="color: white;">访问统计</a>
                     <a target="_bank" style="color: white;font-size:14px;margin-left:5px;" href="<c:url value='user/admin'/>">管理员入口</a>
                     <span class="down-icon"></span>
                 </div>

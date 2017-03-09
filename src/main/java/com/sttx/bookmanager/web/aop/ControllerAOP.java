@@ -50,12 +50,18 @@ public class ControllerAOP {
             String userIp = IPUtils.getIpAddr(req);
             //            String addresses = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
             Base_info base_info = BaiduIP.getBaiduIpPO(userIp).getBase_info();
-            String country = base_info.getCountry();
-            String province = base_info.getProvince();
-            String city = base_info.getCity();
-            String county = base_info.getCounty();
-            String isp = base_info.getIsp();
-            String userAddress = country + "," + province + "," + city + "," + county + "," + isp;
+            String userAddress = "";
+            if (base_info == null) {
+                userAddress = "局域网或未知";
+            } else {
+                String country = base_info.getCountry();
+                String province = base_info.getProvince();
+                String city = base_info.getCity();
+                String county = base_info.getCounty();
+                String isp = base_info.getIsp();
+                userAddress = country + "," + province + "," + city + "," + county + "," + isp;
+
+            }
             //            String userAddress = addresses.equals("0") ? "未知区域~~~搜不到你,请尝试刷新" : addresses;
             long actionTime = end - start;
             String operTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());

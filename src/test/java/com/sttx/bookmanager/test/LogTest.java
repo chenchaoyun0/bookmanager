@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
+import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -18,6 +19,12 @@ public class LogTest {
     private static final Logger logger = DdpLoggerFactory.getLogger(LogTest.class);
     @Autowired
     private ILogService logService;
+
+    @Test
+    public void testSelectLogPages() {
+        PagedResult<TLog> pagedResult = logService.selectLogPages(new TLog(), null, null);
+        logger.info("+++++:{}", JSONObject.toJSON(pagedResult));
+    }
 
     @Test
     public void testSelectByPrimaryKey() {

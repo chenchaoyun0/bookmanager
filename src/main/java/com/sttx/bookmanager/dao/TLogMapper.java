@@ -1,5 +1,9 @@
 package com.sttx.bookmanager.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.po.TLogKey;
 
@@ -17,4 +21,6 @@ public interface TLogMapper {
     int updateByPrimaryKeySelective(TLog record);
 
     int updateByPrimaryKey(TLog record);
+
+    List<TLog> selectLogPages(@Param("tLog") TLog tLog);
 }
