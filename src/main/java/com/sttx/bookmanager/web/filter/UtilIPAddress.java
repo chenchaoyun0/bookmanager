@@ -16,6 +16,7 @@ import java.net.URL;
  *  @date：Nov 14, 2012 6:38:25 PM 
  */
 public class UtilIPAddress {
+
     /** 
      * 
      * @param content 
@@ -120,7 +121,7 @@ public class UtilIPAddress {
             reader.close();
             return buffer.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("超时..." + e.getMessage());
         } finally {
             if (connection != null) {
                 connection.disconnect();// 关闭连接  
@@ -211,6 +212,9 @@ public class UtilIPAddress {
             address = addressUtils.getAddresses("ip=" + ip, "utf-8");
         } catch (UnsupportedEncodingException e) {
             System.out.println(e.getMessage());
+        }
+        if ("0".equals(address) || address == null) {
+            address = IPGetAddress.getAddress(ip);
         }
         System.out.println(address);
         // 输出结果为：广东省,广州市,越秀区  

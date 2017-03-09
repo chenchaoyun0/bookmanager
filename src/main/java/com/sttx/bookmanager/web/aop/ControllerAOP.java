@@ -19,8 +19,10 @@ import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.web.filter.BaiduIP;
 import com.sttx.bookmanager.web.filter.Base_info;
 import com.sttx.bookmanager.web.filter.IPAddressMap;
+import com.sttx.bookmanager.web.filter.IPGetAddress;
 import com.sttx.bookmanager.web.filter.IPUtils;
 import com.sttx.bookmanager.web.filter.SysContent;
+import com.sttx.bookmanager.web.filter.UtilIPAddress;
 
 import cn.itcast.commons.CommonUtils;
 
@@ -52,7 +54,10 @@ public class ControllerAOP {
             Base_info base_info = BaiduIP.getBaiduIpPO(userIp).getBase_info();
             String userAddress = "";
             if (base_info == null) {
-                userAddress = "局域网或未知";
+                userAddress = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
+                if ("0".equals(userAddress) || userAddress == null) {
+                    userAddress = IPGetAddress.getAddress(userIp);
+                }
             } else {
                 String country = base_info.getCountry();
                 String province = base_info.getProvince();

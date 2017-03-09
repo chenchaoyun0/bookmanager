@@ -62,5 +62,13 @@
 <div style="margin-top: 30px">
     <jsp:include page="public/page.jsp"></jsp:include>
     </div>
+	<div align="center" style="color: white;">
+	<br/>
+	项目gitHub:<a style="color: lime;" href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a>
+	,博客:<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a>
+	<br/>
+	<br/>
+	备案/许可证编号:<a style="color: lime;" href="http://www.miitbeian.gov.cn" target="_bank">桂ICP备16001571</a>
+</div>
 </body>
 </html>

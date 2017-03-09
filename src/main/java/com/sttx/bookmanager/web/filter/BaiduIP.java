@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 
 public class BaiduIP {
     public static void main(String[] args) {
-        getBaiduIpPO("127.0.0.1");
+        getBaiduIpPO("112.90.82.139");
     }
 
     public static BaiduIpPO getBaiduIpPO(String ip) {
