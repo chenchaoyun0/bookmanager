@@ -65,7 +65,6 @@
 	<!-- 自定义参数绑定 -->
 	<!-- 算出每个controller方法的执行时间 -->
 	<bean id="ControllerAOP" class="com.sttx.bookmanager.web.aop.ControllerAOP"></bean>
-    
     <aop:config>
         <aop:aspect ref="ControllerAOP">
             <aop:pointcut expression="execution(* com.sttx.bookmanager.web.controller..*.*(..))"
@@ -73,7 +72,7 @@
             <aop:around pointcut-ref="commonMethod" method="aroundMethod"/>
         </aop:aspect>
     </aop:config>
-
+<!-- <aop:aspectj-autoproxy proxy-target-class="true"/>   -->
 	<!-- 校验错误信息配置文件 -->
 
 	<!-- 全局异常处理器,只要实现HandlerExceptionResolver接口就是全局异常处理器 -->

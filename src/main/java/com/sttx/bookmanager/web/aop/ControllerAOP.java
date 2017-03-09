@@ -1,34 +1,84 @@
 package com.sttx.bookmanager.web.aop;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.alibaba.fastjson.JSONObject;
+import com.sttx.bookmanager.po.TLog;
+import com.sttx.bookmanager.po.User;
+import com.sttx.bookmanager.service.ILogService;
+import com.sttx.bookmanager.web.filter.GetLatAndLngByGaoDeMap;
+import com.sttx.bookmanager.web.filter.IPUtils;
+import com.sttx.bookmanager.web.filter.SysContent;
+import com.sttx.bookmanager.web.filter.UtilIPAddress;
+
+import cn.itcast.commons.CommonUtils;
 
 public class ControllerAOP {
+    @Autowired
+    private ILogService logService;
+    private static Logger log = Logger.getLogger(ControllerAOP.class);
 
-    public Object aroundMethod(ProceedingJoinPoint joinpoint) throws Throwable {// ProceedingJoinPoint为通知
+    public Object aroundMethod(ProceedingJoinPoint joinpoint) {// ProceedingJoinPoint为通知
         Object obj = null;
         try {
-            System.out.println("controller方法开始");
-            System.out.println(joinpoint.getSignature().getDeclaringType().getSimpleName() + "."
-                    + joinpoint.getSignature().getName() + "{");
             long start = System.currentTimeMillis();
+            log.info("+++++controller方法开始...");
             obj = joinpoint.proceed();// 执行通知的方法
             long end = System.currentTimeMillis();
-            System.out.println("执行时间为:" + (end - start));
-            System.out.println("}");
+            /**
+             * 保存日志
+             */
+            String module = joinpoint.getSignature().getDeclaringType().getSimpleName();
+            String action = joinpoint.getSignature().getName();
+            HttpServletRequest req = SysContent.getRequest();
+            HttpServletResponse resp = SysContent.getResponse();
+            HttpSession session = SysContent.getSession();
+            String userName = (session != null && (User) session.getAttribute("userLogin") != null)
+                    ? ((User) session.getAttribute("userLogin")).getLoginName() : "游客用户";
+            String userNickName = "未设置";
+            String userIp = IPUtils.getIpAddr(req);
+            String addresses = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
+            String userAddress = addresses.equals("0") ? "未知区域~~~搜不到你,请尝试刷新" : addresses;
+            long actionTime = end - start;
+            String operTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
+            String userJWD = (userAddress.equals("未分配或者内网IP----") || userAddress.equals("未知区域~~~搜不到你,请尝试刷新")) ? "未知"
+                    : GetLatAndLngByGaoDeMap.getPoint(userAddress.substring(0, userAddress.lastIndexOf(",")));
+            //new
+            TLog tLog = new TLog(userName, userNickName, userAddress, userJWD, module, action, actionTime, operTime,
+                    1l);
+            tLog.setLogId(CommonUtils.uuid());
+            tLog.setUserIp(userIp);
+            //select
+            TLog tLog2 = logService.selectByUserIp(userIp);
+            log.info("根据ip查询日志+++++result:" + JSONObject.toJSON(tLog2));
+            if (tLog2 != null) {
+                tLog.setCount(tLog2.getCount() + 1);
+                tLog.setLogId(tLog2.getLogId());
+                logService.updateByPrimaryKey(tLog);
+            } else {
+
+                log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
+                int i = logService.insert(tLog);
+                log.info("+++++保存日志end...+++++result:" + i);
+            }
+            /**
+             * 结束
+             */
+            log.info("++++++controller方法结束,执行时间为:" + (actionTime));
             return obj;
         } catch (Throwable e) {
-            try {
-                System.out.println(joinpoint.getSignature().getName() + "retry.");
-                // 此处为方法执行失败调用的方法,可以多次调用通知方法，达到重试的目的
-                // 但是proceed()方法至少调用一次
-                joinpoint.proceed();
-            } catch (Throwable e1) {
-                // TODO Auto-generated catch block
-                System.out.println(joinpoint.getSignature().getName() + "failure.");
-                throw new Throwable(e1);
-            }
-            throw new Throwable(e);
+            e.printStackTrace();
         }
+        return obj;
 
     }
 }

@@ -6,6 +6,13 @@ public class PagedResult<T> extends BaseEntity {
 
     /* serialVersionUID */
     private static final long serialVersionUID = 1L;
+    private long pageNo;// 当前页
+
+    private long pageSize;// 一页条数
+
+    private long total;// 总条数
+
+    private long pages;// 总页数
     private int pageOffset;
     private List<T> dataList;// 数据
     private String url;
@@ -26,14 +33,6 @@ public class PagedResult<T> extends BaseEntity {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    private long pageNo;// 当前页
-
-    private long pageSize;// 一页条数
-
-    private long total;// 总条数
-
-    private long pages;// 总页数
 
     public List<T> getDataList() {
         return dataList;

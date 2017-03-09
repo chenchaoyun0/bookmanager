@@ -49,7 +49,7 @@ function checkinput(){
 <form action="${pageContext.request.contextPath}/user/userLoginSubmit.action" id="loginForm" method="post">
 			<div class="table" align="center">
 					<h3 align="center" style="font-size: 17px;margin-left: 20px;color: red;margin-bottom: 20px;">${requestScope.errorMsg}</h3>
-<script type="text/javascript">
+<!--<script type="text/javascript">
 	$(document).ready(function(){
 		$("#loginName").focus(function(){
 			$uname=$(this).val();
@@ -69,14 +69,14 @@ function checkinput(){
 		});
 		
 	});
-</script>
+</script>-->
 						<table class="table_in" style="color: blue">
 							<tr class="table_tr">
 								<td>
 									用&nbsp;户&nbsp;名/邮箱：
 								</td>
 								<td>
-									<input style="font-size: 20px;"  type="text" value="用户名/邮箱/手机号" name="loginName" id="loginName"/>
+									<input style="font-size: 20px;"  type="text" name="loginName" id="loginName" value="chenchaoyun"/>
 								</td>
 							</tr>
 							<tr>
@@ -89,7 +89,7 @@ function checkinput(){
 									密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：
 								</td>
 								<td><!-- ${fn:substring(requestScope.pform, 0, 6)} -->
-									<input onfocus="pswonf()" onblur="pswonb()" type="password" value="${requestScope.pform}" name="userPwd" id="password"style="font-size: 20px;" />
+									<input onfocus="pswonf()" onblur="pswonb()" type="password" value="111111" name="userPwd" id="password" style="font-size: 20px;" />
 								</td>
 							</tr>
 							<tr>
