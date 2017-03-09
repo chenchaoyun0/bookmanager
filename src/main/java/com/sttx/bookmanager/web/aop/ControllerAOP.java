@@ -21,7 +21,6 @@ import com.sttx.bookmanager.web.filter.Base_info;
 import com.sttx.bookmanager.web.filter.IPAddressMap;
 import com.sttx.bookmanager.web.filter.IPUtils;
 import com.sttx.bookmanager.web.filter.SysContent;
-import com.sttx.bookmanager.web.filter.UtilIPAddress;
 
 import cn.itcast.commons.CommonUtils;
 
@@ -49,7 +48,7 @@ public class ControllerAOP {
                     ? ((User) session.getAttribute("userLogin")).getLoginName() : "游客用户";
             String userNickName = "未设置";
             String userIp = IPUtils.getIpAddr(req);
-            String addresses = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
+            //            String addresses = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
             Base_info base_info = BaiduIP.getBaiduIpPO(userIp).getBase_info();
             String country = base_info.getCountry();
             String province = base_info.getProvince();
