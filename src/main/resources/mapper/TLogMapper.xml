@@ -175,7 +175,7 @@
     from t_log
     order by oper_Time DESC
   </select>
-   <select id="selectLogSumCount" resultType="long" useCache="false">
+   <select id="selectLogSumCount" resultType="java.lang.Long" useCache="false">
     select SUM(count) from t_log
   </select>
 </mapper>

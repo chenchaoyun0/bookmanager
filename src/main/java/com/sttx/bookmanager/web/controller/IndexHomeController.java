@@ -27,7 +27,7 @@ public class IndexHomeController {
         //        return "forward:/book/selectBookPages";
         TLog tLog = new TLog();
         PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
-        long totalcount = logService.selectLogSumCount();
+        Long totalcount = logService.selectLogSumCount();
         String url = request.getRequestURI();
         pages.setUrl(url);
         model.addAttribute("pages", pages);

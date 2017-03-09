@@ -22,7 +22,7 @@ public interface TLogMapper {
 
     int updateByPrimaryKey(TLog record);
 
-    long selectLogSumCount();
+    Long selectLogSumCount();
 
     List<TLog> selectLogPages(@Param("tLog") TLog tLog);
 }

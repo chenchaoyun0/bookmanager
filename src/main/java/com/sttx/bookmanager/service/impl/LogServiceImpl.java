@@ -71,7 +71,7 @@ public class LogServiceImpl implements ILogService {
     }
 
     @Override
-    public long selectLogSumCount() {
+    public Long selectLogSumCount() {
         return tLogMapper.selectLogSumCount();
     }
 }
