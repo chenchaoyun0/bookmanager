@@ -87,7 +87,7 @@ public class ControllerAOP {
                 tLog2.setOperTime(operTime);
                 tLog2.setUserName(userName);
                 tLog2.setUserNickName(userNickName);
-                logService.updateByPrimaryKey(tLog);
+                logService.updateByPrimaryKey(tLog2);
             } else {
 
                 log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
