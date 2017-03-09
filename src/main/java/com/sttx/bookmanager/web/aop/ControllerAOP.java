@@ -1,6 +1,7 @@
 package com.sttx.bookmanager.web.aop;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.ILogService;
-import com.sttx.bookmanager.web.filter.GetLatAndLngByGaoDeMap;
+import com.sttx.bookmanager.web.filter.BaiduIP;
+import com.sttx.bookmanager.web.filter.Base_info;
+import com.sttx.bookmanager.web.filter.IPAddressMap;
 import com.sttx.bookmanager.web.filter.IPUtils;
 import com.sttx.bookmanager.web.filter.SysContent;
 import com.sttx.bookmanager.web.filter.UtilIPAddress;
@@ -47,11 +50,17 @@ public class ControllerAOP {
             String userNickName = "未设置";
             String userIp = IPUtils.getIpAddr(req);
             String addresses = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
-            String userAddress = addresses.equals("0") ? "未知区域~~~搜不到你,请尝试刷新" : addresses;
+            Base_info base_info = BaiduIP.getBaiduIpPO(userIp).getBase_info();
+            String country = base_info.getCountry();
+            String province = base_info.getProvince();
+            String city = base_info.getCity();
+            String county = base_info.getCounty();
+            String isp = base_info.getIsp();
+            String userAddress = country + "," + province + "," + city + "," + county + "," + isp;
+            //            String userAddress = addresses.equals("0") ? "未知区域~~~搜不到你,请尝试刷新" : addresses;
             long actionTime = end - start;
             String operTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
-            String userJWD = (userAddress.equals("未分配或者内网IP----") || userAddress.equals("未知区域~~~搜不到你,请尝试刷新")) ? "未知"
-                    : GetLatAndLngByGaoDeMap.getPoint(userAddress.substring(0, userAddress.lastIndexOf(",")));
+            String userJWD = Arrays.toString(IPAddressMap.getIPXY(userIp));
             //new
             TLog tLog = new TLog(userName, userNickName, userAddress, userJWD, module, action, actionTime, operTime,
                     1l);

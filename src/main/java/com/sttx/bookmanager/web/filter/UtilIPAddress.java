@@ -103,7 +103,7 @@ public class UtilIPAddress {
             connection.setReadTimeout(2000);// 设置读取数据超时时间，单位毫秒  
             connection.setDoOutput(true);// 是否打开输出流 true|false  
             connection.setDoInput(true);// 是否打开输入流true|false  
-            connection.setRequestMethod("POST");// 提交方法POST|GET  
+            connection.setRequestMethod("GET");// 提交方法POST|GET  
             connection.setUseCaches(false);// 是否缓存true|false  
             connection.connect();// 打开连接端口  
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());// 打开输出流往对端服务器写数据  
@@ -205,7 +205,7 @@ public class UtilIPAddress {
     public static void main(String[] args) {
         UtilIPAddress addressUtils = new UtilIPAddress();
         // 测试ip 219.136.134.157 中国=华南=广东省=广州市=越秀区=电信  
-        String ip = "127.0.0.1";
+        String ip = "123.123.52.104";
         String address = "";
         try {
             address = addressUtils.getAddresses("ip=" + ip, "utf-8");
