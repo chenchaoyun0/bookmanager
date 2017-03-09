@@ -12,5 +12,7 @@ public interface ILogService {
 
     int updateByPrimaryKey(TLog record);
 
+    long selectLogSumCount();
+
     PagedResult<TLog> selectLogPages(TLog tLog, Integer pageNo, Integer pageSize);
 }

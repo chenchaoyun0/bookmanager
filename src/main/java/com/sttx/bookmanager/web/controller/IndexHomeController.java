@@ -27,9 +27,11 @@ public class IndexHomeController {
         //        return "forward:/book/selectBookPages";
         TLog tLog = new TLog();
         PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
+        long totalcount = logService.selectLogSumCount();
         String url = request.getRequestURI();
         pages.setUrl(url);
         model.addAttribute("pages", pages);
+        model.addAttribute("totalcount", totalcount);
         logger.info("+++++查询日志列表:{}" + JSONObject.toJSONString(pages));
         return "ipLog";
     }
