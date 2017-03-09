@@ -33,6 +33,8 @@ public class BaiduIP {
             URL url = new URL(httpUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
             // 填入apikey到HTTP header
             connection.setRequestProperty("apikey", "cf1058d371ead3adc3c309a5791e8ca7");
             connection.connect();
