@@ -23,7 +23,7 @@
             <div align="center" style="margin-top: 30px;">目前没有数据!</div>
 </c:if>
 <c:if test="${pages.total gt 0 }">
-        <table align="center" border="1" width="100%">
+        <table align="center" width="100%">
                 <tr style="color: red;font-weight: bolder;">
                         <th >用户名</th>
                         <th >用户IP</th>
@@ -64,8 +64,20 @@
     </div>
 	<div align="center" style="color: white;">
 	<br/>
+	Jenkins:<a style="color: lime;" href="http://www.longge1987.cn/jenkins/" target="_bank">http://www.longge1987.cn/jenkins/</a>
+	，ActiveMQ:<a style="color: lime;" href="http://www.longge1987.cn:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
+	<br/>
+	<br/>
+	私服库:<a style="color: lime;" href="http://www.longge1987.cn:8080/nexus/" target="_bank">http://www.longge1987.cn:8080/nexus/</a>
+	，手机商城:<a style="color: lime;" href="http://www.ccy123.cn/AShopping/" target="_bank">http://www.ccy123.cn/AShopping/</a>
+	<br/>
+	<br/>
+	Zookeeper节点管理:<a style="color: lime;" href="http://www.ccy123.cn/zkWeb/" target="_bank">http://www.ccy123.cn/zkWeb/</a>
+	，Dubbo:<a style="color: lime;" href="http://www.ccy123.cn/dubbo-admin/" target="_bank">http://www.ccy123.cn/dubbo-admin/</a>
+	<br/>
+	<br/>
 	项目gitHub:<a style="color: lime;" href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a>
-	,博客:<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a>
+	，博客:<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a>
 	<br/>
 	<br/>
 	备案/许可证编号:<a style="color: lime;" href="http://www.miitbeian.gov.cn" target="_bank">桂ICP备16001571</a>
