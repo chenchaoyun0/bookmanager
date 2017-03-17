@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <th style="color: yellow;">${log.userName}</th>
-                    <th style="color: yellow">${log.userIp}</th>
+                    <th style="color: yellow"><a href="<c:url value='indexHomeForIp?userIp=${log.userIp}'/>" style="color:lime; text-decoration:underline;">${log.userIp}</a></th>
                     <th style="color: yellow">${log.operTime}</th>
                     <th style="color: yellow">${log.userNickName}</th>
                     <th style="color: yellow">${log.userAddress}</th>

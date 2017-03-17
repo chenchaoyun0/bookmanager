@@ -15,4 +15,6 @@ public interface ILogService {
     Long selectLogSumCount();
 
     PagedResult<TLog> selectLogPages(TLog tLog, Integer pageNo, Integer pageSize);
+
+    PagedResult<TLog> selectLogPagesForIp(String userIp, Integer pageNo, Integer pageSize);
 }

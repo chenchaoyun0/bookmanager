@@ -172,7 +172,14 @@
    <select id="selectLogPages" resultMap="BaseResultMap" useCache="false" parameterType="com.sttx.bookmanager.po.TLog" >
     select 
     <include refid="Base_Column_List" />
-    from t_log
+    from t_log GROUP BY user_Ip
+    order by oper_Time DESC
+  </select>
+  <!-- 查询日志分页 -->
+   <select id="selectLogPagesForIp" resultMap="BaseResultMap" useCache="false" parameterType="string" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_log where user_Ip=#{userIp,jdbcType=VARCHAR}
     order by oper_Time DESC
   </select>
    <select id="selectLogSumCount" resultType="java.lang.Long" useCache="false">

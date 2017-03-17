@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -44,7 +43,18 @@ public class ControllerAOP {
             String module = joinpoint.getSignature().getDeclaringType().getSimpleName();
             String action = joinpoint.getSignature().getName();
             HttpServletRequest req = SysContent.getRequest();
-            HttpServletResponse resp = SysContent.getResponse();
+            String remoteHost = req.getRemoteHost();
+            log.info("+++++remoteHost:" + remoteHost);
+            String localAddr = req.getLocalAddr();
+            log.info("+++++localAddr:" + localAddr);
+            String remoteAddr = req.getRemoteAddr();
+            log.info("+++++remoteAddr:" + remoteAddr);
+            String remoteUser = req.getRemoteUser();
+            log.info("+++++remoteUser:" + remoteUser);
+            String localName = req.getLocalName();
+            log.info("+++++localName:" + localName);
+            String serverName = req.getServerName();
+            log.info("+++++serverName:" + serverName);
             HttpSession session = SysContent.getSession();
             String userName = (session != null && (User) session.getAttribute("userLogin") != null)
                     ? ((User) session.getAttribute("userLogin")).getLoginName() : "游客用户";
@@ -76,27 +86,10 @@ public class ControllerAOP {
                     1l);
             tLog.setLogId(CommonUtils.uuid());
             tLog.setUserIp(userIp);
-            //select
-            TLog tLog2 = logService.selectByUserIp(userIp);
-            log.info("根据ip查询日志+++++result:" + JSONObject.toJSON(tLog2));
-            if (tLog2 != null) {
-                tLog2.setCount(tLog2.getCount() + 1);
-                tLog2.setAction(action);
-                tLog2.setActionTime(actionTime);
-                tLog2.setModule(module);
-                tLog2.setOperTime(operTime);
-                tLog2.setUserName(userName);
-                tLog2.setUserNickName(userNickName);
-                logService.updateByPrimaryKey(tLog2);
-            } else {
 
-                log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
-                int i = logService.insert(tLog);
-                log.info("+++++保存日志end...+++++result:" + i);
-            }
-            /**
-             * 结束
-             */
+            log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
+            int i = logService.insert(tLog);
+            log.info("+++++保存日志end...+++++result:" + i);
             log.info("++++++controller方法结束,执行时间为:" + (actionTime));
             return obj;
         } catch (Throwable e) {

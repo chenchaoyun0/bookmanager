@@ -25,4 +25,6 @@ public interface TLogMapper {
     Long selectLogSumCount();
 
     List<TLog> selectLogPages(@Param("tLog") TLog tLog);
+
+    List<TLog> selectLogPagesForIp(@Param("userIp") String userIp);
 }
