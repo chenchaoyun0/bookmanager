@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sttx.bookmanager.dao.TLogMapper" >
+<!-- 缓存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
   <resultMap id="BaseResultMap" type="com.sttx.bookmanager.po.TLog" >
     <id column="log_Id" property="logId" jdbcType="VARCHAR" />
     <id column="user_Ip" property="userIp" jdbcType="VARCHAR" />
@@ -169,13 +171,13 @@
     where user_Ip = #{userIp,jdbcType=VARCHAR}
   </select>
   <!-- 查询日志分页 -->
-   <select id="selectLogPages" resultMap="BaseResultMap" useCache="false" parameterType="com.sttx.bookmanager.po.TLog" >
+   <select id="selectLogPages" resultMap="BaseResultMap" parameterType="com.sttx.bookmanager.po.TLog">
     select log_Id,user_Name,user_Nick_Name,user_Address,user_JWD,module,action,action_Time,user_Ip,oper_Time,(select count(distinct log_Id) from t_log where user_Ip= b.user_Ip) as count
  from t_log as b where not exists(select 1 from t_log where user_Ip= b.user_Ip
 and b.oper_Time &lt; oper_Time ) ORDER BY oper_Time DESC
   </select>
   <!-- 查询日志分页 -->
-   <select id="selectLogPagesForIp" resultMap="BaseResultMap" useCache="false" parameterType="string" >
+   <select id="selectLogPagesForIp" resultMap="BaseResultMap" parameterType="string">
     select 
     <include refid="Base_Column_List" />
     from t_log where user_Ip=#{userIp,jdbcType=VARCHAR}

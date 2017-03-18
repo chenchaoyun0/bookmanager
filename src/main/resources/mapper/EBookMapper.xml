@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sttx.bookmanager.dao.EBookMapper">
+<!-- 缓存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 	<resultMap id="BaseResultMap" type="com.sttx.bookmanager.po.EBook">
 		<id column="ebook_Id" property="ebookId" jdbcType="VARCHAR" />
 		<result column="user_Id" property="userId" jdbcType="VARCHAR" />

@@ -24,6 +24,7 @@ public class LogTest {
     public void testSelectLogPages() {
         PagedResult<TLog> pagedResult = logService.selectLogPages(new TLog(), null, null);
         logger.info("+++++:{}", JSONObject.toJSON(pagedResult));
+        PagedResult<TLog> pagedResult2 = logService.selectLogPages(new TLog(), null, null);
     }
 
     @Test
