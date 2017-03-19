@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.esotericsoftware.minlog.Log;
 import com.github.pagehelper.PageHelper;
 import com.sttx.bookmanager.dao.TLogMapper;
 import com.sttx.bookmanager.po.TLog;
@@ -20,7 +21,10 @@ public class LogServiceImpl implements ILogService {
 
     public int insertSelective(TLog tLog) {
         try {
-            return tLogMapper.insertSelective(tLog);
+            Log.info("++++++++++++++++++++保存日志begin...");
+            int insertSelective = tLogMapper.insertSelective(tLog);
+            Log.info("++++++++++++++++++++保存日志end...");
+            return insertSelective;
         } catch (UserException e) {
             throw new UserException("操作失败");
         }
