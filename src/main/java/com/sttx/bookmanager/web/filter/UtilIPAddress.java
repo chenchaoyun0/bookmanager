@@ -100,8 +100,8 @@ public class UtilIPAddress {
         try {
             url = new URL(urlStr);
             connection = (HttpURLConnection) url.openConnection();// 新建连接实例  
-            connection.setConnectTimeout(2000);// 设置连接超时时间，单位毫秒  
-            connection.setReadTimeout(2000);// 设置读取数据超时时间，单位毫秒  
+            connection.setConnectTimeout(100);// 设置连接超时时间，单位毫秒  
+            connection.setReadTimeout(100);// 设置读取数据超时时间，单位毫秒  
             connection.setDoOutput(true);// 是否打开输出流 true|false  
             connection.setDoInput(true);// 是否打开输入流true|false  
             connection.setRequestMethod("GET");// 提交方法POST|GET  

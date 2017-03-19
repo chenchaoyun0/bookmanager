@@ -70,6 +70,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
             String userAddress = "";
             if (base_info == null) {
                 userAddress = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
+                userAddress = null;
                 if ("0".equals(userAddress) || userAddress == null) {
                     userAddress = IPGetAddress.getAddress(userIp);
                 }
