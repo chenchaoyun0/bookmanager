@@ -10,10 +10,11 @@ $(function(){
                 if(!email_re.test(userEmail)){
                         tip_email.css({"color":"red"});
                         tip_email.html("请填写正确的邮箱格式");
-                }else if(userEmail.indexOf("sttxtech.com")==-1){
-                    tip_email.css({"color":"red"});
-                    tip_email.html("请使用数通邮箱");
                 }
+//                else if(userEmail.indexOf("sttxtech.com")==-1){
+//                    tip_email.css({"color":"red"});
+//                    tip_email.html("请使用数通邮箱");
+//                }
                 else if(msg=="true"){
                     tip_email.css({"color":"red"});
                     tip_email.html("该邮箱已注册");
@@ -39,8 +40,8 @@ $(function(){
         		
         	});
         }else{
-        	$("#telHome").text("手机号码格式不正确");
-        	$("#telHome").css({"color":"red"});
+//        	$("#telHome").text("手机号码格式不正确");
+//        	$("#telHome").css({"color":"red"});
 //            alert("手机号码格式不正确");
 //            $("#userTel").focus();
         }
