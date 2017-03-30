@@ -42,6 +42,7 @@ public class IndexHomeController {
         PagedResult<TLog> pages = logService.selectLogPagesForIp(userIp, pageNo, pageSize);
         Long totalcount = logService.selectLogSumCount();
         String url = request.getRequestURI();
+        pages.setStrWhere("userIp=" + userIp);
         pages.setUrl(url);
         model.addAttribute("pages", pages);
         model.addAttribute("totalcount", totalcount);
