@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.sttx.bookmanager.service.ILogService;
+import com.sttx.bookmanager.util.spring.SpringUtils;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -15,7 +17,8 @@ public class ActiveMQTest {
 
     @Test
     public void testSelectByPrimaryKey() {
-
+        ILogService logService = SpringUtils.getBean("logService", ILogService.class);
+        logger.info("+++++logService:{}", logService);
     }
 
 }

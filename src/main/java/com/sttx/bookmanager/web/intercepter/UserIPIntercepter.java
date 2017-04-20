@@ -89,7 +89,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
                     operTime, 1l);
             tLog.setLogId(CommonUtils.uuid());
             tLog.setUserIp(userIp);
-
+            ActiveMQUtil.sendTextMessage("tLogPagesIsNull", "主页被访问了一次");
             log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
             ActiveMQUtil.sendObjectMessage("tLog", tLog);
             log.info("+++++保存日志end...+++++");

@@ -19,7 +19,6 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.log4j.Logger;
 
-import com.sttx.bookmanager.listener.BookManagerListener;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 
 public class ActiveMQUtil {
@@ -130,7 +129,7 @@ public class ActiveMQUtil {
         log.info("----------------设置消息队列监听setMessageListener-----------------");
         MessageConsumer messageConsumer = getMessageConsumer(sendQueueName);
         try {
-            messageConsumer.setMessageListener(new BookManagerListener());
+            messageConsumer.setMessageListener(messageListener);
         } catch (JMSException e) {
             log.error("setMessageListener 设置消息队列监听", e);
         }
