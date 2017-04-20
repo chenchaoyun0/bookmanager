@@ -48,6 +48,7 @@ public class IndexHomeController {
             pages.setUrl(url);
             model.addAttribute("pages", pages);
             model.addAttribute("totalcount", textMessage);
+            ActiveMQUtil.sendTextMessage("tLogPagesIsNull", "主页被访问了一次");
             return "ipLog";
         }
         PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
