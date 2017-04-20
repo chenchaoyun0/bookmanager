@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.po.User;
-import com.sttx.bookmanager.service.ILogService;
+import com.sttx.bookmanager.util.mq.ActiveMQUtil;
 import com.sttx.bookmanager.util.pages.ThreadLocalContext;
 import com.sttx.bookmanager.web.filter.BaiduIP;
 import com.sttx.bookmanager.web.filter.Base_info;
@@ -30,8 +29,6 @@ import cn.itcast.commons.CommonUtils;
 
 public class UserIPIntercepter implements HandlerInterceptor {
     private static Logger log = Logger.getLogger(UserIPIntercepter.class);
-    @Autowired
-    private ILogService logService;
 
     // 执行Handler完成执行此方法
     // 应用场景：统一异常处理，统一日志处理
@@ -94,8 +91,8 @@ public class UserIPIntercepter implements HandlerInterceptor {
             tLog.setUserIp(userIp);
 
             log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
-            int i = logService.insert(tLog);
-            log.info("+++++保存日志end...+++++result:" + i);
+            ActiveMQUtil.sendObjectMessage("tLog", tLog);
+            log.info("+++++保存日志end...+++++");
         }
     }
 

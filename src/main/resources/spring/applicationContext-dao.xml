@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 	<!-- 加载db配置文件 -->
-	<context:property-placeholder location="classpath:properties/db.properties" />
+	<context:property-placeholder location="classpath:properties/db.properties" ignore-unresolvable="true" />
     <!-- 数据源druid-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
     
