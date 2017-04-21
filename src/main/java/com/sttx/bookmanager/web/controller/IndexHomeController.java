@@ -41,14 +41,15 @@ public class IndexHomeController {
                 pages1.setUrl(url);
                 model.addAttribute("pages", pages1);
                 model.addAttribute("totalcount", totalcount1);
+                ActiveMQUtil.sendTextMessage("tLogPagesIsNull", "主页被访问了一次");
                 return "ipLog";
             }
+            Log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>从队列获取主页信息...");
             String textMessage = ActiveMQUtil.getTextMessage(totalcount);
             String url = request.getRequestURI();
             pages.setUrl(url);
             model.addAttribute("pages", pages);
             model.addAttribute("totalcount", textMessage);
-            ActiveMQUtil.sendTextMessage("tLogPagesIsNull", "主页被访问了一次");
             return "ipLog";
         }
         PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);

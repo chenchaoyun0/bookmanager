@@ -3,16 +3,24 @@ package com.sttx.bookmanager.util.spring;
 import java.util.Map;
 
 import org.slf4j.Logger;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
-public class SpringUtils {
+@Component
+public class SpringUtils implements ApplicationContextAware {
     private static Logger log = DdpLoggerFactory.getLogger(SpringUtils.class);
     private static ApplicationContext applicationContext;
-    static {
-        applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        log.info("SpringUtils setApplicationContext............................................................");
+        if (SpringUtils.applicationContext == null) {
+            SpringUtils.applicationContext = applicationContext;
+        }
     }
 
     public static Object getBean(String name) {
