@@ -127,9 +127,8 @@ public class ActiveMQUtil {
 
     public static void setMessageListener(MessageListener messageListener, String sendQueueName) {
         log.info("----------------设置消息队列监听setMessageListener-----------------");
-        MessageConsumer messageConsumer = getMessageConsumer(sendQueueName);
         try {
-            messageConsumer.setMessageListener(messageListener);
+            session.setMessageListener(messageListener);
         } catch (JMSException e) {
             log.error("setMessageListener 设置消息队列监听", e);
         }

@@ -6,12 +6,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
-import com.sttx.bookmanager.listener.BookManagerTLogListener;
-import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
-import com.sttx.bookmanager.util.mq.ActiveMQUtil;
-import com.sttx.bookmanager.util.pages.PagedResult;
-import com.sttx.bookmanager.util.properties.PropertiesUtil;
 
 @Component
 public class InitSpring implements ApplicationListener<ApplicationEvent> {
@@ -22,18 +17,18 @@ public class InitSpring implements ApplicationListener<ApplicationEvent> {
     @Override
     public void onApplicationEvent(ApplicationEvent arg0) {
         log.info("+++++初始化容器开始...");
-        String tLogName = PropertiesUtil.getFilePath("properties/activemq.properties", "tLogName");
-        ActiveMQUtil.setMessageListener(new BookManagerTLogListener(), tLogName);
-        //---初始化
-        TLog tLog = new TLog();
-        PagedResult<TLog> pages = logService.selectLogPages(tLog, null, null);
-        Long totalc = logService.selectLogSumCount();
-        String tLogPages = PropertiesUtil.getFilePath("properties/activemq.properties", "tLogPages");
-        String totalcount = PropertiesUtil.getFilePath("properties/activemq.properties", "totalcount");
-        ActiveMQUtil.sendObjectMessage(tLogPages, pages);
-        ActiveMQUtil.sendObjectMessage(tLogPages, pages);
-        ActiveMQUtil.sendTextMessage(totalcount, totalc + "");
-        ActiveMQUtil.sendTextMessage(totalcount, totalc + "");
+        //        String tLogName = PropertiesUtil.getFilePath("properties/activemq.properties", "tLogName");
+        //        ActiveMQUtil.setMessageListener(new BookManagerTLogListener(), tLogName);
+        //        //---初始化
+        //        TLog tLog = new TLog();
+        //        PagedResult<TLog> pages = logService.selectLogPages(tLog, null, null);
+        //        Long totalc = logService.selectLogSumCount();
+        //        String tLogPages = PropertiesUtil.getFilePath("properties/activemq.properties", "tLogPages");
+        //        String totalcount = PropertiesUtil.getFilePath("properties/activemq.properties", "totalcount");
+        //        ActiveMQUtil.sendObjectMessage(tLogPages, pages);
+        //        ActiveMQUtil.sendObjectMessage(tLogPages, pages);
+        //        ActiveMQUtil.sendTextMessage(totalcount, totalc + "");
+        //        ActiveMQUtil.sendTextMessage(totalcount, totalc + "");
     }
 
 }

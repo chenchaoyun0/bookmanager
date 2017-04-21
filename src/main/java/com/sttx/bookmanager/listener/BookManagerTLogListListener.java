@@ -31,6 +31,7 @@ public class BookManagerTLogListListener implements MessageListener {
             String tLogPages = PropertiesUtil.getFilePath("properties/activemq.properties", "tLogPages");
             String totalcount = PropertiesUtil.getFilePath("properties/activemq.properties", "totalcount");
             ActiveMQUtil.sendObjectMessage(tLogPages, pages);
+            ActiveMQUtil.sendObjectMessage(tLogPages, pages);
             ActiveMQUtil.sendTextMessage(totalcount, totalc + "");
 
         } catch (JMSException e) {
