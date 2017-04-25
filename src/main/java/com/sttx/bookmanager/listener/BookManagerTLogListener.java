@@ -12,13 +12,12 @@ import javax.jms.TextMessage;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sttx.bookmanager.init.InitSpring;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.spring.SpringUtils;
 
 public class BookManagerTLogListener implements MessageListener {
-    private static Logger log = Logger.getLogger(InitSpring.class);
+    private static Logger log = Logger.getLogger(BookManagerTLogListener.class);
 
     public void onMessage(Message m) {
         try {

@@ -34,8 +34,8 @@
             value="admin" />
     </bean>
     <!-- 队列目的地-->
-    <bean id="tLogName" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg index="0" value="${tLogName}"/>
+    <bean id="tLogPagesIsNull" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="${tLogPagesIsNull}"/>
     </bean>
     <!-- jmsTemplate -->
     <bean
@@ -45,7 +45,7 @@
             name="connectionFactory"
             ref="connectionFactory" />
         <!-- 设置默认的消息目的地-->
-        <property name="defaultDestination" ref="tLogName"/>
+        <property name="defaultDestination" ref="tLogPagesIsNull"/>
         <property name="deliveryMode" value="1"></property>
         <!-- 消息不持久化 -->
         <property name="explicitQosEnabled" value="true"></property>
@@ -58,26 +58,26 @@
     </bean>
     <!-- 监听者 -->
     <bean
-        id="bookManagerTLogListener"
-        class="com.sttx.bookmanager.listener.BookManagerTLogListener">
+        id="bookManagerTLogPagesIsNullListener"
+        class="com.sttx.bookmanager.listener.BookManagerTLogPagesIsNullListener">
     </bean>
     <!-- SimpleMessageListenerContainer -->
     <bean
-        id="bookManagerTLogListenerContainer"
+        id="bookManagerTLogPageContainer"
         class="org.springframework.jms.listener.SimpleMessageListenerContainer">
         <!-- 消息监听器输出消息的数量 -->
         <property
             name="concurrentConsumers"
-            value="10" />
+            value="100" />
         <property
             name="connectionFactory"
             ref="connectionFactory" />
         <property
             name="destination"
-            ref="tLogName" />
+            ref="tLogPagesIsNull" />
         <property
             name="messageListener"
-            ref="bookManagerTLogListener" />
+            ref="bookManagerTLogPagesIsNullListener" />
         <property
             name="pubSubNoLocal"
             value="false"></property>

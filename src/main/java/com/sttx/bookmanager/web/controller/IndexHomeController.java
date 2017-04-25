@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.esotericsoftware.minlog.Log;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.mq.ActiveMQUtil;
@@ -34,7 +33,7 @@ public class IndexHomeController {
             String totalcount = PropertiesUtil.getFilePath("properties/activemq.properties", "totalcount");
             PagedResult<TLog> pages = (PagedResult<TLog>) ActiveMQUtil.getObjectMessage(tLogPages);
             if (pages == null) {
-                Log.info("+++++++++++++++++++++++++消息队列没有主页数据");
+                logger.info("+++++++++++++++++++++++++消息队列没有主页数据");
                 PagedResult<TLog> pages1 = logService.selectLogPages(tLog, pageNo, pageSize);
                 Long totalcount1 = logService.selectLogSumCount();
                 String url = request.getRequestURI();
@@ -44,12 +43,13 @@ public class IndexHomeController {
                 ActiveMQUtil.sendTextMessage("tLogPagesIsNull", "主页被访问了一次");
                 return "ipLog";
             }
-            Log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>从队列获取主页信息...");
+            logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>从队列获取主页信息...");
             String textMessage = ActiveMQUtil.getTextMessage(totalcount);
             String url = request.getRequestURI();
             pages.setUrl(url);
             model.addAttribute("pages", pages);
             model.addAttribute("totalcount", textMessage);
+            ActiveMQUtil.sendTextMessage("tLogPagesIsNull", "主页被访问了一次");
             return "ipLog";
         }
         PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);

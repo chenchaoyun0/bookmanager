@@ -6,7 +6,6 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.method.HandlerMethod;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
-import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.util.mq.ActiveMQUtil;
 import com.sttx.bookmanager.util.pages.ThreadLocalContext;
 import com.sttx.bookmanager.web.filter.BaiduIP;
@@ -57,9 +55,10 @@ public class UserIPIntercepter implements HandlerInterceptor {
             log.info("+++++localName:" + localName);
             String serverName = req.getServerName();
             log.info("+++++serverName:" + serverName);
-            HttpSession session = req.getSession();
-            String userName = (session != null && (User) session.getAttribute("userLogin") != null)
-                    ? ((User) session.getAttribute("userLogin")).getLoginName() : "游客用户";
+            String userName = "游客用户";
+            //            HttpSession session = req.getSession();
+            //            String userName = (session != null && (User) session.getAttribute("userLogin") != null)
+            //                    ? ((User) session.getAttribute("userLogin")).getLoginName() : "游客用户";
             String userNickName = "未设置";
             String userIp = IPUtils.getIpAddr(req);
             //            String addresses = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");

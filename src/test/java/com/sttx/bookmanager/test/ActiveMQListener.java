@@ -3,7 +3,7 @@ package com.sttx.bookmanager.test;
 import org.slf4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.sttx.bookmanager.init.InitSpring;
+import com.sttx.bookmanager.listener.BookManagerTLogListener;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 public class ActiveMQListener {
@@ -12,7 +12,7 @@ public class ActiveMQListener {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext cpxac = new ClassPathXmlApplicationContext(
                 "classpath:spring/applicationContext-*.xml");
-        InitSpring bean = cpxac.getBean("initSpring", InitSpring.class);
+        BookManagerTLogListener bean = cpxac.getBean("bookManagerTLogListener", BookManagerTLogListener.class);
         logger.info("+++++" + bean);
     }
 
