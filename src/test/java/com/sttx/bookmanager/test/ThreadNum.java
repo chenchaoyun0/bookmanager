@@ -9,6 +9,13 @@ import java.net.URLConnection;
 public class ThreadNum implements Runnable {
     private ThreadLocal<Integer> tl = new ThreadLocal<Integer>();
 
+    public static void main(String[] args) {
+        for (int i = 0; i < 1; i++) {
+            ThreadNum threadNum = new ThreadNum();
+            threadNum.run();
+        }
+    }
+
     @Override
     public void run() {
         try {
@@ -19,7 +26,7 @@ public class ThreadNum implements Runnable {
                 System.out.println("+++++begin...i:" + i);
                 URL url = new URL("http://www.ccy123.cn/");
                 URLConnection url_conn = url.openConnection();
-                url_conn.setConnectTimeout(100);
+                url_conn.setConnectTimeout(1000);
                 //                url_conn.connect();
                 InputStream ips = url_conn.getInputStream();
                 System.out.println("+++++end...i:" + i);
