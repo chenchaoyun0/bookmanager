@@ -19,6 +19,24 @@
         <div align="center" style="margin-top:10px">
 <p style="color: yellow;font-weight: bolder;font-size: 20px">当前总访问人数：${pages.total}人，总访问量：${totalcount}次</p></div>
 <div align="center" style="margin-top: 20px" >
+<div style="color:fuchsia;">
+当前主机:
+<%
+String dataName = request.getParameter("dataName");
+if (dataName != null && dataName.length() > 0) {
+    String dataValue = request.getParameter("dataValue");
+    session.setAttribute(dataName, dataValue);
+}
+%>
+    <%
+    out.println(request.getLocalAddr() + " : " + request.getLocalPort()
+            + "<br>");
+    %>
+    <%
+        out.println("<br> SESSIONID :" + session.getId() + "<br>");
+        %>
+</div>
+<br/>
 <c:if test="${pages.total le 0 }">
             <div align="center" style="margin-top: 30px;">目前没有数据!</div>
 </c:if>
