@@ -18,7 +18,19 @@ public class BaiduIP {
         String httpArg = "ip=" + ip;
         String jsonResult = request(httpUrl, httpArg);
         System.out.println(jsonResult);
-        BaiduIpPO parseObject = JSONObject.parseObject(jsonResult, BaiduIpPO.class);
+        // BaiduIpPO parseObject = JSONObject.parseObject(jsonResult,
+        // BaiduIpPO.class);
+        BaiduIpPO parseObject = new BaiduIpPO();
+        Base_info base_info = new Base_info();
+        base_info.setCity("北京");
+        base_info.setCountry("海淀区");
+        base_info.setCounty("");
+        base_info.setIsp("中国联通-假接口测试");
+        base_info.setProvince("北京市");
+        parseObject.setBase_info(base_info);
+        parseObject.setDescription("OK");
+        parseObject.setStatus("0");
+        parseObject.setNet_info(null);
         System.out.println("---" + JSONObject.toJSON(parseObject));
         return parseObject;
     }
