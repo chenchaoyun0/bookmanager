@@ -38,8 +38,7 @@ public class ActiveMQUtil {
         String url = PropertiesUtil.getFilePath("properties/activemq.properties", "mq.activemqUrl");
         log.info("----------------" + url);
         // 构造ConnectionFactory实例对象，此处采用ActiveMq的实现jar
-        connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnection.DEFAULT_USER,
-                ActiveMQConnection.DEFAULT_PASSWORD, url);
+        connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnection.DEFAULT_USER, ActiveMQConnection.DEFAULT_PASSWORD, url);
         try {
             // 构造从工厂得到连接对象
             connection = connectionFactory.createConnection();

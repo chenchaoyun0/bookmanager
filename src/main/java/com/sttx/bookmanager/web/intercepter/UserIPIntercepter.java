@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
-import com.sttx.bookmanager.util.mq.ActiveMQUtil;
 import com.sttx.bookmanager.util.pages.ThreadLocalContext;
 import com.sttx.bookmanager.web.filter.BaiduIP;
 import com.sttx.bookmanager.web.filter.Base_info;
@@ -89,7 +88,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
             tLog.setLogId(CommonUtils.uuid());
             tLog.setUserIp(userIp);
             log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
-            ActiveMQUtil.sendObjectMessage("tLog", tLog);
+            // ActiveMQUtil.sendObjectMessage("tLog", tLog);
             log.info("+++++保存日志end...+++++");
         }
     }

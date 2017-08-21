@@ -17,7 +17,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd "
     default-autowire="byName">
     <!-- 加载db配置文件 -->
-    <context:property-placeholder
+   <!--  <context:property-placeholder
         location="classpath:properties/activemq.properties"
         ignore-unresolvable="true" />
     <bean
@@ -33,39 +33,39 @@
             name="password"
             value="admin" />
     </bean>
-    <!-- 队列目的地-->
+    队列目的地
     <bean id="tLogPagesIsNull" class="org.apache.activemq.command.ActiveMQQueue">
         <constructor-arg index="0" value="${tLogPagesIsNull}"/>
     </bean>
-    <!-- jmsTemplate -->
+    jmsTemplate
     <bean
         id="jmsTemplateTlog"
         class="org.springframework.jms.core.JmsTemplate">
         <property
             name="connectionFactory"
             ref="connectionFactory" />
-        <!-- 设置默认的消息目的地-->
+        设置默认的消息目的地
         <property name="defaultDestination" ref="tLogPagesIsNull"/>
         <property name="deliveryMode" value="1"></property>
-        <!-- 消息不持久化 -->
+        消息不持久化
         <property name="explicitQosEnabled" value="true"></property>
-        <!-- 由于receiver方法是同步的，所以我们在这里对接收设置超时时间-->
-        <!--  <property name="receiveTimeout" value="60000"/>   -->
-        <!-- 区别它采用的模式为false是p2p，为true是订阅 -->
+        由于receiver方法是同步的，所以我们在这里对接收设置超时时间
+         <property name="receiveTimeout" value="60000"/>  
+        区别它采用的模式为false是p2p，为true是订阅
         <property
             name="pubSubDomain"
             value="false" />
     </bean>
-    <!-- 监听者 -->
+    监听者
     <bean
         id="bookManagerTLogPagesIsNullListener"
         class="com.sttx.bookmanager.listener.BookManagerTLogPagesIsNullListener">
     </bean>
-    <!-- SimpleMessageListenerContainer -->
+    SimpleMessageListenerContainer
     <bean
         id="bookManagerTLogPageContainer"
         class="org.springframework.jms.listener.SimpleMessageListenerContainer">
-        <!-- 消息监听器输出消息的数量 -->
+        消息监听器输出消息的数量
         <property
             name="concurrentConsumers"
             value="100" />
@@ -81,7 +81,7 @@
         <property
             name="pubSubNoLocal"
             value="false"></property>
-    </bean>
+    </bean> -->
 </beans>
 
 
