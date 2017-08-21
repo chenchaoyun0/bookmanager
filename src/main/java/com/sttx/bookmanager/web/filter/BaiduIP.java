@@ -16,8 +16,8 @@ public class BaiduIP {
     public static BaiduIpPO getBaiduIpPO(String ip) {
         String httpUrl = "http://apis.baidu.com/bdyunfenxi/intelligence/ip";
         String httpArg = "ip=" + ip;
-        String jsonResult = request(httpUrl, httpArg);
-        System.out.println(jsonResult);
+        // String jsonResult = request(httpUrl, httpArg);
+        // System.out.println(jsonResult);
         // BaiduIpPO parseObject = JSONObject.parseObject(jsonResult,
         // BaiduIpPO.class);
         BaiduIpPO parseObject = new BaiduIpPO();
