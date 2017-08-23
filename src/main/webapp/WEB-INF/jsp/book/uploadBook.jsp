@@ -55,8 +55,8 @@
 <body>
 <div style="margin-bottom: 130px;">
 <jsp:include page="../public/header.jsp"></jsp:include>
-        <link rel="stylesheet" type="text/css" href="/bookmanager/css/xcConfirm.css"/>
-        <script src="/bookmanager/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xcConfirm.css"/>
+        <script src="${pageContext.request.contextPath}/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
 </div>
 	<div class="bm_h bbs"
 		style="background-color: #ECF0F1;text-align: center;">

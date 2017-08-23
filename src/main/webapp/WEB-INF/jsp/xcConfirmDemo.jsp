@@ -10,9 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <head>
         <meta charset="utf-8" />
         <title>Demo</title>
-        <link rel="stylesheet" type="text/css" href="/bookmanager/css/xcConfirm.css"/>
-        <script src="/bookmanager/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/bookmanager/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xcConfirm.css"/>
+        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="${pageContext.request.contextPath}/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
         <style type="text/css">
             .sgBtn{width: 135px; height: 35px; line-height: 35px; margin-left: 10px; margin-top: 10px; text-align: center; background-color: #0095D9; color: #FFFFFF; float: left; border-radius: 5px;}
         </style>

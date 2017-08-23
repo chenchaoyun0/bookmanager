@@ -283,7 +283,7 @@ function _change(){
 
 function init(){
 	$.ajax({
-        url:"/bookmanager/user/getThisUser",    //请求的url地址
+        url:"user/getThisUser",    //请求的url地址
         //dataType:"json",   //返回格式为json
         async:false,//请求是否异步，默认为异步，这也是ajax重要特性
         data:{  "userId":$("#userId").val()},    //参数值
@@ -339,7 +339,7 @@ function checkspace(){
 	}else{
 	    
 		  $.ajax({
-		        url:"/bookmanager/user/updatePassword",    //请求的url地址
+		        url:"user/updatePassword",    //请求的url地址
 		        //dataType:"json",   //返回格式为json
 		        async:false,//请求是否异步，默认为异步，这也是ajax重要特性
 		        data:{  "userId":userId,
@@ -360,7 +360,7 @@ function checkspace(){
 		            	alert("原密码错误！")
 		            }else if(req>=1){
 		            	alert("修改密码成功！")
-		            	window.location.href='/bookmanager/';
+		            	window.location.href='/';
 		            }
 		            
 		            //请求成功时处理

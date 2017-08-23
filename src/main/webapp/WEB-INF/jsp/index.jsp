@@ -6,10 +6,10 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
-    <link rel="stylesheet" href="/bookmanager/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bookmanager/css/table.css">
-    <script type="text/javascript" src="/bookmanager/js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="/bookmanager/js/page/jqPaginator.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/table.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/page/jqPaginator.min.js"></script>
     <script type="text/javascript">
         function loadData(num) {
             $("#PageCount").val("30");
@@ -39,8 +39,8 @@
         <input type="hidden" id="visiblePages" runat="server" value="10" />
         </div>
     </div>
-    <script type="text/javascript" src="/bookmanager/js/page/myPage.js"></script>
-    <script type="text/javascript" src="/bookmanager/js/index.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/page/myPage.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
     </form>
 </body>
 </html>

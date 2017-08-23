@@ -29,7 +29,7 @@
 	href="<c:url value='css/style_8_common.css'/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='css/goods.css'/>">
-<link rel="stylesheet" type="text/css" href="/bookmanager/css/xcConfirm.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xcConfirm.css"/>
 <script type="text/javascript"
 	src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 <script src="${pageContext.request.contextPath}/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>

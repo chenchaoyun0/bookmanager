@@ -5,13 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>已借书籍</title>
-    <script type="text/javascript" src="/bookmanager/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
      <jsp:include page="../public/top.jsp"></jsp:include> 
-    <link rel="stylesheet" href="/bookmanager/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bookmanager/css/table.css">
-    <script type="text/javascript" src="/bookmanager/js/page/jqPaginator.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/table.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/page/jqPaginator.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
     <input id="userId" type="hidden" value="${sessionScope.userLogin.userId}">
     
@@ -34,7 +34,7 @@
         <input type="hidden" id="visiblePages" runat="server" value="10" />
         </div>
     </div>
-    <script type="text/javascript" src="/bookmanager/js/order/myBookOrder.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/order/myBookOrder.js"></script>
     <script type="text/javascript">
     $(function(){
         initdata(1,5);
@@ -44,7 +44,7 @@
             $("#PageCount").val(num);
         }
     </script>
-    <script type="text/javascript" src="/bookmanager/js/page/myPage.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/page/myPage.js"></script>
     
 </body>
 </html>

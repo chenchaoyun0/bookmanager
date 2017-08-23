@@ -71,7 +71,7 @@ function ilend(bookId){
                 title: "提示",
                 btn: parseInt("0011",2),    //定义有无确定框和取消框，在xsComfirm.js中定义
                 onOk: function(){
-                	window.location.href="/bookmanager/user/userLoginInput.action";
+                	window.location.href="user/userLoginInput.action";
                 }
         }
             window.wxc.xcConfirm(txt, "confirm", option);  
