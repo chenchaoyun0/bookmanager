@@ -27,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" href="<c:url value='css/bottomnav.css'/>"
 	type="text/css">
 <link rel="stylesheet" type="text/css" href="<c:url value='css/my.css'/>">
-	<link href="<c:url value='js/jquery.autocomplete.css'/>" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='js/header.js'/>"></script>
 <script type="text/javascript" src="<c:url value='js/index.js'/>"></script>
