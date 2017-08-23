@@ -16,6 +16,6 @@
     <context:annotation-config />
     
     <!-- 数据源、mybatis bean配置 -->
-    <import resource="classpath:spring/**/*.xml" />
+    <import resource="classpath:spring/**/applicationContext-*.xml" />
 
 </beans>

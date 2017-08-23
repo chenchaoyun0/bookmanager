@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@ImportResource(locations = { "classpath:bookmanagerApp.xml" })
+@ImportResource(locations = { "classpath:bookmanagerApp.xml", "classpath:spring/springmvc.xml" })
 public class ConfigClass {
 
     public ConfigClass() {
