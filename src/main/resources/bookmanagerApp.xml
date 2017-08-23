@@ -15,20 +15,6 @@
     http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <context:annotation-config />
     
-    <bean
-        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property
-            name="targetClass"
-            value="org.springframework.util.Log4jConfigurer" />
-        <property
-            name="targetMethod"
-            value="initLogging" />
-        <property name="arguments">
-            <list>
-                <value>classpath:ssplog.properties</value>
-            </list>
-        </property>
-    </bean>
     <!-- 数据源、mybatis bean配置 -->
     <import resource="classpath:spring/**/*.xml" />
 
