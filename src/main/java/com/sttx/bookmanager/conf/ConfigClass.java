@@ -9,7 +9,7 @@ public class ConfigClass {
 
     public ConfigClass() {
         super();
-        System.out.println("AUTO ConfigClass");
+        System.out.println("加载spring配置文件开始...AUTO ConfigClass");
     }
 
 }
