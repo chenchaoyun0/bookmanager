@@ -1,6 +1,6 @@
 function initdata(type,pageNo,pageSize){	
 	$.ajax({
-	    url:"/bookmanager/order/orderBook",    //请求的url地址
+	    url:"order/orderBook",    //请求的url地址
 	    //dataType:"json",   //返回格式为json
 	    //async:true,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{	"userId":"2F1CE4A814744C8186F8E3B6902CA180",

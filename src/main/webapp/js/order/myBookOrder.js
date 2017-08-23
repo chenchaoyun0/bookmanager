@@ -3,7 +3,7 @@ function initdata(pageNo,pageSize){
 	console.log(userId);
 	
 	$.ajax({
-	    url:"/bookmanager/order/orderBook",    //请求的url地址
+	    url:"order/orderBook",    //请求的url地址
 	    //dataType:"json",   //返回格式为json
 	    async:false,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{	"userId":userId,
@@ -75,7 +75,7 @@ function setdata(req){
 }
 
 function returnBook(itemId){
-	$.post("/bookmanager/order/returnBook/"+itemId,function(data){
+	$.post("order/returnBook/"+itemId,function(data){
             alert("还书成功！等待管理员审核。")
             window.location.reload();
 	});

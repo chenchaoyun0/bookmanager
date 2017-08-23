@@ -1,7 +1,7 @@
 function initdata(pageNo,pageSize){	
 	
 	$.ajax({
-	    url:"/bookmanager/order/adminData",    //请求的url地址
+	    url:"order/adminData",    //请求的url地址
 	    //dataType:"json",   //返回格式为json
 	    async:false,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{	"pageNo":pageNo,
@@ -76,7 +76,7 @@ function setdata(req){
 }
 
 function updateOrderItem(bookId,itemId,status){
-	$.post("/bookmanager/order/updateOrderItem",{bookId:bookId,itemId:itemId,status:status},function(data){
+	$.post("order/updateOrderItem",{bookId:bookId,itemId:itemId,status:status},function(data){
 		if(data==-1){
 			alert("该书已被借完。请拒绝该请求。");
 /*            var txt=  "该书已被借完。请拒绝该请求。";

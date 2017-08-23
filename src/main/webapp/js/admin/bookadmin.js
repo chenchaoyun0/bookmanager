@@ -1,6 +1,6 @@
 function initdata(pageNo,pageSize){	
 	$.ajax({
-	    url:"/bookmanager/book/adminData",    //请求的url地址
+	    url:"book/adminData",    //请求的url地址
 	    //dataType:"json",   //返回格式为json
 	    async:false,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{	"pageNo":pageNo,
@@ -64,7 +64,7 @@ function setdata(req){
 }
 
 function unmountBook(bookId){
-	$.post("/bookmanager/book/unmountBook/"+bookId,function(data){
+	$.post("book/unmountBook/"+bookId,function(data){
     		if(data>=0){
 	            alert("下架成功！")
 	            initdata(1,5);
@@ -78,7 +78,7 @@ function unmountBook(bookId){
 }
 
 function mountBook(bookId){
-	$.post("/bookmanager/book/mountBook/"+bookId,function(data){
+	$.post("book/mountBook/"+bookId,function(data){
 			if(data>=0){
 	            alert("上架成功！")
 	            initdata(1,5);

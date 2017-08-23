@@ -17,9 +17,7 @@
 	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置 mvc:annotation-driven默认加载很多的参数绑定方法， 
 		比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter 
 		实际开发时使用mvc:annotation-driven -->
-	<mvc:annotation-driven>
-	</mvc:annotation-driven>
-	
+	<mvc:annotation-driven/>
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
         infrastructure -->
     <bean
@@ -108,7 +106,14 @@
 			<bean class="com.sttx.bookmanager.web.intercepter.UserLoginIntercepter"></bean>
 		</mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/**" />
+			<mvc:mapping path="/book/**" />
+			<mvc:mapping path="/ebook/**" />
+			<mvc:mapping path="/util/**" />
+			<mvc:mapping path="/order/**" />
+			<mvc:mapping path="/view/**" />
+			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/" />
+			<mvc:mapping path="/indexHomeForIp" />
             <bean class="com.sttx.bookmanager.web.intercepter.UserIPIntercepter"></bean>
         </mvc:interceptor>
 	</mvc:interceptors>

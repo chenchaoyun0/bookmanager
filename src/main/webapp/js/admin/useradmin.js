@@ -1,6 +1,6 @@
 function initdata(pageNo,pageSize){	
 	$.ajax({
-	    url:"/bookmanager/user/adminData",    //请求的url地址
+	    url:"user/adminData",    //请求的url地址
 	    //dataType:"json",   //返回格式为json
 	    async:false,//请求是否异步，默认为异步，这也是ajax重要特性
 	    data:{	"pageNo":pageNo,
@@ -65,7 +65,7 @@ function setdata(req){
 }
 
 function updatePermission(userId){
-	$.post("/bookmanager/user/updatePermission/"+userId,function(data){
+	$.post("user/updatePermission/"+userId,function(data){
             alert("已升级为管理员")
             initdata(1,5);
 	});

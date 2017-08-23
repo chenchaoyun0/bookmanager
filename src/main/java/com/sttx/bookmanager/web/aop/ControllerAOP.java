@@ -2,14 +2,10 @@ package com.sttx.bookmanager.web.aop;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.pages.ThreadLocalContext;
 
 public class ControllerAOP {
-    @Autowired
-    private ILogService logService;
     private static Logger log = Logger.getLogger(ControllerAOP.class);
 
     public Object aroundMethod(ProceedingJoinPoint joinpoint) {// ProceedingJoinPoint为通知

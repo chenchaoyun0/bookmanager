@@ -93,6 +93,8 @@ public class UserIPIntercepter implements HandlerInterceptor {
             tLog.setUserIp(userIp);
             log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
             // ActiveMQUtil.sendObjectMessage("tLog", tLog);
+            Long long1 = ThreadLocalContext.getControllerexcutime().get();
+            tLog.setActionTime(long1);
             int insert = logService.insert(tLog);
             log.info("+++++保存日志end...+++++insert:{}" + insert);
         }
@@ -101,8 +103,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
     // 进入Handler方法之后，返回modelAndView之前执行
     // 应用场景从modelAndView出发：将公用的模型数据(比如菜单导航)在这里传到视图，
     // 也可以在这里统一指定视图
-    public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
-            throws Exception {
+    public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3) throws Exception {
 
     }
 
