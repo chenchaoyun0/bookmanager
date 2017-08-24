@@ -103,6 +103,8 @@ public class UserIPIntercepter implements HandlerInterceptor {
                 logDb.setLogId(CommonUtils.uuid());
                 logDb.setUserIp(userIp);
                 logDb.setOperTime(operTime);
+                logDb.setModule(className);
+                logDb.setAction(methodName);
                 logDb.setActionTime(actionTime);
                 log.info("+++++保存日志 exit begin...参数" + JSONObject.toJSONString(logDb));
                 // ActiveMQUtil.sendObjectMessage("tLog", tLog);
