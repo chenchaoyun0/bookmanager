@@ -168,7 +168,7 @@
     select 
     <include refid="Base_Column_List" />
     from t_log
-    where user_Ip = #{userIp,jdbcType=VARCHAR}
+    where user_Ip = #{userIp,jdbcType=VARCHAR} limit 1
   </select>
   <!-- 查询日志分页 -->
    <select id="selectLogPages" resultMap="BaseResultMap" parameterType="com.sttx.bookmanager.po.TLog" useCache="false">
