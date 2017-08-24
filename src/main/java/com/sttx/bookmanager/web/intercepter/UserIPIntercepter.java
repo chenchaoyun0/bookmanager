@@ -16,13 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
+import com.sttx.bookmanager.util.map.AddressUtils;
+import com.sttx.bookmanager.util.map.IPAddressMap;
+import com.sttx.bookmanager.util.map.IPUtils;
+import com.sttx.bookmanager.util.map.vo.IPAddressData;
+import com.sttx.bookmanager.util.map.vo.IPAddressVo;
 import com.sttx.bookmanager.util.pages.ThreadLocalContext;
-import com.sttx.bookmanager.web.filter.BaiduIP;
-import com.sttx.bookmanager.web.filter.Base_info;
-import com.sttx.bookmanager.web.filter.IPAddressMap;
-import com.sttx.bookmanager.web.filter.IPGetAddress;
-import com.sttx.bookmanager.web.filter.IPUtils;
-import com.sttx.bookmanager.web.filter.UtilIPAddress;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 import cn.itcast.commons.CommonUtils;
@@ -31,10 +30,10 @@ public class UserIPIntercepter implements HandlerInterceptor {
     private static final Logger log = DdpLoggerFactory.getLogger(UserIPIntercepter.class);
     @Autowired
     private ILogService logService;
+
     // 执行Handler完成执行此方法
     // 应用场景：统一异常处理，统一日志处理
-    public void afterCompletion(HttpServletRequest req, HttpServletResponse response, Object handler, Exception e)
-            throws Exception {
+    public void afterCompletion(HttpServletRequest req, HttpServletResponse response, Object handler, Exception e) throws Exception {
         if (handler instanceof HandlerMethod) {
             HandlerMethod h = (HandlerMethod) handler;
             String className = h.getBean().getClass().getSuperclass().getSimpleName();
@@ -59,44 +58,57 @@ public class UserIPIntercepter implements HandlerInterceptor {
             String serverName = req.getServerName();
             log.info("+++++serverName:" + serverName);
             String userName = "游客用户";
-            //            HttpSession session = req.getSession();
-            //            String userName = (session != null && (User) session.getAttribute("userLogin") != null)
-            //                    ? ((User) session.getAttribute("userLogin")).getLoginName() : "游客用户";
+            // HttpSession session = req.getSession();
+            // String userName = (session != null && (User)
+            // session.getAttribute("userLogin") != null)
+            // ? ((User) session.getAttribute("userLogin")).getLoginName() :
+            // "游客用户";
             String userNickName = "未设置";
             String userIp = IPUtils.getIpAddr(req);
-            //            String addresses = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
-            Base_info base_info = BaiduIP.getBaiduIpPO(userIp).getBase_info();
-            String userAddress = "";
-            if (base_info == null) {
-                userAddress = UtilIPAddress.getAddresses("ip=" + IPUtils.getIpAddr(req), "utf-8");
-                userAddress = null;
-                if ("0".equals(userAddress) || userAddress == null) {
-                    userAddress = IPGetAddress.getAddress(userIp);
-                }
-            } else {
-                String country = base_info.getCountry();
-                String province = base_info.getProvince();
-                String city = base_info.getCity();
-                String county = base_info.getCounty();
-                String isp = base_info.getIsp();
-                userAddress = country + "," + province + "," + city + "," + county + "," + isp;
-
-            }
-            //            String userAddress = addresses.equals("0") ? "未知区域~~~搜不到你,请尝试刷新" : addresses;
-            String operTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
-            String userJWD = Arrays.toString(IPAddressMap.getIPXY(userIp));
+            //
             Long actionTime = ThreadLocalContext.getControllerexcutime().get();
-            //new
-            TLog tLog = new TLog(userName, userNickName, userAddress, userJWD, className, methodName, actionTime,
-                    operTime, 1l);
-            tLog.setLogId(CommonUtils.uuid());
-            tLog.setUserIp(userIp);
-            log.info("+++++保存日志begin...参数" + JSONObject.toJSONString(tLog));
-            // ActiveMQUtil.sendObjectMessage("tLog", tLog);
-            Long long1 = ThreadLocalContext.getControllerexcutime().get();
-            tLog.setActionTime(long1);
-            int insert = logService.insert(tLog);
-            log.info("+++++保存日志end...+++++insert:{}" + insert);
+            String operTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
+            TLog logDb = logService.selectByUserIp(userIp);
+            log.info("+++++保存日志 exit begin...logDb" + JSONObject.toJSONString(logDb));
+            if (logDb == null) {
+                //
+                String userAddress = "";
+                IPAddressVo ipAddressVo = AddressUtils.getIPAddressVo(userIp);
+                if (ipAddressVo == null || !"0".equals(ipAddressVo.getCode())) {
+                    userAddress = "搜不到你,请尝试刷新";
+                } else {
+                    IPAddressData data = ipAddressVo.getData();
+                    String area = data.getArea();
+                    String country = data.getCountry();
+                    String province = data.getRegion();
+                    String city = data.getCity();
+                    String isp = data.getIsp();
+                    userAddress = area + "," + province + "," + city + "," + country + "," + isp;
+                }
+
+                // String userAddress = addresses.equals("0") ?
+                // "未知区域~~~搜不到你,请尝试刷新"
+                String userJWD = Arrays.toString(IPAddressMap.getIPXY(userIp));
+                // new
+                TLog tLog = new TLog(userName, userNickName, userAddress, userJWD, className, methodName, actionTime, operTime, 1l);
+                tLog.setLogId(CommonUtils.uuid());
+                tLog.setUserIp(userIp);
+                tLog.setOperTime(operTime);
+                tLog.setActionTime(actionTime);
+                log.info("+++++保存日志 new begin...参数" + JSONObject.toJSONString(tLog));
+                // ActiveMQUtil.sendObjectMessage("tLog", tLog);
+                int insert = logService.insert(tLog);
+                log.info("+++++保存日志 new end...+++++insert:{}" + insert);
+            } else {
+                logDb.setLogId(CommonUtils.uuid());
+                logDb.setUserIp(userIp);
+                logDb.setOperTime(operTime);
+                logDb.setActionTime(actionTime);
+                log.info("+++++保存日志 exit begin...参数" + JSONObject.toJSONString(logDb));
+                // ActiveMQUtil.sendObjectMessage("tLog", tLog);
+                int insert = logService.insert(logDb);
+                log.info("+++++保存日志 exit end...+++++insert:{}" + insert);
+            }
         }
     }
 
@@ -110,8 +122,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
     // 进入 Handler方法之前执行
     // 用于身份认证、身份授权
     // 比如身份认证，如果认证通过表示当前用户没有登陆，需要此方法拦截不再向下执行
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         return true;
     }
 
