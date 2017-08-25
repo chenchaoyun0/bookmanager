@@ -352,7 +352,7 @@
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>yanfs</artifactId>
-            <version>1.4-SNAPSHOT</version>
+            <version>1.4</version>
         </dependency>
     </dependencies>
     <build>
@@ -386,12 +386,12 @@
         <repository>
             <id>nexus-releases</id>
             <name>deployment</name>
-            <url>http://127.0.0.1:8080/nexus/content/repositories/releases/</url>
+            <url>http://123.206.68.97:8080/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>deployment</name>
-            <url>http://127.0.0.1:8080/nexus/content/repositories/snapshots/</url>
+            <url>http://123.206.68.97:8080/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
