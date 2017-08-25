@@ -17,7 +17,6 @@ public class CashLoanManagerApplication extends SpringBootServletInitializer imp
     private static final Logger log = DdpLoggerFactory.getLogger(CashLoanManagerApplication.class);
     private static String contextPath = null;
     private static String port = null;
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(CashLoanManagerApplication.class);

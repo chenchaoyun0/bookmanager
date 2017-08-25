@@ -21,7 +21,6 @@ import com.sttx.bookmanager.util.map.IPAddressMap;
 import com.sttx.bookmanager.util.map.IPUtils;
 import com.sttx.bookmanager.util.map.vo.IPAddressData;
 import com.sttx.bookmanager.util.map.vo.IPAddressVo;
-import com.sttx.bookmanager.util.pages.ThreadLocalContext;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 import cn.itcast.commons.CommonUtils;
@@ -30,6 +29,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
     private static final Logger log = DdpLoggerFactory.getLogger(UserIPIntercepter.class);
     @Autowired
     private ILogService logService;
+    private static final ThreadLocal<Long> startTime = new ThreadLocal<Long>();
 
     // 执行Handler完成执行此方法
     // 应用场景：统一异常处理，统一日志处理
@@ -66,7 +66,9 @@ public class UserIPIntercepter implements HandlerInterceptor {
             String userNickName = "未设置";
             String userIp = IPUtils.getIpAddr(req);
             //
-            Long actionTime = ThreadLocalContext.getControllerexcutime().get();
+            long end = System.currentTimeMillis();
+            Long start = startTime.get();
+            Long actionTime = end - start;
             String operTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
             TLog logDb = logService.selectByUserIp(userIp);
             log.info("+++++保存日志 exit begin...logDb" + JSONObject.toJSONString(logDb));
@@ -125,6 +127,8 @@ public class UserIPIntercepter implements HandlerInterceptor {
     // 用于身份认证、身份授权
     // 比如身份认证，如果认证通过表示当前用户没有登陆，需要此方法拦截不再向下执行
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        long start = System.currentTimeMillis();
+        startTime.set(start);
         return true;
     }
 

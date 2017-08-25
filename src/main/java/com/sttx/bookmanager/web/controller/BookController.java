@@ -12,8 +12,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,16 +30,19 @@ import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IBookService;
 import com.sttx.bookmanager.util.excel.ExportToExcelUtil;
 import com.sttx.bookmanager.util.exception.UserException;
+import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.uuidno.UUID2NO;
+import com.sttx.ddp.logger.DdpLoggerFactory;
+import com.sun.xfile.XFileOutputStream;
 
 import cn.itcast.commons.CommonUtils;
 
 @Controller
 @RequestMapping("/book")
 public class BookController {
-    private static final Logger LOGGER = Logger.getLogger(BookController.class);
+    private static Logger log = DdpLoggerFactory.getLogger(BookController.class);
     @Autowired
     private IBookService bookService;
 
@@ -74,25 +76,47 @@ public class BookController {
         /**
          * 图片处理
          */
-        StringBuilder bookImg = new StringBuilder();
+        StringBuilder bookImg = new StringBuilder(",");
+        String realPath = NfsFileUtils.getNfsUrl();
+        String bookPath = null;
+        String dbPath = null;
+        if (bookFile.length <= 0) {
+            // 未选择图片择读取默认图片
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("defaultBookImg.jpg");
+            // 读取配置文件，将文件上传至虚拟目录
+            // nfs://192.168.1.xxx:/u01/upload/
+            // 二级目录
+            bookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/" + book.getBookNo() + "/"
+                    + book.getBookNo() + "-defaultBookImg-01.jpg";
+            log.info("bookPath:{}", bookPath);
+            /* 数据库保存路径 */
+            dbPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath") + bookPath;
+            log.info("dbPath:{}", dbPath);
+            /* 保存到硬盘 */
+            String uploadPath = realPath + bookPath;
+            log.info("uploadPath:{}", uploadPath);
+            NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
+            /* 将所有文件路径用，隔开保存 */
+            bookImg.append(dbPath).append(",");
+        }
         for (int i = 0; i < bookFile.length; i++) {
             MultipartFile myfile = bookFile[i];
-            String realPath = null;
-            String bookPath = null;
-            String dbPath = null;
             if (myfile.isEmpty()) {
                 // 未选择图片择读取默认图片
                 InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("defaultBookImg.jpg");
                 // 读取配置文件，将文件上传至虚拟目录
-                realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "book.ImgPath");
+                // nfs://192.168.1.xxx:/u01/upload/
                 // 二级目录
                 bookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
                         + book.getBookNo() + "/" + book.getBookNo() + "-defaultBookImg" + i + ".jpg";
+                log.info("bookPath:{}", bookPath);
                 /* 数据库保存路径 */
                 dbPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath") + bookPath;
+                log.info("dbPath:{}", dbPath);
                 /* 保存到硬盘 */
-                FileUtils.copyInputStreamToFile(inputStream, new File(realPath + bookPath));
-
+                String uploadPath = realPath + bookPath;
+                log.info("uploadPath:{}", uploadPath);
+                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
                 /* 将所有文件路径用，隔开保存 */
                 bookImg.append(dbPath).append(",");
             } else {
@@ -104,24 +128,27 @@ public class BookController {
                     return "book/uploadBook";
                 }
 
-                LOGGER.info("文件长度: " + myfile.getSize());
-                LOGGER.info("文件类型: " + myfile.getContentType());
-                LOGGER.info("文件名称: " + myfile.getName());
-                LOGGER.info("文件原名: " + myfile.getOriginalFilename());
-                LOGGER.info("========================================");
+                log.info("文件长度: " + myfile.getSize());
+                log.info("文件类型: " + myfile.getContentType());
+                log.info("文件名称: " + myfile.getName());
+                log.info("文件原名: " + myfile.getOriginalFilename());
+                log.info("========================================");
                 // 如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\文件夹中
                 /* 保存文件夹 */
                 /* 真实路径 */
-                realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "book.ImgPath");
                 bookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
                         + book.getBookNo() + "/" + book.getBookNo() + "-" + i
                         + originalFilename.substring(originalFilename.lastIndexOf("."));
+                log.info("bookPath:{}", bookPath);
                 /* 数据库路径 */
                 dbPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath") + bookPath;
+                log.info("bookPath:{}", dbPath);
 
                 // 这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的
                 /* 保存到硬盘 */
-                FileUtils.copyInputStreamToFile(myfile.getInputStream(), new File(realPath + bookPath));
+                String uploadPath = realPath + bookPath;
+                log.info("uploadPath:{}", uploadPath);
+                NfsFileUtils.uploadFile(myfile.getInputStream(), new XFileOutputStream(uploadPath));
 
                 /**/
                 bookImg.append(dbPath).append(",");

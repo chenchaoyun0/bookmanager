@@ -349,6 +349,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>yanfs</artifactId>
+            <version>1.4-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>compile</defaultGoal>
@@ -374,6 +379,7 @@
                     <encoding>${file_encoding}</encoding>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
     <distributionManagement>

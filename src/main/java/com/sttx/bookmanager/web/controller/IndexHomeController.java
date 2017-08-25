@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
+import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
@@ -49,5 +51,16 @@ public class IndexHomeController {
         model.addAttribute("pages", pages);
         model.addAttribute("totalcount", totalcount);
         return "ipLog";
+    }
+
+    @RequestMapping("/testImg")
+    public String testImg(HttpServletRequest request, Model model) {
+        String nfsFileName = NfsFileUtils.getNfsUrl() + "ad.jpg";
+        String imageBase64Str = NfsFileUtils.getImageBase64Str(nfsFileName);
+        Book book = new Book();
+        book.setBookAuthor("chenchaoyun");
+        book.setBookImg(imageBase64Str);
+        model.addAttribute("book", book);
+        return "testImg";
     }
 }
