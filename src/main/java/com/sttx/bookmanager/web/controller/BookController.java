@@ -80,21 +80,24 @@ public class BookController {
         String realPath = NfsFileUtils.getNfsUrl();
         String bookPath = null;
         String dbPath = null;
+        String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath");
         if (bookFile.length <= 0) {
             // 未选择图片择读取默认图片
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("defaultBookImg.jpg");
             // 读取配置文件，将文件上传至虚拟目录
             // nfs://192.168.1.xxx:/u01/upload/
             // 二级目录
-            bookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/" + book.getBookNo() + "/"
+            bookPath = outPath + "/" + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
+                    + book.getBookNo() + "/"
                     + book.getBookNo() + "-defaultBookImg-01.jpg";
             log.info("bookPath:{}", bookPath);
             /* 数据库保存路径 */
-            dbPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath") + bookPath;
+            dbPath = outPath + bookPath;
             log.info("dbPath:{}", dbPath);
             /* 保存到硬盘 */
             String uploadPath = realPath + bookPath;
             log.info("uploadPath:{}", uploadPath);
+            NfsFileUtils.mkdirFile(uploadPath);
             NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
             /* 将所有文件路径用，隔开保存 */
             bookImg.append(dbPath).append(",");
@@ -116,6 +119,7 @@ public class BookController {
                 /* 保存到硬盘 */
                 String uploadPath = realPath + bookPath;
                 log.info("uploadPath:{}", uploadPath);
+                NfsFileUtils.mkdirFile(uploadPath);
                 NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
                 /* 将所有文件路径用，隔开保存 */
                 bookImg.append(dbPath).append(",");
@@ -148,6 +152,7 @@ public class BookController {
                 /* 保存到硬盘 */
                 String uploadPath = realPath + bookPath;
                 log.info("uploadPath:{}", uploadPath);
+                NfsFileUtils.mkdirFile(uploadPath);
                 NfsFileUtils.uploadFile(myfile.getInputStream(), new XFileOutputStream(uploadPath));
 
                 /**/

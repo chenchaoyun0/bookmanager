@@ -49,6 +49,7 @@ public class NfsFileUtils {
      */
     public static int uploadFile(String nfsFileName, String localFileName) throws UserException {
         int start = 0;
+        mkdirFile(nfsFileName);
         try {
             File file = new File(localFileName);
             if (!file.exists()) {
@@ -205,6 +206,23 @@ public class NfsFileUtils {
             throw new UserException("USPS0104", "文件不存在");
         }
         return new XFile(nfsFileName).delete();
+    }
+
+    /**
+     * nfs mkdir
+     * 
+     * @Description
+     * @param nfsFileName
+     *            远程文件绝对路径 nfs://192.168.1.xxx:/u01/app/image/ad/ad.jpg
+     * @return true-存在，false-不存在
+     */
+    public static boolean mkdirFile(String nfsFileName) {
+        String dirName = nfsFileName.substring(0, nfsFileName.lastIndexOf("/"));
+        log.info("mkdir创建文件夹begin...dirName:{}", dirName);
+        XFile xFile = new XFile(dirName);
+        boolean mkdirs = xFile.mkdirs();
+        log.info("mkdir创建文件夹end...mkdirs:{}", mkdirs);
+        return mkdirs;
     }
 
     /**
