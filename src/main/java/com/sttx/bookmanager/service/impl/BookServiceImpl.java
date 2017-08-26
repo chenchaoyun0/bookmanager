@@ -29,6 +29,7 @@ public class BookServiceImpl implements IBookService {
     private BookMapper bookMapper;
     @Autowired
     private IImgService imgService;
+
     public int insertSelective(Book book) {
 
         try {

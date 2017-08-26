@@ -41,6 +41,10 @@ public class NfsFileUtils {
         return imgTypes;
     }
 
+    public static String getJspImgSrc() {
+        return jspImgSrc;
+    }
+
     public static String getNfsUrl() {
         return nfsUrl;
     }
