@@ -1,18 +1,19 @@
 package com.sttx.bookmanager.web.controller;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,12 +25,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sttx.bookmanager.dictionary.ImgLinkType;
 import com.sttx.bookmanager.po.EBook;
+import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IEBookService;
+import com.sttx.bookmanager.service.IImgService;
+import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.uuidno.UUID2NO;
+import com.sttx.ddp.logger.DdpLoggerFactory;
+import com.sun.xfile.XFileOutputStream;
 
 import cn.itcast.commons.CommonUtils;
 
@@ -38,6 +46,9 @@ import cn.itcast.commons.CommonUtils;
 public class EBookController {
     @Autowired
     private IEBookService eBookService;
+    @Autowired
+    private IImgService imgService;
+    private static Logger log = DdpLoggerFactory.getLogger(EBookController.class);
 
     @RequestMapping(value = "/uploadEBookInput", method = RequestMethod.GET)
     public String uploadEBookInput() {
@@ -77,27 +88,36 @@ public class EBookController {
         }
         /* 获取登陆用户 */
         User user = (User) request.getSession().getAttribute("userLogin");
-        eBook.setEbookId(CommonUtils.uuid());
+        String eBookId = CommonUtils.uuid();
+        eBook.setEbookId(eBookId);
         eBook.setEbookNo(UUID2NO.getUUID2NO());
         eBook.setUserId(user.getUserId());
         eBook.setEbookUploadTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
         eBook.setEbookDownloadCount(0);
         eBook.setEbookFlag(1);
         // 文件
+        String realPath = NfsFileUtils.getNfsUrl();
         if (!ebookFile.isEmpty()) {
-            String realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.FilePath");
+            String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.dbpathfile");
             String originalFilename = ebookFile.getOriginalFilename();
             String ebookType = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
             eBook.setEbookType(ebookType);
-            String ebookPath = user.getLoginName() + "/" + ebookType + "/"
+            String ebookPath = outPath + user.getLoginName() + "/" + ebookType + "/"
                     + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/" + eBook.getEbookNo() + "/"
                     + eBook.getEbookNo() + "-" + originalFilename;
             /* 数据库保存路径 */
-            String dbpathfile = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.dbpathfile") + ebookPath;
+            log.info("ebookPath:{}", ebookPath);
+            String dbpathfile = ebookPath;
             eBook.setEbookPath(dbpathfile);
             eBook.setEbookSize(Integer.parseInt(ebookFile.getSize() + ""));
+            /* 保存到硬盘 */
+            String uploadPath = realPath + ebookPath;
+            log.info("uploadPath:{}", uploadPath);
             try {
-                FileUtils.copyInputStreamToFile(ebookFile.getInputStream(), new File(realPath + ebookPath));
+                InputStream inputStream = ebookFile.getInputStream();
+                log.info("uploadPath:{}", uploadPath);
+                NfsFileUtils.mkdirFile(uploadPath);
+                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
             } catch (Exception e) {
                 model.addAttribute("ebook", eBook);
                 model.addAttribute("errorMsg", "上传失败");
@@ -110,41 +130,76 @@ public class EBookController {
             return "ebook/uploadEBook";
         }
         // 图片
+        List<TImg> imgList = new ArrayList<>();
         if (ebookImgFile.isEmpty()) {
+            TImg tImg = new TImg();
+            tImg.setCreateTime(new Date());
+            tImg.setCreateUser(user.getLoginName());
+            tImg.setImgId(CommonUtils.uuid());
+            String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.dbpathimg");
             // 未选择图片择读取默认图片
             InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("ebookimg.jpg");
-            String realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.ImgPath");
-            String ebookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
+            String ebookPath = outPath + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
                     + eBook.getEbookNo() + "/" + eBook.getEbookNo() + "-" + "defaultebookimg.jpg";
+            log.info("ebookPath:{}", ebookPath);
             /* 数据库保存路径 */
-            String dbPathImg = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.dbpathimg") + ebookPath;
+            String dbPathImg = ebookPath;
+            log.info("dbPathImg:{}", dbPathImg);
             eBook.setEbookImg(dbPathImg);
             /* 保存到硬盘 */
             try {
-                FileUtils.copyInputStreamToFile(inputStream, new File(realPath + ebookPath));
+                /* 保存到硬盘 */
+                String uploadPath = realPath + ebookPath;
+                log.info("uploadPath:{}", uploadPath);
+                NfsFileUtils.mkdirFile(uploadPath);
+                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
+                tImg.setImgPath(dbPathImg);
+                tImg.setLastModifyTime(new Date());
+                tImg.setLastModifyUser(user.getLoginName());
+                tImg.setLinkId(eBookId);
+                tImg.setLinkType(ImgLinkType.EBookImg.getCode());
+                log.info("保存图片信息begin...tImg:{}", JSONObject.toJSON(tImg));
+                imgList.add(tImg);
             } catch (IOException e) {
                 model.addAttribute("ebook", eBook);
                 model.addAttribute("errorMsg", "上传出错");
                 return "ebook/uploadEBook";
             }
         } else {
+            TImg tImg = new TImg();
+            tImg.setCreateTime(new Date());
+            tImg.setCreateUser(user.getLoginName());
+            tImg.setImgId(CommonUtils.uuid());
+            String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.dbpathimg");
             // 格式不对
             String originalFilename = ebookImgFile.getOriginalFilename();
-            if (!originalFilename.substring(originalFilename.lastIndexOf(".") + 1).equals("jpg")) {
+            String imgEnd = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+            if (!NfsFileUtils.isImgFile(imgEnd)) {
                 model.addAttribute("ebook", eBook);
-                model.addAttribute("errorMsg", "请上传jpg格式的图片");
+                model.addAttribute("errorMsg", "请上传正确格式的图片");
                 return "ebook/uploadEBook";
             }
 
-            String realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.ImgPath");
-            String ebookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
+            String ebookPath = outPath + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
                     + eBook.getEbookNo() + "/" + eBook.getEbookNo() + "-" + originalFilename;
             /* 数据库保存路径 */
-            String dbPathImg = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.dbpathimg") + ebookPath;
+            String dbPathImg = ebookPath;
+            log.info("dbPathImg:{}", dbPathImg);
             eBook.setEbookImg(dbPathImg);
             /* 保存到硬盘 */
             try {
-                FileUtils.copyInputStreamToFile(ebookImgFile.getInputStream(), new File(realPath + ebookPath));
+                InputStream inputStream = ebookImgFile.getInputStream();
+                String uploadPath = realPath + ebookPath;
+                log.info("uploadPath:{}", uploadPath);
+                NfsFileUtils.mkdirFile(uploadPath);
+                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
+                tImg.setImgPath(dbPathImg);
+                tImg.setLastModifyTime(new Date());
+                tImg.setLastModifyUser(user.getLoginName());
+                tImg.setLinkId(eBookId);
+                tImg.setLinkType(ImgLinkType.EBookImg.getCode());
+                log.info("保存图片信息begin...tImg:{}", JSONObject.toJSON(tImg));
+                imgList.add(tImg);
             } catch (IOException e) {
                 model.addAttribute("ebook", eBook);
                 model.addAttribute("errorMsg", "上传不行");
@@ -157,11 +212,15 @@ public class EBookController {
          */
         try {
             eBookService.insertSelective(eBook);
+            imgService.batchSaveImg(imgList);
         } catch (Exception e) {
             model.addAttribute("ebook", eBook);
             model.addAttribute("errorMsg", "上传有误");
             return "ebook/uploadEBook";
         }
+        List<String> imageBase64StrList = NfsFileUtils.getImageBase64StrList(imgList);
+        model.addAttribute("eimg", imageBase64StrList.get(0));
+        eBook.setEbookImg(imageBase64StrList.get(0));
         model.addAttribute("successMsg", "上传成功");
         return "ebook/uploadEBook";
     }
@@ -171,7 +230,6 @@ public class EBookController {
             HttpServletRequest request) throws Exception {
 
         EBook eBook = eBookService.selectByPrimaryKey(ebookId);
-        String realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.FilePath");
         String ebookPath = eBook.getEbookPath();
         String s1 = ebookPath.substring(ebookPath.lastIndexOf("/") + 1);
         String fileName = s1.substring(s1.indexOf("-") + 1);
@@ -182,18 +240,15 @@ public class EBookController {
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
-        BufferedInputStream bis = null;
+        InputStream bis = null;
         BufferedOutputStream bos = null;
-
+        String realPath = NfsFileUtils.getNfsUrl();
         try {
-            File file = new File(realPath + ebookPath);
-            bis = new BufferedInputStream(new FileInputStream(file));
-            bos = new BufferedOutputStream(response.getOutputStream());
-            byte[] buff = new byte[2048];
-            int bytesRead;
-            while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
-                bos.write(buff, 0, bytesRead);
-            }
+            String nfsFileName = realPath + ebookPath;
+            log.info("nfsFileName:{}", nfsFileName);
+            bis = NfsFileUtils.readNfsFile2Stream(nfsFileName);
+            ServletOutputStream outputStream = response.getOutputStream();
+            IOUtils.copy(bis, outputStream);
         } catch (Exception e) {
             request.setAttribute("msg", "要下载的文件不存在" + e.getMessage());
             return "forward:/error/msg.jsp";
@@ -220,13 +275,14 @@ public class EBookController {
         }
 
         int i = eBookService.deleteByPrimaryKey(eBookId);
-        String realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.FilePath");
+        String realPath = NfsFileUtils.getNfsUrl();
         // 得到文件
         if (i > 0) {
-            File file = new File(realPath + eBook.getEbookPath());
-            if (file.exists()) {
+            String nfsFilePath = realPath + eBook.getEbookPath();
+            log.info("nfsFilePath:{}", nfsFilePath);
+            if (NfsFileUtils.existsNfsFile(nfsFilePath)) {
                 try {
-                    FileUtils.deleteQuietly(file);
+                    NfsFileUtils.deleteNfsFile(nfsFilePath);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

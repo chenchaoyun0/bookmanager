@@ -3,12 +3,15 @@ package com.sttx.bookmanager.util.file;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 
+import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.ddp.logger.DdpLoggerFactory;
@@ -28,8 +31,14 @@ public class NfsFileUtils {
     private static Logger log = DdpLoggerFactory.getLogger(NfsFileUtils.class);
     private static String jspImgSrc = "data:image/jpg;base64,";
     private static String nfsUrl = null;
+    private static String[] imgTypes = null;
     static {
         nfsUrl = PropertiesUtil.getFilePath("properties/nfs.properties", "nfsUrl");
+        imgTypes = new String[] { "jpg", "png", "jpeg", "gif", "bmp", "jpe", "tif", "tiff" };
+    }
+
+    public static String[] getImgTypes() {
+        return imgTypes;
     }
 
     public static String getNfsUrl() {
@@ -288,5 +297,24 @@ public class NfsFileUtils {
             imageBase64Str = getImageBase64Str(imgPath);
         }
         return imageBase64Str;
+    }
+
+    public static List<String> getImageBase64StrList(List<TImg> imgList) {
+        List<String> base64StrList = new ArrayList<>();
+        for (TImg tImg : imgList) {
+            String imgPath = tImg.getImgPath();
+            String nfsImgPath=nfsUrl+imgPath;
+            log.info("NFS服务器图片路径:{}", nfsImgPath);
+            String imageBase64Str = getImageBase64Str(nfsImgPath);
+            base64StrList.add(imageBase64Str);
+        }
+        return base64StrList;
+    }
+
+    public static boolean isImgFile(String fileName){
+        if(ArrayUtils.contains(imgTypes, fileName.toLowerCase())){
+            return true;
+        }
+        return false;
     }
 }

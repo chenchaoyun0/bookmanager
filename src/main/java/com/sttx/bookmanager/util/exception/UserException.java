@@ -25,6 +25,10 @@ public class UserException extends RuntimeException {
         super(message, e);
     }
 
+    public UserException(Throwable e) {
+        super(e);
+    }
+
     public UserException(String errorCode, String message) {
         super(message);
         log.error(">>>>>>>>>>>>>>>>>>>>>errorCode:{}", errorCode);

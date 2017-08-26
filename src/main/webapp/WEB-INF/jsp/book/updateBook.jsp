@@ -75,7 +75,7 @@
 		</c:if>
 		<br/>
 		<div class="cpimg" style="">
-			<c:forEach items="${book.bookImg}" var="img" varStatus="vs">
+			<c:forEach items="${imgList}" var="img" varStatus="vs">
 			     <c:if test="${vs.index eq 0}">
 			         <div>
                      <img id="upimg" alt=""

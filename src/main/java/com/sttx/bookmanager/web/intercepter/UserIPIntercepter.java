@@ -39,24 +39,24 @@ public class UserIPIntercepter implements HandlerInterceptor {
             String className = h.getBean().getClass().getSuperclass().getSimpleName();
             String methodName = h.getMethod().getName();
             String requestURI = req.getRequestURI();
-            log.info("+++++className:" + className);
-            log.info("+++++methodName:" + methodName);
-            log.info("+++++requestURI:" + requestURI);
+            // log.info("+++++className:" + className);
+            // log.info("+++++methodName:" + methodName);
+            // log.info("+++++requestURI:" + requestURI);
             /**
              * 保存日志
              */
             String remoteHost = req.getRemoteHost();
-            log.info("+++++remoteHost:" + remoteHost);
+            // log.info("+++++remoteHost:" + remoteHost);
             String localAddr = req.getLocalAddr();
-            log.info("+++++localAddr:" + localAddr);
+            // log.info("+++++localAddr:" + localAddr);
             String remoteAddr = req.getRemoteAddr();
-            log.info("+++++remoteAddr:" + remoteAddr);
+            // log.info("+++++remoteAddr:" + remoteAddr);
             String remoteUser = req.getRemoteUser();
-            log.info("+++++remoteUser:" + remoteUser);
+            // log.info("+++++remoteUser:" + remoteUser);
             String localName = req.getLocalName();
-            log.info("+++++localName:" + localName);
+            // log.info("+++++localName:" + localName);
             String serverName = req.getServerName();
-            log.info("+++++serverName:" + serverName);
+            // log.info("+++++serverName:" + serverName);
             String userName = "游客用户";
             // HttpSession session = req.getSession();
             // String userName = (session != null && (User)

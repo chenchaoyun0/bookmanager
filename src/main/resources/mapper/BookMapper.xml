@@ -32,7 +32,7 @@
 		book_Upload_Time, book_Type,book_Status, book_Flag
 	</sql>
 	<select id="selectByPrimaryKey" resultMap="bookUserResultMap"
-		parameterType="java.lang.String" useCache="true">
+		parameterType="java.lang.String" useCache="false">
 		select
 		b.*,u.*
 		from t_book
@@ -304,7 +304,7 @@
 		</association>
 	</resultMap>
 	<select id="selectBookPages" resultMap="bookUserResultMap"
-		parameterType="com.sttx.bookmanager.po.Book" useCache="true">
+		parameterType="com.sttx.bookmanager.po.Book" useCache="false">
 		SELECT
 		b.*,
 		u.login_Name,u.real_Name

@@ -1,6 +1,5 @@
 package com.sttx.bookmanager.web.controller;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +14,6 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,11 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IUserService;
 import com.sttx.bookmanager.util.exception.UserException;
+import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.passwd.SHA;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.tel.TelUtil;
 import com.sttx.ddp.logger.DdpLoggerFactory;
+import com.sun.xfile.XFileOutputStream;
 
 import cn.itcast.commons.CommonUtils;
 import cn.itcast.mail.Mail;
@@ -43,7 +43,7 @@ import cn.itcast.mail.MailUtils;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private static final Logger logger = DdpLoggerFactory.getLogger(UserController.class);
+    private static Logger log = DdpLoggerFactory.getLogger(UserController.class);
     @Autowired
     private IUserService userService;
 
@@ -121,17 +121,20 @@ public class UserController {
         }
         user.setUserPwd(SHA.getSHA256(user.getUserPwd()));
         user.setUserId(CommonUtils.uuid());
+        String realPath = NfsFileUtils.getNfsUrl();
         /*
          * 默认头像
          */
-        InputStream stream = this.getClass().getClassLoader().getResourceAsStream("userhead.jpg");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("userhead.jpg");
+        String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "userHead.dbpath");
         // 从配置文件获取物理地址
-        String realPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "user.userHeadPath");
-        String headPath = user.getLoginName() + "/userhead.jpg";
-        String dbPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "userHead.dbpath") + headPath;
+        String headPath = outPath + user.getLoginName() + "/userhead.jpg";
+        String dbPath = headPath;
         /* 保存到硬盘 */
-        FileUtils.copyInputStreamToFile(stream, new File(realPath + headPath));
-
+        String uploadPath = realPath + headPath;
+        log.info("uploadPath:{}", uploadPath);
+        NfsFileUtils.mkdirFile(uploadPath);
+        NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
         user.setUserHead(dbPath);
         user.setUserCode(CommonUtils.uuid() + CommonUtils.uuid());
         user.setUserStatus(0);
@@ -292,7 +295,7 @@ public class UserController {
     @ResponseBody
     public String chatWithRobot(@RequestParam("user_say") String user_say) {
         String robotRes = userService.chatWithRobot(user_say);
-        logger.info("chatWithRobot:req:{},res:{}", user_say, robotRes);
+        log.info("chatWithRobot:req:{},res:{}", user_say, robotRes);
         return robotRes;
     }
 

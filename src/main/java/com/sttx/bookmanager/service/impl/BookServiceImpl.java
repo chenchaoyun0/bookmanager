@@ -11,7 +11,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.sttx.bookmanager.dao.BookMapper;
 import com.sttx.bookmanager.po.Book;
+import com.sttx.bookmanager.po.TImg;
+import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IBookService;
+import com.sttx.bookmanager.service.IImgService;
 import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.BeanUtil;
@@ -24,7 +27,8 @@ public class BookServiceImpl implements IBookService {
 
     @Autowired
     private BookMapper bookMapper;
-
+    @Autowired
+    private IImgService imgService;
     public int insertSelective(Book book) {
 
         try {
@@ -42,6 +46,13 @@ public class BookServiceImpl implements IBookService {
         log.info("imgPath:{}", imgPath);
         String imageBase64Str = NfsFileUtils.getImgIfNullReturnDefault(imgPath);
         book.setBookImg(imageBase64Str);
+        //
+        User user = book.getUser();
+        String userHead = user.getUserHead();
+        String imageBase64Str2 = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
+        user.setUserHead(imageBase64Str2);
+        book.setUser(user);
+
         return book;
     }
 
@@ -57,11 +68,14 @@ public class BookServiceImpl implements IBookService {
         log.info("bookList:{}", JSONObject.toJSON(bookList));
         List<Book> arrayList = new ArrayList<Book>();
         for (Book book2 : bookList) {
-            String bookImg = book2.getBookImg();
-            log.info("bookImg:{}", bookImg);
-            String imgPath = NfsFileUtils.getNfsUrl() + bookImg;
-            log.info("imgPath:{}", imgPath);
-            String imageBase64Str = NfsFileUtils.getImgIfNullReturnDefault(imgPath);
+            TImg tImg = new TImg();
+            tImg.setLinkId(book2.getBookId());
+            log.info("查询图书图片begin...");
+            List<TImg> imgList = imgService.selectList(tImg);
+            log.info("查询图书图片end...imgList:{}", JSONObject.toJSON(imgList));
+            TImg tImg2 = imgList.get(0);
+            String imgPath = tImg2.getImgPath();
+            String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + imgPath);
             book2.setBookImg(imageBase64Str);
             arrayList.add(book2);
         }

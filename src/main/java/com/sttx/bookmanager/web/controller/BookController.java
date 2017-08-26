@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,9 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sttx.bookmanager.dictionary.ImgLinkType;
 import com.sttx.bookmanager.po.Book;
+import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IBookService;
+import com.sttx.bookmanager.service.IImgService;
 import com.sttx.bookmanager.util.excel.ExportToExcelUtil;
 import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
@@ -45,6 +50,8 @@ public class BookController {
     private static Logger log = DdpLoggerFactory.getLogger(BookController.class);
     @Autowired
     private IBookService bookService;
+    @Autowired
+    private IImgService imgService;
 
     @RequestMapping(value = "/uploadBookInput", method = { RequestMethod.GET, RequestMethod.POST })
     public String uploadBookInput() {
@@ -53,8 +60,8 @@ public class BookController {
     }
 
     @RequestMapping(value = "/uploadBookSubmit", method = RequestMethod.POST)
-    public String uploadBookSubmit(@ModelAttribute("book") Book book, HttpServletResponse response,
-            HttpServletRequest request, Model model, @RequestParam MultipartFile[] bookFile) throws IOException {
+    public String uploadBookSubmit(@ModelAttribute("book") Book book, HttpServletResponse response, HttpServletRequest request, Model model,
+            @RequestParam("bookFile") MultipartFile[] bookFile) throws IOException {
         /* 验证码 */
         // ...方便测试暂时不做校验
         String sessionCode = (String) request.getSession().getAttribute("session_vcode");
@@ -65,8 +72,8 @@ public class BookController {
         }
         /* 获取登陆用户 */
         User user = (User) request.getSession().getAttribute("userLogin");
-
-        book.setBookId(CommonUtils.uuid());
+        String bookId = CommonUtils.uuid();
+        book.setBookId(bookId);
         book.setBookNo(UUID2NO.getUUID2NO());
         book.setBookStatus(1);
         book.setBookRemain(book.getBookCount());
@@ -76,45 +83,29 @@ public class BookController {
         /**
          * 图片处理
          */
-        StringBuilder bookImg = new StringBuilder(",");
         String realPath = NfsFileUtils.getNfsUrl();
         String bookPath = null;
         String dbPath = null;
         String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath");
-        if (bookFile.length <= 0) {
-            // 未选择图片择读取默认图片
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("defaultBookImg.jpg");
-            // 读取配置文件，将文件上传至虚拟目录
-            // nfs://192.168.1.xxx:/u01/upload/
-            // 二级目录
-            bookPath = outPath + "/" + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
-                    + book.getBookNo() + "/"
-                    + book.getBookNo() + "-defaultBookImg-01.jpg";
-            log.info("bookPath:{}", bookPath);
-            /* 数据库保存路径 */
-            dbPath = outPath + bookPath;
-            log.info("dbPath:{}", dbPath);
-            /* 保存到硬盘 */
-            String uploadPath = realPath + bookPath;
-            log.info("uploadPath:{}", uploadPath);
-            NfsFileUtils.mkdirFile(uploadPath);
-            NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
-            /* 将所有文件路径用，隔开保存 */
-            bookImg.append(dbPath).append(",");
-        }
+        log.info("bookFile:{}", bookFile.length);
+        List<TImg> imgList = new ArrayList<>();
         for (int i = 0; i < bookFile.length; i++) {
             MultipartFile myfile = bookFile[i];
             if (myfile.isEmpty()) {
+                TImg tImg = new TImg();
+                tImg.setCreateTime(new Date());
+                tImg.setCreateUser(user.getLoginName());
+                tImg.setImgId(CommonUtils.uuid());
                 // 未选择图片择读取默认图片
                 InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("defaultBookImg.jpg");
                 // 读取配置文件，将文件上传至虚拟目录
                 // nfs://192.168.1.xxx:/u01/upload/
                 // 二级目录
-                bookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
+                bookPath = outPath + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
                         + book.getBookNo() + "/" + book.getBookNo() + "-defaultBookImg" + i + ".jpg";
                 log.info("bookPath:{}", bookPath);
                 /* 数据库保存路径 */
-                dbPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath") + bookPath;
+                dbPath = bookPath;
                 log.info("dbPath:{}", dbPath);
                 /* 保存到硬盘 */
                 String uploadPath = realPath + bookPath;
@@ -122,11 +113,18 @@ public class BookController {
                 NfsFileUtils.mkdirFile(uploadPath);
                 NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
                 /* 将所有文件路径用，隔开保存 */
-                bookImg.append(dbPath).append(",");
+                tImg.setImgPath(dbPath);
+                tImg.setLastModifyTime(new Date());
+                tImg.setLastModifyUser(user.getLoginName());
+                tImg.setLinkId(bookId);
+                tImg.setLinkType(ImgLinkType.BookImg.getCode());
+                log.info("保存图片信息begin...tImg:{}", JSONObject.toJSON(tImg));
+                imgList.add(tImg);
             } else {
                 // 格式错误
                 String originalFilename = myfile.getOriginalFilename();
-                if (!originalFilename.substring(originalFilename.lastIndexOf(".") + 1).equals("jpg")) {
+                String imgEnd = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+                if (!NfsFileUtils.isImgFile(imgEnd)) {
                     model.addAttribute("book", book);
                     model.addAttribute("errorMsg", "请上传jpg格式的图片");
                     return "book/uploadBook";
@@ -140,12 +138,16 @@ public class BookController {
                 // 如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\WEB-INF\\upload\\文件夹中
                 /* 保存文件夹 */
                 /* 真实路径 */
-                bookPath = user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
+                TImg tImg = new TImg();
+                tImg.setCreateTime(new Date());
+                tImg.setCreateUser(user.getLoginName());
+                tImg.setImgId(CommonUtils.uuid());
+                bookPath = outPath + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
                         + book.getBookNo() + "/" + book.getBookNo() + "-" + i
                         + originalFilename.substring(originalFilename.lastIndexOf("."));
                 log.info("bookPath:{}", bookPath);
                 /* 数据库路径 */
-                dbPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath") + bookPath;
+                dbPath = bookPath;
                 log.info("bookPath:{}", dbPath);
 
                 // 这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的
@@ -154,19 +156,26 @@ public class BookController {
                 log.info("uploadPath:{}", uploadPath);
                 NfsFileUtils.mkdirFile(uploadPath);
                 NfsFileUtils.uploadFile(myfile.getInputStream(), new XFileOutputStream(uploadPath));
-
-                /**/
-                bookImg.append(dbPath).append(",");
+                tImg.setImgPath(dbPath);
+                tImg.setLastModifyTime(new Date());
+                tImg.setLastModifyUser(user.getLoginName());
+                tImg.setLinkId(bookId);
+                tImg.setLinkType(ImgLinkType.BookImg.getCode());
+                log.info("保存图片信息begin...tImg:{}", JSONObject.toJSON(tImg));
+                imgList.add(tImg);
             }
         }
-        // 去掉最后一个，号
-        book.setBookImg(bookImg.substring(0, bookImg.lastIndexOf(",")));
-
         /**
          * 插入数据库
          */
         try {
-            bookService.insertSelective(book);
+            book.setBookImg(imgList.size() + "");
+            log.info("imgList size:{}条", imgList.size());
+            int j = bookService.insertSelective(book);
+            log.info("保存图书:{}条", j);
+            log.info("imgList:{}", JSONObject.toJSON(imgList));
+            int i = imgService.batchSaveImg(imgList);
+            log.info("保存图片:{}条", i);
         } catch (UserException e) {
             model.addAttribute("book", book);
             model.addAttribute("errorMsg", e.getMessage());
@@ -174,14 +183,14 @@ public class BookController {
         }
 
         model.addAttribute("successMsg", "上传成功");
-        model.addAttribute("bookImg", book.getBookImg().split(","));
+        List<String> imageBase64StrList = NfsFileUtils.getImageBase64StrList(imgList);
+        model.addAttribute("imgList", imageBase64StrList);
         return "book/uploadBook";
     }
 
     @RequestMapping(value = "selectBookPages", method = { RequestMethod.GET, RequestMethod.POST })
-    public String selectBookPages(Book book, String loginName, Model model, HttpServletRequest request,
-            ModelAndView modelAndView, Integer pageNo, Integer pageSize,
-            @RequestParam(value = "userId", required = false) String userId) {
+    public String selectBookPages(Book book, String loginName, Model model, HttpServletRequest request, ModelAndView modelAndView,
+            Integer pageNo, Integer pageSize, @RequestParam(value = "userId", required = false) String userId) {
         User user = new User();
         user.setLoginName(loginName);
         book.setUser(user);
@@ -192,7 +201,7 @@ public class BookController {
         PagedResult<Book> pages = bookService.selectBookPages(book, pageNo, pageSize);
         String url = request.getRequestURI();
         pages.setUrl(url);
-
+        //
         model.addAttribute("pages", pages);
 
         return "indexHome";
@@ -201,8 +210,15 @@ public class BookController {
     @RequestMapping(value = "selectBookDetail/{bookId}", method = { RequestMethod.GET })
     public String selectBookDetail(@PathVariable("bookId") String bookId, Model model) {
         Book book = bookService.selectByPrimaryKey(bookId);
+
         model.addAttribute("book", book);
-        model.addAttribute("bookImg", book.getBookImg().split(","));
+        TImg tImg = new TImg();
+        tImg.setLinkId(bookId);
+        log.info("查询图书图片begin...");
+        List<TImg> imgList = imgService.selectList(tImg);
+        log.info("查询图书图片end...imgList:{}", JSONObject.toJSON(imgList));
+        List<String> imageBase64StrList = NfsFileUtils.getImageBase64StrList(imgList);
+        model.addAttribute("imgList", imageBase64StrList);
         return "book/bookDetail";
     }
 
@@ -210,7 +226,14 @@ public class BookController {
     public String updateBook(@PathVariable("bookId") String bookId, Model model) {
         Book book = bookService.selectByPrimaryKey(bookId);
         model.addAttribute("book", book);
-        model.addAttribute("bookImg", book.getBookImg().split(","));
+        //
+        TImg tImg = new TImg();
+        tImg.setLinkId(bookId);
+        log.info("查询图书图片begin...");
+        List<TImg> imgList = imgService.selectList(tImg);
+        log.info("查询图书图片end...imgList:{}", JSONObject.toJSON(imgList));
+        List<String> imageBase64StrList = NfsFileUtils.getImageBase64StrList(imgList);
+        model.addAttribute("imgList", imageBase64StrList);
         return "book/updateBook";
     }
 
@@ -259,9 +282,9 @@ public class BookController {
     }
 
     @RequestMapping("/exportBookListExcel/{pageNo}/{pageSize}")
-    public void exportBookListExcel(Book book, String loginName, HttpServletResponse response,
-            @PathVariable("pageNo") Integer pageNo, @RequestParam(value = "userId", required = false) String userId,
-            @PathVariable("pageSize") Integer pageSize) throws IOException {
+    public void exportBookListExcel(Book book, String loginName, HttpServletResponse response, @PathVariable("pageNo") Integer pageNo,
+            @RequestParam(value = "userId", required = false) String userId, @PathVariable("pageSize") Integer pageSize)
+            throws IOException {
         User user = new User();
         user.setLoginName(loginName);
         book.setUser(user);
@@ -275,7 +298,7 @@ public class BookController {
         for (int i = 0; i < bookList.size(); i++) {
             Book b = bookList.get(i);
             String bookImg = b.getBookImg();
-            String s = bookImg.substring(0, bookImg.indexOf(",")).substring(bookImg.indexOf("bookImg") + 8);
+            String s = bookImg.substring(0, bookImg.indexOf(null)).substring(bookImg.indexOf("bookImg") + 8);
             String realPath = filePath + s;
             BufferedImage img = ImageIO.read(new File(realPath));
             b.setBookImage(img);

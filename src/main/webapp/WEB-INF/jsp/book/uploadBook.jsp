@@ -77,7 +77,7 @@
 		</c:if>
 		<br/>
 		<div class="cpimg" style="">
-			<c:forEach items="${book.bookImg}" var="img" varStatus="vs">
+			<c:forEach items="${imgList}" var="img" varStatus="vs">
 			     <c:if test="${vs.index eq 0}">
 			         <div>
                      <img id="upimg" alt=""
@@ -173,19 +173,19 @@
 				</tr>
 				<tr>
 					<th id="rfmth">上传图片--1</th>
-					<td><input type="file" name="bookFile" value="${book.bookImg }"/></td>
+					<td><input type="file" name="bookFile" /></td>
 				</tr>
 				<tr>
 					<th id="rfmth">上传图片--2</th>
-					<td><input type="file" name="bookFile" value="${book.bookImg }"/></td>
+					<td><input type="file" name="bookFile" /></td>
 				</tr>
 				<tr>
 					<th id="rfmth">上传图片--3</th>
-					<td><input type="file" name="bookFile" value="${book.bookImg}"/></td>
+					<td><input type="file" name="bookFile"/></td>
 				</tr>
 				<tr>
 					<th id="rfmth">上传图片--4</th>
-					<td><input type="file" name="bookFile" value="${book.bookImg}"/></td>
+					<td><input type="file" name="bookFile"/></td>
 				</tr>
 				<tr>
                     <th id="rfmth"><span class="rq">*</span><label>验证码:</label>

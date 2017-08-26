@@ -192,7 +192,8 @@ function ilend(bookId){
 					<div class="single-shop-product" style="margin-bottom: 30px;border:#00AAEE 0px solid;">
 						<div class="product-upper" align="center">
 							<a  href="<c:url value='book/selectBookDetail/${book.bookId}'/>">
-						<img style="height: 230px;width:180px;" src="${fn:substringBefore(book.bookImg, ',')}">
+						<%-- <img style="height: 230px;width:180px;" src="${fn:substringBefore(book.bookImg, ',')}"> --%>
+						<img style="height: 230px;width:180px;" src="${book.bookImg}">
 						</a>
 						</div>
 						<br/>

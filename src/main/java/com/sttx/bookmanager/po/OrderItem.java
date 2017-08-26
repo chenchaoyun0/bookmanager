@@ -3,6 +3,8 @@ package com.sttx.bookmanager.po;
 import java.io.Serializable;
 
 public class OrderItem implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String itemId;
 
     private String bookId;

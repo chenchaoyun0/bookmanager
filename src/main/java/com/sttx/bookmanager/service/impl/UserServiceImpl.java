@@ -1,7 +1,9 @@
 package com.sttx.bookmanager.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +14,20 @@ import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IUserService;
 import com.sttx.bookmanager.util.exception.UserException;
+import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.BeanUtil;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.passwd.SHA;
 import com.sttx.bookmanager.util.tuling.Aes;
 import com.sttx.bookmanager.util.tuling.Md5;
 import com.sttx.bookmanager.util.tuling.PostServer;
+import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
-
+    private static Logger log = DdpLoggerFactory.getLogger(UserServiceImpl.class);
     public User selectByPrimaryKey(String userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
@@ -83,6 +87,10 @@ public class UserServiceImpl implements IUserService {
         if (user.getUserStatus() == 0) {
             throw new UserException(user.getLoginName() + ",您尚未激活，请前往邮箱" + user.getUserEmail() + "激活");
         }
+
+        String userHead = user.getUserHead();
+        String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
+        user.setUserHead(imageBase64Str);
         return user;
     }
 
@@ -92,6 +100,16 @@ public class UserServiceImpl implements IUserService {
         PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
 
         List<User> list = userMapper.selectUserPages(user);
+
+        log.info("list:{}", JSONObject.toJSON(list));
+        List<User> arrayList = new ArrayList<User>();
+        for (User user2 : list) {
+            String userHead = user2.getUserHead();
+            String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
+            user2.setUserHead(imageBase64Str);
+            arrayList.add(user2);
+        }
+
         PagedResult<User> bookPagedResult = BeanUtil.toPagedResult(list);
 
         return bookPagedResult;

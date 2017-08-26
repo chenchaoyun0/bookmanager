@@ -43,11 +43,11 @@
 	<input type="hidden" id="userId" value="${sessionScope.userLogin.userId}"> 
 	<div class="bor" style="margin-top: 140px;">
 		<div class="cpimg" align="center">
-			<c:forEach items="${book.bookImg}" var="img" varStatus="vs">
+			<c:forEach items="${imgList}" var="img" varStatus="vs">
 				<c:if test="${vs.index eq 0}">
 					<div>
 						<img style="height: 350px; width: 300px;" id="upimg" alt=""
-							src="${fn:substringBefore(book.bookImg, ',')}" />
+							src="${img}" />
 					</div>
 				</c:if>
 				<div class="cptmp">

@@ -1,10 +1,13 @@
 package com.sttx.bookmanager.po;
 
+import java.io.Serializable;
+
 import jxl.Cell;
 import jxl.Range;
 import jxl.Sheet;
 
-public class GetExcelbean {
+public class GetExcelbean implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int topleft_row; // 起始行
     private int topleft_column; // 起始列
     private int bottomright_row = 0; // 终止行
