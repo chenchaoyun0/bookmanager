@@ -222,7 +222,7 @@ public class EBookController {
         model.addAttribute("eimg", imageBase64StrList.get(0));
         eBook.setEbookImg(imageBase64StrList.get(0));
         model.addAttribute("successMsg", "上传成功");
-        return "ebook/eBookList";
+        return "redirect:ebook/selectEBookPages";
     }
 
     @RequestMapping("/downloadFile/{ebookId}")
