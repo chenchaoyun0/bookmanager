@@ -105,7 +105,7 @@
 			<mvc:mapping path="/order/**" />
 			<bean class="com.sttx.bookmanager.web.intercepter.UserLoginIntercepter"></bean>
 		</mvc:interceptor>
-        <mvc:interceptor>
+        <!-- <mvc:interceptor>
 			<mvc:mapping path="/book/**" />
 			<mvc:mapping path="/ebook/**" />
 			<mvc:mapping path="/util/**" />
@@ -115,7 +115,7 @@
 			<mvc:mapping path="/" />
 			<mvc:mapping path="/indexHomeForIp" />
             <bean class="com.sttx.bookmanager.web.intercepter.UserIPIntercepter"></bean>
-        </mvc:interceptor>
+        </mvc:interceptor> -->
 	</mvc:interceptors>
 </beans>
 

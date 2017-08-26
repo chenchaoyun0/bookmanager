@@ -35,7 +35,7 @@ public class IndexHomeController {
         pages.setUrl(url);
         model.addAttribute("pages", pages);
         model.addAttribute("totalcount", totalcount);
-        logger.info(">>>>>>>>>pages:{}", JSONObject.toJSON(pages));
+        logger.info(">>>>>>>>>pages getTotal:{}", JSONObject.toJSON(pages.getTotal()));
         return "ipLog";
     }
 
