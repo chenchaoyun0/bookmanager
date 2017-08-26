@@ -1,6 +1,5 @@
 package com.sttx.bookmanager.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -100,15 +99,7 @@ public class UserServiceImpl implements IUserService {
         PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
 
         List<User> list = userMapper.selectUserPages(user);
-
-        log.info("list:{}", JSONObject.toJSON(list));
-        List<User> arrayList = new ArrayList<User>();
-        for (User user2 : list) {
-            String userHead = user2.getUserHead();
-            String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
-            user2.setUserHead(imageBase64Str);
-            arrayList.add(user2);
-        }
+        log.info("list:{}", JSONObject.toJSON(list.size()));
 
         PagedResult<User> bookPagedResult = BeanUtil.toPagedResult(list);
 
