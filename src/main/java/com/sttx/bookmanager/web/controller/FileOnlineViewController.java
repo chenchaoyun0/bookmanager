@@ -1,8 +1,6 @@
 package com.sttx.bookmanager.web.controller;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -38,7 +36,7 @@ import org.w3c.dom.Document;
 
 import com.sttx.bookmanager.po.EBook;
 import com.sttx.bookmanager.service.IEBookService;
-import com.sttx.bookmanager.util.properties.PropertiesUtil;
+import com.sttx.bookmanager.util.file.NfsFileUtils;
 
 @Controller
 @RequestMapping("/view")
@@ -63,7 +61,7 @@ public class FileOnlineViewController {
         }
         if ("pdf".equalsIgnoreCase(ebookType)) {
             modelAndView = new ModelAndView("doc_view/tz");
-            String urlPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.urlpathfile");
+            String urlPath = NfsFileUtils.getNfsUrl();
             int serverPort = request.getServerPort();
             String serverName = request.getServerName();
             urlPath = MessageFormat.format(urlPath, serverName + ":" + serverPort);// 替换{0}
@@ -90,8 +88,7 @@ public class FileOnlineViewController {
     @RequestMapping(value = { "xls2html" }, method = { RequestMethod.GET })
     public String xls2html(@RequestParam(value = "eBookFilePath", required = true) final String eBookFilePath,
             HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
-        String filePath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.FilePath");
-
+        String filePath = NfsFileUtils.getNfsUrl() + eBookFilePath;
         String encode = URLEncoder.encode(filePath + eBookFilePath, "UTF-8");
         model.addAttribute("title", eBookFilePath.substring(eBookFilePath.lastIndexOf("-") + 1));
         return "forward:/WEB-INF/jsp/doc_view/xlsview.jsp?filename=" + encode;
@@ -114,10 +111,8 @@ public class FileOnlineViewController {
             @RequestParam(value = "eBookFilePath", required = true) final String eBookFilePath,
             HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("doc_view/docview");
-        String filePath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.FilePath");
-        File dir = new File(filePath + eBookFilePath);
-        InputStream input = new FileInputStream(dir);
-
+        String filePath = NfsFileUtils.getNfsUrl() + eBookFilePath;
+        InputStream input = NfsFileUtils.readNfsFile2Stream(filePath);
         //
         HWPFDocument wordDocument = new HWPFDocument(input);
         WordToHtmlConverter wordToHtmlConverter;
