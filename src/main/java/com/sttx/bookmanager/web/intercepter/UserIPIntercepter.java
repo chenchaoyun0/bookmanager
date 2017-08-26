@@ -70,7 +70,9 @@ public class UserIPIntercepter implements HandlerInterceptor {
             Long start = startTime.get();
             Long actionTime = end - start;
             String operTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
+            log.info("查找访问来源是否存在日志...begin");
             TLog logDb = logService.selectByUserIp(userIp);
+            log.info("查找访问来源是否存在日志...end");
             log.info("+++++保存日志 exit begin...logDb" + JSONObject.toJSONString(logDb));
             if (logDb == null) {
                 //
