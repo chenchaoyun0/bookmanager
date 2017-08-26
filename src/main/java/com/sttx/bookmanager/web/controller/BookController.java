@@ -185,7 +185,7 @@ public class BookController {
         model.addAttribute("successMsg", "上传成功");
         List<String> imageBase64StrList = NfsFileUtils.getImageBase64StrList(imgList);
         model.addAttribute("imgList", imageBase64StrList);
-        return "redirect:book/selectBookPages";
+        return "book/uploadBook";
     }
 
     @RequestMapping(value = "selectBookPages", method = { RequestMethod.GET, RequestMethod.POST })
@@ -250,7 +250,7 @@ public class BookController {
         bookService.updateByPrimaryKeySelective(book);
         model.addAttribute("book", book);
         model.addAttribute("successMsg", "更新成功");
-        return "redirect:book/selectBookPages";
+        return "book/updateBook";
     }
 
     @RequestMapping("/admin")
