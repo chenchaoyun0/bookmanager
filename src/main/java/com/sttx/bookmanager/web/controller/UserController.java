@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IUserService;
 import com.sttx.bookmanager.util.exception.UserException;
@@ -159,6 +160,7 @@ public class UserController {
         /**
          * 发邮件 准备配置文件！
          */
+        log.info("发邮件 准备配置文件...");
         Properties props = new Properties();
         props.load(this.getClass().getClassLoader().getResourceAsStream("email_template.properties"));// 获取配置文件内容
         String host = props.getProperty("host");// 获取服务器主机
@@ -166,24 +168,34 @@ public class UserController {
         String pwd = props.getProperty("pwd");// 获取密码
         String from = props.getProperty("from");// 获取发件人
         String to = user.getUserEmail();// 获取收件人
+        log.info("获取收件人...userEmail:{}", to);
         // String to = "873692191@qq.com";// 获取收件人
         String subject = props.getProperty("subject");// 获取主题
+        log.info("获取主题subject:{}", subject);
         String content = props.getProperty("content");// 获取邮件内容
+        log.info("获取邮件内容content:{}", content);
         int serverPort = request.getServerPort();
+        log.info("serverPort:{}", serverPort);
         String serverName = request.getServerName();
+        log.info("serverName:{}", serverName);
         content = MessageFormat.format(content, serverName + ":" + serverPort, user.getUserCode());// 替换{0}
+        log.info(" 替换{0},content:{}", content);
 
         Session session = MailUtils.createSession(host, uname, pwd);// 得到session
         Mail mail = new Mail(from, to, subject, content);// 创建邮件对象
+        log.info("邮件对象mail:{}", JSONObject.toJSON(mail));
         try {
+            log.info("发邮件begin..");
             MailUtils.send(session, mail);// 发邮件
+            log.info("发邮件end..");
         } catch (MessagingException e) {
+            log.info("发邮件异常,{}", e);
             request.setAttribute("msg", "当前网络异常，请检查您的网络后到您注册的邮箱激活");
             request.setAttribute("user", user);
             request.setAttribute("tz", "user/userLoginInput");
             return "forward:/error/msg.jsp";
         }
-
+        log.info("发送邮件成功");
         /**
          * 网络正常，发送邮件成功了 1. 保存成功信息 2. 转发到msg.jsp
          * <meta http-equiv="Refresh" content="3;url=http://${requestScope.tz}">
