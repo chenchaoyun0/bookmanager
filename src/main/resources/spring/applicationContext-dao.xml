@@ -16,7 +16,6 @@
 	<context:property-placeholder location="classpath:properties/db.properties" ignore-unresolvable="true" />
     <!-- 数据源druid-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-    
         <property name="driverClassName" value="${jdbc.driver}" />
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
