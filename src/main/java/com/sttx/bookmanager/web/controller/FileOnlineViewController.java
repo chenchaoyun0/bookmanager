@@ -88,7 +88,7 @@ public class FileOnlineViewController {
     @RequestMapping(value = { "xls2html" }, method = { RequestMethod.GET })
     public String xls2html(@RequestParam(value = "eBookFilePath", required = true) final String eBookFilePath,
             HttpServletResponse response, HttpServletRequest request, Model model) throws Exception {
-        String filePath = NfsFileUtils.getNfsUrl() + eBookFilePath;
+        String filePath = "/u01/upload/" + eBookFilePath;
         String encode = URLEncoder.encode(filePath, "UTF-8");
         model.addAttribute("title", eBookFilePath.substring(eBookFilePath.lastIndexOf("-") + 1));
         return "forward:/WEB-INF/jsp/doc_view/xlsview.jsp?filename=" + encode;
@@ -131,7 +131,7 @@ public class FileOnlineViewController {
                 Picture pic = (Picture) pics.get(i);
                 try {
                     pic.writeImageContent(
-                            new FileOutputStream(filePath + "_" + pic.suggestFullFileName()));
+                            new FileOutputStream("/u01/upload/" + eBookFilePath + "_" + pic.suggestFullFileName()));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
