@@ -9,7 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.mail.Authenticator;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -164,6 +166,7 @@ public class UserController {
         Properties props = new Properties();
         props.load(this.getClass().getClassLoader().getResourceAsStream("email_template.properties"));// 获取配置文件内容
         String host = props.getProperty("host");// 获取服务器主机
+        String port = props.getProperty("port");
         String uname = props.getProperty("uname");// 获取用户名
         String pwd = props.getProperty("pwd");// 获取密码
         String from = props.getProperty("from");// 获取发件人
@@ -181,7 +184,27 @@ public class UserController {
         content = MessageFormat.format(content, serverName + ":" + serverPort, user.getUserCode());// 替换{0}
         log.info(" 替换{0},content:{}", content);
 
-        Session session = MailUtils.createSession(host, uname, pwd);// 得到session
+        // Session session = MailUtils.createSession(host, uname, pwd);//
+        // 得到session
+        /**
+         * add session
+         */
+        // 创建验证器
+        Authenticator auth = new Authenticator() {
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(uname, pwd);
+            }
+        };
+        Properties prop = new Properties();
+        prop.setProperty("mail.transport.protocol", "smtp");// 邮件发送协议
+        prop.setProperty("mail.host", host);// 指定主机
+        prop.setProperty("mail.smtp.port", port);
+        log.info("port:{}", port);
+        prop.setProperty("mail.smtp.auth", "true");// 指定验证为true
+        prop.setProperty("mail.debug", "true");// 是否启用调试模式（启用调试模式可打印客户端与服务器交互过程时一问一答的响应消息）
+        log.info("prop:{}", JSONObject.toJSON(prop));
+        Session session = Session.getDefaultInstance(prop, auth);
+        //
         Mail mail = new Mail(from, to, subject, content);// 创建邮件对象
         log.info("邮件对象mail:{}", JSONObject.toJSON(mail));
         try {
