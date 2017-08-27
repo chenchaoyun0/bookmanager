@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>网站访问IP日志</title>
+<title>网站访问IP日志 by 陈超允</title>
 </head>
 <body style="background-color: black;">
 <!-- 顶部导航 start -->
