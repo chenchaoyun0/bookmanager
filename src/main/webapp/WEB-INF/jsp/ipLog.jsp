@@ -82,16 +82,16 @@ if (dataName != null && dataName.length() > 0) {
     </div>
 	<div align="center" style="color: white;">
 	<br/>
-	Jenkins:<a style="color: lime;" href="http://www.longge1987.cn/jenkins/" target="_bank">http://www.longge1987.cn/jenkins/</a>
-	，ActiveMQ:<a style="color: lime;" href="http://www.longge1987.cn:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
+	Jenkins:<a style="color: lime;" href="http://39.108.0.229:8080" target="_bank">http://www.longge1987.cn/jenkins/</a>
+	，ActiveMQ:<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
 	<br/>
 	<br/>
 	私服库:<a style="color: lime;" href="http://www.longge1987.cn:8080/nexus/" target="_bank">http://www.longge1987.cn:8080/nexus/</a>
-	，手机商城:<a style="color: lime;" href="http://www.ccy123.cn/AShopping/" target="_bank">http://www.ccy123.cn/AShopping/</a>
+	，手机商城:<a style="color: lime;" href="http://118.89.222.115:8081/AShopping" target="_bank">http://www.ccy123.cn/AShopping/</a>
 	<br/>
 	<br/>
-	Zookeeper节点管理:<a style="color: lime;" href="http://www.ccy123.cn/zkWeb/" target="_bank">http://www.ccy123.cn/zkWeb/</a>
-	，Dubbo:<a style="color: lime;" href="http://www.ccy123.cn/dubbo-admin/" target="_bank">http://www.ccy123.cn/dubbo-admin/</a>
+	Zookeeper节点管理:<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a>
+	，Dubbo:<a style="color: lime;" href="http://118.89.222.115:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a>
 	<br/>
 	<br/>
 	项目gitHub:<a style="color: lime;" href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a>
