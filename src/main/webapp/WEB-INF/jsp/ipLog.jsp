@@ -86,7 +86,7 @@ if (dataName != null && dataName.length() > 0) {
 	，ActiveMQ:<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
 	<br/>
 	<br/>
-	私服库:<a style="color: lime;" href="http://www.longge1987.cn:8080/nexus/" target="_bank">http://www.longge1987.cn:8080/nexus/</a>
+	私服库:<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a>
 	，手机商城:<a style="color: lime;" href="http://118.89.222.115:8081/AShopping" target="_bank">http://www.ccy123.cn/AShopping/</a>
 	<br/>
 	<br/>
