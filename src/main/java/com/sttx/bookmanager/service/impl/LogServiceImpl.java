@@ -63,7 +63,7 @@ public class LogServiceImpl implements ILogService {
          * 默认是12条
          */
         pageNo = pageNo == null ? (Integer) 1 : pageNo;
-        pageSize = pageSize == null ? (Integer) 20 : pageSize;
+        pageSize = pageSize == null ? (Integer) 8 : pageSize;
         PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
         List<TLog> selectLogPages = tLogMapper.selectLogPages(tLog);
         PagedResult<TLog> logPagedResult = BeanUtil.toPagedResult(selectLogPages);
