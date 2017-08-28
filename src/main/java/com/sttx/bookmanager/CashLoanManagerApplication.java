@@ -1,5 +1,7 @@
 package com.sttx.bookmanager;
 
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,15 +10,20 @@ import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletCont
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
+import com.sttx.bookmanager.util.spring.SpringUtils;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @SpringBootApplication
 @ServletComponentScan
-public class CashLoanManagerApplication extends SpringBootServletInitializer implements EmbeddedServletContainerCustomizer {
+public class CashLoanManagerApplication extends SpringBootServletInitializer
+        implements EmbeddedServletContainerCustomizer, ApplicationListener<ContextRefreshedEvent> {
     private static final Logger log = DdpLoggerFactory.getLogger(CashLoanManagerApplication.class);
     private static String contextPath = null;
     private static String port = null;
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(CashLoanManagerApplication.class);
@@ -35,6 +42,14 @@ public class CashLoanManagerApplication extends SpringBootServletInitializer imp
         if (port != null) {
             container.setPort(Integer.valueOf(port));
         }
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        log.info("开机服务执行的操作....");
+        DataSource dataSource = SpringUtils.getBean("dataSource", DataSource.class);
+        log.info("dataSource:{}", dataSource);
+
     }
 
 }
