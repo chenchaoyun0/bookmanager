@@ -89,7 +89,7 @@ function checkinput(){
 									密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：
 								</td>
 								<td><!-- ${fn:substring(requestScope.pform, 0, 6)} -->
-									<input onfocus="pswonf()" onblur="pswonb()" type="password" value="111111" name="userPwd" id="password" style="font-size: 20px;" />
+									<input onfocus="pswonf()" onblur="pswonb()" type="text" value="111111" name="userPwd" id="password" style="font-size: 20px;" />
 								</td>
 							</tr>
 							<tr>
