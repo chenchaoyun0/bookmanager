@@ -1,5 +1,8 @@
 package com.sttx.bookmanager;
 
+import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -49,6 +52,15 @@ public class CashLoanManagerApplication extends SpringBootServletInitializer
         log.info("开机服务执行的操作....");
         DataSource dataSource = SpringUtils.getBean("dataSource", DataSource.class);
         log.info("dataSource:{}", dataSource);
+        try {
+            DatabaseMetaData databaseMetaData = dataSource.getConnection().getMetaData();
+            String url = databaseMetaData.getURL();
+            log.info("url:{}", url);
+            String userName = databaseMetaData.getUserName();
+            log.info("userName:{}", userName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
