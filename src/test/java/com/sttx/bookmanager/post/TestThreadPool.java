@@ -19,7 +19,7 @@ public class TestThreadPool {
         pool.setTimeBetweenEvictionRunsMillis(600000);// 间隔每过多少毫秒进行一次后台对象清理的行动
         pool.setNumTestsPerEvictionRun(-1);// －1表示清理时检查所有线程
         pool.setMinEvictableIdleTimeMillis(3000);// 设定在进行后台对象清理时，休眠时间超过了3000毫秒的对象为过期
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 666; i++) {
             try {
                 SendPostThread simpleThread = (SendPostThread) pool.borrowObject();
                 simpleThread.setPool(pool);
