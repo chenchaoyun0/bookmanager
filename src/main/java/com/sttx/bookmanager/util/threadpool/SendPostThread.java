@@ -39,7 +39,7 @@ public class SendPostThread extends Thread {
                 this.wait();
             } else {
                 System.out.println(this.getName() + "开始处理");
-                HttpPostUtil u = new HttpPostUtil("http://39.108.0.229");
+                HttpPostUtil u = new HttpPostUtil("http://39.108.0.229/book/selectBookPages");
                 byte[] b = u.send();
                 String result = new String(b);
                 System.out.println("result:{}" + result.length());
