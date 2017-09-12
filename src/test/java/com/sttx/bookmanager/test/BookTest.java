@@ -14,8 +14,7 @@ import com.sttx.bookmanager.service.IBookService;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
-@ContextConfiguration(locations = { "classpath:spring/applicationContext-dao.xml", "classpath:spring/applicationContext-service.xml",
-        "classpath:spring/applicationContext-transation.xml" })
+@ContextConfiguration(locations = { "classpath:spring/applicationContext-*.xml" })
 @RunWith(SpringJUnit4ClassRunner.class) // SpringJUnit支持，由此引入Spring-Test框架支持！
 @WebAppConfiguration
 public class BookTest {

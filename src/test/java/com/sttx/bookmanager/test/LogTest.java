@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
@@ -13,8 +14,10 @@ import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring/applicationContext-*.xml" })
+@ContextConfiguration(locations = { "classpath:spring/applicationContext-dao.xml", "classpath:spring/applicationContext-service.xml",
+        "classpath:spring/applicationContext-transation.xml" })
+@RunWith(SpringJUnit4ClassRunner.class) // SpringJUnit支持，由此引入Spring-Test框架支持！
+@WebAppConfiguration
 public class LogTest {
     private static final Logger logger = DdpLoggerFactory.getLogger(LogTest.class);
     @Autowired

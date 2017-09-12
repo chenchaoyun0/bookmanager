@@ -28,17 +28,17 @@ public class UspHttpUtils {
         httpPost.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
         T t = null;
         try {
-            StringEntity entity = new StringEntity(JsonUtil.toJson(msg), "utf-8");
+            StringEntity entity = new StringEntity(CcyJsonUtil.toJson(msg), "utf-8");
             ((HttpEntityEnclosingRequestBase) httpPost).setEntity(entity);
             CloseableHttpResponse httpResponse = HttpClients.createDefault().execute(httpPost);
             int statusCode = httpResponse.getStatusLine().getStatusCode();
             String reasonPhrase = httpResponse.getStatusLine().getReasonPhrase();
             if (200 != statusCode) {
                 log.error("连接异常,statusCode:{},reasonPhrase:{}", statusCode, reasonPhrase);
-                return JsonUtil.fromJson("{\"resCode\":\"USPB1050\",\"resMsg\":\"连接restful异常,statusCode:" + statusCode + "\"}", cla);
+                return CcyJsonUtil.fromJson("{\"resCode\":\"USPB1050\",\"resMsg\":\"连接restful异常,statusCode:" + statusCode + "\"}", cla);
             }
             String response = EntityUtils.toString(httpResponse.getEntity());
-            t = JsonUtil.fromJson(response, cla);
+            t = CcyJsonUtil.fromJson(response, cla);
         } catch (IOException e) {
             log.error("UspHttpUtils doPost 抛出异常,{}", e);
             throw new UserException("USPB1050", e);// 发送POST请求失败
