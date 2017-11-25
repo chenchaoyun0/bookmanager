@@ -82,7 +82,8 @@ if (dataName != null && dataName.length() > 0) {
     </div>
 	<div align="center" style="color: white;">
 	<br/>
-	Jenkins:<a style="color: lime;" href="http://39.108.0.229:8080" target="_bank">http://www.longge1987.cn/jenkins/</a>
+	Gerrit:<a style="color: lime;" href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a>，
+	Jenkins:<a style="color: lime;" href="http://39.108.0.229:8081" target="_bank">http://www.longge1987.cn/jenkins/</a>
 	，ActiveMQ:<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
 	<br/>
 	<br/>
