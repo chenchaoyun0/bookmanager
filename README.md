@@ -1,3 +1,4 @@
 # bookmanager
 # test jenkins build4
-# 测试 test2
+# 测试 23
+# 测试 jenkins slave
