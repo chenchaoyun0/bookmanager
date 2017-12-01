@@ -15,7 +15,7 @@
 <div align="center" style="margin-top: 20px" >
                 <a href="<c:url value='/book/selectBookPages'/>"><img src="<c:url value='img/myheader.jpeg'/>" style="width: 180px;height: 100px;" alt="数通图书"/>
                 </a>
-            <i style="color: yellow;font-style:normal;">点击图片访问主页</i></div>
+            <i style="color: yellow;font-style:normal;">点我头像  by 陈超允</i></div>
         <div align="center" style="margin-top:10px">
 <p style="color: yellow;font-weight: bolder;font-size: 20px">当前总访问人数：${pages.total}人，总访问量：${totalcount}次</p></div>
 <div align="center" style="margin-top: 20px" >
