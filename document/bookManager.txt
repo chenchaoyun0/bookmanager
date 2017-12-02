@@ -71,3 +71,5 @@
 	ebook_Flag;--逻辑删除：1-正常，0-删除
 	ebook_UUID;--删除UUID
 
+7、t_log（日志表)
+
