@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sttx.bookmanager.dao.TImgMapper">
+    <!-- 缓存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+    <resultMap
+        id="BaseResultMap"
+        type="com.sttx.bookmanager.po.TImg">
+        <id
+            column="img_Id"
+            property="imgId"
+            jdbcType="VARCHAR" />
+        <result
+            column="link_Id"
+            property="linkId"
+            jdbcType="VARCHAR" />
+        <result
+            column="link_Type"
+            property="linkType"
+            jdbcType="VARCHAR" />
+        <result
+            column="img_Path"
+            property="imgPath"
+            jdbcType="VARCHAR" />
+        <result
+            column="create_User"
+            property="createUser"
+            jdbcType="VARCHAR" />
+        <result
+            column="create_Time"
+            property="createTime"
+            jdbcType="TIMESTAMP" />
+        <result
+            column="last_Modify_User"
+            property="lastModifyUser"
+            jdbcType="VARCHAR" />
+        <result
+            column="last_Modify_Time"
+            property="lastModifyTime"
+            jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        img_Id, link_Id, link_Type, img_Path, create_User,
+        create_Time,
+        last_Modify_User,
+        last_Modify_Time
+    </sql>
+    <select
+        id="selectByPrimaryKey"
+        resultMap="BaseResultMap"
+        parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from t_img
+        where img_Id = #{imgId,jdbcType=VARCHAR}
+    </select>
+    <delete
+        id="deleteByPrimaryKey"
+        parameterType="java.lang.String">
+        delete from t_img
+        where img_Id =
+        #{imgId,jdbcType=VARCHAR}
+    </delete>
+    <insert
+        id="insert"
+        parameterType="com.sttx.bookmanager.po.TImg">
+        insert into t_img (img_Id, link_Id, link_Type,
+        img_Path, create_User, create_Time,
+        last_Modify_User,
+        last_Modify_Time)
+        values (#{imgId,jdbcType=VARCHAR},
+        #{linkId,jdbcType=VARCHAR},
+        #{linkType,jdbcType=VARCHAR},
+        #{imgPath,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{lastModifyUser,jdbcType=VARCHAR},
+        #{lastModifyTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert
+        id="insertSelective"
+        parameterType="com.sttx.bookmanager.po.TImg">
+        insert into t_img
+        <trim
+            prefix="("
+            suffix=")"
+            suffixOverrides=",">
+            <if test="imgId != null">
+                img_Id,
+            </if>
+            <if test="linkId != null">
+                link_Id,
+            </if>
+            <if test="linkType != null">
+                link_Type,
+            </if>
+            <if test="imgPath != null">
+                img_Path,
+            </if>
+            <if test="createUser != null">
+                create_User,
+            </if>
+            <if test="createTime != null">
+                create_Time,
+            </if>
+            <if test="lastModifyUser != null">
+                last_Modify_User,
+            </if>
+            <if test="lastModifyTime != null">
+                last_Modify_Time,
+            </if>
+        </trim>
+        <trim
+            prefix="values ("
+            suffix=")"
+            suffixOverrides=",">
+            <if test="imgId != null">
+                #{imgId,jdbcType=VARCHAR},
+            </if>
+            <if test="linkId != null">
+                #{linkId,jdbcType=VARCHAR},
+            </if>
+            <if test="linkType != null">
+                #{linkType,jdbcType=VARCHAR},
+            </if>
+            <if test="imgPath != null">
+                #{imgPath,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyTime != null">
+                #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update
+        id="updateByPrimaryKeySelective"
+        parameterType="com.sttx.bookmanager.po.TImg">
+        update t_img
+        <set>
+            <if test="linkId != null">
+                link_Id = #{linkId,jdbcType=VARCHAR},
+            </if>
+            <if test="linkType != null">
+                link_Type = #{linkType,jdbcType=VARCHAR},
+            </if>
+            <if test="imgPath != null">
+                img_Path = #{imgPath,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_User = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_Time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUser != null">
+                last_Modify_User =
+                #{lastModifyUser,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyTime != null">
+                last_Modify_Time =
+                #{lastModifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where img_Id = #{imgId,jdbcType=VARCHAR}
+    </update>
+    <update
+        id="updateByPrimaryKey"
+        parameterType="com.sttx.bookmanager.po.TImg">
+        update t_img
+        set link_Id =
+        #{linkId,jdbcType=VARCHAR},
+        link_Type =
+        #{linkType,jdbcType=VARCHAR},
+        img_Path =
+        #{imgPath,jdbcType=VARCHAR},
+        create_User =
+        #{createUser,jdbcType=VARCHAR},
+        create_Time =
+        #{createTime,jdbcType=TIMESTAMP},
+        last_Modify_User =
+        #{lastModifyUser,jdbcType=VARCHAR},
+        last_Modify_Time =
+        #{lastModifyTime,jdbcType=TIMESTAMP}
+        where img_Id =
+        #{imgId,jdbcType=VARCHAR}
+    </update>
+    <!-- select list -->
+    <select
+        id="selectList"
+        resultMap="BaseResultMap"
+        parameterType="com.sttx.bookmanager.po.TImg"
+        useCache="false">
+        SELECT
+        *
+        FROM
+        t_img
+        <where>
+            <include refid="condition_selectList" />
+        </where>
+        ORDER BY create_Time ASC
+    </select>
+    <sql id="condition_selectList">
+        <if test="linkId != null and linkId != ''">
+            and link_Id = #{linkId,jdbcType=VARCHAR}
+        </if>
+        <if test="linkType != null and linkType != ''">
+            and link_Type = #{linkType,jdbcType=VARCHAR
+        </if>
+        <if test="imgPath != null and imgPath != ''">
+            and img_Path = #{imgPath,jdbcType=VARCHAR}
+        </if>
+        <if test="createUser != null and createUser != ''">
+            and create_User = #{createUser,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null and createTime != ''">
+            and create_Time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="lastModifyUser != null and lastModifyUser != ''">
+            and last_Modify_User = #{lastModifyUser,jdbcType=VARCHAR}
+        </if>
+        <if test="lastModifyTime != null and lastModifyTime != ''">
+            and last_Modify_Time = #{lastModifyTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+</mapper>

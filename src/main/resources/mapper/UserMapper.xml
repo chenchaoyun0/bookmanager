@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sttx.bookmanager.dao.UserMapper">
+	<!-- 缓存 -->
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+	<resultMap id="UserBaseResultMap" type="com.sttx.bookmanager.po.User">
+		<id column="user_Id" property="userId" jdbcType="VARCHAR" />
+		<result column="login_Name" property="loginName" jdbcType="VARCHAR" />
+		<result column="real_Name" property="realName" jdbcType="VARCHAR" />
+		<result column="user_Sex" property="userSex" jdbcType="INTEGER" />
+		<result column="user_Pwd" property="userPwd" jdbcType="VARCHAR" />
+		<result column="user_Email" property="userEmail" jdbcType="VARCHAR" />
+		<result column="user_Tel" property="userTel" jdbcType="VARCHAR" />
+		<result column="user_BirthDay" property="userBirthday"
+			jdbcType="VARCHAR" />
+		<result column="user_Head" property="userHead" jdbcType="VARCHAR" />
+		<result column="user_Code" property="userCode" jdbcType="VARCHAR" />
+		<result column="user_Status" property="userStatus" jdbcType="INTEGER" />
+		<result column="user_RegistTime" property="userRegisttime"
+			jdbcType="VARCHAR" />
+		<result column="user_Role" property="userRole" jdbcType="INTEGER" />
+		<result column="user_Flag" property="userFlag" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="UserBase_Column_List">
+		user_Id, login_Name, real_Name, user_Sex, user_Pwd,
+		user_Email, user_Tel,
+		user_BirthDay,
+		user_Head, user_Code, user_Status,
+		user_RegistTime, user_Role,user_Flag
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="UserBaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="UserBase_Column_List" />
+		from t_user
+		where user_Id = #{userId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		update t_user
+		set user_Flag=0 where user_Id = #{userId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sttx.bookmanager.po.User">
+		insert into t_user (user_Id,
+		login_Name, real_Name,
+		user_Sex, user_Pwd, user_Email,
+		user_Tel,
+		user_BirthDay, user_Head,
+		user_Code, user_Status, user_RegistTime,user_Role,
+		user_Flag)
+		values (#{userId,jdbcType=VARCHAR},
+		#{loginName,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR},
+		#{userSex,jdbcType=INTEGER}, #{userPwd,jdbcType=VARCHAR},
+		#{userEmail,jdbcType=VARCHAR},
+		#{userTel,jdbcType=VARCHAR},
+		#{userBirthday,jdbcType=VARCHAR},
+		#{userHead,jdbcType=VARCHAR},
+		#{userCode,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER},
+		#{userRegisttime,jdbcType=VARCHAR},
+		#{userFlag,jdbcType=INTEGER}),
+		#{userRole,jdbcType=INTEGER}
+	</insert>
+	<insert id="insertSelective" parameterType="com.sttx.bookmanager.po.User">
+		insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_Id,
+			</if>
+			<if test="loginName != null">
+				login_Name,
+			</if>
+			<if test="realName != null">
+				real_Name,
+			</if>
+			<if test="userSex != null">
+				user_Sex,
+			</if>
+			<if test="userPwd != null">
+				user_Pwd,
+			</if>
+			<if test="userEmail != null">
+				user_Email,
+			</if>
+			<if test="userTel != null">
+				user_Tel,
+			</if>
+			<if test="userBirthday != null">
+				user_BirthDay,
+			</if>
+			<if test="userHead != null">
+				user_Head,
+			</if>
+			<if test="userCode != null">
+				user_Code,
+			</if>
+			<if test="userStatus != null">
+				user_Status,
+			</if>
+			<if test="userRegisttime != null">
+				user_RegistTime,
+			</if>
+			<if test="userRole != null">
+				user_Role,
+			</if>
+			<if test="userFlag != null">
+				user_Flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				#{userSex,jdbcType=INTEGER},
+			</if>
+			<if test="userPwd != null">
+				#{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userTel != null">
+				#{userTel,jdbcType=VARCHAR},
+			</if>
+			<if test="userBirthday != null">
+				#{userBirthday,jdbcType=VARCHAR},
+			</if>
+			<if test="userHead != null">
+				#{userHead,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userStatus != null">
+				#{userStatus,jdbcType=INTEGER},
+			</if>
+			<if test="userRegisttime != null">
+				#{userRegisttime,jdbcType=VARCHAR},
+			</if>
+			<if test="userRole != null">
+				#{userRole,jdbcType=INTEGER},
+			</if>
+			<if test="userFlag != null">
+				#{userFlag,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sttx.bookmanager.po.User">
+		update t_user
+		<set>
+			<if test="loginName != null">
+				login_Name = #{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				real_Name = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				user_Sex = #{userSex,jdbcType=INTEGER},
+			</if>
+			<if test="userPwd != null">
+				user_Pwd = #{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="userEmail != null">
+				user_Email = #{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userTel != null">
+				user_Tel = #{userTel,jdbcType=VARCHAR},
+			</if>
+			<if test="userBirthday != null">
+				user_BirthDay = #{userBirthday,jdbcType=VARCHAR},
+			</if>
+			<if test="userHead != null">
+				user_Head = #{userHead,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				user_Code = #{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userStatus != null">
+				user_Status = #{userStatus,jdbcType=INTEGER},
+			</if>
+			<if test="userRegisttime != null">
+				user_RegistTime = #{userRegisttime,jdbcType=VARCHAR},
+			</if>
+			<if test="userRole != null">
+				user_Role = #{userRole,jdbcType=INTEGER},
+			</if>
+			<if test="userFlag != null">
+				user_Flag = #{userFlag,jdbcType=INTEGER},
+			</if>
+		</set>
+		where user_Id = #{userId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sttx.bookmanager.po.User">
+		update t_user
+		set
+		login_Name = #{loginName,jdbcType=VARCHAR},
+		real_Name =
+		#{realName,jdbcType=VARCHAR},
+		user_Sex = #{userSex,jdbcType=INTEGER},
+		user_Pwd = #{userPwd,jdbcType=VARCHAR},
+		user_Email =
+		#{userEmail,jdbcType=VARCHAR},
+		user_Tel = #{userTel,jdbcType=VARCHAR},
+		user_BirthDay = #{userBirthday,jdbcType=VARCHAR},
+		user_Head =
+		#{userHead,jdbcType=VARCHAR},
+		user_Code = #{userCode,jdbcType=VARCHAR},
+		user_Status = #{userStatus,jdbcType=INTEGER},
+		user_RegistTime =
+		#{userRegisttime,jdbcType=VARCHAR},
+		user_Flag =
+		#{userFlag,jdbcType=INTEGER},
+		user_Role=
+		#{userRole,jdbcType=INTEGER}
+		where user_Id = #{userId,jdbcType=VARCHAR}
+	</update>
+	<!-- 根据用户Id查询 其图书信息列表 resultMap -->
+	<resultMap type="com.sttx.bookmanager.po.User" id="UserBookResultMap"
+		extends="UserBaseResultMap">
+		<collection property="bookList" ofType="com.sttx.bookmanager.po.Book">
+			<id column="book_Id" property="bookId" jdbcType="VARCHAR" />
+			<result column="user_Id" property="userId" jdbcType="VARCHAR" />
+			<result column="book_No" property="bookNo" jdbcType="VARCHAR" />
+			<result column="book_Img" property="bookImg" jdbcType="VARCHAR" />
+			<result column="book_Name" property="bookName" jdbcType="VARCHAR" />
+			<result column="book_Author" property="bookAuthor" jdbcType="VARCHAR" />
+			<result column="book_Price" property="bookPrice" jdbcType="DOUBLE" />
+			<result column="book_Desc" property="bookDesc" jdbcType="VARCHAR" />
+			<result column="book_Count" property="bookCount" jdbcType="INTEGER" />
+			<result column="book_Remain" property="bookRemain" jdbcType="INTEGER" />
+			<result column="book_Upload_Time" property="bookUploadTime"
+				jdbcType="VARCHAR" />
+			<result column="book_Status" property="bookStatus" jdbcType="INTEGER" />
+			<result column="book_Flag" property="bookFlag" jdbcType="INTEGER" />
+		</collection>
+	</resultMap>
+	<select id="findUserBookListByUserId" resultMap="UserBookResultMap"
+		parameterType="java.lang.String">
+		select u.*,b.* from t_user u,t_book b where
+		u.user_Id=b.user_Id and
+		u.user_Id=#{userId,jdbcType=VARCHAR}
+	</select>
+	<!-- 邮箱重复 -->
+	<select useCache="false" id="existUserEmail" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select count(user_Id) from t_user where
+		user_Email=#{userEmail,jdbcType=VARCHAR}
+	</select>
+	<!-- 用户名重复 -->
+	<select useCache="false" id="existUserName" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select count(user_Id) from t_user where
+		login_Name=#{loginName,jdbcType=VARCHAR}
+	</select>
+	<!-- 通过激活码查找用户 -->
+	<select useCache="false" id="findByCode" resultMap="UserBaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="UserBase_Column_List" />
+		from t_user
+		where user_Code= #{userCode,jdbcType=VARCHAR}
+	</select>
+	<!-- 用户根据id激活 -->
+	<update id="activeUserStatus">
+		update t_user set user_Status=#{userStatus,jdbcType=INTEGER} where
+		user_Code=#{userCode,jdbcType=VARCHAR}
+	</update>
+	<!-- 用户登录 -->
+	<sql id="userLoginWhere">
+	   <if test="loginMes!=null and loginMes!=''">
+	       login_Name=#{loginMes,jdbcType=VARCHAR}
+	       or user_Email=#{loginMes,jdbcType=VARCHAR}
+	       or user_Tel=#{loginMes,jdbcType=VARCHAR}
+	   </if>
+	</sql>
+	<select useCache="false" id="userLoginSubmit" resultMap="UserBaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="UserBase_Column_List" />
+		from t_user
+		<where>
+			<include refid="userLoginWhere"></include>
+		</where>
+	</select>
+	
+	<select id="selectUserPages" resultMap="UserBaseResultMap" parameterType="com.sttx.bookmanager.po.User">
+	select * from t_user a where a.user_Flag=1 order by a.user_RegistTime DESC
+	</select>
+	
+	<update id="updatePermission" parameterType="java.lang.String">
+	update t_user a set a.user_Role=1 where a.user_Id=#{userId}
+	</update>
+</mapper>

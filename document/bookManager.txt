@@ -1,0 +1,76 @@
+1、t_user（用户表）
+	user_Id;--用户ID
+	login_Name;--登录名
+	real_Name;--真实姓名
+	user_Sex;--性别
+	user_Pwd;--密码
+	user_Email;--邮箱mail.sttxtech.com
+	user_Tel;--手机号
+	user_BirthDay;--出生日期
+	--addressList<Address>;--当前用户所有地址
+	--bookList<Book>;--用户拥有图书列表
+	--orderList<Order>;--用户的订单列表
+	--eBookList<EBook>;--用户的电子书列表
+	user_Head;--头像路径
+	user_Code;--激活码:UUID*2
+	user_Status;--状态:0-未激活，1-激活，-1-封禁
+	user_RegistTime;--注册时间
+	user_Flag;--逻辑删除：1-正常，0-删除
+	user_UUID;--删除UUID
+
+3、t_book（图书表）
+	book_Id;--图书ID
+	user_Id;--图书所有者用户ID:<User> *fk*
+	--User;--图书所属用户
+	book_Country;--图书国家###
+	book_No;--图书编号
+	book_Img;--照片路径
+	book_Name;--标题名称
+	book_Author;--作者
+	book_House;--出版社###
+	book_Price;--价格
+	book_Desc;--描述
+	book_Count;--总数量
+	book_By_Time;--购买时间###
+	book_Remain;--剩余数量
+	book_Upload_Time;--上架时间
+	book_Status;--状态：1-正常，-1-已下架
+	book_Flag;--逻辑删除：1-正常，0-删除
+	book_UUID;--删除UUID
+
+
+5、t_orderItem（订单条目表）
+	item_Id;--条目ID
+	order_Id;--订单ID:<Order> *fk*
+	book_Id;--图书ID:<Book> *fk*
+	--Book;--订单条目对应的图书
+	lend_Count;--借出数量
+	lend_Time;--借出时间
+	return_Time;--归还时间
+	item_Total;--条目总价
+	item_Status;--条目状态:-1-未归还，1-已归还
+	item_Flag;--逻辑删除：1-正常，0-删除
+	item_UUID;--删除UUID
+
+6、t_ebook（电子书表）
+	ebook_Id;--电子书ID
+	user_Id;--电子书上传人:<User>*fk*
+	--User;--电子书所属用户
+	ebook_Name;--名称***
+	ebook_Country;--国内外
+	ebook_No;--编号
+	ebook_House;--出版社
+	ebook_Img;--电子书图片
+	ebook_Desc;--描述
+	ebook_Author;--作者***
+	ebook_Type;--格式
+	ebook_Size;--大小
+	ebook_Path;--路径:/loginName/ebookUploadTime/ebookNo+ebookName
+	ebook_Upload_Time;--上传时间
+	ebook_Download_Count;--下载次数
+	ebook_Flag;--逻辑删除：1-正常，0-删除
+	ebook_UUID;--删除UUID
+
+7、t_log（日志表)
+
+
