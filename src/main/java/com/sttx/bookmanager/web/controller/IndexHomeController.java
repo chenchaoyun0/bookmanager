@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
@@ -25,18 +24,25 @@ public class IndexHomeController {
     private ILogService logService;
 
     @RequestMapping("/")
-    public String indexHome(Model model, HttpServletRequest request, ModelAndView modelAndView, Integer pageNo,
-            Integer pageSize) {
-        //        return "forward:/book/selectBookPages";
-        TLog tLog = new TLog();
-        PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
-        Long totalcount = logService.selectLogSumCount();
-        String url = request.getRequestURI();
-        pages.setUrl(url);
-        model.addAttribute("pages", pages);
-        model.addAttribute("totalcount", totalcount);
-        logger.info(">>>>>>>>>pages getTotal:{}", JSONObject.toJSON(pages.getTotal()));
-        return "ipLog";
+    public String indexHome() {
+        // return "forward:/book/selectBookPages";
+        // TLog tLog = new TLog();
+        // PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo,
+        // pageSize);
+        // Long totalcount = logService.selectLogSumCount();
+        // String url = request.getRequestURI();
+        // pages.setUrl(url);
+        // model.addAttribute("pages", pages);
+        // model.addAttribute("totalcount", totalcount);
+        // logger.info(">>>>>>>>>pages getTotal:{}",
+        // JSONObject.toJSON(pages.getTotal()));
+        // return "ipLog";
+        return "redirect:job/m2/index.html";
+    }
+
+    @RequestMapping("/resume")
+    public String resume() {
+        return "redirect:job/m2/index.html";
     }
 
     @RequestMapping(value = "/indexHomeForIp", method = RequestMethod.GET)
