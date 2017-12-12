@@ -62,14 +62,14 @@
    <!-- navigation menu -->
    <ul id="navigation">
     <li><a href="${pageContext.request.contextPath}/indexHome"
-     class="active">网站首页</a></li>
-    <li><a href="#home" class="active">Home</a></li>
-    <li><a href="#about">About Us</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#skills">Our Skills</a></li>
-    <li><a href="#industries">Industries</a></li>
+     class="active">查看首页</a></li>
+    <li><a href="#home" class="active">最近成果</a></li>
+    <li><a href="#about">关于我</a></li>
+    <li><a href="#portfolio">项目展示</a></li>
+    <li><a href="#skills">技能与特长</a></li>
+    <li><a href="#industries">工作经历</a></li>
     <li><a href="#myclients">Our Clients</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact">联系我</a></li>
    </ul>
   </div>
   <div id="container">
