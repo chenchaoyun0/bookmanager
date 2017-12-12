@@ -7,10 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class TelUtil {
-    public static void main(String[] args) {
-        String telHome = TelUtil.getTelHome("18734170206");
-        System.out.println(telHome.toString());
-    }
+    // public static void main(String[] args) {
+    // String telHome = TelUtil.getTelHome("18734170206");
+    // System.out.println(telHome.toString());
+    // }
 
     public static String getTelHome(String tel) {
         String httpUrl = "http://apis.baidu.com/apistore/mobilephoneservice/mobilephone";

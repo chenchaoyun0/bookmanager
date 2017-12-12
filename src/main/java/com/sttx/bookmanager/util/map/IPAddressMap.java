@@ -6,14 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 
 public class IPAddressMap {
-    public static void main(String[] args) {
-        String[] ipxy = getIPXY("123.123.52.104");
-        String s = Arrays.toString(ipxy);
-        System.err.println(s);
-    }
+    // public static void main(String[] args) {
+    // String[] ipxy = getIPXY("123.123.52.104");
+    // String s = Arrays.toString(ipxy);
+    // System.err.println(s);
+    // }
 
     /**
     * 获取指定IP对应的经纬度（为空返回当前机器经纬度）

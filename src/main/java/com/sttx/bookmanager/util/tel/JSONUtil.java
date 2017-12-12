@@ -6,9 +6,9 @@ import java.util.Map.Entry;
 import net.sf.json.JSONObject;
 
 public class JSONUtil {
-    public static void main(String[] args) {
-        new JSONUtil().testjSON();
-    }
+    // public static void main(String[] args) {
+    // new JSONUtil().testjSON();
+    // }
 
     public void testjSON() {
         String jsonStr = "{'qyyzcry':{'TABLES':'PROCESS_RYJBXX r,PRCOESS_RYKZXXB k,PROCESS_QYRYGXB g','TABLESLINK':'r.ID=k.RYID and g.RYID=r.ID and g.rylx=\"QYRYFXB009\"','PROCESS_RYJBXX':'r.ZWXM,r.ZGXL,r.ZJLX,r.ZJHM','PRCOESS_RYKZXXB':'k.ZW,k.ZC,k.CSZY','testa':{'testb':{'testc':'testctest'},'testb1':'testb1text'}}}";

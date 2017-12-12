@@ -155,14 +155,14 @@ public class HttpPostUtil {
         return URLEncoder.encode(value, "UTF-8");
     }
 
-    public static void main(String[] args) throws Exception {
-        HttpPostUtil u = new HttpPostUtil("http://localhost:3000/up_load");
-        u.addFileParameter("img", new File("D:\\素材\\圆月.jpg"));
-        u.addTextParameter("text", "中文");
-        byte[] b = u.send();
-        String result = new String(b);
-        System.out.println(result);
-
-    }
+    // public static void main(String[] args) throws Exception {
+    // HttpPostUtil u = new HttpPostUtil("http://localhost:3000/up_load");
+    // u.addFileParameter("img", new File("D:\\素材\\圆月.jpg"));
+    // u.addTextParameter("text", "中文");
+    // byte[] b = u.send();
+    // String result = new String(b);
+    // System.out.println(result);
+    //
+    // }
 
 }
