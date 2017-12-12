@@ -20,7 +20,7 @@
         <div align="center" style="margin-top:10px">
 <p style="color: yellow;font-weight: bolder;font-size: 20px">当前总访问人数：${pages.total}人，总访问量：${totalcount}次</p>
 <br/>
-<a style="color: lime;font-weight: bold;" href="<c:url value='/resume'/>" target="_bank">点此查看他在线简历</a>
+<a style="color: lime;font-weight: bold;" href="<c:url value='/'/>" target="_bank">点此查看他在线简历</a>
 <br/>
 <br/>
 </div>
