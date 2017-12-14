@@ -61,15 +61,13 @@
     height="180px" alt="" /></a>
    <!-- navigation menu -->
    <ul id="navigation">
-    <li><a href="#home" class="active">Home</a></li>  
+    <li><a href="#home" class="active">Home</a></li>
     <li><a href="#about">关于我</a></li>
     <li><a href="#portfolio">项目展示</a></li>
     <li><a href="#skills">技能与特长</a></li>
-    <li><a href="#industries">工作经历</a></li>
-    <li><a href="#myclients">Our Clients</a></li>
     <li><a href="#contact">联系我</a></li>
     <li><a href="${pageContext.request.contextPath}/indexHome"
-     class="active" target="_bank">项目首页</a></li>   
+     class="active" target="_bank">项目首页</a></li>
    </ul>
   </div>
   <div id="container">
@@ -103,93 +101,87 @@
      <!-- services -->
      <div class="one_half first">
       <div class="column_content">
-       <h4>Coded with Love!</h4>
+       <h4>Coded in Love</h4>
        <img
         src="${pageContext.request.contextPath}/m2/images/coded-with-love.png"
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>Lorem ipsum dolor sit amet, consectetur
-         adipiscing elit. Maecenas at feugiat felis. Ut faucibus
-         molestie turpis, sit amet scelerisque ipsum scelerisque quis.
-         Quisque suscipit fermentum sodales.</small>
+        <small>
+        假如多年后，我也成为那所谓的大牛时，我将会以怎样的视角与深度去看待那最初的hello world ？我有所期待
+        </small>
        </p>
       </div>
      </div>
      <div class="one_half last">
       <div class="column_content">
-       <h4>Responsive Layout</h4>
+       <h4>Learn to accumulate</h4>
        <img
         src="${pageContext.request.contextPath}/m2/images/responsive.png"
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>Lorem ipsum dolor sit amet, consectetur
-         adipiscing elit. Maecenas at feugiat felis. Ut faucibus
-         molestie turpis, sit amet scelerisque ipsum scelerisque quis.
-         Quisque suscipit fermentum sodales.</small>
+        <small>
+        不积跬步，无以至千里；不积小流，无以成江海。
+        </small>
        </p>
       </div>
      </div>
      <div class="space"></div>
      <div class="one_half first">
       <div class="column_content">
-       <h4>Perfect for Portfolios</h4>
+       <h4>Keep good habit</h4>
        <img
         src="${pageContext.request.contextPath}/m2/images/for-portfolio.png"
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>Lorem ipsum dolor sit amet, consectetur
-         adipiscing elit. Maecenas at feugiat felis. Ut faucibus
-         molestie turpis, sit amet scelerisque ipsum scelerisque quis.
-         Quisque suscipit fermentum sodales.</small>
+        <small>
+        习惯决定性格，性格决定成败
+        </small>
        </p>
       </div>
      </div>
      <div class="one_half last">
       <div class="column_content">
-       <h4>Easily Customizable</h4>
+       <h4>Speaking is art </h4>
        <img
         src="${pageContext.request.contextPath}/m2/images/customizable.png"
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>Lorem ipsum dolor sit amet, consectetur
-         adipiscing elit. Maecenas at feugiat felis. Ut faucibus
-         molestie turpis, sit amet scelerisque ipsum scelerisque quis.
-         Quisque suscipit fermentum sodales.</small>
+        <small>
+        说话是一种艺术，学会与人交流
+        </small>
        </p>
       </div>
      </div>
      <div class="space"></div>
      <div class="one_half first">
       <div class="column_content">
-       <h4>Image Gallery</h4>
+       <h4>Modesty,kind of virtue</h4>
        <img
         src="${pageContext.request.contextPath}/m2/images/image-gallery.png"
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>Lorem ipsum dolor sit amet, consectetur
-         adipiscing elit. Maecenas at feugiat felis. Ut faucibus
-         molestie turpis, sit amet scelerisque ipsum scelerisque quis.
-         Quisque suscipit fermentum sodales.</small>
+        <small>
+        谦虚是一种美德，懂得谦让的人讨人喜欢
+        </small>
        </p>
       </div>
      </div>
      <div class="one_half last">
       <div class="column_content">
-       <h4>jQuery Powered</h4>
+       <h4>Responsibility</h4>
        <img
         src="${pageContext.request.contextPath}/m2/images/jquery-code.png"
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>Lorem ipsum dolor sit amet, consectetur
-         adipiscing elit. Maecenas at feugiat felis. Ut faucibus
-         molestie turpis, sit amet scelerisque ipsum scelerisque quis.
-         Quisque suscipit fermentum sodales.</small>
+        <small>
+        在岗一天则职责所在，不愧于人，无愧于心
+        </small>
        </p>
       </div>
      </div>
@@ -198,28 +190,52 @@
    </div>
    <div class="page" id="about">
     <!-- page about -->
-    <h3 class="page_title">About Us</h3>
+    <h3 class="page_title">我的自评</h3>
     <div class="page_content">
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-      reprehenderit in voluptate velit esse cillum dolore eu fugiat
-      nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-      sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-     <h4 class="blue">Why Choose Us</h4>
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-      reprehenderit in voluptate velit esse cillum dolore eu fugiat
-      nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-      sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     <p style="text-indent: 2em">
+      我是一名热衷于IT行业的JAVA工程师，热爱编程，对技术有很大的求知欲，喜欢将多个人的技术合并到一起生成新的东西。我一直以“严谨、专注、虚心”鞭策自己，我喜欢学习，并且有较强的学习能力。<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我不是一个简单纯粹的人，我追求卓越，具有Geek特质，我能做事做实事，我相信您的团队正需要像我这样的人加入。
+     </p>
+     <h4 class="blue">Java之开发历程</h4>
+     <p  style="text-indent: 2em">
+曾在大学期间，参加腾讯云校园计划，获云服务器与域名，用于学习Linux
+并在大三利用周末时间参加校外培训，搭建个人网站。现今在阿里云与腾讯云均有应用服务。<br />
+
+
+</p>
      <blockquote>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua.
       <p>
-       <small><b>Sarfraz Shoukat</b> - Owner <a href="#">Greepit.com</a></small>
+       <b>在校外培训机构表现成绩优异突出，担任过小组组长</b>
+      </p>
+      <p>
+       <b>校外培训机构结训项目获机构评优并作为后期学员的参考模板。</b>
+      </p>
+      <p>
+       <b>在2016年公司年会上，代表公司同期入职应届生做年终工作总结</b>
+      </p>
+      <p>
+       <b>项目gitHub:&nbsp;&nbsp;<a style="color: lime;" href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a></b>
+      </p>
+      <p>
+       <b>博客:&nbsp;&nbsp;<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a></b>
+      </p>
+      <p>
+       <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a></b>
+      </p>
+      <p>
+       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
+      </p>
+      <p>
+       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
+      </p>
+      <p>
+       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
+      </p>
+      <p>
+       <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
+      </p>
+      <p>
+       <b>Dubbo:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a></b>
       </p>
      </blockquote>
      <div class="clear"></div>
@@ -227,17 +243,16 @@
    </div>
    <div class="page" id="portfolio">
     <!-- page portfolio -->
-    <h3 class="page_title">Portfolio</h3>
+    <h3 class="page_title">项目展示</h3>
     <div class="page_content">
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex ea commodo consequat.</p>
+     <p style="text-indent: 2em">
+     做软件开发是一个不断学习的过程，你停住脚步就会被别人超越。刚好~很幸运，我喜欢技术，也喜欢这个学习的过程。别人觉得无聊的东西，我却乐在其中。
+     </p>
      <ul id="works_filter">
       <li><a href="#" data-filter="*" class="selected">Show All</a></li>
-      <li><a href="#" data-filter=".css">CSS</a></li>
-      <li><a href="#" data-filter=".html_php">HTML / PHP</a></li>
-      <li><a href="#" data-filter=".js">JavaScript</a></li>
+      <li><a href="#" data-filter=".css">SpringBoot</a></li>
+      <li><a href="#" data-filter=".html_php">Devps</a></li>
+      <li><a href="#" data-filter=".js">Apps</a></li>
      </ul>
      <div class="clear"></div>
      <div id="works">
@@ -294,28 +309,28 @@
    </div>
    <div class="page" id="skills">
     <!-- page skills -->
-    <h3 class="page_title">Our Skills</h3>
+    <h3 class="page_title">技术标签</h3>
     <div class="page_content">
 
      <div class="one_fourth first">
       <div class="column_content">
-       <h4 class="blue">Photoshop</h4>
+       <h4 class="blue">Dubbo</h4>
        <input class="knob" data-readonly="true" data-width="120"
         data-min="0" data-angleoffset="0" data-displayprevious="true"
-        data-fgcolor="#cfdee7" data-bgcolor="#0d4667" value="65">
+        data-fgcolor="#cfdee7" data-bgcolor="#0d4667" value="80">
       </div>
      </div>
      <div class="one_fourth">
       <div class="column_content">
-       <h4 class="blue">HTML5</h4>
+       <h4 class="blue">Zookeeper</h4>
        <input class="knob" data-readonly="true" data-width="120"
         data-min="0" data-angleoffset="0" data-displayprevious="true"
-        value="45" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
+        value="70" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
       </div>
      </div>
      <div class="one_fourth">
       <div class="column_content">
-       <h4 class="blue">jQuery</h4>
+       <h4 class="blue">Spring</h4>
        <input class="knob" data-readonly="true" data-width="120"
         data-min="0" data-angleoffset="0" data-displayprevious="true"
         value="85" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
@@ -323,91 +338,40 @@
      </div>
      <div class="one_fourth last">
       <div class="column_content">
-       <h4 class="blue">CSS3</h4>
+       <h4 class="blue">Git</h4>
        <input class="knob" data-readonly="true" data-width="120"
         data-min="0" data-angleoffset="0" data-displayprevious="true"
-        value="95" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
+        value="90" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
       </div>
      </div>
      <div class="clear"></div>
     </div>
    </div>
    <div class="copyrights">
-    Collect from <a href="http://www.cssmoban.com/">企业网站模板</a>
+    Collect from <a href="#">网站首页</a>
    </div>
    <div class="page" id="industries">
     <!-- page industries -->
-    <h3 class="page_title">Industries We Serve!</h3>
+    <h3 class="page_title">基础必备</h3>
     <div class="page_content">
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex ea commodo consequat.</p>
+     <p>
+     
+     </p>
      <div class="space"></div>
      <div class="clear"></div>
      <ul class="sublist">
-      <li><a href="#">Freebies</a></li>
-      <li><a href="#">Category Names</a></li>
-      <li><a href="#">Graphic Design</a></li>
-      <li><a href="#">Akay Akagunduz</a></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Themeforest</a></li>
-      <li><a href="#">Reviews</a></li>
-      <li><a href="#">Links</a></li>
-      <li><a href="#">Tutorials</a></li>
-      <li><a href="#">Others</a></li>
-      <li><a href="#">Web Development</a></li>
-     </ul>
-     <div class="clear"></div>
-    </div>
-   </div>
-   <div class="page" id="myclients">
-    <!-- page clients -->
-    <h3 class="page_title">Our Clients</h3>
-    <div class="page_content">
-     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex ea commodo consequat.</p>
-     <div class="space"></div>
-     <div class="clear"></div>
-     <ul id="clients" class="grid">
-      <li class="altoids"><a href="#" rel="altoids"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Altoids.png"
-        alt="Altoids"></a></li>
-      <li class="facebook"><a href="#" rel="facebook"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Facebook.png"
-        alt="Facebook"></a></li>
-      <li class="ge"><a href="#" rel="general-electric"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/GE.png"
-        alt="General Electric"></a></li>
-      <li class="orbit"><a href="#" rel="orbit"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/orbitlogo.png"
-        alt="Orbit"></a></li>
-      <li class="skittles"><a href="#" rel="skittles"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Skittles.png"
-        alt="Skittles"></a></li>
-      <li class="jameson"><a href="#" rel="jameson"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Jameson.png"
-        alt="Jameson"></a></li>
-      <li class="juicy_fruit"><a href="#" rel="juicy-fruit"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Juicy-Fruit.png"
-        alt="Juicy Fruit"></a></li>
-      <li class="microsoft"><a href="#" rel="microsoft"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Microsoft.png"
-        alt="Microsoft"></a></li>
-      <li class="a_e"><a href="#" rel="ae"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/AE.png"
-        alt="A&amp;E"></a></li>
-      <li class="zynga"><a href="#" rel="zynga"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Zynga.png"
-        alt="Zynga"></a></li>
-      <li class="smuin"><a href="#" rel="smuin"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Smuin.png"
-        alt="Smuin"></a></li>
-      <li class="westfield"><a href="#" rel="westfield"> <img
-        src="${pageContext.request.contextPath}/m2/images/clients/Westfield.png"
-        alt="Westfield"></a></li>
+      <li style="font-size:14px;"><a href="#">SpringMVC</a></li>
+      <li style="font-size:14px;"><a href="#">SpringBoot</a></li>
+      <li style="font-size:14px;"><a href="#">Restful</a></li>
+      <li style="font-size:14px;"><a href="#">Gerrit</a></li>
+      <li style="font-size:14px;"><a href="#">Redis</a></li>
+      <li style="font-size:14px;"><a href="#">ActiveMQ</a></li>
+      <li style="font-size:14px;"><a href="#">Nginx</a></li>
+      <li style="font-size:14px;"><a href="#">Apache</a></li>
+      <li style="font-size:14px;"><a href="#">MySQL</a></li>
+      <li style="font-size:14px;"><a href="#">Oracle</a></li>
+      <li style="font-size:14px;"><a href="#">Mybatis</a></li>
+      <li style="font-size:14px;"><a href="#">Hibernate</a></li>
      </ul>
      <div class="clear"></div>
     </div>
@@ -436,17 +400,17 @@
      </fieldset>
      <div class="clear"></div>
      <ul class="social_icons">
-      <li><a href="#" id="fb" original-title="Join My Fan Club">
+      <li><a href="https://github.com/chenchaoyun0" id="fb" original-title="Join My Fan Club">
         <img
         src="${pageContext.request.contextPath}/m2/images/facebook.png"
         alt="Facebook" />
       </a></li>
-      <li><a href="#" id="tw" original-title="Follow Me on Twitter">
+      <li><a href="http://blog.csdn.net/sinat_22767969" id="tw" original-title="Follow Me on Twitter">
         <img
         src="${pageContext.request.contextPath}/m2/images/twitter.png"
         alt="Twitter" />
       </a></li>
-      <li><a href="#" id="ld" original-title="Find me on LinkedIn">
+      <li><a href="https://www.linkedin.com/in/%E8%B6%85%E5%85%81-%E9%99%88-86881a102/" id="ld" original-title="Find me on LinkedIn">
         <img
         src="${pageContext.request.contextPath}/m2/images/linkedin.png"
         alt="LinkedIn" />
