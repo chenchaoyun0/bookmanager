@@ -395,22 +395,22 @@
        <textarea id="msg" name="message"
         onFocus="if(this.value == 'Your Message*') this.value = ''"
         onblur="if(this.value == '') this.value = 'Your Message*'">Your Message*</textarea>
-       <button id="submit" class="button">Send Message</button>
+       <button id="submit" class="button" onclick="window.location.href='http://wpa.qq.com/msgrd?v=3&uin=873692191'">Send Message</button>
       </form>
      </fieldset>
      <div class="clear"></div>
      <ul class="social_icons">
-      <li><a href="https://github.com/chenchaoyun0" id="fb" original-title="Join My Fan Club">
+      <li><a href="https://github.com/chenchaoyun0" target="_bank" id="fb" original-title="Join My Fan Club">
         <img
         src="${pageContext.request.contextPath}/m2/images/facebook.png"
         alt="Facebook" />
       </a></li>
-      <li><a href="http://blog.csdn.net/sinat_22767969" id="tw" original-title="Follow Me on Twitter">
+      <li><a href="http://blog.csdn.net/sinat_22767969" target="_bank" id="tw" original-title="Follow Me on Twitter">
         <img
         src="${pageContext.request.contextPath}/m2/images/twitter.png"
         alt="Twitter" />
       </a></li>
-      <li><a href="https://www.linkedin.com/in/%E8%B6%85%E5%85%81-%E9%99%88-86881a102/" id="ld" original-title="Find me on LinkedIn">
+      <li><a target="_bank" href="https://www.linkedin.com/in/%E8%B6%85%E5%85%81-%E9%99%88-86881a102/" id="ld" original-title="Find me on LinkedIn">
         <img
         src="${pageContext.request.contextPath}/m2/images/linkedin.png"
         alt="LinkedIn" />
