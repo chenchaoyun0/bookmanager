@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -18,8 +19,6 @@ import com.sttx.ddp.logger.DdpLoggerFactory;
 import com.sun.xfile.XFile;
 import com.sun.xfile.XFileInputStream;
 import com.sun.xfile.XFileOutputStream;
-
-import sun.misc.BASE64Encoder;
 
 /**
  * 
@@ -247,7 +246,9 @@ public class NfsFileUtils {
      * @return true-存在，false-不存在
      */
     public static boolean existsNfsFile(String nfsFileName) {
-        return new XFile(nfsFileName).exists();
+        boolean exists = new XFile(nfsFileName).exists();
+        log.info("判断文件名{},是否存在:{}", nfsFileName, exists);
+        return exists;
     }
 
     /**
@@ -258,10 +259,9 @@ public class NfsFileUtils {
      * @return
      * @throws UserException
      */
-    @SuppressWarnings("restriction")
     public static String getImageBase64Str(String nfsFileName) throws UserException {
         byte[] b = readNfsFile2Byte(nfsFileName);
-        return jspImgSrc + new BASE64Encoder().encode(b);
+        return jspImgSrc + getImageBase64Str(b);
     }
 
     /**
@@ -272,10 +272,9 @@ public class NfsFileUtils {
      * @return
      * @throws UserException
      */
-    @SuppressWarnings("restriction")
     public static String getImageBase64Str(InputStream in) throws UserException {
         byte[] b = readNfsStream2Byte(in);
-        return jspImgSrc + new BASE64Encoder().encode(b);
+        return jspImgSrc + getImageBase64Str(b);
     }
 
     /**
@@ -286,9 +285,22 @@ public class NfsFileUtils {
      * @return
      * @throws UserException
      */
-    @SuppressWarnings("restriction")
     public static String getImageBase64Str(byte[] b) throws UserException {
-        return jspImgSrc + new BASE64Encoder().encode(b);
+        String base64Str = getBase64Str(b);
+        return jspImgSrc + base64Str;
+    }
+
+    /**
+     * 将图片读取为base64 字符串
+     * 
+     * @Description
+     * @param nfsFileName
+     * @return
+     * @throws UserException
+     */
+    public static String getBase64Str(byte[] b) throws UserException {
+        String base64String = Base64.encodeBase64String(b);
+        return base64String;
     }
 
     public static String getImgIfNullReturnDefault(String imgPath) {
@@ -320,5 +332,21 @@ public class NfsFileUtils {
             return true;
         }
         return false;
+    }
+
+    public static String[] readDirFiles(String dirName) throws UserException {
+        String[] list = null;
+        try {
+            if (!existsNfsFile(dirName)) {
+                log.error("读取nfs文件进流:{}", "文件不存在");
+                throw new UserException("USPS0104", "文件不存在");
+            }
+            XFile xFile = new XFile(dirName);
+            list = xFile.list();
+        } catch (Exception e) {
+            log.error("读取nfs文件为字节异常", e);
+            throw new UserException("USPS0104", "读取nfs文件为字节异常");
+        }
+        return list;
     }
 }

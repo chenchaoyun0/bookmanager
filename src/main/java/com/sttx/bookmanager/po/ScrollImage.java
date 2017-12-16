@@ -1,6 +1,12 @@
 package com.sttx.bookmanager.po;
 
-public class ScrollImage {
+import java.io.Serializable;
+
+import com.sttx.bookmanager.util.HideImg;
+
+public class ScrollImage implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @HideImg
     private String imageStr;
     private String imageDesc;
 
