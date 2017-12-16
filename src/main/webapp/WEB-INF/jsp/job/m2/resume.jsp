@@ -79,20 +79,20 @@
       <!-- slider -->
       <ul class="slides">
        <li><img
-        src="${pageContext.request.contextPath}/m2/images/01.jpg" alt="" />
+        src="${pageContext.request.contextPath}/m2/images/photos/01.jpg" alt="" />
         <p class="flex-caption">工作之余学习，搭建的gerrit+jenkins 持续集成系统</p></li>
        <li><img
-        src="${pageContext.request.contextPath}/m2/images/02.jpg" alt="" />
+        src="${pageContext.request.contextPath}/m2/images/photos/02.jpg" alt="" />
         <p class="flex-caption">实习期练手，基于Spring、Springmvc、Mybatis开发的图书馆管理系统
          JavaWeb</p></li>
        <li><img
-        src="${pageContext.request.contextPath}/m2/images/03.jpg" alt="" />
+        src="${pageContext.request.contextPath}/m2/images/photos/03.jpg" alt="" />
         <p class="flex-caption">大学时期，手机电子商城JavaWeb项目</p></li>
        <li><img
-        src="${pageContext.request.contextPath}/m2/images/04.jpg" alt="" />
+        src="${pageContext.request.contextPath}/m2/images/photos/04.jpg" alt="" />
         <p class="flex-caption">实习期项目，Zookeeper 节点管理系统</p></li>
        <li><img
-        src="${pageContext.request.contextPath}/m2/images/05.jpg" alt="" />
+        src="${pageContext.request.contextPath}/m2/images/photos/05.jpg" alt="" />
         <p class="flex-caption">工作之余学习，搭建的gerrit+jenkins 持续集成系统</p></li>
       </ul>
      </div>
@@ -263,9 +263,9 @@
        src="${pageContext.request.contextPath}/m2/images/photos/01.jpg"
        alt="" />
       </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/03.jpg">
+       href="${pageContext.request.contextPath}/m2/images/photos/02.jpg">
        <img class="work css"
-       src="${pageContext.request.contextPath}/m2/images/photos/03.jpg"
+       src="${pageContext.request.contextPath}/m2/images/photos/02.jpg"
        alt="" />
       </a><a rel="prettyPhoto[gallery]"
        href="${pageContext.request.contextPath}/m2/images/photos/04.jpg">
@@ -401,19 +401,19 @@
      <div class="clear"></div>
      <ul class="social_icons">
       <li><a href="https://github.com/chenchaoyun0" target="_bank" id="fb" original-title="Join My Fan Club">
-        <img
-        src="${pageContext.request.contextPath}/m2/images/facebook.png"
+        <img height="28px"
+        src="${pageContext.request.contextPath}/m2/images/github.png"
         alt="Facebook" />
-      </a></li>
-      <li><a href="http://blog.csdn.net/sinat_22767969" target="_bank" id="tw" original-title="Follow Me on Twitter">
-        <img
-        src="${pageContext.request.contextPath}/m2/images/twitter.png"
-        alt="Twitter" />
       </a></li>
       <li><a target="_bank" href="https://www.linkedin.com/in/%E8%B6%85%E5%85%81-%E9%99%88-86881a102/" id="ld" original-title="Find me on LinkedIn">
         <img
         src="${pageContext.request.contextPath}/m2/images/linkedin.png"
         alt="LinkedIn" />
+      </a></li>
+      <li><a href="http://blog.csdn.net/sinat_22767969" target="_bank" id="tw" original-title="Follow Me on Twitter">
+        <img height="28px"
+        src="${pageContext.request.contextPath}/m2/images/csdn.png"
+        alt="Twitter" />
       </a></li>
      </ul>
     </div>
