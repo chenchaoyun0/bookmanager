@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.sttx.bookmanager.po.ResumeVo;
 import com.sttx.bookmanager.service.IResumeService;
+import com.sttx.bookmanager.util.ResumeUtils;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @Service("resumeService")
@@ -13,8 +14,16 @@ public class ResumeServiceImpl implements IResumeService {
 
     @Override
     public ResumeVo findResumeVo() {
-        // TODO Auto-generated method stub
-        return null;
+        ResumeVo resumeVo = null;
+        try {
+            resumeVo = ResumeUtils.getResumeVo();
+            if (resumeVo.getImageVo() == null) {
+                ResumeUtils.initResumeVo();
+            }
+        } catch (Exception e) {
+            return new ResumeVo();
+        }
+        return resumeVo;
     }
 
 }

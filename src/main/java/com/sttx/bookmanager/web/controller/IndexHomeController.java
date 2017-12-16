@@ -12,17 +12,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.Book;
+import com.sttx.bookmanager.po.ResumeVo;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
+import com.sttx.bookmanager.service.IResumeService;
+import com.sttx.bookmanager.util.LogUtil;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @Controller
 public class IndexHomeController {
-    private static final Logger logger = DdpLoggerFactory.getLogger(IndexHomeController.class);
+    private static final Logger log = DdpLoggerFactory.getLogger(IndexHomeController.class);
     @Autowired
     private ILogService logService;
+    @Autowired
+    private IResumeService resumeService;
 
     @RequestMapping("/indexHome")
     public String indexHome(Model model, HttpServletRequest request, ModelAndView modelAndView, Integer pageNo, Integer pageSize) {
@@ -34,25 +39,19 @@ public class IndexHomeController {
         pages.setUrl(url);
         model.addAttribute("pages", pages);
         model.addAttribute("totalcount", totalcount);
-        logger.info(">>>>>>>>>pages getTotal:{}", JSONObject.toJSON(pages.getTotal()));
+        log.info(">>>>>>>>>pages getTotal:{}", JSONObject.toJSON(pages.getTotal()));
         // return "redirect:job/m2/index.html";
         return "ipLog";
     }
     @RequestMapping("/")
-    public String indexResume() {
-        // return "forward:/book/selectBookPages";
-        // TLog tLog = new TLog();
-        // PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo,
-        // pageSize);
-        // Long totalcount = logService.selectLogSumCount();
-        // String url = request.getRequestURI();
-        // pages.setUrl(url);
-        // model.addAttribute("pages", pages);
-        // model.addAttribute("totalcount", totalcount);
-        // logger.info(">>>>>>>>>pages getTotal:{}",
-        // JSONObject.toJSON(pages.getTotal()));
-        // return "ipLog";
-        //return "redirect:job/m2/index.html";
+    public String indexResume(Model model, HttpServletRequest request, ModelAndView modelAndView) {
+
+        ResumeVo resumeVo = resumeService.findResumeVo();
+
+        log.info("缓存中的信息 resumeVo.getImageVo:{}", LogUtil.formatLog(resumeVo.getImageVo()));
+
+        model.addAttribute("resumeVo", resumeVo);
+
         return "/job/m2/resume";
     }
 

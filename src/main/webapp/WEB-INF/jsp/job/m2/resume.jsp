@@ -78,22 +78,12 @@
      <div class="gf-slider">
       <!-- slider -->
       <ul class="slides">
+      <c:forEach items="${resumeVo.imageVo.scrollImageList}" var="scrollImage">
        <li><img
-        src="${pageContext.request.contextPath}/m2/images/photos/01.jpg" alt="" />
-        <p class="flex-caption">工作之余学习，搭建的gerrit+jenkins 持续集成系统</p></li>
-       <li><img
-        src="${pageContext.request.contextPath}/m2/images/photos/02.jpg" alt="" />
-        <p class="flex-caption">实习期练手，基于Spring、Springmvc、Mybatis开发的图书馆管理系统
-         JavaWeb</p></li>
-       <li><img
-        src="${pageContext.request.contextPath}/m2/images/photos/03.jpg" alt="" />
-        <p class="flex-caption">大学时期，手机电子商城JavaWeb项目</p></li>
-       <li><img
-        src="${pageContext.request.contextPath}/m2/images/photos/04.jpg" alt="" />
-        <p class="flex-caption">实习期项目，Zookeeper 节点管理系统</p></li>
-       <li><img
-        src="${pageContext.request.contextPath}/m2/images/photos/05.jpg" alt="" />
-        <p class="flex-caption">工作之余学习，搭建的gerrit+jenkins 持续集成系统</p></li>
+        src="${scrollImage.imageStr}"
+        alt="" />
+        <p class="flex-caption">${scrollImage.imageDesc}</p></li>
+        </c:forEach>
       </ul>
      </div>
      <div class="space"></div>
@@ -107,9 +97,8 @@
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>
-        假如多年后，我也成为那所谓的大牛时，我将会以怎样的视角与深度去看待那最初的hello world ？我有所期待
-        </small>
+        <small> 假如多年后，我也成为那所谓的大牛时，我将会以怎样的视角与深度去看待那最初的hello world
+         ？我有所期待 </small>
        </p>
       </div>
      </div>
@@ -121,9 +110,7 @@
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>
-        不积跬步，无以至千里；不积小流，无以成江海。
-        </small>
+        <small> 不积跬步，无以至千里；不积小流，无以成江海。 </small>
        </p>
       </div>
      </div>
@@ -136,23 +123,19 @@
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>
-        习惯决定性格，性格决定成败
-        </small>
+        <small> 习惯决定性格，性格决定成败 </small>
        </p>
       </div>
      </div>
      <div class="one_half last">
       <div class="column_content">
-       <h4>Speaking is art </h4>
+       <h4>Speaking is art</h4>
        <img
         src="${pageContext.request.contextPath}/m2/images/customizable.png"
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>
-        说话是一种艺术，学会与人交流
-        </small>
+        <small> 说话是一种艺术，学会与人交流 </small>
        </p>
       </div>
      </div>
@@ -165,9 +148,7 @@
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>
-        谦虚是一种美德，懂得谦让的人讨人喜欢
-        </small>
+        <small> 谦虚是一种美德，懂得谦让的人讨人喜欢 </small>
        </p>
       </div>
      </div>
@@ -179,9 +160,7 @@
         class="left no_border" alt=""
         style="margin-top: 10px; margin-right: 10px" />
        <p>
-        <small>
-        在岗一天则职责所在，不愧于人，无愧于心
-        </small>
+        <small> 在岗一天则职责所在，不愧于人，无愧于心 </small>
        </p>
       </div>
      </div>
@@ -197,12 +176,12 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我不是一个简单纯粹的人，我追求卓越，具有Geek特质，我能做事做实事，我相信您的团队正需要像我这样的人加入。
      </p>
      <h4 class="blue">Java之开发历程</h4>
-     <p  style="text-indent: 2em">
-曾在大学期间，参加腾讯云校园计划，获云服务器与域名，用于学习Linux
-并在大三利用周末时间参加校外培训，搭建个人网站。现今在阿里云与腾讯云均有应用服务。<br />
+     <p style="text-indent: 2em">
+      曾在大学期间，参加腾讯云校园计划，获云服务器与域名，用于学习Linux
+      并在大三利用周末时间参加校外培训，搭建个人网站。现今在阿里云与腾讯云均有应用服务。<br />
 
 
-</p>
+     </p>
      <blockquote>
       <p>
        <b>在校外培训机构表现成绩优异突出，担任过小组组长</b>
@@ -214,28 +193,36 @@
        <b>在2016年公司年会上，代表公司同期入职应届生做年终工作总结</b>
       </p>
       <p>
-       <b>项目gitHub:&nbsp;&nbsp;<a style="color: lime;" href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a></b>
+       <b>项目gitHub:&nbsp;&nbsp;<a style="color: lime;"
+        href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a></b>
       </p>
       <p>
-       <b>博客:&nbsp;&nbsp;<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a></b>
+       <b>博客:&nbsp;&nbsp;<a style="color: lime;"
+        href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a></b>
       </p>
       <p>
-       <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a></b>
+       <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;"
+        href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a></b>
       </p>
       <p>
-       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
+       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;"
+        href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
       </p>
       <p>
-       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
+       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;"
+        href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
       </p>
       <p>
-       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
+       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;"
+        href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
       </p>
       <p>
-       <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
+       <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;"
+        href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
       </p>
       <p>
-       <b>Dubbo:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a></b>
+       <b>Dubbo:&nbsp;&nbsp;<a style="color: lime;"
+        href="http://118.89.222.115:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a></b>
       </p>
      </blockquote>
      <div class="clear"></div>
@@ -246,7 +233,7 @@
     <h3 class="page_title">项目展示</h3>
     <div class="page_content">
      <p style="text-indent: 2em">
-     做软件开发是一个不断学习的过程，你停住脚步就会被别人超越。刚好~很幸运，我喜欢技术，也喜欢这个学习的过程。别人觉得无聊的东西，我却乐在其中。
+      做软件开发是一个不断学习的过程，你停住脚步就会被别人超越。刚好~很幸运，我喜欢技术，也喜欢这个学习的过程。别人觉得无聊的东西，我却乐在其中。
      </p>
      <ul id="works_filter">
       <li><a href="#" data-filter="*" class="selected">Show All</a></li>
@@ -256,52 +243,32 @@
      </ul>
      <div class="clear"></div>
      <div id="works">
-      <!-- works -->
+      <!-- SpringBoot -->
+      <c:forEach items="${resumeVo.imageVo.springBootImageList}" var="imageBase64Vo">
       <a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/01.jpg">
-       <img class="work js"
-       src="${pageContext.request.contextPath}/m2/images/photos/01.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/02.jpg">
+       href="${imageBase64Vo.base64Str}">
        <img class="work css"
-       src="${pageContext.request.contextPath}/m2/images/photos/02.jpg"
+       src="${imageBase64Vo.base64Str}"
        alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/04.jpg">
+      </a>
+      </c:forEach>
+      <!-- Devps -->
+      <c:forEach items="${resumeVo.imageVo.devpsImageList}" var="imageBase64Vo">
+      <a rel="prettyPhoto[gallery]"
+       href="${imageBase64Vo.base64Str}">
        <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/04.jpg"
+       src="${imageBase64Vo.base64Str}"
        alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/05.jpg">
-       <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/05.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/06.jpg">
-       <img class="work css"
-       src="${pageContext.request.contextPath}/m2/images/photos/06.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/07.jpg">
+      </a>
+      </c:forEach>
+      <!-- Apps -->
+      <c:forEach items="${resumeVo.imageVo.appsImageList}" var="imageBase64Vo">
+      <a rel="prettyPhoto[gallery]"
+       href="${imageBase64Vo.base64Str}">
        <img class="work js"
-       src="${pageContext.request.contextPath}/m2/images/photos/07.jpg"
+       src="${imageBase64Vo.base64Str}"
        alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/08.jpg">
-       <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/08.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/09.jpg">
-       <img class="work js"
-       src="${pageContext.request.contextPath}/m2/images/photos/09.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/10.jpg">
-       <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/10.jpg"
-       alt="" />
+      </c:forEach>
       </a>
      </div>
      <div class="clear"></div>
@@ -354,24 +321,22 @@
     <!-- page industries -->
     <h3 class="page_title">基础必备</h3>
     <div class="page_content">
-     <p>
-     
-     </p>
+     <p></p>
      <div class="space"></div>
      <div class="clear"></div>
      <ul class="sublist">
-      <li style="font-size:14px;"><a href="#">SpringMVC</a></li>
-      <li style="font-size:14px;"><a href="#">SpringBoot</a></li>
-      <li style="font-size:14px;"><a href="#">Restful</a></li>
-      <li style="font-size:14px;"><a href="#">Gerrit</a></li>
-      <li style="font-size:14px;"><a href="#">Redis</a></li>
-      <li style="font-size:14px;"><a href="#">ActiveMQ</a></li>
-      <li style="font-size:14px;"><a href="#">Nginx</a></li>
-      <li style="font-size:14px;"><a href="#">Apache</a></li>
-      <li style="font-size:14px;"><a href="#">MySQL</a></li>
-      <li style="font-size:14px;"><a href="#">Oracle</a></li>
-      <li style="font-size:14px;"><a href="#">Mybatis</a></li>
-      <li style="font-size:14px;"><a href="#">Hibernate</a></li>
+      <li style="font-size: 14px;"><a href="#">SpringMVC</a></li>
+      <li style="font-size: 14px;"><a href="#">SpringBoot</a></li>
+      <li style="font-size: 14px;"><a href="#">Restful</a></li>
+      <li style="font-size: 14px;"><a href="#">Gerrit</a></li>
+      <li style="font-size: 14px;"><a href="#">Redis</a></li>
+      <li style="font-size: 14px;"><a href="#">ActiveMQ</a></li>
+      <li style="font-size: 14px;"><a href="#">Nginx</a></li>
+      <li style="font-size: 14px;"><a href="#">Apache</a></li>
+      <li style="font-size: 14px;"><a href="#">MySQL</a></li>
+      <li style="font-size: 14px;"><a href="#">Oracle</a></li>
+      <li style="font-size: 14px;"><a href="#">Mybatis</a></li>
+      <li style="font-size: 14px;"><a href="#">Hibernate</a></li>
      </ul>
      <div class="clear"></div>
     </div>
@@ -395,22 +360,26 @@
        <textarea id="msg" name="message"
         onFocus="if(this.value == 'Your Message*') this.value = ''"
         onblur="if(this.value == '') this.value = 'Your Message*'">Your Message*</textarea>
-       <button id="submit" class="button" onclick="window.location.href='http://wpa.qq.com/msgrd?v=3&uin=873692191'">Send Message</button>
+       <button id="submit" class="button"
+        onclick="window.location.href='http://wpa.qq.com/msgrd?v=3&uin=873692191'">Send
+        Message</button>
       </form>
      </fieldset>
      <div class="clear"></div>
      <ul class="social_icons">
-      <li><a href="https://github.com/chenchaoyun0" target="_bank" id="fb" original-title="Join My Fan Club">
-        <img height="28px"
+      <li><a href="https://github.com/chenchaoyun0" target="_bank"
+       id="fb" original-title="Join My Fan Club"> <img height="28px"
         src="${pageContext.request.contextPath}/m2/images/github.png"
         alt="Facebook" />
       </a></li>
-      <li><a target="_bank" href="https://www.linkedin.com/in/%E8%B6%85%E5%85%81-%E9%99%88-86881a102/" id="ld" original-title="Find me on LinkedIn">
-        <img
+      <li><a target="_bank"
+       href="https://www.linkedin.com/in/%E8%B6%85%E5%85%81-%E9%99%88-86881a102/"
+       id="ld" original-title="Find me on LinkedIn"> <img
         src="${pageContext.request.contextPath}/m2/images/linkedin.png"
         alt="LinkedIn" />
       </a></li>
-      <li><a href="http://blog.csdn.net/sinat_22767969" target="_bank" id="tw" original-title="Follow Me on Twitter">
+      <li><a href="http://blog.csdn.net/sinat_22767969"
+       target="_bank" id="tw" original-title="Follow Me on Twitter">
         <img height="28px"
         src="${pageContext.request.contextPath}/m2/images/csdn.png"
         alt="Twitter" />
