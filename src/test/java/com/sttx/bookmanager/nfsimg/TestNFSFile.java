@@ -45,6 +45,16 @@ public class TestNFSFile {
     }
 
     @Test
+    public void readDocx() {
+        /**
+         * read
+         */
+        String nfsFileName = nfsUrl + "resume/docx/chenchaoyun-resume.docx";
+        log.info("nfsFileName:{}", nfsFileName);
+        InputStream inputStream = NfsFileUtils.readNfsFile2Stream(nfsFileName);
+    }
+
+    @Test
     public void readImg() throws UserException {
         /**
          * read

@@ -1,7 +1,12 @@
 package com.sttx.bookmanager.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,6 +79,33 @@ public class IndexHomeController {
         return "ipLog";
     }
 
+    @RequestMapping("/downloadResumeDocx")
+    public String downloadResumeDocx(Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+
+        String fileName = "北京-Java开发工程师-陈超允.docx";
+        fileName = new String(fileName.getBytes("UTF-8"), "iso8859-1");
+        response.reset();// 去除空白行
+        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);// 指定下载的文件名
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        InputStream bis = null;
+        try {
+            String nfsFileName = NfsFileUtils.getNfsUrl() + "resume/docx/chenchaoyun-resume.docx";
+            log.info("nfsFileName:{}", nfsFileName);
+            bis = NfsFileUtils.readNfsFile2Stream(nfsFileName);
+            ServletOutputStream outputStream = response.getOutputStream();
+            IOUtils.copy(bis, outputStream);
+        } catch (Exception e) {
+            log.error("要下载的文件不存在", e);
+            request.setAttribute("msg", "要下载的文件不存在" + e.getMessage());
+            return "forward:/error/msg.jsp";
+        } finally {
+        }
+        return null;
+    }
+
     @RequestMapping("/testImg")
     public String testImg(HttpServletRequest request, Model model) {
         String nfsFileName = NfsFileUtils.getNfsUrl() + "ad.jpg";
@@ -84,4 +116,5 @@ public class IndexHomeController {
         model.addAttribute("book", book);
         return "testImg";
     }
+
 }
