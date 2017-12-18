@@ -70,7 +70,7 @@
      class="active" target="_bank">项目首页</a></li>
      <li><a href="http://39.108.0.229/resumeHtml/"
      class="active" target="_bank">附件简历预览</a></li>
-    <li><a href="#"
+    <li><a href="${pageContext.request.contextPath}/downloadResumeDocx"
      class="active" target="_bank">简历下载</a></li>
    </ul>
   </div>
