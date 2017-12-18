@@ -12,11 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.Book;
-import com.sttx.bookmanager.po.ResumeVo;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.service.IResumeService;
-import com.sttx.bookmanager.util.LogUtil;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.ddp.logger.DdpLoggerFactory;
@@ -46,11 +44,13 @@ public class IndexHomeController {
     @RequestMapping("/")
     public String indexResume(Model model, HttpServletRequest request, ModelAndView modelAndView) {
 
-        ResumeVo resumeVo = resumeService.findResumeVo();
+        // ResumeVo resumeVo = resumeService.findResumeVo();
 
-        log.info("缓存中的信息 resumeVo.getImageVo:{}", LogUtil.formatLog(resumeVo.getImageVo()));
+        // log.info("缓存中的信息 resumeVo.getImageVo:{}",
+        // LogUtil.formatLog(resumeVo.getImageVo()));
 
-        model.addAttribute("resumeVo", resumeVo);
+        // model.addAttribute("resumeVo", resumeVo);
+        // 此方法加重浏览器解析base64 照片负担更慢了=-=
 
         return "/job/m2/resume";
     }

@@ -27,8 +27,8 @@ import org.w3c.dom.Document;
 public class TestWord2Html {
     @Test
     public void main() throws Throwable {
-        final String path = "F:\\p6p\\";
-        final String file = "北京-Java开发工程师-陈超允-20170827.doc";
+        final String path = "J:\\resume\\";
+        final String file = "北京-Java开发工程师-陈超允-20171216.doc";
         InputStream input = new FileInputStream(path + file);
         HWPFDocument wordDocument = new HWPFDocument(input);
         WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
