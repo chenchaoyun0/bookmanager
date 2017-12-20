@@ -405,7 +405,7 @@
      <div class="clear"></div>
      <ul class="social_icons">
       <li><a href="https://github.com/chenchaoyun0" target="_bank" id="fb" original-title="Join My Fan Club">
-        <img height="28px"
+        <img height="26px"
         src="${pageContext.request.contextPath}/m2/images/github.png"
         alt="Facebook" />
       </a></li>
@@ -415,7 +415,7 @@
         alt="LinkedIn" />
       </a></li>
       <li><a href="http://blog.csdn.net/sinat_22767969" target="_bank" id="tw" original-title="Follow Me on Twitter">
-        <img height="28px"
+        <img height="26px"
         src="${pageContext.request.contextPath}/m2/images/csdn.png"
         alt="Twitter" />
       </a></li>
