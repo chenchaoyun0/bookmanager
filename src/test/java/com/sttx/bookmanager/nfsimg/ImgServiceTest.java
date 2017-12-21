@@ -20,6 +20,12 @@ import com.sttx.ddp.logger.DdpLoggerFactory;
 
 import cn.itcast.commons.CommonUtils;
 
+/**
+ * 
+ * @Description
+ * @author chenchaoyun[chenchaoyun@sttxtech.com]
+ * @date 2017年12月21日 下午3:12:20
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/applicationContext-*.xml" })
 @WebAppConfiguration

@@ -21,7 +21,7 @@ import com.sttx.bookmanager.po.OrderItem;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring/applicationContext-*.xml" })
+@ContextConfiguration(locations = {"classpath:spring/applicationContext-*.xml"})
 public class OrderItemServiceImplTest {
 
     @Autowired
@@ -35,16 +35,13 @@ public class OrderItemServiceImplTest {
     }
 
     @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-    }
+    public static void tearDownAfterClass() throws Exception {}
 
     @Before
-    public void setUp() throws Exception {
-    }
+    public void setUp() throws Exception {}
 
     @After
-    public void tearDown() throws Exception {
-    }
+    public void tearDown() throws Exception {}
 
     @Test
     @Ignore

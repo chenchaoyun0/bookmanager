@@ -10,8 +10,8 @@ public class ActiveMQListener {
     private static final Logger logger = DdpLoggerFactory.getLogger(ActiveMQListener.class);
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext cpxac = new ClassPathXmlApplicationContext(
-                "classpath:spring/applicationContext-*.xml");
+        ClassPathXmlApplicationContext cpxac
+            = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
         BookManagerTLogListener bean = cpxac.getBean("bookManagerTLogListener", BookManagerTLogListener.class);
         logger.info("+++++" + bean);
     }

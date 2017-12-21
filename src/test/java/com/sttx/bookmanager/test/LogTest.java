@@ -14,8 +14,8 @@ import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.ddp.logger.DdpLoggerFactory;
 
-@ContextConfiguration(locations = { "classpath:spring/applicationContext-dao.xml", "classpath:spring/applicationContext-service.xml",
-        "classpath:spring/applicationContext-transation.xml" })
+@ContextConfiguration(locations = {"classpath:spring/applicationContext-dao.xml",
+    "classpath:spring/applicationContext-service.xml", "classpath:spring/applicationContext-transation.xml"})
 @RunWith(SpringJUnit4ClassRunner.class) // SpringJUnit支持，由此引入Spring-Test框架支持！
 @WebAppConfiguration
 public class LogTest {
@@ -33,19 +33,9 @@ public class LogTest {
     @Test
     public void testSelectByPrimaryKey() {
         /**
-         * {
-        "action": "indexHome",
-        "actionTime": 29,
-        "count": 0,
-        "logId": "A55D9D20B88D421D92FA96D986EC65D2",
-        "module": "IndexHomeController",
-        "operTime": "2017-03-09 02:29:38:655",
-        "userAddress": "未分配或者内网IP----",
-        "userIp": "127.0.0.1",
-        "userJwd": "未知",
-        "userName": "游客用户",
-        "userNickName": "未设置"
-        }
+         * { "action": "indexHome", "actionTime": 29, "count": 0, "logId": "A55D9D20B88D421D92FA96D986EC65D2", "module":
+         * "IndexHomeController", "operTime": "2017-03-09 02:29:38:655", "userAddress": "未分配或者内网IP----", "userIp":
+         * "127.0.0.1", "userJwd": "未知", "userName": "游客用户", "userNickName": "未设置" }
          */
         TLog tLog = new TLog();
         tLog.setAction("indexHome");

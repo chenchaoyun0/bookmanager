@@ -27,8 +27,8 @@ import com.sun.xfile.XFileOutputStream;
  * @author chenchaoyun[chenchaoyun@sttxtech.com]
  * @date 2017年6月22日 下午5:03:47
  */
-public class TestNFSFile {
-    private static Logger log = DdpLoggerFactory.getLogger(TestNFSFile.class);
+public class NfsFileTest {
+    private static Logger log = DdpLoggerFactory.getLogger(NfsFileTest.class);
     private static String nfsUrl = null;
     static {
         nfsUrl = PropertiesUtil.getFilePath("properties/nfs.properties", "nfsUrl");

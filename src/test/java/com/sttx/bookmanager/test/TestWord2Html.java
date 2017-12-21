@@ -24,6 +24,11 @@ import org.apache.poi.hwpf.usermodel.PictureType;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
+/**
+ * 
+ * @author Administrator
+ * @date 2017/12/21
+ */
 public class TestWord2Html {
     @Test
     public void main() throws Throwable {
@@ -31,11 +36,11 @@ public class TestWord2Html {
         final String file = "北京-Java开发工程师-陈超允-20171216.doc";
         InputStream input = new FileInputStream(path + file);
         HWPFDocument wordDocument = new HWPFDocument(input);
-        WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
-                DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+        WordToHtmlConverter wordToHtmlConverter
+            = new WordToHtmlConverter(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
         wordToHtmlConverter.setPicturesManager(new PicturesManager() {
             public String savePicture(byte[] content, PictureType pictureType, String suggestedName, float widthInches,
-                    float heightInches) {
+                float heightInches) {
                 return suggestedName;
             }
         });
@@ -45,7 +50,7 @@ public class TestWord2Html {
         List pics = wordDocument.getPicturesTable().getAllPictures();
         if (pics != null) {
             for (int i = 0; i < pics.size(); i++) {
-                Picture pic = (Picture) pics.get(i);
+                Picture pic = (Picture)pics.get(i);
                 try {
                     pic.writeImageContent(new FileOutputStream(outPath + pic.suggestFullFileName()));
                 } catch (FileNotFoundException e) {
