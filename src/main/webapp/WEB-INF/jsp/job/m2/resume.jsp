@@ -63,8 +63,8 @@
    <ul id="navigation">
     <li><a href="#home" class="active">Home</a></li>
     <li><a href="#about">关于我</a></li>
-    <li><a href="#portfolio">项目展示</a></li>
     <li><a href="#skills">技能与特长</a></li>
+    <li><a href="#portfolio">项目展示</a></li>
     <li><a href="#contact">联系我</a></li>
     <li><a href="${pageContext.request.contextPath}/indexHome"
      class="active" target="_bank">项目首页</a></li>
@@ -103,7 +103,198 @@
      <div class="space"></div>
      <div class="clear"></div>
      <!-- services -->
-     <div class="one_half first">
+     <div class="page" id="skills">
+    <!-- page skills -->
+    <h3 class="page_title">技术标签</h3>
+    <div class="page_content">
+
+     <div class="one_fourth first">
+      <div class="column_content">
+       <h4 class="blue" style="color: white;">Dubbo</h4>
+       <input class="knob" data-readonly="true" data-width="120"
+        data-min="0" data-angleoffset="0" data-displayprevious="true"
+        data-fgcolor="#cfdee7" data-bgcolor="#0d4667" value="80">
+      </div>
+     </div>
+     <div class="one_fourth">
+      <div class="column_content">
+       <h4 class="blue" style="color: white;">Zookeeper</h4>
+       <input class="knob" data-readonly="true" data-width="120"
+        data-min="0" data-angleoffset="0" data-displayprevious="true"
+        value="70" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
+      </div>
+     </div>
+     <div class="one_fourth">
+      <div class="column_content">
+       <h4 class="blue" style="color: white;">Spring</h4>
+       <input class="knob" data-readonly="true" data-width="120"
+        data-min="0" data-angleoffset="0" data-displayprevious="true"
+        value="85" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
+      </div>
+     </div>
+     <div class="one_fourth last">
+      <div class="column_content">
+       <h4 class="blue" style="color: white;">Git</h4>
+       <input class="knob" data-readonly="true" data-width="120"
+        data-min="0" data-angleoffset="0" data-displayprevious="true"
+        value="90" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
+      </div>
+     </div>
+     <div class="clear"></div>
+    </div>
+   </div>
+   <div class="copyrights">
+    Collect from <a href="#">网站首页</a>
+   </div>
+   <div class="page" id="industries">
+    <!-- page industries -->
+    <h3 class="page_title">基础必备</h3>
+    <div class="page_content">
+     <p>
+     
+     </p>
+     <div class="space"></div>
+     <div class="clear"></div>
+     <ul class="sublist">
+      <li style="font-size:17px;font-weight: bold;"><a href="#">SpringMVC</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">SpringBoot</a></li>
+      <li style="font-size:17px;font-weight: bold;font-weight: bold;"><a href="#">Restful</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">Gerrit</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">Redis</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">ActiveMQ</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">Nginx</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">Apache</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">MySQL</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">Oracle</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">Mybatis</a></li>
+      <li style="font-size:17px;font-weight: bold;"><a href="#">Hibernate</a></li>
+     </ul>
+     <div class="clear"></div>
+      <blockquote style="font-size: 17px">
+      <p>
+       <b>项目gitHub:&nbsp;&nbsp;<a style="color: lime;" href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a></b>
+      </p>
+      <p>
+       <b>博客:&nbsp;&nbsp;<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a></b>
+      </p>
+      <p>
+       <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a></b>
+      </p>
+      <p>
+       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
+      </p>
+      <p>
+       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
+      </p>
+      <p>
+       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
+      </p>
+      <p>
+       <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
+      </p>
+      <p>
+       <b>Dubbo:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a></b>
+      </p>
+     </blockquote>
+    </div>
+   </div>
+   </div>
+   <div class="page" id="about">
+    <!-- page about -->
+    <h3 class="page_title">我的自评</h3>
+    <div class="page_content">
+     <p style="text-indent: 2em">
+      我是一名热衷于IT行业的JAVA工程师，热爱编程，对技术有很大的求知欲，喜欢将多个人的技术合并到一起生成新的东西。我一直以“严谨、专注、虚心”鞭策自己，我喜欢学习，并且有较强的学习能力。<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我不是一个简单纯粹的人，我追求卓越，具有Geek特质，我能做事做实事，我相信您的团队正需要像我这样的人加入。
+     </p>
+     <h4 class="blue">Java之开发历程</h4>
+     <p  style="text-indent: 2em">
+曾在大学期间，参加腾讯云校园计划，获云服务器与域名，用于学习Linux
+并在大三利用周末时间参加校外培训，搭建个人网站。现今在阿里云与腾讯云均有应用服务。<br />
+</p>
+ <blockquote>
+      <p>
+       <b>在校外培训机构表现成绩优异突出，担任过小组组长</b>
+      </p>
+      <p>
+       <b>校外培训机构结训项目获机构评优并作为后期学员的参考模板。</b>
+      </p>
+      <p>
+       <b>在2016年公司年会上，代表公司同期入职应届生做年终工作总结</b>
+      </p>
+     </blockquote>
+     <div class="clear"></div>
+    </div>
+   </div>
+   <div class="page" id="portfolio">
+    <!-- page portfolio -->
+    <h3 class="page_title">项目展示</h3>
+    <div class="page_content">
+     <p style="text-indent: 2em">
+     做软件开发是一个不断学习的过程，你停住脚步就会被别人超越。刚好~很幸运，我喜欢技术，也喜欢这个学习的过程。别人觉得无聊的东西，我却乐在其中。
+     </p>
+     <ul id="works_filter">
+      <li><a href="#" data-filter="*" class="selected">Show All</a></li>
+      <li><a href="#" data-filter=".css">SpringBoot</a></li>
+      <li><a href="#" data-filter=".html_php">Devps</a></li>
+      <li><a href="#" data-filter=".js">Apps</a></li>
+     </ul>
+     <div class="clear"></div>
+     <div id="works">
+      <!-- works -->
+      <a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/01.jpg">
+       <img class="work js"
+       src="${pageContext.request.contextPath}/m2/images/photos/01.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/02.jpg">
+       <img class="work css"
+       src="${pageContext.request.contextPath}/m2/images/photos/02.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/04.jpg">
+       <img class="work html_php"
+       src="${pageContext.request.contextPath}/m2/images/photos/04.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/05.jpg">
+       <img class="work html_php"
+       src="${pageContext.request.contextPath}/m2/images/photos/05.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/06.jpg">
+       <img class="work css"
+       src="${pageContext.request.contextPath}/m2/images/photos/06.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/07.jpg">
+       <img class="work js"
+       src="${pageContext.request.contextPath}/m2/images/photos/07.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/08.jpg">
+       <img class="work html_php"
+       src="${pageContext.request.contextPath}/m2/images/photos/08.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/09.jpg">
+       <img class="work js"
+       src="${pageContext.request.contextPath}/m2/images/photos/09.jpg"
+       alt="" />
+      </a><a rel="prettyPhoto[gallery]"
+       href="${pageContext.request.contextPath}/m2/images/photos/10.jpg">
+       <img class="work html_php"
+       src="${pageContext.request.contextPath}/m2/images/photos/10.jpg"
+       alt="" />
+      </a>
+     </div>
+     <div class="clear"></div>
+    </div>
+   </div>
+   <!--  -->
+   <div style="margin-left: 30px">
+   <div class="one_half first">
       <div class="column_content">
        <h4>Coded in Love</h4>
        <img
@@ -191,195 +382,9 @@
      </div>
      <div class="clear"></div>
     </div>
-   </div>
-   <div class="page" id="about">
-    <!-- page about -->
-    <h3 class="page_title">我的自评</h3>
-    <div class="page_content">
-     <p style="text-indent: 2em">
-      我是一名热衷于IT行业的JAVA工程师，热爱编程，对技术有很大的求知欲，喜欢将多个人的技术合并到一起生成新的东西。我一直以“严谨、专注、虚心”鞭策自己，我喜欢学习，并且有较强的学习能力。<br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我不是一个简单纯粹的人，我追求卓越，具有Geek特质，我能做事做实事，我相信您的团队正需要像我这样的人加入。
-     </p>
-     <h4 class="blue">Java之开发历程</h4>
-     <p  style="text-indent: 2em">
-曾在大学期间，参加腾讯云校园计划，获云服务器与域名，用于学习Linux
-并在大三利用周末时间参加校外培训，搭建个人网站。现今在阿里云与腾讯云均有应用服务。<br />
-
-
-</p>
-     <blockquote>
-      <p>
-       <b>在校外培训机构表现成绩优异突出，担任过小组组长</b>
-      </p>
-      <p>
-       <b>校外培训机构结训项目获机构评优并作为后期学员的参考模板。</b>
-      </p>
-      <p>
-       <b>在2016年公司年会上，代表公司同期入职应届生做年终工作总结</b>
-      </p>
-      <p>
-       <b>项目gitHub:&nbsp;&nbsp;<a style="color: lime;" href="https://github.com/chenchaoyun0" target="_bank">https://github.com/chenchaoyun0</a></b>
-      </p>
-      <p>
-       <b>博客:&nbsp;&nbsp;<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a></b>
-      </p>
-      <p>
-       <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a></b>
-      </p>
-      <p>
-       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
-      </p>
-      <p>
-       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
-      </p>
-      <p>
-       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
-      </p>
-      <p>
-       <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
-      </p>
-      <p>
-       <b>Dubbo:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a></b>
-      </p>
-     </blockquote>
-     <div class="clear"></div>
     </div>
-   </div>
-   <div class="page" id="portfolio">
-    <!-- page portfolio -->
-    <h3 class="page_title">项目展示</h3>
-    <div class="page_content">
-     <p style="text-indent: 2em">
-     做软件开发是一个不断学习的过程，你停住脚步就会被别人超越。刚好~很幸运，我喜欢技术，也喜欢这个学习的过程。别人觉得无聊的东西，我却乐在其中。
-     </p>
-     <ul id="works_filter">
-      <li><a href="#" data-filter="*" class="selected">Show All</a></li>
-      <li><a href="#" data-filter=".css">SpringBoot</a></li>
-      <li><a href="#" data-filter=".html_php">Devps</a></li>
-      <li><a href="#" data-filter=".js">Apps</a></li>
-     </ul>
-     <div class="clear"></div>
-     <div id="works">
-      <!-- works -->
-      <a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/01.jpg">
-       <img class="work js"
-       src="${pageContext.request.contextPath}/m2/images/photos/01.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/02.jpg">
-       <img class="work css"
-       src="${pageContext.request.contextPath}/m2/images/photos/02.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/04.jpg">
-       <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/04.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/05.jpg">
-       <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/05.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/06.jpg">
-       <img class="work css"
-       src="${pageContext.request.contextPath}/m2/images/photos/06.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/07.jpg">
-       <img class="work js"
-       src="${pageContext.request.contextPath}/m2/images/photos/07.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/08.jpg">
-       <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/08.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/09.jpg">
-       <img class="work js"
-       src="${pageContext.request.contextPath}/m2/images/photos/09.jpg"
-       alt="" />
-      </a><a rel="prettyPhoto[gallery]"
-       href="${pageContext.request.contextPath}/m2/images/photos/10.jpg">
-       <img class="work html_php"
-       src="${pageContext.request.contextPath}/m2/images/photos/10.jpg"
-       alt="" />
-      </a>
-     </div>
-     <div class="clear"></div>
-    </div>
-   </div>
-   <div class="page" id="skills">
-    <!-- page skills -->
-    <h3 class="page_title">技术标签</h3>
-    <div class="page_content">
-
-     <div class="one_fourth first">
-      <div class="column_content">
-       <h4 class="blue">Dubbo</h4>
-       <input class="knob" data-readonly="true" data-width="120"
-        data-min="0" data-angleoffset="0" data-displayprevious="true"
-        data-fgcolor="#cfdee7" data-bgcolor="#0d4667" value="80">
-      </div>
-     </div>
-     <div class="one_fourth">
-      <div class="column_content">
-       <h4 class="blue">Zookeeper</h4>
-       <input class="knob" data-readonly="true" data-width="120"
-        data-min="0" data-angleoffset="0" data-displayprevious="true"
-        value="70" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
-      </div>
-     </div>
-     <div class="one_fourth">
-      <div class="column_content">
-       <h4 class="blue">Spring</h4>
-       <input class="knob" data-readonly="true" data-width="120"
-        data-min="0" data-angleoffset="0" data-displayprevious="true"
-        value="85" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
-      </div>
-     </div>
-     <div class="one_fourth last">
-      <div class="column_content">
-       <h4 class="blue">Git</h4>
-       <input class="knob" data-readonly="true" data-width="120"
-        data-min="0" data-angleoffset="0" data-displayprevious="true"
-        value="90" data-fgcolor="#cfdee7" data-bgcolor="#0d4667">
-      </div>
-     </div>
-     <div class="clear"></div>
-    </div>
-   </div>
-   <div class="copyrights">
-    Collect from <a href="#">网站首页</a>
-   </div>
-   <div class="page" id="industries">
-    <!-- page industries -->
-    <h3 class="page_title">基础必备</h3>
-    <div class="page_content">
-     <p>
-     
-     </p>
-     <div class="space"></div>
-     <div class="clear"></div>
-     <ul class="sublist">
-      <li style="font-size:14px;"><a href="#">SpringMVC</a></li>
-      <li style="font-size:14px;"><a href="#">SpringBoot</a></li>
-      <li style="font-size:14px;"><a href="#">Restful</a></li>
-      <li style="font-size:14px;"><a href="#">Gerrit</a></li>
-      <li style="font-size:14px;"><a href="#">Redis</a></li>
-      <li style="font-size:14px;"><a href="#">ActiveMQ</a></li>
-      <li style="font-size:14px;"><a href="#">Nginx</a></li>
-      <li style="font-size:14px;"><a href="#">Apache</a></li>
-      <li style="font-size:14px;"><a href="#">MySQL</a></li>
-      <li style="font-size:14px;"><a href="#">Oracle</a></li>
-      <li style="font-size:14px;"><a href="#">Mybatis</a></li>
-      <li style="font-size:14px;"><a href="#">Hibernate</a></li>
-     </ul>
-     <div class="clear"></div>
-    </div>
-   </div>
+   <!--  -->
+   
    <div class="page" id="contact">
     <!-- page contact -->
     <h3 class="page_title">Let's Get in Touch</h3>
