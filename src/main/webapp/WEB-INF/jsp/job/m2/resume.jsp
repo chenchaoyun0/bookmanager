@@ -66,8 +66,6 @@
     <li><a href="#skills">技能与特长</a></li>
     <li><a href="#portfolio">项目展示</a></li>
     <li><a href="#contact">联系我</a></li>
-    <li><a href="${pageContext.request.contextPath}/indexHome"
-     class="active" target="_bank">项目首页</a></li>
      <li><a href="http://39.108.0.229/resumeHtml/"
      class="active" target="_bank">附件简历预览</a></li>
     <li><a href="${pageContext.request.contextPath}/downloadResumeDocx"
@@ -188,6 +186,9 @@
       </p>
       <p>
        <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
+      </p>
+      <p>
+       <b>图书管理系统:&nbsp;&nbsp;<a style="color: lime;" href=""${pageContext.request.contextPath}/indexHome"" target="_bank">http://39.108.0.229/bookmanager/indexHome</a></b>
       </p>
       <p>
        <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
