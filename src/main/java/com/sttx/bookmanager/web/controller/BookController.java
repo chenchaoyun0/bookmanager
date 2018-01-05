@@ -1,7 +1,5 @@
 package com.sttx.bookmanager.web.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -9,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,7 +30,6 @@ import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IBookService;
 import com.sttx.bookmanager.service.IImgService;
-import com.sttx.bookmanager.util.excel.ExportToExcelUtil;
 import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
@@ -280,36 +276,4 @@ public class BookController {
 
         return bookService.mountBook(bookId);
     }
-
-    @RequestMapping("/exportBookListExcel/{pageNo}/{pageSize}")
-    public void exportBookListExcel(Book book, String loginName, HttpServletResponse response, @PathVariable("pageNo") Integer pageNo,
-            @RequestParam(value = "userId", required = false) String userId, @PathVariable("pageSize") Integer pageSize)
-            throws IOException {
-        User user = new User();
-        user.setLoginName(loginName);
-        book.setUser(user);
-        if (!"".equals(userId) && userId != null) {
-            book.setUserId(userId);
-        }
-        /* 分页 */
-        PagedResult<Book> pages = bookService.selectBookPages(book, pageNo, pageSize);
-        List<Book> bookList = pages.getDataList();
-        String filePath = PropertiesUtil.getFilePath("uploadFilePath.properties", "book.ImgPath");
-        for (int i = 0; i < bookList.size(); i++) {
-            Book b = bookList.get(i);
-            String bookImg = b.getBookImg();
-            String s = bookImg.substring(0, bookImg.indexOf(null)).substring(bookImg.indexOf("bookImg") + 8);
-            String realPath = filePath + s;
-            BufferedImage img = ImageIO.read(new File(realPath));
-            b.setBookImage(img);
-        }
-
-        try {
-            ExportToExcelUtil.out(response, bookList);
-            return;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

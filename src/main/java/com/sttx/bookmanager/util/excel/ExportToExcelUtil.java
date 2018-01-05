@@ -238,7 +238,7 @@ public class ExportToExcelUtil {
              * 从i+2行开始，因为我们之前的表的标题和列的标题已经占用了两行
              */
             row = sheet.createRow(i + 2);
-
+            row.setHeight((short)1000);
             // no
             cell = row.createCell(0);
             cell.setCellStyle(cellStyle);

@@ -28,7 +28,7 @@ import com.sun.xfile.XFileOutputStream;
  */
 public class NfsFileUtils {
     private static Logger log = DdpLoggerFactory.getLogger(NfsFileUtils.class);
-    private static String jspImgSrc = "data:image/jpg;base64,";
+    public static String jspImgSrc = "data:image/jpg;base64,";
     private static String nfsUrl = null;
     private static String[] imgTypes = null;
     static {
@@ -303,6 +303,10 @@ public class NfsFileUtils {
         // @SuppressWarnings("restriction")
         // String base64String = new BASE64Encoder().encode(b);
         return base64String;
+    }
+
+    public static byte[] base64Str2Byte(String base64String) throws UserException {
+        return  Base64.decodeBase64(base64String);
     }
 
     public static String getImgIfNullReturnDefault(String imgPath) {

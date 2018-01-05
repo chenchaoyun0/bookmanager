@@ -148,7 +148,7 @@ function ilend(bookId){
         <a href="<c:url value='book/selectBookPages?userId=${sessionScope.userLogin.userId}'/>" style="color: blue;">我的图书</a>&nbsp;&nbsp;&nbsp;
         <a href="<c:url value='ebook/selectEBookPages?userId=${sessionScope.userLogin.userId}'/>" style="color: blue;">我的电子书</a>&nbsp;&nbsp;&nbsp;
     </c:if>
-<a href="<c:url value='book/exportBookListExcel/${pages.pageNo}/${pages.pageSize}'/>" style="color: blue;">导出本页至EXCEL</a>&nbsp;
+<a href="<c:url value='exportBookListExcel/${pages.pageNo}/${pages.pageSize}'/>" style="color: blue;">导出本页至EXCEL</a>&nbsp;
 	<button type="button" id="conditionQueryShow">条件查找</button>
                     &nbsp;&nbsp;&nbsp;<button type="button" id="conditionQueryHide">收起</button>
 	<br/>
