@@ -66,8 +66,9 @@
     <li><a href="#skills">技能与特长</a></li>
     <li><a href="#portfolio">项目展示</a></li>
     <li><a href="#contact">联系我</a></li>
-     <!--<li><a href="http://39.108.0.229/resumeHtml/"
-     class="active" target="_bank">附件简历预览</a></li>
+    <li><a href="https://github.com/chenchaoyun0/bookmanager"
+     class="active" target="_bank">项目gitHub</a></li>
+     <!--
     <li><a href="${pageContext.request.contextPath}/downloadResumeDocx"
      class="active" target="_bank">简历下载</a></li>  -->
    </ul>
