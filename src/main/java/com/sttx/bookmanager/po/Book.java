@@ -3,6 +3,8 @@ package com.sttx.bookmanager.po;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
+import com.sttx.bookmanager.util.HideImg;
+
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -15,7 +17,7 @@ public class Book implements Serializable {
     private String bookHouse;
 
     private String bookNo;
-
+    @HideImg
     private String bookImg;
     private BufferedImage bookImage;
     private String bookName;
@@ -189,4 +191,14 @@ public class Book implements Serializable {
     public void setBookFlag(Integer bookFlag) {
         this.bookFlag = bookFlag;
     }
+
+    @Override
+    public String toString() {
+        return "Book [bookId=" + bookId + ", userId=" + userId + ", bookCountry=" + bookCountry + ", bookHouse=" + bookHouse + ", bookNo="
+                + bookNo + ", bookImage=" + bookImage + ", bookName=" + bookName + ", bookAuthor=" + bookAuthor + ", bookPrice=" + bookPrice
+                + ", bookDesc=" + bookDesc + ", bookCount=" + bookCount + ", bookByTime=" + bookByTime + ", bookRemain=" + bookRemain
+                + ", bookUploadTime=" + bookUploadTime + ", bookType=" + bookType + ", bookStatus=" + bookStatus + ", bookFlag=" + bookFlag
+                + ", user=" + user + "]";
+    }
+
 }

@@ -66,7 +66,7 @@ public class BookServiceImpl implements IBookService {
         PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
 
         List<Book> bookList = bookMapper.selectBookPages(book);
-        log.info("bookList:{}", JSONObject.toJSON(bookList));
+        log.info("bookList:{}", bookList.toString());
         List<Book> arrayList = new ArrayList<Book>();
         for (Book book2 : bookList) {
             TImg tImg = new TImg();
