@@ -1,6 +1,7 @@
  package com.sttx.bookmanager.resume;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -38,5 +39,10 @@ public class ResumeCodeTests {
     @Test
     public void threadTest() {
         ExecutorService pool = Executors.newCachedThreadPool();
+    }
+
+    @Test
+    public void java8Test() {
+        Arrays.asList("a", "b", "d").forEach(e -> System.out.println(e));
     }
 }

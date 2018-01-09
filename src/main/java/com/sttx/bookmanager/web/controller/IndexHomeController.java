@@ -72,12 +72,13 @@ public class IndexHomeController {
         // model.addAttribute("resumeVo", resumeVo);
         // 此方法加重浏览器解析base64 照片负担更慢了=-=
 
-        return "/job/m2/resume";
+        // return "/job/m2/resume";
+        return "forward:/book/selectBookPages";
     }
 
     @RequestMapping("/resume")
     public String resume() {
-        return "redirect:/";
+        return "job/m2/resume";
     }
 
     @RequestMapping(value = "/indexHomeForIp", method = RequestMethod.GET)
