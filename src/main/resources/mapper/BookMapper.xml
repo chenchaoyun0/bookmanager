@@ -304,7 +304,7 @@
 		</association>
 	</resultMap>
 	<select id="selectBookPages" resultMap="bookUserResultMap"
-		parameterType="com.sttx.bookmanager.po.Book" useCache="false">
+		parameterType="com.sttx.bookmanager.po.Book" useCache="true">
 		SELECT
 		b.*,
 		u.login_Name,u.real_Name

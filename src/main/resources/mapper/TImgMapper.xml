@@ -196,7 +196,7 @@
         id="selectList"
         resultMap="BaseResultMap"
         parameterType="com.sttx.bookmanager.po.TImg"
-        useCache="false">
+        useCache="true">
         SELECT
         *
         FROM
