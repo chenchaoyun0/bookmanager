@@ -62,10 +62,12 @@
    <!-- navigation menu -->
    <ul id="navigation">
     <li><a href="#home" class="active">Home</a></li>
-    <li><a href="#about">关于我</a></li>
     <li><a href="#skills">技能与特长</a></li>
+    <li><a href="#about">关于我</a></li>
     <li><a href="#portfolio">项目展示</a></li>
     <li><a href="#contact">联系我</a></li>
+    <li><a href="${pageContext.request.contextPath}/book/selectBookPages"
+     class="active" target="_bank">项目首页</a></li>
     <li><a href="https://github.com/chenchaoyun0/bookmanager"
      class="active" target="_bank">项目gitHub</a></li>
      <!--
