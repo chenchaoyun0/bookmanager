@@ -45,4 +45,5 @@ public class ResumeCodeTests {
     public void java8Test() {
         Arrays.asList("a", "b", "d").forEach(e -> System.out.println(e));
     }
+
 }
