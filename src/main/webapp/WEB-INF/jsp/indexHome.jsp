@@ -186,7 +186,7 @@ function ilend(bookId){
 		<div class="zigzag-bottom"></div>
 		<div class="container">
 			<div class="row">
-<c:forEach items="${pages.dataList}" var="book">
+<c:forEach items="${pages.dataList}" var="book" varStatus="stat">
 			<!-- ******************************************** -->
 				<div class="col-md-3 col-sm-6" style="border: 0px solid #00AAEE;height: 400px;width:300px;">
 					<div class="single-shop-product" style="margin-bottom: 30px;border:#00AAEE 0px solid;">
@@ -198,8 +198,8 @@ function ilend(bookId){
 						</div>
 						<br/>
 						<h2 align="left">
-                        <span style="color: blue">书名:</span><a style="color: red;"  href="<c:url value='book/selectBookDetail/${book.bookId}'/>">
-                         ${book.bookName}
+                        <span style="color: blue">${stat.index}书名:</span><a style="color: red;"  href="<c:url value='book/selectBookDetail/${book.bookId}'/>">
+                         ${stat.count}-${book.bookName}
 							</a>
 							<span style="color: blue">作者:</span><a style="color:purple;"  href="<c:url value='book/selectBookDetail/${book.bookId}'/>">${book.bookAuthor}
 							</a>
