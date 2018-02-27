@@ -1,18 +1,18 @@
 package com.sttx.bookmanager.test;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 import cn.itcast.commons.CommonUtils;
 
 public class ThreadMain {
     private static int count = 0;
-    private static final Logger logger = DdpLoggerFactory.getLogger(LogTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ThreadMain.class);
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(

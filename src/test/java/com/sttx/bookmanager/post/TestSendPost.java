@@ -5,13 +5,12 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 import com.sttx.bookmanager.util.http.HttpPostUtil;
 import com.sttx.bookmanager.util.http.UspHttpUtils;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 public class TestSendPost {
-    private final static Logger log = DdpLoggerFactory.getLogger(UspHttpUtils.class);
+  private static final Logger log = LoggerFactory.getLogger(TestSendPost.class);
     @Test
     public void test() throws Exception {
         Map<String, Object> msg=new HashMap<>();

@@ -3,6 +3,7 @@ package com.sttx.bookmanager.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -11,12 +12,11 @@ import com.sttx.bookmanager.po.EBook;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IEBookService;
 import com.sttx.bookmanager.util.pages.PagedResult;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/applicationContext-*.xml" })
 public class EBookTest {
-    private static final Logger logger = DdpLoggerFactory.getLogger(EBookTest.class);
+  private static final Logger logger = LoggerFactory.getLogger(EBookTest.class);
     @Autowired
     private IEBookService eBookService;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.ImageBase64Vo;
 import com.sttx.bookmanager.po.ImageVo;
@@ -18,7 +18,6 @@ import com.sttx.bookmanager.util.LogUtil;
 import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 import com.sun.xfile.XFileOutputStream;
 
 /**
@@ -28,7 +27,7 @@ import com.sun.xfile.XFileOutputStream;
  * @date 2017年6月22日 下午5:03:47
  */
 public class NfsFileTest {
-    private static Logger log = DdpLoggerFactory.getLogger(NfsFileTest.class);
+  private static final Logger log = LoggerFactory.getLogger(NfsFileTest.class);
     private static String nfsUrl = null;
     static {
         nfsUrl = PropertiesUtil.getFilePath("properties/nfs.properties", "nfsUrl");

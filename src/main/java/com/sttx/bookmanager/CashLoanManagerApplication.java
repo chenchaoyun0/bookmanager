@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -17,13 +18,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.sttx.bookmanager.util.spring.SpringUtils;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @SpringBootApplication
 @ServletComponentScan
 public class CashLoanManagerApplication extends SpringBootServletInitializer
         implements EmbeddedServletContainerCustomizer, ApplicationListener<ContextRefreshedEvent> {
-    private static final Logger log = DdpLoggerFactory.getLogger(CashLoanManagerApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(CashLoanManagerApplication.class);
     private static String contextPath = null;
     private static String port = null;
 

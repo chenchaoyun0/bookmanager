@@ -1,15 +1,14 @@
 package com.sttx.bookmanager.web.init;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import com.sttx.ddp.logger.DdpLoggerFactory;
-
 @Component
 public class ResumeInitApplication implements ApplicationRunner {
-    private static final Logger log = DdpLoggerFactory.getLogger(ResumeInitApplication.class);
+  private static final Logger log = LoggerFactory.getLogger(ResumeInitApplication.class);
 
     @Override
     public void run(ApplicationArguments var1) throws Exception {

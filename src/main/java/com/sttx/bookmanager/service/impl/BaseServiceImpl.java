@@ -3,14 +3,13 @@ package com.sttx.bookmanager.service.impl;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.sttx.bookmanager.dao.BaseMapper;
 import com.sttx.bookmanager.service.IBaseService;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 public class BaseServiceImpl<T> implements IBaseService<T> {
-    private static Logger log = DdpLoggerFactory.getLogger(BaseServiceImpl.class);
+  private static final Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
 
     @Autowired
     private BaseMapper<T> baseMapper;

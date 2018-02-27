@@ -1,13 +1,13 @@
 package com.sttx.bookmanager.test;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.sttx.bookmanager.listener.BookManagerTLogListener;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 public class ActiveMQListener {
-    private static final Logger logger = DdpLoggerFactory.getLogger(ActiveMQListener.class);
+  private static final Logger logger = LoggerFactory.getLogger(ActiveMQListener.class);
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext cpxac

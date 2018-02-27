@@ -11,6 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,7 +19,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.sttx.bookmanager.dao.OrderItemMapper;
 import com.sttx.bookmanager.po.ItemStatus;
 import com.sttx.bookmanager.po.OrderItem;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring/applicationContext-*.xml"})
@@ -27,7 +27,7 @@ public class OrderItemServiceImplTest {
     @Autowired
     private OrderItemMapper orderItemMapper;
 
-    private static final Logger logger = DdpLoggerFactory.getLogger(OrderItemServiceImplTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderItemServiceImplTest.class);
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {

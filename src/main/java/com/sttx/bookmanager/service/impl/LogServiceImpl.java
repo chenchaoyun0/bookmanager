@@ -1,11 +1,10 @@
 package com.sttx.bookmanager.service.impl;
 
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.esotericsoftware.minlog.Log;
 import com.github.pagehelper.PageHelper;
 import com.sttx.bookmanager.dao.TLogMapper;
 import com.sttx.bookmanager.po.TLog;
@@ -16,83 +15,86 @@ import com.sttx.bookmanager.util.pages.PagedResult;
 
 @Service("logService")
 public class LogServiceImpl implements ILogService {
-    @Autowired
-    private TLogMapper tLogMapper;
 
-    public int insertSelective(TLog tLog) {
-        try {
-            Log.info("++++++++++++++++++++保存日志begin...");
-            int insertSelective = tLogMapper.insertSelective(tLog);
-            Log.info("++++++++++++++++++++保存日志end...");
-            return insertSelective;
-        } catch (UserException e) {
-            throw new UserException("操作失败");
-        }
+  private static final Logger log = LoggerFactory.getLogger(LogServiceImpl.class);
+
+  @Autowired
+  private TLogMapper tLogMapper;
+
+  public int insertSelective(TLog tLog) {
+    try {
+      log.info("++++++++++++++++++++保存日志begin...");
+      int insertSelective = tLogMapper.insertSelective(tLog);
+      log.info("++++++++++++++++++++保存日志end...");
+      return insertSelective;
+    } catch (UserException e) {
+      throw new UserException("操作失败");
     }
+  }
 
-    @Override
-    public TLog selectByUserIp(String userIp) {
-        try {
-            return tLogMapper.selectByUserIp(userIp);
-        } catch (UserException e) {
-            throw new UserException("操作失败");
-        }
+  @Override
+  public TLog selectByUserIp(String userIp) {
+    try {
+      return tLogMapper.selectByUserIp(userIp);
+    } catch (UserException e) {
+      throw new UserException("操作失败");
     }
+  }
 
-    @Override
-    public int insert(TLog tLog) {
-        try {
-            return tLogMapper.insert(tLog);
-        } catch (UserException e) {
-            throw new UserException("操作失败");
-        }
+  @Override
+  public int insert(TLog tLog) {
+    try {
+      return tLogMapper.insert(tLog);
+    } catch (UserException e) {
+      throw new UserException("操作失败");
     }
+  }
 
-    @Override
-    public int updateByPrimaryKey(TLog record) {
-        try {
-            return tLogMapper.updateByPrimaryKeySelective(record);
-        } catch (UserException e) {
-            throw new UserException("操作失败");
-        }
+  @Override
+  public int updateByPrimaryKey(TLog record) {
+    try {
+      return tLogMapper.updateByPrimaryKeySelective(record);
+    } catch (UserException e) {
+      throw new UserException("操作失败");
     }
+  }
 
-    @Override
-    public PagedResult<TLog> selectLogPages(TLog tLog, Integer pageNo, Integer pageSize) {
-        /**
-         * 默认是12条
-         */
-        pageNo = pageNo == null ? (Integer) 1 : pageNo;
-        pageSize = pageSize == null ? (Integer) 8 : pageSize;
-        PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
-        List<TLog> selectLogPages = tLogMapper.selectLogPages(tLog);
-        PagedResult<TLog> logPagedResult = BeanUtil.toPagedResult(selectLogPages);
+  @Override
+  public PagedResult<TLog> selectLogPages(TLog tLog, Integer pageNo, Integer pageSize) {
+    /**
+     * 默认是12条
+     */
+    pageNo = pageNo == null ? (Integer) 1 : pageNo;
+    pageSize = pageSize == null ? (Integer) 8 : pageSize;
+    PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
+    List<TLog> selectLogPages = tLogMapper.selectLogPages(tLog);
+    PagedResult<TLog> logPagedResult = BeanUtil.toPagedResult(selectLogPages);
 
-        logPagedResult.setPageNo(pageNo);
-        logPagedResult.setPageSize(pageSize);
+    logPagedResult.setPageNo(pageNo);
+    logPagedResult.setPageSize(pageSize);
 
-        return logPagedResult;
-    }
+    return logPagedResult;
+  }
 
-    @Override
-    public Long selectLogSumCount() {
-        return tLogMapper.selectLogSumCount();
-    }
+  @Override
+  public Long selectLogSumCount() {
+    return tLogMapper.selectLogSumCount();
+  }
 
-    @Override
-    public PagedResult<TLog> selectLogPagesForIp(String userIp, Integer pageNo, Integer pageSize) {
-        /**
-         * 默认是12条
-         */
-        pageNo = pageNo == null ? (Integer) 1 : pageNo;
-        pageSize = pageSize == null ? (Integer) 20 : pageSize;
-        PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
-        List<TLog> selectLogPages = tLogMapper.selectLogPagesForIp(userIp);
-        PagedResult<TLog> logPagedResult = BeanUtil.toPagedResult(selectLogPages);
+  @Override
+  public PagedResult<TLog> selectLogPagesForIp(String userIp, Integer pageNo, Integer pageSize) {
+    /**
+     * 默认是12条
+     */
+    pageNo = pageNo == null ? (Integer) 1 : pageNo;
+    pageSize = pageSize == null ? (Integer) 20 : pageSize;
+    PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
+    List<TLog> selectLogPages = tLogMapper.selectLogPagesForIp(userIp);
+    PagedResult<TLog> logPagedResult = BeanUtil.toPagedResult(selectLogPages);
 
-        logPagedResult.setPageNo(pageNo);
-        logPagedResult.setPageSize(pageSize);
+    logPagedResult.setPageNo(pageNo);
+    logPagedResult.setPageSize(pageSize);
 
-        return logPagedResult;
-    }
+    return logPagedResult;
+  }
 }

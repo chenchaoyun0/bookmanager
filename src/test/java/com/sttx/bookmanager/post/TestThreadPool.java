@@ -2,13 +2,12 @@ package com.sttx.bookmanager.post;
 
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 import com.sttx.bookmanager.util.threadpool.MyPoolableObjectFactory;
 import com.sttx.bookmanager.util.threadpool.SendPostThread;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 public class TestThreadPool {
-    private final static Logger log = DdpLoggerFactory.getLogger(TestThreadPool.class);
+  private static final Logger log = LoggerFactory.getLogger(TestThreadPool.class);
 
     public static void main(String[] args) {
         MyPoolableObjectFactory factory = new MyPoolableObjectFactory();

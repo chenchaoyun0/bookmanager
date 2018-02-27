@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,11 +35,10 @@ import com.sttx.bookmanager.util.excel.ExportToExcelUtil;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @Controller
 public class IndexHomeController {
-    private static final Logger log = DdpLoggerFactory.getLogger(IndexHomeController.class);
+  private static final Logger log = LoggerFactory.getLogger(IndexHomeController.class);
     @Autowired
     private ILogService logService;
     @Autowired

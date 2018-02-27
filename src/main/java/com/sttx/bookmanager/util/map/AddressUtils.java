@@ -9,13 +9,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.util.map.vo.IPAddressVo;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 public class AddressUtils {
-    private static final Logger log = DdpLoggerFactory.getLogger(AddressUtils.class);
+  private static final Logger log = LoggerFactory.getLogger(AddressUtils.class);
 
     public static IPAddressVo getIPAddressVo(String ip) {
         String json_result = null;

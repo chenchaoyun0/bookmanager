@@ -13,15 +13,14 @@ import java.util.Map;
 import javax.activation.MimetypesFileTypeMap;
 
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 import com.sttx.bookmanager.util.exception.UserException;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 /**
  * java通过模拟post方式提交表单实现图片上传功能实例
  */
 public class HttpUploadFile {
-    private static final Logger log = DdpLoggerFactory.getLogger(HttpUploadFile.class);
+  private static final Logger log = LoggerFactory.getLogger(HttpUploadFile.class);
 
     /**
      * 上传图片

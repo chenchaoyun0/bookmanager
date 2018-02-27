@@ -3,6 +3,7 @@ package com.sttx.bookmanager.service.impl;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,12 @@ import com.sttx.bookmanager.util.passwd.SHA;
 import com.sttx.bookmanager.util.tuling.Aes;
 import com.sttx.bookmanager.util.tuling.Md5;
 import com.sttx.bookmanager.util.tuling.PostServer;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
-    private static Logger log = DdpLoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     public User selectByPrimaryKey(String userId) {
         return userMapper.selectByPrimaryKey(userId);
     }

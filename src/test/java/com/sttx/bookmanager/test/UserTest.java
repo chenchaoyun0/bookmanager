@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -14,14 +15,13 @@ import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IUserService;
 import com.sttx.bookmanager.util.pages.PagedResult;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @ContextConfiguration(locations = { "classpath:spring/applicationContext-dao.xml", "classpath:spring/applicationContext-service.xml",
         "classpath:spring/applicationContext-transation.xml" })
 @RunWith(SpringJUnit4ClassRunner.class) // SpringJUnit支持，由此引入Spring-Test框架支持！
 @WebAppConfiguration
 public class UserTest {
-    private static final Logger logger = DdpLoggerFactory.getLogger(UserTest.class);
+  private static final Logger logger = LoggerFactory.getLogger(UserTest.class);
     @Autowired
     private IUserService userService;
 

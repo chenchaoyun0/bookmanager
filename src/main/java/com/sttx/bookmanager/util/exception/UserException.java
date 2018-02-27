@@ -1,11 +1,11 @@
 package com.sttx.bookmanager.util.exception;
 
 import org.slf4j.Logger;
-
-import com.sttx.ddp.logger.DdpLoggerFactory;
+import org.slf4j.LoggerFactory;
+import com.sttx.bookmanager.service.impl.UserServiceImpl;
 
 public class UserException extends RuntimeException {
-    private static Logger log = DdpLoggerFactory.getLogger(UserException.class);
+  private static final Logger log = LoggerFactory.getLogger(UserException.class);
     /**
      * @fieldName: serialVersionUID
      * @fieldType: long

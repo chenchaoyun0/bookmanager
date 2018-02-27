@@ -11,11 +11,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 import com.sun.xfile.XFile;
 import com.sun.xfile.XFileInputStream;
 import com.sun.xfile.XFileOutputStream;
@@ -27,7 +26,7 @@ import com.sun.xfile.XFileOutputStream;
  * @date 2017年6月23日 上午10:12:37
  */
 public class NfsFileUtils {
-    private static Logger log = DdpLoggerFactory.getLogger(NfsFileUtils.class);
+  private static final Logger log = LoggerFactory.getLogger(NfsFileUtils.class);
     public static String jspImgSrc = "data:image/jpg;base64,";
     private static String nfsUrl = null;
     private static String[] imgTypes = null;

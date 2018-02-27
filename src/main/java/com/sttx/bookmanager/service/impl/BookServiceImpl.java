@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,10 @@ import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.BeanUtil;
 import com.sttx.bookmanager.util.pages.PagedResult;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 @Service("bookService")
 public class BookServiceImpl implements IBookService {
-    private static Logger log = DdpLoggerFactory.getLogger(BookServiceImpl.class);
+  private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
 
     @Autowired
     private BookMapper bookMapper;

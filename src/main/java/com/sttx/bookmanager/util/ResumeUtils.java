@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
-
+import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.ImageBase64Vo;
 import com.sttx.bookmanager.po.ImageVo;
 import com.sttx.bookmanager.po.ResumeVo;
 import com.sttx.bookmanager.po.ScrollImage;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
-import com.sttx.ddp.logger.DdpLoggerFactory;
 
 public class ResumeUtils {
-    private static Logger log = DdpLoggerFactory.getLogger(ResumeUtils.class);
+  private static final Logger log = LoggerFactory.getLogger(ResumeUtils.class);
     private static ResumeVo resumeVo = new ResumeVo();
 
     public static ResumeVo getResumeVo() {
