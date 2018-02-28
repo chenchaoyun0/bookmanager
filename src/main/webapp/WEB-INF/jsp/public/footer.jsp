@@ -49,8 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   	<!-- 底部版权 start -->
     <div class="footer w1210 bc mt10" align="center">
-        <p class="copyright">@2014-2016 珠海数通天下科技有限公司 版权所有，并保留所有权利。
-            ICP备案证书号:15061952号-1</p>
+        <p class="copyright">@2014-2016 www.ccy123.cn</p>
         <p class="auth">
             <a href=""><img height="90px" width="100px" src="<c:url value='img/logo.png'/>" alt="" />
             <a href=""><img height="90px" width="100px" src="<c:url value='img/logo.png'/>" alt="" />
