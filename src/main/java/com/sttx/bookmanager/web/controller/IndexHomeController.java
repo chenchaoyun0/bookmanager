@@ -49,6 +49,8 @@ public class IndexHomeController {
 
     @RequestMapping("/indexHome")
     public String indexHome(Model model, HttpServletRequest request, ModelAndView modelAndView, Integer pageNo, Integer pageSize) {
+        String realPath = request.getServletContext().getRealPath("resources/ehcache.xml");
+        log.info(">>>>>>>>>realPath:{}",realPath);
         // return "forward:/book/selectBookPages";
         TLog tLog = new TLog();
         PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);

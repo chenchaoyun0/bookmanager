@@ -36,7 +36,26 @@
         <mybatis.version>3.3.0</mybatis.version>
         <druid.version>1.0.23</druid.version>
         <servlet.version>3.1.0</servlet.version>
-
+        <!-- cas version -->
+        <cas-client-core.version>3.1.12</cas-client-core.version>
+        <mybatis-spring.version>1.2.3</mybatis-spring.version>
+        <mybatis.mapper.version>3.3.4</mybatis.mapper.version>
+        <github.pagehelper.version>4.1.1</github.pagehelper.version>
+        <alibaba.fastjson>1.2.10</alibaba.fastjson>
+        <ehcache-core.version>2.6.5</ehcache-core.version>
+        <ezmorph.version>1.0.6</ezmorph.version>
+        <mybatis-ehcache.version>1.0.3</mybatis-ehcache.version>
+        <commons-fileupload.version>1.2.2</commons-fileupload.version>
+        <commons-io.version>2.4</commons-io.version>
+        <taglibs.standard.version>1.1.2</taglibs.standard.version>
+        <powermock.version>1.6.5</powermock.version>
+        <javax.mail.version>1.4</javax.mail.version>
+        <poi.version>3.9</poi.version>
+        <jxl.version>2.6</jxl.version>
+        <activemq.version>5.7.0</activemq.version>
+        <sun.yanfs.version>1.4</sun.yanfs.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
+        <jboss.netty.version>3.2.4.Final</jboss.netty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
@@ -115,13 +134,13 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>1.2.3</version>
+            <version>${mybatis-spring.version}</version>
         </dependency>
         <!--通用Mapper插件 -->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
-            <version>3.3.4</version>
+            <version>${mybatis.mapper.version}</version>
         </dependency>
         <!-- mysql oracle驱动包 -->
         <dependency>
@@ -134,7 +153,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-            <version>4.1.1</version>
+            <version>${github.pagehelper.version}</version>
         </dependency>
 
         <!-- 添加json的依赖包 -->
@@ -152,7 +171,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.10</version>
+            <version>${alibaba.fastjson}</version>
         </dependency>
 
         <dependency>
@@ -173,23 +192,21 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
         <!-- -->
-        <!-- <dependency> <groupId>diy.ehcache</groupId> <artifactId>ehcache</artifactId> 
-            <version>2.6.5</version> </dependency> -->
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
-            <version>2.6.5</version>
+            <version>${ehcache-core.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sf.ezmorph</groupId>
             <artifactId>ezmorph</artifactId>
-            <version>1.0.6</version>
+            <version>${ezmorph.version}</version>
         </dependency>
         <!-- mybatis-ehcache-1.0.2.jar -->
         <dependency>
             <groupId>org.mybatis.caches</groupId>
             <artifactId>mybatis-ehcache</artifactId>
-            <version>1.0.3</version>
+            <version>${mybatis-ehcache.version}</version>
         </dependency>
         <!-- 添加Servlet -->
         <dependency>
@@ -200,12 +217,12 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.2.2</version>
+            <version>${commons-fileupload.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>${commons-io.version}</version>
         </dependency>
         <!-- jstl -->
         <!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>jstl</artifactId> 
@@ -219,25 +236,25 @@
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
-            <version>1.1.2</version>
+            <version>${taglibs.standard.version}</version>
         </dependency>
 
         <!--PowerMockJUNIT的支持 -->
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito</artifactId>
-            <version>1.6.5</version>
+            <version>${powermock.version}</version>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.6.5</version>
+            <version>${powermock.version}</version>
         </dependency>
         <!-- mail -->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4</version>
+            <version>${javax.mail.version}</version>
         </dependency>
         <!-- druid -->
         <dependency>
@@ -249,23 +266,23 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.9</version>
+            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.9</version>
+            <version>${poi.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
-            <version>3.9</version>
+            <version>${poi.version}</version>
         </dependency>
         <!-- jxl -->
         <dependency>
             <groupId>net.sourceforge.jexcelapi</groupId>
             <artifactId>jxl</artifactId>
-            <version>2.6</version>
+            <version>${jxl.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -282,7 +299,7 @@
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-core</artifactId>
-            <version>5.7.0</version>
+            <version>${activemq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -346,12 +363,12 @@
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>yanfs</artifactId>
-            <version>1.4</version>
+            <version>${sun.yanfs.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-pool</groupId>
@@ -364,7 +381,26 @@
         <dependency>
             <groupId>org.jboss.netty</groupId>
             <artifactId>netty</artifactId>
-            <version>3.2.4.Final</version>
+            <version>${jboss.netty.version}</version>
+        </dependency>
+        <!-- cas -->  
+        <!-- <dependency>  
+            <groupId>org.jasig.cas.client</groupId>  
+            <artifactId>cas-client-core</artifactId>  
+            <version>${cas-client-core.version}</version>
+        </dependency> -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
         </dependency>
     </dependencies>
     <build>
