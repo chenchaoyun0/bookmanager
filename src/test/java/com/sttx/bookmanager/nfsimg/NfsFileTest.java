@@ -59,7 +59,7 @@ public class NfsFileTest {
          * read
          */
         log.info("nfsUrl:{}", nfsUrl);
-        String nfsFileName = nfsUrl + "ad.jpg";
+        String nfsFileName = "nfs://39.108.0.229:/u01/upload/" + "userhead/chenchaoyun/userhead.jpg";
         byte[] bs = NfsFileUtils.readNfsFile2Byte(nfsFileName);
         log.info("bs length:{}", bs.length);
         String imageBase64Str = NfsFileUtils.getImageBase64Str(bs);

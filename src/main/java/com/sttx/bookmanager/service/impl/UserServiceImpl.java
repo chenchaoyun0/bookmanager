@@ -88,8 +88,8 @@ public class UserServiceImpl implements IUserService {
         }
 
         String userHead = user.getUserHead();
-        String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
-        user.setUserHead(imageBase64Str);
+        //String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
+        user.setUserHead(userHead);
         return user;
     }
 
