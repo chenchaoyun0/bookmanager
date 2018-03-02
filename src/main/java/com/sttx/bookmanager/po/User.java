@@ -1,13 +1,9 @@
 package com.sttx.bookmanager.po;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import org.springframework.security.core.userdetails.UserDetails;
-import com.sttx.bookmanager.cas.AuthorityInfo;
 
-public class User implements Serializable,UserDetails {
+public class User implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +49,6 @@ public class User implements Serializable,UserDetails {
   
     private boolean isEnabled = true;  
   
-    private Set<AuthorityInfo> authorities = new HashSet<AuthorityInfo>();
     
     public List<Book> getBookList() {
         return bookList;
@@ -221,22 +216,4 @@ public class User implements Serializable,UserDetails {
     public void setEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
-
-    public Set<AuthorityInfo> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<AuthorityInfo> authorities) {
-        this.authorities = authorities;
-    }
-
-    @Override
-    public String getPassword() {
-         return this.getUserPwd();
-    }
-
-    @Override
-    public String getUsername() {
-         return this.getLoginName();
-    } 
 }

@@ -389,17 +389,17 @@
             <artifactId>cas-client-core</artifactId>  
             <version>${cas-client-core.version}</version>
         </dependency> -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency> -->
         <!-- security 对CAS支持 -->  
-        <dependency>  
+        <!-- <dependency>  
             <groupId>org.springframework.security</groupId>  
             <artifactId>spring-security-cas</artifactId>  
-        </dependency>  
+        </dependency>  --> 
         <!-- security taglibs -->  
-        <dependency>  
+       <!--  <dependency>  
             <groupId>org.springframework.security</groupId>  
             <artifactId>spring-security-taglibs</artifactId>  
         </dependency>
@@ -407,7 +407,7 @@
             <groupId>org.springframework.boot</groupId>  
             <artifactId>spring-boot-configuration-processor</artifactId>  
             <optional>true</optional>  
-        </dependency>
+        </dependency> -->
     </dependencies>
     <build>
         <defaultGoal>compile</defaultGoal>
