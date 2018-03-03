@@ -20,32 +20,12 @@
 	<mvc:annotation-driven/>
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
         infrastructure -->
-    <bean
-        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <bean
-                class="org.springframework.http.converter.StringHttpMessageConverter">
-                <property name="supportedMediaTypes">
-                    <value>text/html;charset=UTF-8</value>
-                </property>
-            </bean>
-        </property>
-    </bean>
-
     <!-- rest json related... start -->
     <bean id="mappingJacksonHttpMessageConverter"
         class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
-            </list>
-        </property>
-    </bean>
-    <bean
-        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="mappingJacksonHttpMessageConverter" />
             </list>
         </property>
     </bean>
