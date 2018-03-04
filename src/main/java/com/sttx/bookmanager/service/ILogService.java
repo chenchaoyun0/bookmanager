@@ -17,4 +17,8 @@ public interface ILogService {
     PagedResult<TLog> selectLogPages(TLog tLog, Integer pageNo, Integer pageSize);
 
     PagedResult<TLog> selectLogPagesForIp(String userIp, Integer pageNo, Integer pageSize);
+
+    PagedResult<TLog> selectLogPagesByMongo(TLog tLog, Integer pageNo, Integer pageSize);
+
+    PagedResult<TLog> selectLogPagesForIpByMongo(String userIp, Integer pageNo, Integer pageSize);
 }
