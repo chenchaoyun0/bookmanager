@@ -28,7 +28,6 @@
         <!-- spring版本号 -->
         <spring.version>5.0.4.RELEASE</spring.version>
         <!-- log4j日志文件管理包版本 -->
-        <slf4j.version>1.7.21</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <!-- junit版本号 -->
         <junit.version>4.12</junit.version>
@@ -56,6 +55,7 @@
         <sun.yanfs.version>1.4</sun.yanfs.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <jboss.netty.version>3.2.4.Final</jboss.netty.version>
+        <cglib.version>3.2.2</cglib.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
@@ -107,15 +107,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
-        </dependency>
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
         </dependency>
         <!--spring单元测试依赖 -->
         <dependency>
@@ -232,6 +223,14 @@
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+                　　　　<groupId>org.mongodb</groupId>
+                　　　　<artifactId>mongo-java-driver</artifactId>
+                　　</dependency>
         <!-- jstl -->
         <!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>jstl</artifactId> 
             <version>1.2</version> </dependency> -->
@@ -247,17 +246,6 @@
             <version>${taglibs.standard.version}</version>
         </dependency>
 
-        <!--PowerMockJUNIT的支持 -->
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-mockito</artifactId>
-            <version>${powermock.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>${powermock.version}</version>
-        </dependency>
         <!-- mail -->
         <dependency>
             <groupId>javax.mail</groupId>
@@ -390,6 +378,12 @@
             <artifactId>netty</artifactId>
             <version>${jboss.netty.version}</version>
         </dependency>
+            <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- cas -->  
         <!-- <dependency>  
             <groupId>org.jasig.cas.client</groupId>  
