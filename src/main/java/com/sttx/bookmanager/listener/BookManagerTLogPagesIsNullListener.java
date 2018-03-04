@@ -20,7 +20,7 @@ public class BookManagerTLogPagesIsNullListener implements MessageListener {
         try {
             ILogService logService = SpringUtils.getBean("logService", ILogService.class);
             TLog tLog = new TLog();
-            PagedResult<TLog> pages = logService.selectLogPages(tLog, null, null);
+            PagedResult<TLog> pages = logService.selectLogPagesByMongo(tLog, null, null);
             Long totalc = logService.selectLogSumCount();
             String tLogPages = PropertiesUtil.getFilePath("properties/activemq.properties", "tLogPages");
             String totalcount = PropertiesUtil.getFilePath("properties/activemq.properties", "totalcount");

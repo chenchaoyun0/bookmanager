@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -17,7 +18,7 @@ import com.sttx.bookmanager.util.pages.PagedResult;
 @ContextConfiguration(locations = {"classpath:spring/applicationContext-dao.xml",
     "classpath:spring/applicationContext-service.xml", "classpath:spring/applicationContext-transation.xml"})
 @RunWith(SpringJUnit4ClassRunner.class) // SpringJUnit支持，由此引入Spring-Test框架支持！
-@WebAppConfiguration
+@SpringBootTest
 public class LogTest {
   private static final Logger logger = LoggerFactory.getLogger(LogTest.class);
     @Autowired
@@ -25,8 +26,10 @@ public class LogTest {
 
     @Test
     public void testSelectLogPages() {
-        PagedResult<TLog> pagedResult = logService.selectLogPages(new TLog(), null, null);
-        logger.info("+++++:{}", JSONObject.toJSON(pagedResult));
+        TLog tLog = new TLog();
+        tLog.setLogId("001B710B17384ECB86894A4D5BDAD2EC");
+        PagedResult<TLog> pagedResult = logService.selectLogPages(tLog, null, null);
+        logger.info("+++++:{}", JSONObject.toJSON(pagedResult.getDataList().get(0)));
         PagedResult<TLog> pagedResult2 = logService.selectLogPages(new TLog(), null, null);
     }
 
@@ -52,7 +55,13 @@ public class LogTest {
         logger.info("insertSelective~:{}" + JSONObject.toJSONString(tLog));
         int i = logService.insertSelective(tLog);
         logger.info("insertSelective~:{}" + i);
-
     }
-
+    
+    @Test
+    public void testSelectLogPagesByMongo() {
+        TLog tLog = new TLog();
+        PagedResult<TLog> pagedResult = logService.selectLogPagesByMongo(tLog, 2, 8);
+        logger.info("+++++:{}", JSONObject.toJSON(pagedResult));
+    }
+    
 }

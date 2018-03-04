@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.springframework.data.domain.Pageable;
 import com.sttx.bookmanager.util.exception.UserException;
 
 /**
  * <b>类说明：</b>bean基类
  */
-public abstract class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable,Pageable {
     private static final long serialVersionUID = 1L;
 
     private static Map<Class<?>, PropertyInfo[]> class2Props = new HashMap<Class<?>, PropertyInfo[]>(128);

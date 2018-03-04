@@ -1,25 +1,37 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
-		http://www.springframework.org/schema/mvc 
-		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
-		http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
-		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
-		http://www.springframework.org/schema/tx 
-		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
-	<!-- 扫描controller -->
-	<context:component-scan base-package="com.sttx.bookmanager.web.controller"></context:component-scan>
-	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置 mvc:annotation-driven默认加载很多的参数绑定方法， 
-		比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter 
-		实际开发时使用mvc:annotation-driven -->
-	<mvc:annotation-driven/>
-	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+    <!-- 扫描controller -->
+    <context:component-scan base-package="com.sttx.bookmanager.web.controller"></context:component-scan>
+    <!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置 mvc:annotation-driven默认加载很多的参数绑定方法， 
+        比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter 
+        实际开发时使用mvc:annotation-driven -->
+    <mvc:annotation-driven/>
+    <!-- DispatcherServlet Context: defines this servlet's request-processing 
         infrastructure -->
+    <bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <bean
+                class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <value>text/html;charset=UTF-8</value>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
     <!-- rest json related... start -->
     <bean id="mappingJacksonHttpMessageConverter"
         class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -29,20 +41,29 @@
             </list>
         </property>
     </bean>
+    <bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
     <!-- rest json related... end -->
-	
-	<!-- 视图解析器 解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包 -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<!-- 配置jsp路径的前缀 -->
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<!-- 配置jsp路径的后缀 -->
-		<property name="suffix" value=".jsp" />
-	</bean>
+    
+    <!-- 视图解析器 解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包 -->
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 配置jsp路径的前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!-- 配置jsp路径的后缀 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
 
-	<!-- 自定义参数绑定 -->
-	<!-- 算出每个controller方法的执行时间 -->
-	<bean id="ControllerAOP" class="com.sttx.bookmanager.web.aop.ControllerAOP"></bean>
+    <!-- 自定义参数绑定 -->
+    <!-- 算出每个controller方法的执行时间 -->
+    <!-- and !execution(* className.*(..) -->
+    <bean id="ControllerAOP" class="com.sttx.bookmanager.web.aop.ControllerAOP"></bean>
     <aop:config>
         <aop:aspect ref="ControllerAOP">
             <aop:pointcut expression="execution(* com.sttx.bookmanager.web.controller..*.*(..))"
@@ -51,55 +72,50 @@
         </aop:aspect>
     </aop:config>
 <!-- <aop:aspectj-autoproxy proxy-target-class="true"/>   -->
-	<!-- 校验错误信息配置文件 -->
+    <!-- 校验错误信息配置文件 -->
 
-	<!-- 全局异常处理器,只要实现HandlerExceptionResolver接口就是全局异常处理器 -->
+    <!-- 全局异常处理器,只要实现HandlerExceptionResolver接口就是全局异常处理器 -->
 
 
-	<!--配置前端控制器的url-parttern中指定/，对静态资源的解析出现问题：静态资源解析 -->
-	<mvc:resources location="/js/" mapping="/js/**" />
-	<mvc:resources location="/css/" mapping="/css/**" />
-	<mvc:resources location="/img/" mapping="/img/**" />
-	<mvc:resources location="/images/" mapping="/images/**" />
-	<mvc:resources location="/error/" mapping="/error/**" />
-	<mvc:resources location="/" mapping="*.html" />
+    <!--配置前端控制器的url-parttern中指定/，对静态资源的解析出现问题：静态资源解析 -->
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <mvc:resources location="/img/" mapping="/img/**" />
+    <mvc:resources location="/images/" mapping="/images/**" />
+    <mvc:resources location="/error/" mapping="/error/**" />
+    <mvc:resources location="/" mapping="*.html" />
 
-	<!-- 文件上传 -->
-	<!-- <bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="defaultEncoding" value="UTF-8" />
-		<property name="maxUploadSize" value="102400000" />
-		resolveLazily属性启用是为了推迟文件解析，以便在UploadController 中捕获文件大小异常
-		<property name="resolveLazily" value="true" />
-	</bean> -->
+    <!-- 文件上传 -->
+    <!-- <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="maxUploadSize" value="102400000" />
+        resolveLazily属性启用是为了推迟文件解析，以便在UploadController 中捕获文件大小异常
+        <property name="resolveLazily" value="true" />
+    </bean> -->
 
-	<!-- 拦截器 -->
-	<mvc:interceptors>
-		<!--多个拦截器,顺序执行 -->
-		<!-- 登陆认证拦截器 -->
-		<!-- /**表示所有url包括子url路径 -->
-		<mvc:interceptor>
-			<mvc:mapping path="/book/**" />
-			<mvc:mapping path="/ebook/**" />
-			<mvc:mapping path="/**/admin/**" />
-			<mvc:mapping path="/order/**" />
-			<bean class="com.sttx.bookmanager.web.intercepter.UserLoginIntercepter"></bean>
-		</mvc:interceptor>
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!--多个拦截器,顺序执行 -->
+        <!-- 登陆认证拦截器 -->
+        <!-- /**表示所有url包括子url路径 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/book/**" />
+            <mvc:mapping path="/ebook/**" />
+            <mvc:mapping path="/**/admin/**" />
+            <mvc:mapping path="/order/**" />
+            <bean class="com.sttx.bookmanager.web.intercepter.UserLoginIntercepter"></bean>
+        </mvc:interceptor>
         <!-- <mvc:interceptor>
-			<mvc:mapping path="/book/**" />
-			<mvc:mapping path="/ebook/**" />
-			<mvc:mapping path="/util/**" />
-			<mvc:mapping path="/order/**" />
-			<mvc:mapping path="/view/**" />
-			<mvc:mapping path="/user/**" />
-			<mvc:mapping path="/" />
-			<mvc:mapping path="/indexHomeForIp" />
+            <mvc:mapping path="/book/**" />
+            <mvc:mapping path="/ebook/**" />
+            <mvc:mapping path="/util/**" />
+            <mvc:mapping path="/order/**" />
+            <mvc:mapping path="/view/**" />
+            <mvc:mapping path="/user/**" />
+            <mvc:mapping path="/" />
+            <mvc:mapping path="/indexHomeForIp" />
             <bean class="com.sttx.bookmanager.web.intercepter.UserIPIntercepter"></bean>
         </mvc:interceptor> -->
-	</mvc:interceptors>
+    </mvc:interceptors>
 </beans>
-
-
-
-
-
