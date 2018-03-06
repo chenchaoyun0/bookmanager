@@ -117,7 +117,6 @@ public class LogServiceImpl implements ILogService {
         AggregationResults<BasicDBObject> aggregateCount = mongoTemplate.aggregate(aggregationCount,BasicDBObject.class);
         
         int total = aggregateCount.getMappedResults().size();
-        
         TypedAggregation<TLog> aggregation = Aggregation.newAggregation(
                 TLog.class
                 ,Aggregation.group("userIp").sum("count").as("count")
@@ -204,7 +203,6 @@ public class LogServiceImpl implements ILogService {
         
         TypedAggregation<TLog> aggregationCount = Aggregation.newAggregation(
                 TLog.class
-                ,Aggregation.group("userIp").sum("count").as("count").first("userIp").as("userIp")
                 ,Aggregation.match(Criteria.where("userIp").is(userIp))
                 );
         AggregationResults<BasicDBObject> aggregateCount = mongoTemplate.aggregate(aggregationCount,BasicDBObject.class);
@@ -213,7 +211,7 @@ public class LogServiceImpl implements ILogService {
         
         TypedAggregation<TLog> aggregation = Aggregation.newAggregation(
                 TLog.class
-                ,Aggregation.group("userIp").sum("count").as("count")
+                ,Aggregation.group("logId").max("operTime").as("operTime").sum("count").as("count")
                 .first("logId").as("logId").first("userIp").as("userIp").first("userName").as("userName")
                 .first("userNickName").as("userNickName").first("userAddress").as("userAddress")
                 .first("userJwd").as("userJwd").first("module").as("module").first("action")

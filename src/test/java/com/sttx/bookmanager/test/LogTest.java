@@ -60,13 +60,18 @@ public class LogTest {
     @Test
     public void testSelectLogPagesByMongo() {
         TLog tLog = new TLog();
-        PagedResult<TLog> pagedResult = logService.selectLogPagesByMongo(tLog, 2, 8);
+        PagedResult<TLog> pagedResult = logService.selectLogPagesByMongo(tLog, 1, 8);
         logger.info("+++++:{}", JSONObject.toJSON(pagedResult));
     }
     @Test
     public void testSelectLogSumCount() {
         Long selectLogSumCount = logService.selectLogSumCount();
         logger.info("+++++:{}", JSONObject.toJSON(selectLogSumCount));
+    }
+    @Test
+    public void testSelectLogByIp() {
+        PagedResult<TLog> pagedResult = logService.selectLogPagesForIp("127.0.0.1", null, null);
+        logger.info("+++++:{}", JSONObject.toJSON(pagedResult));
     }
     
 }
