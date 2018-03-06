@@ -1,10 +1,13 @@
 package com.sttx.bookmanager.util.threadpool;
 
 import org.apache.commons.pool.impl.GenericObjectPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sttx.bookmanager.util.http.HttpPostUtil;
 
 public class SendPostThread extends Thread {
+    private static final Logger log = LoggerFactory.getLogger(SendPostThread.class);
 
     private boolean isRunning;
     private GenericObjectPool pool;
@@ -29,7 +32,7 @@ public class SendPostThread extends Thread {
     }
 
     public void destroy() {
-        System.out.println("destroy中");
+        log.info(">>>>>>>>>>>>>>>>destroy中");
         this.interrupt();
     }
 
@@ -38,17 +41,17 @@ public class SendPostThread extends Thread {
             if (!isRunning) {
                 this.wait();
             } else {
-                System.out.println(this.getName() + "开始处理");
-                HttpPostUtil u = new HttpPostUtil("http://39.108.0.229/");
+                log.info(">>>>>>>>>>>>>>>>" + this.getName() + "开始处理");
+                HttpPostUtil u = new HttpPostUtil("http://39.108.0.229:9090/bookmanager/indexHome");
                 byte[] b = u.send();
                 String result = new String(b);
-                System.out.println("result:{}" + result.length());
-                System.out.println(this.getName() + "结束处理");
+                log.info(">>>>>>>>>>>>>>>>result:{}" + result.length());
+                log.info(">>>>>>>>>>>>>>>>" + this.getName() + "结束处理");
                 setIsRunning(false);
                 pool.returnObject(this);
             }
         } catch (Exception e) {
-            System.out.println("我被Interrupted了，所以此线程将被关闭");
+            log.info(">>>>>>>>>>>>>>>>我被Interrupted了，所以此线程将被关闭");
             e.printStackTrace();
         }
     }

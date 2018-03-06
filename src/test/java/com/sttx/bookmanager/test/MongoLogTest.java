@@ -1,7 +1,9 @@
 package com.sttx.bookmanager.test;
 
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,20 +17,16 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationExpression;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperationContext;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
 import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import com.alibaba.fastjson.JSONObject;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.WriteResult;
 import com.sttx.bookmanager.po.TLog;
-import com.sttx.bookmanager.po.TLogKey;
 import com.sttx.bookmanager.service.IBaseMongoRepository;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.pages.PagedResult;
@@ -159,19 +157,19 @@ public class MongoLogTest {
     }
     @Test
     public void testBatch() {
-//        TLog tLog = new TLog();
-//        int pageNo=1;
-//        int pageSize=8;
-//        PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
-//        logger.info(">>>>>>>>>page :{}",JSONObject.toJSON(pages));
-//        long total = pages.getTotal();
-//        logger.info(">>>>>>>>>page.getTotal :{}",JSONObject.toJSON(total));
-//        PagedResult<TLog> pageAll = logService.selectLogPages(tLog, pageNo, Integer.parseInt(total+""));
-//        List<TLog> dataList = pageAll.getDataList();
-//        for (TLog tLog2 : dataList) {
-//            logger.info(">>>>>>>>>tLog2 :{}",JSONObject.toJSON(tLog2));
-//            mongoTemplate.save(tLog2);
-//        }
+        TLog tLog = new TLog();
+        int pageNo = 1;
+        int pageSize = 8;
+        PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
+        logger.info(">>>>>>>>>page :{}", JSONObject.toJSON(pages));
+        long total = pages.getTotal();
+        logger.info(">>>>>>>>>page.getTotal :{}", JSONObject.toJSON(total));
+        PagedResult<TLog> pageAll = logService.selectLogPages(tLog, pageNo, Integer.parseInt(total + ""));
+        List<TLog> dataList = pageAll.getDataList();
+        for (TLog tLog2 : dataList) {
+            logger.info(">>>>>>>>>tLog2 :{}", JSONObject.toJSON(tLog2));
+            mongoTemplate.save(tLog2);
+        }
     }
 
 }
