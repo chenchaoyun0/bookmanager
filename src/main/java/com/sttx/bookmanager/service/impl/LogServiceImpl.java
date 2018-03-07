@@ -2,13 +2,13 @@ package com.sttx.bookmanager.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -16,10 +16,9 @@ import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-import com.alibaba.fastjson.JSONObject;
+
 import com.github.pagehelper.PageHelper;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import com.sttx.bookmanager.dao.TLogMapper;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.IBaseMongoRepository;
@@ -119,13 +118,13 @@ public class LogServiceImpl implements ILogService {
         int total = aggregateCount.getMappedResults().size();
         TypedAggregation<TLog> aggregation = Aggregation.newAggregation(
                 TLog.class
+                , Aggregation.sort(Sort.Direction.DESC, "operTime")
                 ,Aggregation.group("userIp").sum("count").as("count")
                 .first("logId").as("logId").first("userIp").as("userIp").first("userName").as("userName")
                 .first("userNickName").as("userNickName").first("userAddress").as("userAddress")
                 .first("userJwd").as("userJwd").first("module").as("module").first("action")
                 .as("action").first("actionTime").as("actionTime").first("operTime").as("operTime")
                  //,Aggregation.match(Criteria.where("totalNum").gte(85))
-                 ,Aggregation.sort(Sort.Direction.DESC, "operTime")
                  ,Aggregation.skip(Long.parseLong((pageNo>1?(pageNo-1)*pageSize:0)+""))
                  ,Aggregation.limit(pageSize)
              );

@@ -1,5 +1,6 @@
 package com.sttx.bookmanager.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,11 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -46,37 +43,23 @@ public class MongoLogTest {
     
     @Test
     public void testSelectLogPages() {
-        Criteria criteria = new Criteria();
-        //criteria.and("logId").is("07F963B6B34D45B499BCD242CF369418");
-        Order order=new Order(Direction.DESC, "operTime");
-        Query query = Query.query(criteria);
-        
-        PagedResult<TLog> pageable = new PagedResult<TLog>();
-        // 自己计算..
-        // int pagenumber=(start/iDisplayLength)+1;
-        // 开始页
-        pageable.setPageNo(1);
-        // 每页条数
-        pageable.setPageSize(10);
-        
         ProjectionOperation project = Aggregation.project("logId","userIp","userName","userNickName","userAddress","userJwd","module","action","actionTime","operTime","count");
         TypedAggregation<TLog> aggregation = Aggregation.newAggregation(
                TLog.class
+                , Aggregation.sort(Sort.Direction.DESC, "operTime")
                ,Aggregation.group("userIp").sum("count").as("count")
                .first("logId").as("logId").first("userIp").as("userIp").first("userName").as("userName")
                .first("userNickName").as("userNickName").first("userAddress").as("userAddress")
                .first("userJwd").as("userJwd").first("module").as("module").first("action")
                .as("action").first("actionTime").as("actionTime").first("operTime").as("operTime")
-                //,Aggregation.match(Criteria.where("totalNum").gte(85))
-                ,Aggregation.sort(Sort.Direction.DESC, "operTime")
+                , Aggregation.match(Criteria.where("userIp").is("127.0.0.1"))
                 ,Aggregation.skip(0l)
-                ,Aggregation.limit(20l)
+                , Aggregation.limit(2l)
             );
         
         AggregationResults<BasicDBObject> aggregate = mongoTemplate.aggregate(aggregation,BasicDBObject.class);
-        
+        List<TLog> logList = new ArrayList<>();
         for (BasicDBObject basicDBObject : aggregate) {
-            String json = basicDBObject.toJson();
             String action = basicDBObject.getString("action");
             long actionTime = basicDBObject.getLong("actionTime");
             long count = basicDBObject.getLong("count");
@@ -88,34 +71,13 @@ public class MongoLogTest {
             String userJwd = basicDBObject.getString("userJwd");
             String userName = basicDBObject.getString("userName");
             String userNickName = basicDBObject.getString("userNickName");
-            
             TLog tLog = new TLog(userName, userNickName, userAddress, userJwd, module, action, actionTime, operTime, count);
             tLog.setLogId(logId);
             tLog.setUserIp(userIp);
-            
-            System.out.println(JSONObject.toJSONString(tLog));
+            logList.add(tLog);
         }
-        
-        List<TLog> list = mongoTemplate.find(query.with(pageable), TLog.class);
-        
-        long count = mongoTemplate.count(query, TLog.class);
-        
-        Page<TLog> pagelist = new PageImpl<TLog>(list, pageable, count);
-        int numberOfElements = pagelist.getNumberOfElements();//当前页条数
-        int number = pagelist.getNumber();//页码
-        int size = pagelist.getSize();//分页要求条数
-        long totalElements = pagelist.getTotalElements();//总记录数
-        int totalPages = pagelist.getTotalPages();//总页数
-        //
-        pageable.setDataList(pagelist.getContent());
-        pageable.setPageNo(number);
-        pageable.setPageSize(numberOfElements);
-        pageable.setTotal(totalElements);
-        pageable.setPages(totalPages);
-        
-        logger.info(">>>>>>>>>pagedResult :{}",JSONObject.toJSON(pageable));
-        long total = pageable.getTotal();
-      logger.info(">>>>>>>>>page.getTotal :{}",JSONObject.toJSON(total));
+        System.err.println(JSONObject.toJSONString(logList));
+
     }
     @Test
     public void testSelectOne() {
