@@ -248,7 +248,7 @@
             action_Time,
             user_Ip,
             MAX(oper_Time) oper_Time,
-            SUM(count)
+            SUM(count) as count
         FROM
             t_log 
         GROUP BY user_Ip
