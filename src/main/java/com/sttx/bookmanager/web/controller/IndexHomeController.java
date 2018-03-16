@@ -54,7 +54,7 @@ public class IndexHomeController {
         log.info(">>>>>>>>>realPath:{}",realPath);
         // return "forward:/book/selectBookPages";
         TLog tLog = new TLog();
-        PagedResult<TLog> pages = logService.selectLogPagesByMongo(tLog, pageNo, pageSize);
+        PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
         Long totalcount = logService.selectLogSumCount();
         String url = request.getRequestURI();
         pages.setUrl(url);
@@ -88,7 +88,7 @@ public class IndexHomeController {
     public String indexHomeForIp(String userIp, Model model, HttpServletRequest request, ModelAndView modelAndView,
             Integer pageNo, Integer pageSize) {
         //        return "forward:/book/selectBookPages";
-        PagedResult<TLog> pages = logService.selectLogPagesForIpByMongo(userIp, pageNo, pageSize);
+        PagedResult<TLog> pages = logService.selectLogPagesForIp(userIp, pageNo, pageSize);
         Long totalcount = logService.selectLogSumCount();
         String url = request.getRequestURI();
         pages.setStrWhere("userIp=" + userIp);
