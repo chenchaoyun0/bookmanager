@@ -119,7 +119,7 @@ public class LogServiceImpl implements ILogService {
         TypedAggregation<TLog> aggregation = Aggregation.newAggregation(
                 TLog.class
                 , Aggregation.sort(Sort.Direction.DESC, "operTime")
-                ,Aggregation.group("userIp").sum("count").as("count")
+                ,Aggregation.group("userIp").max("operTime").as("operTime").sum("count").as("count")
                 .first("logId").as("logId").first("userIp").as("userIp").first("userName").as("userName")
                 .first("userNickName").as("userNickName").first("userAddress").as("userAddress")
                 .first("userJwd").as("userJwd").first("module").as("module").first("action")
