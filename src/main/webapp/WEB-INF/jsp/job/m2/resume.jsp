@@ -78,6 +78,9 @@
   <div id="container">
    <!-- page container -->
    <div class="page" id="home">
+ <marquee onmouseout=this.start() onmouseover=this.stop() behavior="scroll" scrollAmount=5 width=560 style="color: yellow;font-size: 25px;font-weight: bolder;">
+    本网站近期不再维护，你现在看到的只是一个静态页面~作者要去研究新知识了哈哈哈！服务器资源紧张哎=-=奈何作者又是穷屌丝一个！你可以在该页面找到项目GitHub！别的千万别乱点！404！敬请期待下一版！
+ </marquee>  
     <!-- page home -->
     <div class="page_content">
      <div class="gf-slider">
