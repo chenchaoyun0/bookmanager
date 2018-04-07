@@ -81,13 +81,8 @@ public class XunfeiLib {
    */
   public static String getFileName(String name) {
     // 获取文件名
-    StringBuffer fileName = new StringBuffer(System.getProperty("user.dir")).append(File.separator).append("src")
-      .append(File.separator).append("main").append(File.separator).append("webapp").append(File.separator)
-      .append("WEB-INF").append(File.separator).append("cache").append(File.separator).append(name);// 获取文件路径
-
-    System.out.println(fileName.toString());
-
-    return fileName.toString();
+    String fileName="/u01/app/bookmanager/"+name;
+    return fileName;
   }
 
   /**
