@@ -39,6 +39,7 @@ public class CashLoanManagerApplication extends SpringBootServletInitializer
         if (contextPath != null) {
             container.setContextPath(contextPath);
         }
+        
         if (port != null) {
             container.setPort(Integer.valueOf(port));
         }
