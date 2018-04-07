@@ -70,6 +70,9 @@
      class="active" target="_bank">项目首页</a></li>
     <li><a href="https://github.com/chenchaoyun0/bookmanager"
      class="active" target="_bank">项目gitHub</a></li>
+     <li>
+      <object height="100" width="100" data="${pageContext.request.contextPath}/music/jj-qt.mp3"></object>
+     </li>
      <!--
     <li><a href="${pageContext.request.contextPath}/downloadResumeDocx"
      class="active" target="_bank">简历下载</a></li>  -->

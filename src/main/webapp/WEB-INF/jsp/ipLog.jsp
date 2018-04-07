@@ -16,6 +16,7 @@
                 <a href="<c:url value='/book/selectBookPages'/>"><img src="<c:url value='img/myheader.jpeg'/>" style="width: 180px;height: 100px;" alt="数通图书"/>
                 </a>
             <i style="color: yellow;font-style:normal;">点他头像查看主页  by 陈超允</i>
+            <object height="100" width="100" data="${pageContext.request.contextPath}/music/jj-qt.mp3"></object>
             </div>
         <div align="center" style="margin-top:10px">
 <p style="color: yellow;font-weight: bolder;font-size: 20px">当前总访问人数：${pages.total}人，总访问量：${totalcount}次</p>
