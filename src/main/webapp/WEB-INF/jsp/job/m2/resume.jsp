@@ -185,7 +185,7 @@
        <b>博客:&nbsp;&nbsp;<a style="color: lime;" href="http://blog.csdn.net/sinat_22767969" target="_bank">http://blog.csdn.net/sinat_22767969</a></b>
       </p>
       <p>
-       <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a></b>
+       <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://www.aiterccy.cn/gerrit" target="_bank">http://www.aiterccy.cn/gerrit</a></b>
       </p>
       <p>
        <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
@@ -197,7 +197,7 @@
        <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
       </p>
       <p>
-       <b>图书管理系统:&nbsp;&nbsp;<a style="color: lime;" href="${pageContext.request.contextPath}/indexHome" target="_bank">http://39.108.0.229/bookmanager/indexHome</a></b>
+       <b>图书管理系统:&nbsp;&nbsp;<a style="color: lime;" href="${pageContext.request.contextPath}/indexHome" target="_bank">http://www.aiterccy.cn/bookmanager/indexHome</a></b>
       </p>
       <p>
        <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
@@ -440,9 +440,9 @@
    <div class="footer">
     <p>&copy; 2017 .chenchaoyun0.</p>
     <p>
-     More Templates <a href="http://39.108.0.229/" target="_blank"
+     More Templates <a href="http://www.aiterccy.cn/" target="_blank"
       title="网站主页">陈超允-网站主页</a> - Collect from <a
-      href="http://39.108.0.229/" title="网站主页" target="_blank">网站主页</a>
+      href="http://www.aiterccy.cn/" title="网站主页" target="_blank">网站主页</a>
     </p>
    </div>
   </div>
