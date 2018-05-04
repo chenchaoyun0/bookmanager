@@ -29,10 +29,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.iflytek.cloud.speech.SpeechConstant;
-import com.iflytek.cloud.speech.SpeechSynthesizer;
-import com.iflytek.cloud.speech.SpeechUtility;
-import com.iflytek.cloud.speech.SynthesizeToUriListener;
 import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.po.User;
@@ -174,54 +170,54 @@ public class IndexHomeController {
         model.addAttribute("book", book);
         return "testImg";
     }
-    @RequestMapping("/ttsData/{data}")
-    public void ttsData(HttpServletRequest request,@PathVariable("data")String data,HttpServletResponse response) throws Exception {
-      request.setCharacterEncoding("UTF-8");//解决乱码
-
-      //换成你在讯飞申请的APPID
-      SpeechUtility.createUtility("appid=5ac38223");
-
-      //合成监听器
-      SynthesizeToUriListener synthesizeToUriListener = XunfeiLib.getSynthesize();
-
-      String fileName=XunfeiLib.getFileName("tts_test.pcm");
-      XunfeiLib.delDone(fileName);
-
-      //1.创建SpeechSynthesizer对象
-      SpeechSynthesizer mTts= SpeechSynthesizer.createSynthesizer( );
-      //2.合成参数设置，详见《MSC Reference Manual》SpeechSynthesizer 类
-      mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoyan");//设置发音人
-      mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速，范围0~100
-      mTts.setParameter(SpeechConstant.PITCH, "50");//设置语调，范围0~100
-      mTts.setParameter(SpeechConstant.VOLUME, "50");//设置音量，范围0~100
-
-      //3.开始合成
-      //设置合成音频保存位置（可自定义保存位置），默认保存在“./tts_test.pcm”
-      mTts.synthesizeToUri(data,fileName ,synthesizeToUriListener);
-
-      //设置最长时间
-      int timeOut=30;
-      int star=0;
-
-      //校验文件是否生成
-      while(!XunfeiLib.checkDone(fileName)){
-
-          try {           
-              Thread.sleep(1000);
-              star++;             
-              if(star>timeOut){
-                  throw new Exception("合成超过"+timeOut+"秒！");
-              }
-          } catch (Exception e) {
-              // TODO 自动生成的 catch 块
-              e.printStackTrace();
-              break;
-          } 
-
-      }
-
-      this.sayPlay(fileName, request, response);
-    }
+//    @RequestMapping("/ttsData/{data}")
+//    public void ttsData(HttpServletRequest request,@PathVariable("data")String data,HttpServletResponse response) throws Exception {
+//      request.setCharacterEncoding("UTF-8");//解决乱码
+//
+//      //换成你在讯飞申请的APPID
+//      SpeechUtility.createUtility("appid=5ac38223");
+//
+//      //合成监听器
+//      SynthesizeToUriListener synthesizeToUriListener = XunfeiLib.getSynthesize();
+//
+//      String fileName=XunfeiLib.getFileName("tts_test.pcm");
+//      XunfeiLib.delDone(fileName);
+//
+//      //1.创建SpeechSynthesizer对象
+//      SpeechSynthesizer mTts= SpeechSynthesizer.createSynthesizer( );
+//      //2.合成参数设置，详见《MSC Reference Manual》SpeechSynthesizer 类
+//      mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoyan");//设置发音人
+//      mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速，范围0~100
+//      mTts.setParameter(SpeechConstant.PITCH, "50");//设置语调，范围0~100
+//      mTts.setParameter(SpeechConstant.VOLUME, "50");//设置音量，范围0~100
+//
+//      //3.开始合成
+//      //设置合成音频保存位置（可自定义保存位置），默认保存在“./tts_test.pcm”
+//      mTts.synthesizeToUri(data,fileName ,synthesizeToUriListener);
+//
+//      //设置最长时间
+//      int timeOut=30;
+//      int star=0;
+//
+//      //校验文件是否生成
+//      while(!XunfeiLib.checkDone(fileName)){
+//
+//          try {           
+//              Thread.sleep(1000);
+//              star++;             
+//              if(star>timeOut){
+//                  throw new Exception("合成超过"+timeOut+"秒！");
+//              }
+//          } catch (Exception e) {
+//              // TODO 自动生成的 catch 块
+//              e.printStackTrace();
+//              break;
+//          } 
+//
+//      }
+//
+//      this.sayPlay(fileName, request, response);
+//    }
     
     /**
      * 将音频内容输出到请求中
