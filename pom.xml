@@ -58,6 +58,7 @@
         <jboss.netty.version>3.2.4.Final</jboss.netty.version>
         <cglib.version>3.2.2</cglib.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <c3p0.version>0.9.5-pre2</c3p0.version>
     </properties>
     <dependencies>
         <!-- 添加Spring依赖 -->
@@ -121,7 +122,11 @@
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>commons-dbutils</groupId>
+            <artifactId>commons-dbutils</artifactId>
+            <version>1.5</version>
+        </dependency>
         <!-- mybatis/spring包 -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -147,7 +152,11 @@
             <artifactId>pagehelper</artifactId>
             <version>${github.pagehelper.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>${c3p0.version}</version>
+        </dependency>
         <!-- 添加json的依赖包 -->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
@@ -396,16 +405,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.xunfei</groupId>
-            <artifactId>Msc</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.json</groupId>
-            <artifactId>jena</artifactId>
-            <version>1.0</version>
         </dependency>
         <!-- cas -->
         <!-- <dependency> <groupId>org.jasig.cas.client</groupId> <artifactId>cas-client-core</artifactId> 

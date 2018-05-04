@@ -241,7 +241,6 @@ public class EBookController {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
         InputStream bis = null;
-        BufferedOutputStream bos = null;
         String realPath = NfsFileUtils.getNfsUrl();
         try {
             String nfsFileName = realPath + ebookPath;
@@ -255,8 +254,6 @@ public class EBookController {
         } finally {
             if (bis != null)
                 bis.close();
-            if (bos != null)
-                bos.close();
             int i = eBookService.updateDownloadCount(eBook.getEbookId());// 更新下载量
             System.out.println(i);
         }

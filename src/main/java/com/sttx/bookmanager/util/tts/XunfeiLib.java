@@ -1,12 +1,9 @@
 package com.sttx.bookmanager.util.tts;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.iflytek.cloud.speech.SpeechError;
-import com.iflytek.cloud.speech.SynthesizeToUriListener;
 
 
 public class XunfeiLib {
@@ -50,31 +47,6 @@ public class XunfeiLib {
    * 
    * @return
    */
-  public static SynthesizeToUriListener getSynthesize() {
-    return new SynthesizeToUriListener() {
-      // progress为合成进度0~100
-      public void onBufferProgress(int progress) {
-        System.out.println("当前进度：" + progress + "%");
-      }
-
-      // 会话合成完成回调接口
-      // uri为合成保存地址，error为错误信息，为null时表示合成会话成功
-      public void onSynthesizeCompleted(String uri, SpeechError error) {
-        if (error != null) {
-          error.printStackTrace();
-        } else {
-          System.out.println("生成文件" + uri);
-          // 将生成的文件保存到队列中
-          XunfeiLib.setVioce(uri, true);
-        }
-      }
-
-      public void onEvent(int arg0, int arg1, int arg2, int arg3, Object arg4, Object arg5) {
-        // TODO 自动生成的方法存根
-
-      }
-    };
-  }
 
   /**
    * 获取文件名
