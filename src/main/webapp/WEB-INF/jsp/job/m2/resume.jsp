@@ -188,22 +188,22 @@
        <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://39.107.126.75/gerrit" target="_bank">http://39.107.126.75/gerrit</a></b>
       </p>
       <p>
-       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
+       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://58.87.121.73:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
       </p>
       <p>
-       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
+       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://58.87.121.73:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
       </p>
       <p>
-       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://123.206.68.97:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
+       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://58.87.121.73:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
       </p>
       <p>
        <b>图书管理系统:&nbsp;&nbsp;<a style="color: lime;" href="${pageContext.request.contextPath}/indexHome" target="_bank">http://39.107.126.75/bookmanager/indexHome</a></b>
       </p>
       <p>
-       <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
+       <b>Zookeeper节点管理:&nbsp;&nbsp;<a style="color: lime;" href="http://39.105.33.58:8081/zkWeb" target="_bank">http://www.ccy123.cn/zkWeb/</a></b>
       </p>
       <p>
-       <b>Dubbo:&nbsp;&nbsp;<a style="color: lime;" href="http://118.89.222.115:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a></b>
+       <b>Dubbo:&nbsp;&nbsp;<a style="color: lime;" href="http://39.105.33.58:8081/dubbo-admin" target="_bank">http://www.ccy123.cn/dubbo-admin/</a></b>
       </p>
      </blockquote>
     </div>

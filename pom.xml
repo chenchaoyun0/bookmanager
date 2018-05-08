@@ -451,12 +451,12 @@
         <repository>
             <id>nexus-releases</id>
             <name>deployment</name>
-            <url>http://123.206.68.97:8080/nexus/content/repositories/releases/</url>
+            <url>http://58.87.121.73:8080/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>nexus-snapshots</id>
             <name>deployment</name>
-            <url>http://123.206.68.97:8080/nexus/content/repositories/snapshots/</url>
+            <url>http://58.87.121.73:8080/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
