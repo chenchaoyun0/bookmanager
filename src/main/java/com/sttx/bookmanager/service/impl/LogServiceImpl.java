@@ -160,7 +160,7 @@ public class LogServiceImpl implements ILogService {
     }
 
     @Override
-    public Long selectLogSumCount() {
+    public Long selectLogSumCountMongo() {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.group("$sum").sum("count").as("totalcount")
                 );
@@ -249,5 +249,15 @@ public class LogServiceImpl implements ILogService {
          pagedResult.setPages((total  +  pageSize  - 1) / pageSize);
         
         return pagedResult;
+    }
+
+    @Override
+    public Long selectLogSumCount() {
+      try {
+        return tLogMapper.selectLogSumCount();
+      } catch (Exception e) {
+        log.error("selectLogSumCount error,{}",e);
+        throw new RuntimeException(e);
+      }
     }
 }
