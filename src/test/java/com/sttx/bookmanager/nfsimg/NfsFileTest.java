@@ -59,7 +59,7 @@ public class NfsFileTest {
          * read
          */
         log.info("nfsUrl:{}", nfsUrl);
-        String nfsFileName = "nfs://39.108.0.229:/u01/upload/" + "userhead/chenchaoyun/userhead.jpg";
+        String nfsFileName = "nfs://39.107.126.75:/u01/upload/" + "userhead/chenchaoyun/userhead.jpg";
         byte[] bs = NfsFileUtils.readNfsFile2Byte(nfsFileName);
         log.info("bs length:{}", bs.length);
         String imageBase64Str = NfsFileUtils.getImageBase64Str(bs);
@@ -69,10 +69,10 @@ public class NfsFileTest {
     @Test
     public void writeImg() throws Exception {
         InputStream input = new FileInputStream(new File("H:\\ad.jpg"));
-        boolean b = NfsFileUtils.mkdirFile("nfs://39.108.0.229:/u01/upload/bookImg/chenchaoyun/2017-08-26/564810052569910/1/");
+        boolean b = NfsFileUtils.mkdirFile("nfs://39.107.126.75:/u01/upload/bookImg/chenchaoyun/2017-08-26/564810052569910/1/");
         log.info("b:{}", b);
         int i = NfsFileUtils.uploadFile(input, new XFileOutputStream(
-                "nfs://39.108.0.229:/u01/upload/bookImg/chenchaoyun/2017-08-26/564810052569910/1/564810052569910-defaultBookImg--1.jpg"));
+                "nfs://39.107.126.75:/u01/upload/bookImg/chenchaoyun/2017-08-26/564810052569910/1/564810052569910-defaultBookImg--1.jpg"));
         log.info("i:{}", i);
     }
 

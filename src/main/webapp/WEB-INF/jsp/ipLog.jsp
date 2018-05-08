@@ -21,7 +21,7 @@
         <div align="center" style="margin-top:10px">
 <p style="color: yellow;font-weight: bolder;font-size: 20px">当前总访问人数：${pages.total}人，总访问量：${totalcount}次</p>
 <br/>
-<a style="color: lime;font-weight: bold;" href="http://39.108.0.229" target="_bank">点此查看他在线简历</a>
+<a style="color: lime;font-weight: bold;" href="http://39.107.126.75" target="_bank">点此查看他在线简历</a>
 <br/>
 <br/>
 </div>
@@ -90,7 +90,7 @@ if (dataName != null && dataName.length() > 0) {
     </div>
 	<div align="center" style="color: white;">
 	<br/>
-	Gerrit:<a style="color: lime;" href="http://39.108.0.229/gerrit" target="_bank">http://39.108.0.229/gerrit</a>，
+	Gerrit:<a style="color: lime;" href="http://39.107.126.75/gerrit" target="_bank">http://39.107.126.75/gerrit</a>，
 	Jenkins:<a style="color: lime;" href="http://123.206.68.97:8081" target="_bank">http://www.longge1987.cn/jenkins/</a>
 	，ActiveMQ:<a style="color: lime;" href="http://123.206.68.97:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
 	<br/>

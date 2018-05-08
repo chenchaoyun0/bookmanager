@@ -11,7 +11,7 @@ import com.mongodb.client.MongoDatabase;
 
 public class MongoConnTest {
      public static void main(String[] args) {
-         ServerAddress serverAddress = new ServerAddress("39.108.0.229",27017);
+         ServerAddress serverAddress = new ServerAddress("39.107.126.75",27017);
          List<ServerAddress> seeds = new ArrayList<ServerAddress>();
          seeds.add(serverAddress);
          MongoCredential credentials = MongoCredential.createScramSha1Credential("root", "bookmanager", "root123".toCharArray());

@@ -16,7 +16,7 @@ public class TestSendPost {
         Map<String, Object> msg=new HashMap<>();
         msg.put("loginName", "chenchaoyun");
         msg.put("userPwd", "111111");
-        String resp = UspHttpUtils.doPostJsonType("http://39.108.0.229/", msg, String.class);
+        String resp = UspHttpUtils.doPostJsonType("http://39.107.126.75/", msg, String.class);
         log.info("resp:{}", resp);
     }
 
@@ -28,13 +28,13 @@ public class TestSendPost {
         sb.append("&");
         sb.append("userPwd=");
         sb.append("111111");
-        String resp = UspHttpUtils.doPostStringType("http://39.108.0.229/user/userLoginSubmit.action", sb.toString());
+        String resp = UspHttpUtils.doPostStringType("http://39.107.126.75/user/userLoginSubmit.action", sb.toString());
         log.info("resp:{}", resp);
     }
 
     @Test
     public void test3() throws Exception {
-        HttpPostUtil u = new HttpPostUtil("http://39.108.0.229/");
+        HttpPostUtil u = new HttpPostUtil("http://39.107.126.75/");
         byte[] b = u.send();
         String result = new String(b);
         log.info("result:{}", result);
@@ -42,7 +42,7 @@ public class TestSendPost {
 
     @Test
     public void test4() throws Exception {
-        HttpPostUtil u = new HttpPostUtil("http://39.108.0.229/book/selectBookPages");
+        HttpPostUtil u = new HttpPostUtil("http://39.107.126.75/book/selectBookPages");
         byte[] b = u.send();
         String result = new String(b);
         log.info("result:{}", result);
