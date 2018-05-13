@@ -100,7 +100,6 @@
                 </div> -->
         </div>
 </div></div>
-<script src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 <script src="<c:url value='js/main.js'/>"></script>
 <script src="<c:url value='js/img-show.js'/>"></script>
 </body>

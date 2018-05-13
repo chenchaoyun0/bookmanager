@@ -39,7 +39,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/xcConfirm.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-
+<script src="<c:url value='js/jquery-1.11.1.min.js'/>"></script>
 
 /**********************************/
 function sou(){
