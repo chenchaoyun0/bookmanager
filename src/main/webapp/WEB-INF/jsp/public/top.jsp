@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="<c:url value='css/reset.css'/>" />
 <link rel="stylesheet" href="<c:url value='css/style.css'/>" />
 <script src="<c:url value='/js/main.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='/js/jquery-1.11.1.min.js'/>"></script>
+<%-- <script type="text/javascript" src="<c:url value='/js/jquery-1.11.1.min.js'/>"></script> --%>
 <style type="text/css">
     a{color: #fff;  font-size: 14px;}
     a:hover{color:orange;}
