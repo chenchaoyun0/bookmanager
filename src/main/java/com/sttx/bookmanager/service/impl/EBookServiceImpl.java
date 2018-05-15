@@ -39,6 +39,7 @@ public class EBookServiceImpl implements IEBookService {
         try {
             return eBookMapper.selectByPrimaryKey(ebookId);
         } catch (Exception e) {
+      log.error("selectByPrimaryKey error:{}", e);
             throw new UserException("查询失败");
         }
     }

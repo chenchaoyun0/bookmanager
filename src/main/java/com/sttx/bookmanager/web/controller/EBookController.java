@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.mongodb.gridfs.GridFSDBFile;
 import com.sttx.bookmanager.dictionary.ImgLinkType;
 import com.sttx.bookmanager.po.EBook;
 import com.sttx.bookmanager.po.GridfsImg;
@@ -200,27 +201,25 @@ public class EBookController {
 
         EBook eBook = eBookService.selectByPrimaryKey(ebookId);
         String ebookPath = eBook.getEbookPath();
-        String s1 = ebookPath.substring(ebookPath.lastIndexOf("/") + 1);
-        String fileName = s1.substring(s1.indexOf("-") + 1);
-        fileName = new String(fileName.getBytes("UTF-8"), "iso8859-1");
-        response.reset();// 去除空白行
-        response.setHeader("Content-Disposition", "attachment;filename=" + fileName);// 指定下载的文件名
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setDateHeader("Expires", 0);
-        InputStream bis = null;
         try {
       String idstr = StringUtils.substringAfterLast(ebookPath, "/");
-      bis = baseMongoRepository.getInputStreamById(new ObjectId(idstr));
+      GridFSDBFile gridFSDBFile = baseMongoRepository.getById(new ObjectId(idstr));
+      String fileName = gridFSDBFile.getFilename();
             ServletOutputStream outputStream = response.getOutputStream();
-            IOUtils.copy(bis, outputStream);
+      fileName = new String(fileName.getBytes("UTF-8"), "iso8859-1");
+      response.reset();// 去除空白行
+      response.setHeader("Content-Disposition", "attachment;filename=" + fileName);// 指定下载的文件名
+      response.setContentType("application/vnd.ms-excel");
+      response.setHeader("Pragma", "no-cache");
+      response.setHeader("Cache-Control", "no-cache");
+      response.setDateHeader("Expires", 0);
+      InputStream inputStream = gridFSDBFile.getInputStream();
+      IOUtils.copy(inputStream, outputStream);
         } catch (Exception e) {
+      log.error("下载异常:{}", e);
             request.setAttribute("msg", "要下载的文件不存在" + e.getMessage());
             return "forward:/error/msg.jsp";
         } finally {
-            if (bis != null)
-                bis.close();
             int i = eBookService.updateDownloadCount(eBook.getEbookId());// 更新下载量
             System.out.println(i);
         }
