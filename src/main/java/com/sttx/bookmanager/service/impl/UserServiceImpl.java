@@ -99,6 +99,13 @@ public class UserServiceImpl implements IUserService {
         PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
 
         List<User> list = userMapper.selectUserPages(user);
+
+        for (User user2 : list) {
+            String userHead = user2.getUserHead();
+            String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
+            user2.setUserHead(imageBase64Str);
+        }
+
         log.info("list:{}", JSONObject.toJSON(list.size()));
 
         PagedResult<User> bookPagedResult = BeanUtil.toPagedResult(list);
