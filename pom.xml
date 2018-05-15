@@ -406,6 +406,10 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
         <!-- cas -->
         <!-- <dependency> <groupId>org.jasig.cas.client</groupId> <artifactId>cas-client-core</artifactId> 
             <version>${cas-client-core.version}</version> </dependency> -->

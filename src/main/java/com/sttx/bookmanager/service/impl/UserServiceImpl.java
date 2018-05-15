@@ -101,9 +101,7 @@ public class UserServiceImpl implements IUserService {
         List<User> list = userMapper.selectUserPages(user);
 
         for (User user2 : list) {
-            String userHead = user2.getUserHead();
-            String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + userHead);
-            user2.setUserHead(imageBase64Str);
+            user2.setUserHead("http://39.107.126.75/gridfs/5afab0624dc1581a28fdd430");
         }
 
         log.info("list:{}", JSONObject.toJSON(list.size()));

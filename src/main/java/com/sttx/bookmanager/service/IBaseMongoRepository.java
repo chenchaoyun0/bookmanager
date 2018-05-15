@@ -1,9 +1,11 @@
 package com.sttx.bookmanager.service;
 
 import java.util.Collection;
-import java.util.Collections;
+
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.query.Query;
+
+import com.sttx.bookmanager.po.GridfsImg;
 import com.sttx.bookmanager.util.pages.PagedResult;
 
 public interface IBaseMongoRepository<T> {
@@ -21,4 +23,6 @@ public interface IBaseMongoRepository<T> {
     T updateOne(T t);
     
     long count(Query query, Class<T> clazz);
+    
+    String saveImg(GridfsImg gridfsImg);
 }

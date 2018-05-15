@@ -38,7 +38,6 @@ function setdata(req){
 	for (var i = 0; i < data.length; i++) {
 		html += "<tr>";	//注意，用map返回的话，字段名称与数据库的一样，用下划线方式
 		var str=data[i].userHead;
-		alert(str);
 		html += "<td>" +"<img style='height: 40px;width:40px;' src="+str+"/>" + "</td>";
 		html += "<td>" + data[i].loginName + "</td>";
 		html += "<td>" + data[i].realName + "</td>";
