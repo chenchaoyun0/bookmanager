@@ -14,7 +14,6 @@ import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.User;
 import com.sttx.bookmanager.service.IUserService;
 import com.sttx.bookmanager.util.exception.UserException;
-import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.BeanUtil;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.passwd.SHA;
@@ -99,10 +98,6 @@ public class UserServiceImpl implements IUserService {
         PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
 
         List<User> list = userMapper.selectUserPages(user);
-
-        for (User user2 : list) {
-            user2.setUserHead("http://39.107.126.75/gridfs/5afab0624dc1581a28fdd430");
-        }
 
         log.info("list:{}", JSONObject.toJSON(list.size()));
 

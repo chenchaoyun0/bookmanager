@@ -276,16 +276,7 @@
 	</resultMap>
 	<select id="selectEBookPages" resultMap="EBookUserResultMap"
 		parameterType="com.sttx.bookmanager.po.EBook">
-		SELECT e.*,u.login_Name
-		FROM t_ebook e,t_user u
-		WHERE e.user_Id=u.user_Id
-		<if test="eBook.userId!=null and eBook.userId!=''">
-			and u.user_Id=#{eBook.userId,jdbcType=VARCHAR}
-		</if>
-		<include refid="selectEBookListWhere"></include>
-		<if test="eBook.user.loginName!=null and eBook.user.loginName!=''">
-            and u.login_Name like '%${eBook.user.loginName}%'
-        </if>
-		ORDER BY ebook_Upload_Time DESC
+		SELECT *
+		FROM t_ebook
 	</select>
 </mapper>

@@ -1,6 +1,5 @@
 package com.sttx.bookmanager.web.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -8,11 +7,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +31,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.dictionary.ImgLinkType;
 import com.sttx.bookmanager.po.EBook;
+import com.sttx.bookmanager.po.GridfsImg;
 import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.po.User;
+import com.sttx.bookmanager.service.IBaseMongoRepository;
 import com.sttx.bookmanager.service.IEBookService;
 import com.sttx.bookmanager.service.IImgService;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.uuidno.UUID2NO;
-import com.sun.xfile.XFileOutputStream;
 
 import cn.itcast.commons.CommonUtils;
 
@@ -49,7 +52,8 @@ public class EBookController {
     @Autowired
     private IImgService imgService;
     private static final Logger log = LoggerFactory.getLogger(EBookController.class);
-
+    @Resource
+    private IBaseMongoRepository baseMongoRepository;
     @RequestMapping(value = "/uploadEBookInput", method = RequestMethod.GET)
     public String uploadEBookInput() {
         return "ebook/uploadEBook";
@@ -76,7 +80,7 @@ public class EBookController {
 
     @RequestMapping(value = "/uploadEBookSubmit", method = RequestMethod.POST)
     public String uploadEBookSubmit(@ModelAttribute("eBook") EBook eBook, Model model, HttpServletRequest request,
-            @RequestParam MultipartFile ebookFile, @RequestParam MultipartFile ebookImgFile) {
+            @RequestParam MultipartFile ebookFile, @RequestParam MultipartFile ebookImgFile) throws IOException {
         /* 验证码 */
         // ...方便测试暂时不做校验
         String sessionCode = (String) request.getSession().getAttribute("session_vcode");
@@ -96,33 +100,21 @@ public class EBookController {
         eBook.setEbookDownloadCount(0);
         eBook.setEbookFlag(1);
         // 文件
-        String realPath = NfsFileUtils.getNfsUrl();
         if (!ebookFile.isEmpty()) {
             String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "ebook.dbpathfile");
             String originalFilename = ebookFile.getOriginalFilename();
             String ebookType = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
             eBook.setEbookType(ebookType);
-            String ebookPath = outPath + user.getLoginName() + "/" + ebookType + "/"
-                    + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/" + eBook.getEbookNo() + "/"
-                    + eBook.getEbookNo() + "-" + originalFilename;
-            /* 数据库保存路径 */
-            log.info("ebookPath:{}", ebookPath);
-            String dbpathfile = ebookPath;
-            eBook.setEbookPath(dbpathfile);
+
+            GridfsImg gridfsImg = new GridfsImg();
+            gridfsImg.setIn(ebookFile.getInputStream());
+            gridfsImg.setAliases(eBook.getEbookId());
+            gridfsImg.setFileName(originalFilename);
+            //
+            String url = baseMongoRepository.saveImg(gridfsImg);
+
+            eBook.setEbookPath(url);
             eBook.setEbookSize(Integer.parseInt(ebookFile.getSize() + ""));
-            /* 保存到硬盘 */
-            String uploadPath = realPath + ebookPath;
-            log.info("uploadPath:{}", uploadPath);
-            try {
-                InputStream inputStream = ebookFile.getInputStream();
-                log.info("uploadPath:{}", uploadPath);
-                NfsFileUtils.mkdirFile(uploadPath);
-                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
-            } catch (Exception e) {
-                model.addAttribute("ebook", eBook);
-                model.addAttribute("errorMsg", "上传失败");
-                return "ebook/uploadEBook";
-            }
 
         } else {
             model.addAttribute("ebook", eBook);
@@ -147,24 +139,19 @@ public class EBookController {
             log.info("dbPathImg:{}", dbPathImg);
             eBook.setEbookImg(dbPathImg);
             /* 保存到硬盘 */
-            try {
-                /* 保存到硬盘 */
-                String uploadPath = realPath + ebookPath;
-                log.info("uploadPath:{}", uploadPath);
-                NfsFileUtils.mkdirFile(uploadPath);
-                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
-                tImg.setImgPath(dbPathImg);
-                tImg.setLastModifyTime(new Date());
-                tImg.setLastModifyUser(user.getLoginName());
-                tImg.setLinkId(eBookId);
-                tImg.setLinkType(ImgLinkType.EBookImg.getCode());
-                log.info("保存图片信息begin...tImg:{}", JSONObject.toJSON(tImg));
-                imgList.add(tImg);
-            } catch (IOException e) {
-                model.addAttribute("ebook", eBook);
-                model.addAttribute("errorMsg", "上传出错");
-                return "ebook/uploadEBook";
-            }
+            GridfsImg gridfsImg = new GridfsImg();
+            gridfsImg.setIn(inputStream);
+            gridfsImg.setAliases(tImg.getImgId());
+            gridfsImg.setFileName("defaultebookimg.jpg");
+            //
+            String url = baseMongoRepository.saveImg(gridfsImg);
+            tImg.setImgPath(url);
+            tImg.setLastModifyTime(new Date());
+            tImg.setLastModifyUser(user.getLoginName());
+            tImg.setLinkId(eBookId);
+            tImg.setLinkType(ImgLinkType.EBookImg.getCode());
+            log.info("保存图片信息begin...tImg:{}", JSONObject.toJSON(tImg));
+            imgList.add(tImg);
         } else {
             TImg tImg = new TImg();
             tImg.setCreateTime(new Date());
@@ -180,31 +167,13 @@ public class EBookController {
                 return "ebook/uploadEBook";
             }
 
-            String ebookPath = outPath + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
-                    + eBook.getEbookNo() + "/" + eBook.getEbookNo() + "-" + originalFilename;
-            /* 数据库保存路径 */
-            String dbPathImg = ebookPath;
-            log.info("dbPathImg:{}", dbPathImg);
-            eBook.setEbookImg(dbPathImg);
-            /* 保存到硬盘 */
-            try {
-                InputStream inputStream = ebookImgFile.getInputStream();
-                String uploadPath = realPath + ebookPath;
-                log.info("uploadPath:{}", uploadPath);
-                NfsFileUtils.mkdirFile(uploadPath);
-                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
-                tImg.setImgPath(dbPathImg);
-                tImg.setLastModifyTime(new Date());
-                tImg.setLastModifyUser(user.getLoginName());
-                tImg.setLinkId(eBookId);
-                tImg.setLinkType(ImgLinkType.EBookImg.getCode());
-                log.info("保存图片信息begin...tImg:{}", JSONObject.toJSON(tImg));
-                imgList.add(tImg);
-            } catch (IOException e) {
-                model.addAttribute("ebook", eBook);
-                model.addAttribute("errorMsg", "上传不行");
-                return "ebook/uploadEBook";
-            }
+            GridfsImg gridfsImg = new GridfsImg();
+            gridfsImg.setIn(ebookImgFile.getInputStream());
+            gridfsImg.setAliases(eBook.getEbookId());
+            gridfsImg.setFileName(originalFilename);
+            //
+            String url = baseMongoRepository.saveImg(gridfsImg);
+            eBook.setEbookImg(url);
 
         }
         /**
@@ -241,11 +210,9 @@ public class EBookController {
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
         InputStream bis = null;
-        String realPath = NfsFileUtils.getNfsUrl();
         try {
-            String nfsFileName = realPath + ebookPath;
-            log.info("nfsFileName:{}", nfsFileName);
-            bis = NfsFileUtils.readNfsFile2Stream(nfsFileName);
+      String idstr = StringUtils.substringAfterLast(ebookPath, "/");
+      bis = baseMongoRepository.getInputStreamById(new ObjectId(idstr));
             ServletOutputStream outputStream = response.getOutputStream();
             IOUtils.copy(bis, outputStream);
         } catch (Exception e) {
@@ -272,18 +239,11 @@ public class EBookController {
         }
 
         int i = eBookService.deleteByPrimaryKey(eBookId);
-        String realPath = NfsFileUtils.getNfsUrl();
         // 得到文件
         if (i > 0) {
-            String nfsFilePath = realPath + eBook.getEbookPath();
-            log.info("nfsFilePath:{}", nfsFilePath);
-            if (NfsFileUtils.existsNfsFile(nfsFilePath)) {
-                try {
-                    NfsFileUtils.deleteNfsFile(nfsFilePath);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+          String ebookPath = eBook.getEbookPath();
+          String idstr = StringUtils.substringAfterLast(ebookPath, "/");
+          baseMongoRepository.delFile(new ObjectId(idstr));
         }
 
         return "forward:/ebook/selectEBookPages";

@@ -16,7 +16,6 @@ import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.service.IEBookService;
 import com.sttx.bookmanager.service.IImgService;
 import com.sttx.bookmanager.util.exception.UserException;
-import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.BeanUtil;
 import com.sttx.bookmanager.util.pages.PagedResult;
 
@@ -60,8 +59,7 @@ public class EBookServiceImpl implements IEBookService {
             log.info("查询图书图片end...imgList:{}", JSONObject.toJSON(imgList));
             TImg tImg2 = imgList.get(0);
             String imgPath = tImg2.getImgPath();
-            String imageBase64Str = NfsFileUtils.getImageBase64Str(NfsFileUtils.getNfsUrl() + imgPath);
-            eBook2.setEbookImg(imageBase64Str);
+            eBook2.setEbookImg(imgPath);
             arrayList.add(eBook2);
         }
 

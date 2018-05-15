@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,8 +28,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.dictionary.ImgLinkType;
 import com.sttx.bookmanager.po.Book;
+import com.sttx.bookmanager.po.GridfsImg;
 import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.po.User;
+import com.sttx.bookmanager.service.IBaseMongoRepository;
 import com.sttx.bookmanager.service.IBookService;
 import com.sttx.bookmanager.service.IImgService;
 import com.sttx.bookmanager.util.exception.UserException;
@@ -36,7 +39,6 @@ import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.uuidno.UUID2NO;
-import com.sun.xfile.XFileOutputStream;
 
 import cn.itcast.commons.CommonUtils;
 
@@ -48,7 +50,8 @@ public class BookController {
     private IBookService bookService;
     @Autowired
     private IImgService imgService;
-
+    @Resource
+    private IBaseMongoRepository baseMongoRepository;
     @RequestMapping(value = "/uploadBookInput", method = { RequestMethod.GET, RequestMethod.POST })
     public String uploadBookInput() {
 
@@ -79,7 +82,6 @@ public class BookController {
         /**
          * 图片处理
          */
-        String realPath = NfsFileUtils.getNfsUrl();
         String bookPath = null;
         String dbPath = null;
         String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "bookImg.dbpath");
@@ -94,22 +96,15 @@ public class BookController {
                 tImg.setImgId(CommonUtils.uuid());
                 // 未选择图片择读取默认图片
                 InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("defaultBookImg.jpg");
-                // 读取配置文件，将文件上传至虚拟目录
-                // nfs://192.168.1.xxx:/u01/upload/
-                // 二级目录
-                bookPath = outPath + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
-                        + book.getBookNo() + "/" + book.getBookNo() + "-defaultBookImg" + i + ".jpg";
-                log.info("bookPath:{}", bookPath);
-                /* 数据库保存路径 */
-                dbPath = bookPath;
-                log.info("dbPath:{}", dbPath);
-                /* 保存到硬盘 */
-                String uploadPath = realPath + bookPath;
-                log.info("uploadPath:{}", uploadPath);
-                NfsFileUtils.mkdirFile(uploadPath);
-                NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
-                /* 将所有文件路径用，隔开保存 */
-                tImg.setImgPath(dbPath);
+                //
+                GridfsImg gridfsImg=new GridfsImg();
+                gridfsImg.setIn(inputStream);
+                gridfsImg.setAliases(tImg.getImgId());
+                gridfsImg.setFileName("defaultBookImg.jpg");
+                //
+                String url = baseMongoRepository.saveImg(gridfsImg);
+                String saveImg = baseMongoRepository.saveImg(gridfsImg);
+                tImg.setImgPath(saveImg);
                 tImg.setLastModifyTime(new Date());
                 tImg.setLastModifyUser(user.getLoginName());
                 tImg.setLinkId(bookId);
@@ -138,21 +133,15 @@ public class BookController {
                 tImg.setCreateTime(new Date());
                 tImg.setCreateUser(user.getLoginName());
                 tImg.setImgId(CommonUtils.uuid());
-                bookPath = outPath + user.getLoginName() + "/" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "/"
-                        + book.getBookNo() + "/" + book.getBookNo() + "-" + i
-                        + originalFilename.substring(originalFilename.lastIndexOf("."));
-                log.info("bookPath:{}", bookPath);
-                /* 数据库路径 */
-                dbPath = bookPath;
-                log.info("bookPath:{}", dbPath);
-
-                // 这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的
-                /* 保存到硬盘 */
-                String uploadPath = realPath + bookPath;
-                log.info("uploadPath:{}", uploadPath);
-                NfsFileUtils.mkdirFile(uploadPath);
-                NfsFileUtils.uploadFile(myfile.getInputStream(), new XFileOutputStream(uploadPath));
-                tImg.setImgPath(dbPath);
+                //
+                GridfsImg gridfsImg = new GridfsImg();
+                gridfsImg.setIn(myfile.getInputStream());
+                gridfsImg.setAliases(tImg.getImgId());
+                gridfsImg.setFileName(originalFilename);
+                //
+                String url = baseMongoRepository.saveImg(gridfsImg);
+                String saveImg = baseMongoRepository.saveImg(gridfsImg);
+                tImg.setImgPath(saveImg);
                 tImg.setLastModifyTime(new Date());
                 tImg.setLastModifyUser(user.getLoginName());
                 tImg.setLinkId(bookId);

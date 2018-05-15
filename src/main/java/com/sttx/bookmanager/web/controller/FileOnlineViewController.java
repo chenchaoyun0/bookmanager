@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,11 +19,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
 import org.apache.poi.hwpf.usermodel.Picture;
 import org.apache.poi.hwpf.usermodel.PictureType;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +38,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.w3c.dom.Document;
 
 import com.sttx.bookmanager.po.EBook;
+import com.sttx.bookmanager.service.IBaseMongoRepository;
 import com.sttx.bookmanager.service.IEBookService;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 
@@ -43,7 +47,8 @@ import com.sttx.bookmanager.util.file.NfsFileUtils;
 public class FileOnlineViewController {
     @Autowired
     private IEBookService eBookService;
-
+  @Resource
+  private IBaseMongoRepository baseMongoRepository;
     @RequestMapping("/pdfview/{ebookId}")
     public ModelAndView pdfView(@PathVariable("ebookId") String ebookId, Model model, HttpServletResponse response,
             HttpServletRequest request) throws UnsupportedEncodingException {
@@ -111,8 +116,8 @@ public class FileOnlineViewController {
             @RequestParam(value = "eBookFilePath", required = true) final String eBookFilePath,
             HttpServletResponse response) throws Exception {
         ModelAndView modelAndView = new ModelAndView("doc_view/docview");
-        String filePath = NfsFileUtils.getNfsUrl() + eBookFilePath;
-        InputStream input = NfsFileUtils.readNfsFile2Stream(filePath);
+    String idstr = StringUtils.substringAfterLast(eBookFilePath, "/");
+    InputStream input = baseMongoRepository.getInputStreamById(new ObjectId(idstr));
         //
         HWPFDocument wordDocument = new HWPFDocument(input);
         WordToHtmlConverter wordToHtmlConverter;

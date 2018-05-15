@@ -20,8 +20,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
 import com.sttx.bookmanager.po.GridfsImg;
 import com.sttx.bookmanager.service.IBaseMongoRepository;
@@ -141,6 +144,33 @@ public class BaseMongoRepositoryImpl<T> implements IBaseMongoRepository<T> {
       logger.error("saveImg error:{}", e);
     }
     return url;
+  }
+
+  @Override
+  public GridFSDBFile getById(Object id) {
+    DBObject query = new BasicDBObject("_id", id);
+    DB db = mongoTemplate.getDb();
+    // 存储fs的根节点
+    GridFS gridFS = new GridFS(db, "fs");
+    GridFSDBFile gridFSDBFile = gridFS.findOne(query);
+    return gridFSDBFile;
+  }
+
+  @Override
+  public InputStream getInputStreamById(Object id) {
+    GridFSDBFile gridFSDBFile = getById(id);
+    InputStream inputStream = gridFSDBFile.getInputStream();
+
+    return inputStream;
+  }
+
+  @Override
+  public void delFile(Object id) {
+    DBObject query = new BasicDBObject("_id", id);
+    DB db = mongoTemplate.getDb();
+    // 存储fs的根节点
+    GridFS gridFS = new GridFS(db, "fs");
+    gridFS.remove(query);
   }
 
 }

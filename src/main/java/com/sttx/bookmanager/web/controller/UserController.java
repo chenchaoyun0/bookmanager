@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.annotation.Resource;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -29,15 +30,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sttx.bookmanager.po.GridfsImg;
 import com.sttx.bookmanager.po.User;
+import com.sttx.bookmanager.service.IBaseMongoRepository;
 import com.sttx.bookmanager.service.IUserService;
 import com.sttx.bookmanager.util.exception.UserException;
-import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.passwd.SHA;
-import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.tel.TelUtil;
-import com.sun.xfile.XFileOutputStream;
 
 import cn.itcast.commons.CommonUtils;
 import cn.itcast.mail.Mail;
@@ -49,7 +49,8 @@ public class UserController {
   private static final Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private IUserService userService;
-
+    @Resource
+    private IBaseMongoRepository baseMongoRepository;
     @RequestMapping("/indexHome")
     public String indexHome() {
         return "indexHome";
@@ -124,21 +125,17 @@ public class UserController {
         }
         user.setUserPwd(SHA.getSHA256(user.getUserPwd()));
         user.setUserId(CommonUtils.uuid());
-        String realPath = NfsFileUtils.getNfsUrl();
         /*
          * 默认头像
          */
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("userhead.jpg");
-        String outPath = PropertiesUtil.getFilePath("uploadFilePath.properties", "userHead.dbpath");
-        // 从配置文件获取物理地址
-        String headPath = outPath + user.getLoginName() + "/userhead.jpg";
-        String dbPath = headPath;
-        /* 保存到硬盘 */
-        String uploadPath = realPath + headPath;
-        log.info("uploadPath:{}", uploadPath);
-        NfsFileUtils.mkdirFile(uploadPath);
-        NfsFileUtils.uploadFile(inputStream, new XFileOutputStream(uploadPath));
-        user.setUserHead(dbPath);
+        GridfsImg gridfsImg = new GridfsImg();
+        gridfsImg.setIn(inputStream);
+        gridfsImg.setAliases(user.getUserId());
+        gridfsImg.setFileName("userhead.jpg");
+        //
+        String url = baseMongoRepository.saveImg(gridfsImg);
+        user.setUserHead(url);
         user.setUserCode(CommonUtils.uuid() + CommonUtils.uuid());
         user.setUserStatus(0);
         user.setUserRegisttime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));

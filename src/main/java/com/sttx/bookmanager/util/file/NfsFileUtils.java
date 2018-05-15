@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.util.exception.UserException;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
@@ -324,10 +325,7 @@ public class NfsFileUtils {
         List<String> base64StrList = new ArrayList<>();
         for (TImg tImg : imgList) {
             String imgPath = tImg.getImgPath();
-            String nfsImgPath=nfsUrl+imgPath;
-            log.info("NFS服务器图片路径:{}", nfsImgPath);
-            String imageBase64Str = getImageBase64Str(nfsImgPath);
-            base64StrList.add(imageBase64Str);
+      base64StrList.add(imgPath);
         }
         return base64StrList;
     }

@@ -1,15 +1,14 @@
 package com.sttx.bookmanager.web.controller;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.po.User;
+import com.sttx.bookmanager.service.IBaseMongoRepository;
 import com.sttx.bookmanager.service.IBookService;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.service.IResumeService;
@@ -48,7 +49,8 @@ public class IndexHomeController {
     private ILogService logService;
     @Autowired
     private IResumeService resumeService;
-    
+  @Resource
+  private IBaseMongoRepository baseMongoRepository;
     @Autowired
     private IBookService bookService;
 
@@ -146,9 +148,8 @@ public class IndexHomeController {
         for (int i = 0; i < bookList.size(); i++) {
             Book b = bookList.get(i);
             String bookImg = b.getBookImg();
-            bookImg = StringUtils.remove(bookImg, NfsFileUtils.jspImgSrc);
-            byte[] byt = NfsFileUtils.base64Str2Byte(bookImg);
-            ByteArrayInputStream in = new ByteArrayInputStream(byt);
+      String idstr = StringUtils.substringAfterLast(bookImg, "/");
+      InputStream in = baseMongoRepository.getInputStreamById(new ObjectId(idstr));
             BufferedImage img = ImageIO.read(in);
             b.setBookImage(img);
         }
