@@ -51,9 +51,11 @@ public class BookServiceImpl implements IBookService {
         PageHelper.startPage(pageNo, pageSize);// 告诉插件开始分页
 
         List<Book> bookList = bookMapper.selectBookPages(book);
+        PagedResult<Book> bookPagedResult = BeanUtil.toPagedResult(bookList);
         log.info("bookList:{}", bookList.toString());
         List<Book> arrayList = new ArrayList<Book>();
-        for (Book book2 : bookList) {
+        List<Book> dataList = bookPagedResult.getDataList();
+        for (Book book2 : dataList) {
             TImg tImg = new TImg();
             tImg.setLinkId(book2.getBookId());
             log.info("查询图书图片begin...");
@@ -64,8 +66,7 @@ public class BookServiceImpl implements IBookService {
             book2.setBookImg(imgPath);
             arrayList.add(book2);
         }
-        PagedResult<Book> bookPagedResult = BeanUtil.toPagedResult(arrayList);
-
+        bookPagedResult.setDataList(arrayList);
         bookPagedResult.setPageNo(pageNo);
         bookPagedResult.setPageSize(pageSize);
 
