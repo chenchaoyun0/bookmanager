@@ -17,7 +17,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.dictionary.ImgLinkType;
 import com.sttx.bookmanager.po.TImg;
 import com.sttx.bookmanager.service.IImgService;
-import com.sttx.bookmanager.web.intercepter.UserIPIntercepter;
 
 import cn.itcast.commons.CommonUtils;
 

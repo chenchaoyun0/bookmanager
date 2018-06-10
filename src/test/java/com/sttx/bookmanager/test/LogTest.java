@@ -17,6 +17,7 @@ import com.sttx.bookmanager.po.Student;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.pages.PagedResult;
+import com.sttx.bookmanager.web.vo.TodayCountVo;
 
 @ContextConfiguration(locations = { "classpath:spring/applicationContext-dao.xml", "classpath:spring/applicationContext-service.xml",
     "classpath:spring/applicationContext-transation.xml" })
@@ -35,8 +36,8 @@ public class LogTest {
     Student student = new Student();
     student.setName("test");
     student.setScore(new BigDecimal("10.98"));
-    long insertPo = studentMapper.insertPo(student);
-    logger.info("insertPo:{}", JSONObject.toJSONString(insertPo));
+    int insertSelective = studentMapper.insertSelective(student);
+    logger.info("insertPo:{}", JSONObject.toJSONString(insertSelective));
     logger.info("student.getId:{}", JSONObject.toJSONString(student.getId()));
   }
 
@@ -92,6 +93,12 @@ public class LogTest {
   public void testSelectLogByIp() {
     PagedResult<TLog> pagedResult = logService.selectLogPagesForIp("127.0.0.1", null, null);
     logger.info("+++++:{}", JSONObject.toJSON(pagedResult));
+  }
+  
+  @Test
+  public void testTodayCount() {
+    TodayCountVo todayCount = logService.todayCount();
+    logger.info("+++++:{}", JSONObject.toJSON(todayCount));
   }
 
 }

@@ -2,6 +2,7 @@ package com.sttx.bookmanager.service;
 
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.util.pages.PagedResult;
+import com.sttx.bookmanager.web.vo.TodayCountVo;
 
 public interface ILogService {
     public int insertSelective(TLog tLog);
@@ -13,6 +14,8 @@ public interface ILogService {
     int updateByPrimaryKey(TLog record);
 
     Long selectLogSumCount();
+    
+    TodayCountVo todayCount();
 
     PagedResult<TLog> selectLogPages(TLog tLog, Integer pageNo, Integer pageSize);
 
