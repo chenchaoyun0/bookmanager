@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.objenesis.strategy.InstantiatorStrategy;
 
 /**
  * 小小工具

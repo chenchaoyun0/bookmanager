@@ -284,4 +284,22 @@
         useCache="false">
         select SUM(count) from t_log
     </select>
+    <!-- todayCount -->
+    <select id="todayCount" resultType="com.sttx.bookmanager.web.vo.TodayCountVo">
+        SELECT
+          count(*) as todayVisitorCount,
+          SUM(sc) as todayCount
+        FROM
+          (
+            SELECT
+              *, SUM(count) sc
+            FROM
+              t_log t
+            WHERE
+              t.oper_Time BETWEEN #{0}
+            AND #{1}
+            GROUP BY
+              t.user_Ip
+          ) b
+    </select>
 </mapper>

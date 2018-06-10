@@ -41,6 +41,7 @@ import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.tts.XunfeiLib;
+import com.sttx.bookmanager.web.vo.TodayCountVo;
 
 @Controller
 public class IndexHomeController {
@@ -62,10 +63,12 @@ public class IndexHomeController {
     TLog tLog = new TLog();
     PagedResult<TLog> pages = logService.selectLogPages(tLog, pageNo, pageSize);
     Long totalcount = logService.selectLogSumCount();
+    TodayCountVo todayCount = logService.todayCount();
     String url = request.getRequestURI();
     pages.setUrl(url);
     model.addAttribute("pages", pages);
     model.addAttribute("totalcount", totalcount);
+    model.addAttribute("todayCount", todayCount);
     log.info(">>>>>>>>>pages getTotal:{}", JSONObject.toJSON(pages.getTotal()));
     // return "redirect:job/m2/index.html";
     return "ipLog";

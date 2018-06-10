@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.po.TLogKey;
+import com.sttx.bookmanager.web.vo.TodayCountVo;
 
 public interface TLogMapper {
     int deleteByPrimaryKey(TLogKey key);
@@ -27,4 +28,6 @@ public interface TLogMapper {
     List<TLog> selectLogPages(@Param("tLog") TLog tLog);
 
     List<TLog> selectLogPagesForIp(@Param("userIp") String userIp);
+    
+    TodayCountVo todayCount(String todayBegin,String todayEnd);
 }
