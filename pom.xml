@@ -378,11 +378,11 @@
             <artifactId>yanfs</artifactId>
             <version>${sun.yanfs.version}</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs-nfs</artifactId>
             <version>2.4.0</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
