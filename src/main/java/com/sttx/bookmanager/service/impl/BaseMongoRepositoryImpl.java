@@ -139,6 +139,7 @@ public class BaseMongoRepositoryImpl<T> implements IBaseMongoRepository<T> {
       gfs.put("contentType", contentType);
       gfs.save();
       Object id = gfs.getId();
+      //占位符替换
       url = MessageFormat.format(gridfsUrl, id);
     } catch (Exception e) {
       logger.error("saveImg error:{}", e);

@@ -102,7 +102,6 @@ public class BookController {
                 gridfsImg.setAliases(tImg.getImgId());
                 gridfsImg.setFileName("defaultBookImg.jpg");
                 //
-                String url = baseMongoRepository.saveImg(gridfsImg);
                 String saveImg = baseMongoRepository.saveImg(gridfsImg);
                 tImg.setImgPath(saveImg);
                 tImg.setLastModifyTime(new Date());
