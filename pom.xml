@@ -384,6 +384,11 @@
             <version>2.4.0</version>
         </dependency> -->
         <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-core</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
