@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>bookmanager</groupId>
-    <artifactId>bookmanager</artifactId>
+    <artifactId>bookmanager-old</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>bookmanager</name>
+    <name>bookmanager-old</name>
     <url>http://maven.apache.org</url>
 
     <!--****************** -->
