@@ -188,13 +188,13 @@
        <b>Gerrit:&nbsp;&nbsp;<a style="color: lime;" href="http://www.shopbop.ink/gerrit" target="_bank">http://www.shopbop.ink/gerrit</a></b>
       </p>
       <p>
-       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://58.87.121.73:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
+       <b>Jenkins:&nbsp;&nbsp;<a style="color: lime;" href="http://www.lilinjue.cn:8081" target="_bank">http://www.longge1987.cn/jenkins/</a></b>
       </p>
       <p>
-       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://58.87.121.73:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
+       <b>ActiveMQ:&nbsp;&nbsp;<a style="color: lime;" href="http://www.lilinjue.cn:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a></b>
       </p>
       <p>
-       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://58.87.121.73:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
+       <b>nexus私服库:&nbsp;&nbsp;<a style="color: lime;" href="http://www.lilinjue.cn:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a></b>
       </p>
       <p>
        <b>图书管理系统:&nbsp;&nbsp;<a style="color: lime;" href="${pageContext.request.contextPath}/indexHome" target="_bank">http://www.shopbop.ink/bookmanager/indexHome</a></b>

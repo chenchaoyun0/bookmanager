@@ -94,11 +94,11 @@ if (dataName != null && dataName.length() > 0) {
 	<div align="center" style="color: white;">
 	<br/>
 	Gerrit:<a style="color: lime;" href="http://www.shopbop.ink/gerrit" target="_bank">http://www.shopbop.ink/gerrit</a>，
-	Jenkins:<a style="color: lime;" href="http://58.87.121.73:8081" target="_bank">http://www.longge1987.cn/jenkins/</a>
-	，ActiveMQ:<a style="color: lime;" href="http://58.87.121.73:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
+	Jenkins:<a style="color: lime;" href="http://www.lilinjue.cn:8081" target="_bank">http://www.longge1987.cn/jenkins/</a>
+	，ActiveMQ:<a style="color: lime;" href="http://www.lilinjue.cn:8161/admin/queues.jsp" target="_bank">http://www.longge1987.cn:8161/admin/queues.jsp</a>
 	<br/>
 	<br/>
-	私服库:<a style="color: lime;" href="http://58.87.121.73:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a>
+	私服库:<a style="color: lime;" href="http://www.lilinjue.cn:8080/nexus" target="_bank">http://www.longge1987.cn:8080/nexus/</a>
 	，手机商城:<a style="color: lime;" href="http://39.105.33.58:8081/AShopping" target="_bank">http://www.ccy123.cn/AShopping/</a>
 	<br/>
 	<br/>
