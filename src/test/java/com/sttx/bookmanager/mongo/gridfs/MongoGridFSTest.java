@@ -25,7 +25,7 @@ public class MongoGridFSTest {
     /* 
      * 1、创建数据库连接 
      */
-    client = new Mongo("ccy004", 27017);
+    client = new Mongo("www.shopbop.ink", 27017);
     // 取得数据库对象
     DB db = client.getDB("bookmanager");
     String collectionName = "fs";

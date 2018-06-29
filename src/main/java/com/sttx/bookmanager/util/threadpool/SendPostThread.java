@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sttx.bookmanager.util.http.HttpPostUtil;
+import com.sttx.bookmanager.util.http.UspHttpUtils;
 
 public class SendPostThread extends Thread {
     private static final Logger log = LoggerFactory.getLogger(SendPostThread.class);
@@ -42,9 +43,11 @@ public class SendPostThread extends Thread {
                 this.wait();
             } else {
                 log.info(">>>>>>>>>>>>>>>>" + this.getName() + "开始处理");
-                HttpPostUtil u = new HttpPostUtil("http://39.107.126.75/bookmanager/indexHome");
-                byte[] b = u.send();
-                String result = new String(b);
+//                HttpPostUtil u = new HttpPostUtil("http://www.shopbop.ink/bookmanager/indexHome");
+//                byte[] b = u.send();
+//                String result = new String(b);
+                String result = UspHttpUtils.doGetStringType("http://58.87.121.73:9091/info");
+                log.info(">>>>>>>>>>>>>>>>result:{}" +result);
                 log.info(">>>>>>>>>>>>>>>>result:{}" + result.length());
                 log.info(">>>>>>>>>>>>>>>>" + this.getName() + "结束处理");
                 setIsRunning(false);

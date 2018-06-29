@@ -3,7 +3,7 @@ Navicat MySQL Data Transfer
 
 Source Server         : ccy004-root
 Source Server Version : 50717
-Source Host           : 39.107.126.75:3306
+Source Host           : www.shopbop.ink:3306
 Source Database       : bookmanager
 
 Target Server Type    : MYSQL
