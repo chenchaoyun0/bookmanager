@@ -22,10 +22,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -41,6 +44,8 @@ import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.tts.XunfeiLib;
+import com.sttx.bookmanager.web.vo.LookResumeReq;
+import com.sttx.bookmanager.web.vo.LookResumeResp;
 import com.sttx.bookmanager.web.vo.TodayCountVo;
 
 @Controller
@@ -55,8 +60,52 @@ public class IndexHomeController {
   @Autowired
   private IBookService bookService;
 
+  @RequestMapping(value="/lookResume",method=RequestMethod.POST)
+  @CrossOrigin
+  public @ResponseBody LookResumeResp lookResume(@RequestBody LookResumeReq req) {
+
+    log.info("查看网站主页 req:{}", JSONObject.toJSONString(req));
+
+    log.info("浏览器的正式名称:{}", req.getAppName());
+    log.info("浏览器的版本号:{}", req.getAppVersion());
+    log.info("返回用户浏览器是否启用了cookie:{}", req.getCookieEnabled());
+    log.info("返回用户计算机的cpu的型号:{}", req.getCookieEnabled());
+    log.info("浏览器正在运行的操作系统平台:{}", req.getPlatform());
+    log.info("浏览器的产品名（IE没有）:{}", req.getProduct());
+    log.info("浏览器正在运行的操作系统，其中可能有CPU的信息（IE没有）:{}", req.getOscpu());
+    log.info("关于浏览器更多信息（IE没有）:{}", req.getProductSub());
+    log.info("userAgent:{}", req.getUserAgent());
+    log.info("返回一个UserProfile对象，它存储用户的个人信息（火狐没有）:{}", req.getUserProfile());
+
+    LookResumeResp resp = new LookResumeResp();
+    log.info("查看网站主页 http://www.shopbop.ink/");
+    try {
+      
+      TLog tLog = new TLog();
+      PagedResult<TLog> pages = logService.selectLogPages(tLog, 1 , 1);
+      Long totalcount = logService.selectLogSumCount();
+      TodayCountVo todayCount = logService.todayCount();
+      long totalPathCount = logService.totalPathCount("lookResume");
+//
+      resp.setTodayCount(todayCount.getTodayCount());
+      resp.setTodayVisitorCount(todayCount.getTodayVisitorCount());
+      resp.setTotalcount(totalcount);
+      resp.setResumeCount(totalPathCount);
+      resp.setTotalVisitorCount(pages.getPages());
+      resp.setFlag(true);
+    } catch (Exception e) {
+      log.error("查看网站主页异常:{}",e);
+      resp.setFlag(false);
+      resp.setMsg(e.getMessage());
+    }
+    resp.setMsg("操作成功");
+    log.info("查看网站主页 resp:{}", JSONObject.toJSONString(resp));
+    return resp;
+  }
+
   @RequestMapping("/indexHome")
-  public String indexHome(Model model, HttpServletRequest request, ModelAndView modelAndView, Integer pageNo, Integer pageSize) {
+  public String indexHome(Model model, HttpServletRequest request, ModelAndView modelAndView, Integer pageNo,
+    Integer pageSize) {
     String realPath = request.getServletContext().getRealPath("resources/ehcache.xml");
     log.info(">>>>>>>>>realPath:{}", realPath);
     // return "forward:/book/selectBookPages";
@@ -96,8 +145,8 @@ public class IndexHomeController {
   }
 
   @RequestMapping(value = "/indexHomeForIp", method = RequestMethod.GET)
-  public String indexHomeForIp(String userIp, Model model, HttpServletRequest request, ModelAndView modelAndView, Integer pageNo,
-      Integer pageSize) {
+  public String indexHomeForIp(String userIp, Model model, HttpServletRequest request, ModelAndView modelAndView,
+    Integer pageNo, Integer pageSize) {
     // return "forward:/book/selectBookPages";
     PagedResult<TLog> pages = logService.selectLogPagesForIp(userIp, pageNo, pageSize);
     Long totalcount = logService.selectLogSumCount();
@@ -110,7 +159,8 @@ public class IndexHomeController {
   }
 
   @RequestMapping("/downloadResumeDocx")
-  public String downloadResumeDocx(Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
+  public String downloadResumeDocx(Model model, HttpServletResponse response, HttpServletRequest request)
+    throws Exception {
 
     String fileName = "北京-Java开发工程师-陈超允.docx";
     fileName = new String(fileName.getBytes("UTF-8"), "iso8859-1");
@@ -137,8 +187,9 @@ public class IndexHomeController {
   }
 
   @RequestMapping("/exportBookListExcel/{pageNo}/{pageSize}")
-  public void exportBookListExcel(Book book, String loginName, HttpServletResponse response, @PathVariable("pageNo") Integer pageNo,
-      @RequestParam(value = "userId", required = false) String userId, @PathVariable("pageSize") Integer pageSize) throws IOException {
+  public void exportBookListExcel(Book book, String loginName, HttpServletResponse response,
+    @PathVariable("pageNo") Integer pageNo, @RequestParam(value = "userId", required = false) String userId,
+    @PathVariable("pageSize") Integer pageSize) throws IOException {
     User user = new User();
     user.setLoginName(loginName);
     book.setUser(user);
@@ -241,7 +292,7 @@ public class IndexHomeController {
 
       response.setHeader("Content-Type", "audio/mpeg");
       File file = new File(fileName);
-      int len_l = (int) file.length();
+      int len_l = (int)file.length();
       byte[] buf = new byte[2048];
       FileInputStream fis = new FileInputStream(file);
       OutputStream out = response.getOutputStream();

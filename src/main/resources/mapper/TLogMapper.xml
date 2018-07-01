@@ -302,4 +302,15 @@
               t.user_Ip
           ) b
     </select>
+    <select id="totalPathCount" resultType="long">
+        SELECT
+          count(1)
+        FROM
+          t_log
+        <where>
+          <if test="path != null and path!=''">
+            action=#{path,jdbcType=VARCHAR}
+          </if>
+        </where>
+    </select>
 </mapper>

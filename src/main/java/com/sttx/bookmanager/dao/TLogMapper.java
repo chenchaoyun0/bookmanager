@@ -30,4 +30,6 @@ public interface TLogMapper {
     List<TLog> selectLogPagesForIp(@Param("userIp") String userIp);
     
     TodayCountVo todayCount(String todayBegin,String todayEnd);
+
+    long totalPathCount(@Param("path")String path);
 }

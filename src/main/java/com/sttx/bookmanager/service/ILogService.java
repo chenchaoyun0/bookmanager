@@ -26,4 +26,6 @@ public interface ILogService {
     PagedResult<TLog> selectLogPagesForIpByMongo(String userIp, Integer pageNo, Integer pageSize);
 
     Long selectLogSumCountMongo();
+
+    long totalPathCount(String path);
 }
