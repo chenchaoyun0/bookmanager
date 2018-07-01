@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -35,14 +36,19 @@ import com.alibaba.fastjson.JSONObject;
 import com.sttx.bookmanager.po.Book;
 import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.po.User;
+import com.sttx.bookmanager.po.VisitorProfile;
 import com.sttx.bookmanager.service.IBaseMongoRepository;
 import com.sttx.bookmanager.service.IBookService;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.service.IResumeService;
+import com.sttx.bookmanager.service.IVisitorProfileService;
+import com.sttx.bookmanager.util.BookManagerBeanUtils;
+import com.sttx.bookmanager.util.LogUtil;
 import com.sttx.bookmanager.util.excel.ExportToExcelUtil;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
+import com.sttx.bookmanager.util.time.DateConvertUtils;
 import com.sttx.bookmanager.util.tts.XunfeiLib;
 import com.sttx.bookmanager.web.vo.LookResumeReq;
 import com.sttx.bookmanager.web.vo.LookResumeResp;
@@ -59,8 +65,25 @@ public class IndexHomeController {
   private IBaseMongoRepository baseMongoRepository;
   @Autowired
   private IBookService bookService;
+  @Autowired
+  private IVisitorProfileService visitorProfileService;
 
-  @RequestMapping(value="/lookResume",method=RequestMethod.POST)
+  @RequestMapping(value = "/visitors", method = RequestMethod.GET)
+  public void visitors(HttpServletResponse response) {
+
+    List<VisitorProfile> visitors = visitorProfileService.visitors();
+    String jsonString = JSONObject.toJSONString(visitors);
+    String formatAsJSON = LogUtil.formatAsJSON(jsonString);
+    try {
+      response.setCharacterEncoding("GBK");
+      response.getWriter().write(formatAsJSON);
+    } catch (Exception e) {
+      log.error("visitors error:{}", e);
+    }
+
+  }
+
+  @RequestMapping(value = "/lookResume", method = RequestMethod.POST)
   @CrossOrigin
   public @ResponseBody LookResumeResp lookResume(@RequestBody LookResumeReq req) {
 
@@ -69,7 +92,7 @@ public class IndexHomeController {
     log.info("浏览器的正式名称:{}", req.getAppName());
     log.info("浏览器的版本号:{}", req.getAppVersion());
     log.info("返回用户浏览器是否启用了cookie:{}", req.getCookieEnabled());
-    log.info("返回用户计算机的cpu的型号:{}", req.getCookieEnabled());
+    log.info("返回用户计算机的cpu的型号:{}", req.getCpuClass());
     log.info("浏览器正在运行的操作系统平台:{}", req.getPlatform());
     log.info("浏览器的产品名（IE没有）:{}", req.getProduct());
     log.info("浏览器正在运行的操作系统，其中可能有CPU的信息（IE没有）:{}", req.getOscpu());
@@ -80,13 +103,18 @@ public class IndexHomeController {
     LookResumeResp resp = new LookResumeResp();
     log.info("查看网站主页 http://www.shopbop.ink/");
     try {
-      
+      // save
+      VisitorProfile visitorProfile = BookManagerBeanUtils.copyBean(req, VisitorProfile.class);
+      visitorProfile.setCreateTime(DateConvertUtils.format(new Date(), DateConvertUtils.DATE_TIME_FORMAT));
+      int insert = visitorProfileService.insert(visitorProfile);
+      log.info("保存用户信息:{}", insert);
+      //
       TLog tLog = new TLog();
-      PagedResult<TLog> pages = logService.selectLogPages(tLog, 1 , 1);
+      PagedResult<TLog> pages = logService.selectLogPages(tLog, 1, 1);
       Long totalcount = logService.selectLogSumCount();
       TodayCountVo todayCount = logService.todayCount();
       long totalPathCount = logService.totalPathCount("lookResume");
-//
+      //
       resp.setTodayCount(todayCount.getTodayCount());
       resp.setTodayVisitorCount(todayCount.getTodayVisitorCount());
       resp.setTotalcount(totalcount);
@@ -94,7 +122,7 @@ public class IndexHomeController {
       resp.setTotalVisitorCount(pages.getPages());
       resp.setFlag(true);
     } catch (Exception e) {
-      log.error("查看网站主页异常:{}",e);
+      log.error("查看网站主页异常:{}", e);
       resp.setFlag(false);
       resp.setMsg(e.getMessage());
     }

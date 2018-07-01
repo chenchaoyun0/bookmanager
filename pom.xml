@@ -59,6 +59,7 @@
         <cglib.version>3.2.2</cglib.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <c3p0.version>0.9.5-pre2</c3p0.version>
+        <mapper.starter.version>2.0.3-beta1</mapper.starter.version>
     </properties>
     <dependencies>
         <!-- 添加Spring依赖 -->
@@ -414,7 +415,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
+        </dependency>
+         <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
         <!-- cas -->
         <!-- <dependency> <groupId>org.jasig.cas.client</groupId> <artifactId>cas-client-core</artifactId> 

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sttx.bookmanager.dao.VisitorProfileMapper">
+  <resultMap id="BaseResultMap" type="com.sttx.bookmanager.po.VisitorProfile">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+    <result column="product" jdbcType="VARCHAR" property="product" />
+    <result column="cookie_enabled" jdbcType="VARCHAR" property="cookieEnabled" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="app_version" jdbcType="LONGVARCHAR" property="appVersion" />
+    <result column="user_agent" jdbcType="LONGVARCHAR" property="userAgent" />
+    <result column="cpu_class" jdbcType="LONGVARCHAR" property="cpuClass" />
+    <result column="oscpu" jdbcType="LONGVARCHAR" property="oscpu" />
+    <result column="product_sub" jdbcType="LONGVARCHAR" property="productSub" />
+    <result column="user_profile" jdbcType="LONGVARCHAR" property="userProfile" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, app_name, platform, product, cookie_enabled, create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    app_version, user_agent, cpu_class, oscpu, product_sub, user_profile
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_visitor_profile
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_visitor_profile
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sttx.bookmanager.po.VisitorProfile">
+    insert into t_visitor_profile (id, app_name, platform, 
+      product, cookie_enabled, create_time, 
+      app_version, user_agent, cpu_class, 
+      oscpu, product_sub, user_profile
+      )
+    values (#{id,jdbcType=BIGINT}, #{appName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
+      #{product,jdbcType=VARCHAR}, #{cookieEnabled,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{appVersion,jdbcType=LONGVARCHAR}, #{userAgent,jdbcType=LONGVARCHAR}, #{cpuClass,jdbcType=LONGVARCHAR}, 
+      #{oscpu,jdbcType=LONGVARCHAR}, #{productSub,jdbcType=LONGVARCHAR}, #{userProfile,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sttx.bookmanager.po.VisitorProfile">
+    insert into t_visitor_profile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="appName != null">
+        app_name,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="product != null">
+        product,
+      </if>
+      <if test="cookieEnabled != null">
+        cookie_enabled,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="appVersion != null">
+        app_version,
+      </if>
+      <if test="userAgent != null">
+        user_agent,
+      </if>
+      <if test="cpuClass != null">
+        cpu_class,
+      </if>
+      <if test="oscpu != null">
+        oscpu,
+      </if>
+      <if test="productSub != null">
+        product_sub,
+      </if>
+      <if test="userProfile != null">
+        user_profile,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="cookieEnabled != null">
+        #{cookieEnabled,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null">
+        #{appVersion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="userAgent != null">
+        #{userAgent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cpuClass != null">
+        #{cpuClass,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="oscpu != null">
+        #{oscpu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productSub != null">
+        #{productSub,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="userProfile != null">
+        #{userProfile,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sttx.bookmanager.po.VisitorProfile">
+    update t_visitor_profile
+    <set>
+      <if test="appName != null">
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        product = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="cookieEnabled != null">
+        cookie_enabled = #{cookieEnabled,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null">
+        app_version = #{appVersion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="userAgent != null">
+        user_agent = #{userAgent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cpuClass != null">
+        cpu_class = #{cpuClass,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="oscpu != null">
+        oscpu = #{oscpu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="productSub != null">
+        product_sub = #{productSub,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="userProfile != null">
+        user_profile = #{userProfile,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sttx.bookmanager.po.VisitorProfile">
+    update t_visitor_profile
+    set app_name = #{appName,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      cookie_enabled = #{cookieEnabled,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      app_version = #{appVersion,jdbcType=LONGVARCHAR},
+      user_agent = #{userAgent,jdbcType=LONGVARCHAR},
+      cpu_class = #{cpuClass,jdbcType=LONGVARCHAR},
+      oscpu = #{oscpu,jdbcType=LONGVARCHAR},
+      product_sub = #{productSub,jdbcType=LONGVARCHAR},
+      user_profile = #{userProfile,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sttx.bookmanager.po.VisitorProfile">
+    update t_visitor_profile
+    set app_name = #{appName,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      product = #{product,jdbcType=VARCHAR},
+      cookie_enabled = #{cookieEnabled,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="visitors" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_visitor_profile
+    order by id desc;
+  </select>
+</mapper>

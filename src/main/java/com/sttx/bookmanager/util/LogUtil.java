@@ -12,6 +12,10 @@ import org.springframework.util.ObjectUtils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * 在日志中过滤敏感信息
@@ -200,5 +204,12 @@ public class LogUtil {
                 }
             }
         }
+    }
+    public static String formatAsJSON(String content) {
+      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+      JsonParser jsonPar = new JsonParser();
+      JsonElement jsonEl = jsonPar.parse(content);
+      String prettyJson = gson.toJson(jsonEl);
+      return prettyJson;
     }
 }
