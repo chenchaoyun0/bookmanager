@@ -116,7 +116,11 @@ public class IndexHomeController {
       String province = data.getRegion();
       String city = data.getCity();
       String isp = data.getIsp();
-      userAddress = area + "," + province + "," + city + "," + country + "," + isp;
+      if(StringUtils.isBlank(area)){
+        userAddress = province + "," + city + "," + country + "," + isp;
+      }else{
+        userAddress = area + "," + province + "," + city + "," + country + "," + isp;
+      }
     }
     log.info("通过ip解析用户地址:{}", userAddress);
 
