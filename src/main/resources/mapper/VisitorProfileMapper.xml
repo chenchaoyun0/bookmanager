@@ -3,6 +3,8 @@
 <mapper namespace="com.sttx.bookmanager.dao.VisitorProfileMapper">
   <resultMap id="BaseResultMap" type="com.sttx.bookmanager.po.VisitorProfile">
     <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="app_name" jdbcType="VARCHAR" property="appName" />
     <result column="platform" jdbcType="VARCHAR" property="platform" />
     <result column="product" jdbcType="VARCHAR" property="product" />
@@ -16,7 +18,7 @@
     <result column="user_profile" jdbcType="LONGVARCHAR" property="userProfile" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, app_name, platform, product, cookie_enabled, create_time
+    id, ip,address,app_name, platform, product, cookie_enabled, create_time
   </sql>
   <sql id="Blob_Column_List">
     app_version, user_agent, cpu_class, oscpu, product_sub, user_profile
@@ -34,12 +36,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.sttx.bookmanager.po.VisitorProfile">
-    insert into t_visitor_profile (id, app_name, platform, 
+    insert into t_visitor_profile (id,ip,address, app_name, platform, 
       product, cookie_enabled, create_time, 
       app_version, user_agent, cpu_class, 
       oscpu, product_sub, user_profile
       )
-    values (#{id,jdbcType=BIGINT}, #{appName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},#{appName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
       #{product,jdbcType=VARCHAR}, #{cookieEnabled,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
       #{appVersion,jdbcType=LONGVARCHAR}, #{userAgent,jdbcType=LONGVARCHAR}, #{cpuClass,jdbcType=LONGVARCHAR}, 
       #{oscpu,jdbcType=LONGVARCHAR}, #{productSub,jdbcType=LONGVARCHAR}, #{userProfile,jdbcType=LONGVARCHAR}
@@ -189,9 +191,7 @@
   </update>
   <select id="visitors" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
+    *
     from t_visitor_profile
     order by id desc;
   </select>

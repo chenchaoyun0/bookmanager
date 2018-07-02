@@ -14,6 +14,8 @@ public class VisitorProfile implements Serializable{
    */
   private static final long serialVersionUID = 1L;
   private long id;
+  private String ip;
+  private String address;
   private String appName;
   private String platform;
   private String appVersion;

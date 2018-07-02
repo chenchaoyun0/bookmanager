@@ -46,6 +46,10 @@ import com.sttx.bookmanager.util.BookManagerBeanUtils;
 import com.sttx.bookmanager.util.LogUtil;
 import com.sttx.bookmanager.util.excel.ExportToExcelUtil;
 import com.sttx.bookmanager.util.file.NfsFileUtils;
+import com.sttx.bookmanager.util.map.AddressUtils;
+import com.sttx.bookmanager.util.map.IPUtils;
+import com.sttx.bookmanager.util.map.vo.IPAddressData;
+import com.sttx.bookmanager.util.map.vo.IPAddressVo;
 import com.sttx.bookmanager.util.pages.PagedResult;
 import com.sttx.bookmanager.util.properties.PropertiesUtil;
 import com.sttx.bookmanager.util.time.DateConvertUtils;
@@ -85,7 +89,7 @@ public class IndexHomeController {
 
   @RequestMapping(value = "/lookResume", method = RequestMethod.POST)
   @CrossOrigin
-  public @ResponseBody LookResumeResp lookResume(@RequestBody LookResumeReq req) {
+  public @ResponseBody LookResumeResp lookResume(@RequestBody LookResumeReq req, HttpServletRequest request) {
 
     log.info("查看网站主页 req:{}", JSONObject.toJSONString(req));
 
@@ -99,13 +103,33 @@ public class IndexHomeController {
     log.info("关于浏览器更多信息（IE没有）:{}", req.getProductSub());
     log.info("userAgent:{}", req.getUserAgent());
     log.info("返回一个UserProfile对象，它存储用户的个人信息（火狐没有）:{}", req.getUserProfile());
+    String ipAddr = IPUtils.getIpAddr(request);
+    log.info("用户ip地址:{}", ipAddr);
+    String userAddress = "";
+    IPAddressVo ipAddressVo = AddressUtils.getIPAddressVo(ipAddr);
+    if (ipAddressVo == null || !"0".equals(ipAddressVo.getCode())) {
+      userAddress = "搜不到你,请尝试刷新";
+    } else {
+      IPAddressData data = ipAddressVo.getData();
+      String area = data.getArea();
+      String country = data.getCountry();
+      String province = data.getRegion();
+      String city = data.getCity();
+      String isp = data.getIsp();
+      userAddress = area + "," + province + "," + city + "," + country + "," + isp;
+    }
+    log.info("通过ip解析用户地址:{}", userAddress);
 
+    //
     LookResumeResp resp = new LookResumeResp();
     log.info("查看网站主页 http://www.shopbop.ink/");
+
     try {
       // save
       VisitorProfile visitorProfile = BookManagerBeanUtils.copyBean(req, VisitorProfile.class);
       visitorProfile.setCreateTime(DateConvertUtils.format(new Date(), DateConvertUtils.DATE_TIME_FORMAT));
+      visitorProfile.setIp(ipAddr);
+      visitorProfile.setAddress(userAddress);
       int insert = visitorProfileService.insert(visitorProfile);
       log.info("保存用户信息:{}", insert);
       //
