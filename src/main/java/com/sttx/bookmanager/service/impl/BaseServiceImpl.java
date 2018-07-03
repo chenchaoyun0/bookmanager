@@ -5,8 +5,10 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.sttx.bookmanager.dao.BaseMapper;
+
 import com.sttx.bookmanager.service.IBaseService;
+
+import tk.mybatis.mapper.common.BaseMapper;
 
 public class BaseServiceImpl<T> implements IBaseService<T> {
   private static final Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
@@ -46,7 +48,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
 
     @Override
     public List<T> selectList(T t) {
-        return baseMapper.selectList(t);
+        return baseMapper.select(t);
     }
 
     @Override

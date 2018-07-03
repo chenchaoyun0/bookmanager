@@ -57,11 +57,12 @@ if (dataName != null && dataName.length() > 0) {
                         <th >用户名</th>
                         <th >用户IP</th>
                         <th >访问时间</th>
-                        <th >昵称</th>
                         <th >地址</th>
+                        <th >浏览器</th>
+                        <th >系统名称</th>
+                        <th >设备类型</th>
                         <th >经纬度</th>
                         <th >访问内容</th>
-                        <th >执行方法</th>
                         <th >执行时间</th>
                         <th >访问次数</th>
                 </tr>
@@ -76,10 +77,11 @@ if (dataName != null && dataName.length() > 0) {
                     <th style="color: yellow;">${log.userName}</th>
                     <th style="color: yellow"><a href="<c:url value='indexHomeForIp?userIp=${log.userIp}'/>" style="color:lime; text-decoration:underline;">${log.userIp}</a></th>
                     <th style="color: yellow">${log.operTime}</th>
-                    <th style="color: yellow">${log.userNickName}</th>
                     <th style="color: yellow">${log.userAddress}</th>
+                    <th style="color: yellow">${log.browserAndVersion}</th>
+                    <th style="color: yellow">${log.sysManufacturer}-${log.sysName}</th>
+                    <th style="color: yellow">${log.deviceType}</th>
                     <th style="color: yellow">${log.userJwd}</th>
-                    <th style="color: yellow">${log.module}</th>
                     <th style="color: yellow">${log.action}</th>
                     <th style="color: yellow">${log.actionTime}</th>
                     <th style="color: yellow">${log.count}</th>

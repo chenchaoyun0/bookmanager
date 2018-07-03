@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sttx.bookmanager.dao.TLogMapper">
-    <!-- 缓存 -->
-    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache" /> -->
     <resultMap
         id="BaseResultMap"
         type="com.sttx.bookmanager.po.TLog">
@@ -50,176 +48,41 @@
             column="count"
             property="count"
             jdbcType="BIGINT" />
+        <result
+            column="browser_Type"
+            property="browserType"
+            jdbcType="VARCHAR" />
+        <result
+            column="browser_And_Version"
+            property="browserAndVersion"
+            jdbcType="VARCHAR" />
+        <result
+            column="manufacturer"
+            property="manufacturer"
+            jdbcType="VARCHAR" />
+        <result
+            column="rendering_Engine"
+            property="renderingEngine"
+            jdbcType="VARCHAR" />
+        <result
+            column="sys_Name"
+            property="sysName"
+            jdbcType="VARCHAR" />
+        <result
+            column="operating_System"
+            property="operatingSystem"
+            jdbcType="VARCHAR" />
+        <result
+            column="sys_Manufacturer"
+            property="sysManufacturer"
+            jdbcType="VARCHAR" />
+        <result
+            column="device_Type"
+            property="deviceType"
+            jdbcType="VARCHAR" />
     </resultMap>
-    <sql id="Base_Column_List">
-        log_Id, user_Ip, user_Name, user_Nick_Name, user_Address, user_JWD, module,
-        action,
-        action_Time, oper_Time, count
-    </sql>
-    <select
-        id="selectByPrimaryKey"
-        resultMap="BaseResultMap"
-        parameterType="com.sttx.bookmanager.po.TLogKey">
-        select
-        <include refid="Base_Column_List" />
-        from t_log
-        where log_Id = #{logId,jdbcType=VARCHAR}
-        and user_Ip = #{userIp,jdbcType=VARCHAR}
-    </select>
-    <delete
-        id="deleteByPrimaryKey"
-        parameterType="com.sttx.bookmanager.po.TLogKey">
-        delete from t_log
-        where log_Id = #{logId,jdbcType=VARCHAR}
-        and user_Ip = #{userIp,jdbcType=VARCHAR}
-    </delete>
-    <insert
-        id="insert"
-        parameterType="com.sttx.bookmanager.po.TLog">
-        insert into t_log (log_Id, user_Ip, user_Name,
-        user_Nick_Name, user_Address, user_JWD,
-        module, action, action_Time,
-        oper_Time, count)
-        values (#{logId,jdbcType=VARCHAR}, #{userIp,jdbcType=VARCHAR},
-        #{userName,jdbcType=VARCHAR},
-        #{userNickName,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userJwd,jdbcType=VARCHAR},
-        #{module,jdbcType=VARCHAR}, #{action,jdbcType=VARCHAR},
-        #{actionTime,jdbcType=BIGINT},
-        #{operTime,jdbcType=VARCHAR}, #{count,jdbcType=BIGINT})
-    </insert>
-    <insert
-        id="insertSelective"
-        parameterType="com.sttx.bookmanager.po.TLog">
-        insert into t_log
-        <trim
-            prefix="("
-            suffix=")"
-            suffixOverrides=",">
-            <if test="logId != null">
-                log_Id,
-            </if>
-            <if test="userIp != null">
-                user_Ip,
-            </if>
-            <if test="userName != null">
-                user_Name,
-            </if>
-            <if test="userNickName != null">
-                user_Nick_Name,
-            </if>
-            <if test="userAddress != null">
-                user_Address,
-            </if>
-            <if test="userJwd != null">
-                user_JWD,
-            </if>
-            <if test="module != null">
-                module,
-            </if>
-            <if test="action != null">
-                action,
-            </if>
-            <if test="actionTime != null">
-                action_Time,
-            </if>
-            <if test="operTime != null">
-                oper_Time,
-            </if>
-            <if test="count != null">
-                count,
-            </if>
-        </trim>
-        <trim
-            prefix="values ("
-            suffix=")"
-            suffixOverrides=",">
-            <if test="logId != null">
-                #{logId,jdbcType=VARCHAR},
-            </if>
-            <if test="userIp != null">
-                #{userIp,jdbcType=VARCHAR},
-            </if>
-            <if test="userName != null">
-                #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="userNickName != null">
-                #{userNickName,jdbcType=VARCHAR},
-            </if>
-            <if test="userAddress != null">
-                #{userAddress,jdbcType=VARCHAR},
-            </if>
-            <if test="userJwd != null">
-                #{userJwd,jdbcType=VARCHAR},
-            </if>
-            <if test="module != null">
-                #{module,jdbcType=VARCHAR},
-            </if>
-            <if test="action != null">
-                #{action,jdbcType=VARCHAR},
-            </if>
-            <if test="actionTime != null">
-                #{actionTime,jdbcType=BIGINT},
-            </if>
-            <if test="operTime != null">
-                #{operTime,jdbcType=VARCHAR},
-            </if>
-            <if test="count != null">
-                #{count,jdbcType=BIGINT},
-            </if>
-        </trim>
-    </insert>
-    <update
-        id="updateByPrimaryKeySelective"
-        parameterType="com.sttx.bookmanager.po.TLog">
-        update t_log
-        <set>
-            <if test="userName != null">
-                user_Name = #{userName,jdbcType=VARCHAR},
-            </if>
-            <if test="userNickName != null">
-                user_Nick_Name = #{userNickName,jdbcType=VARCHAR},
-            </if>
-            <if test="userAddress != null">
-                user_Address = #{userAddress,jdbcType=VARCHAR},
-            </if>
-            <if test="userJwd != null">
-                user_JWD = #{userJwd,jdbcType=VARCHAR},
-            </if>
-            <if test="module != null">
-                module = #{module,jdbcType=VARCHAR},
-            </if>
-            <if test="action != null">
-                action = #{action,jdbcType=VARCHAR},
-            </if>
-            <if test="actionTime != null">
-                action_Time = #{actionTime,jdbcType=BIGINT},
-            </if>
-            <if test="operTime != null">
-                oper_Time = #{operTime,jdbcType=VARCHAR},
-            </if>
-            <if test="count != null">
-                count = #{count,jdbcType=BIGINT},
-            </if>
-        </set>
-        where log_Id = #{logId,jdbcType=VARCHAR}
-        and user_Ip = #{userIp,jdbcType=VARCHAR}
-    </update>
-    <update
-        id="updateByPrimaryKey"
-        parameterType="com.sttx.bookmanager.po.TLog">
-        update t_log
-        set user_Name = #{userName,jdbcType=VARCHAR},
-        user_Nick_Name = #{userNickName,jdbcType=VARCHAR},
-        user_Address = #{userAddress,jdbcType=VARCHAR},
-        user_JWD = #{userJwd,jdbcType=VARCHAR},
-        module = #{module,jdbcType=VARCHAR},
-        action = #{action,jdbcType=VARCHAR},
-        action_Time = #{actionTime,jdbcType=BIGINT},
-        oper_Time = #{operTime,jdbcType=VARCHAR},
-        count = #{count,jdbcType=BIGINT}
-        where log_Id = #{logId,jdbcType=VARCHAR}
-        and user_Ip = #{userIp,jdbcType=VARCHAR}
-    </update>
+    <!-- 缓存 -->
+    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache" /> -->
     <!-- 通过ip查询 -->
     <select
         id="selectByUserIp"
@@ -227,9 +90,10 @@
         parameterType="String"
         useCache="false">
         select
-        <include refid="Base_Column_List" />
+        *
         from t_log
-        where user_Ip = #{userIp,jdbcType=VARCHAR} limit 1
+        where user_Ip =
+        #{userIp,jdbcType=VARCHAR} limit 1
     </select>
     <!-- 查询日志分页 -->
     <select
@@ -238,35 +102,32 @@
         parameterType="com.sttx.bookmanager.po.TLog"
         useCache="false">
         SELECT
-            log_Id,
-            user_Name,
-            user_Nick_Name,
-            user_Address,
-            user_JWD,
-            module,
-            action,
-            action_Time,
-            user_Ip,
-            MAX(oper_Time) oper_Time,
-            SUM(count) as count
+        log_Id,
+        user_Name,
+        user_Nick_Name,
+        user_Address,
+        user_JWD,
+        module,
+        action,
+        action_Time,
+        user_Ip,
+        browser_Type,
+        browser_And_Version,
+        manufacturer,
+        rendering_Engine,
+        sys_Name,
+        operating_System,
+        sys_Manufacturer,
+        device_Type,
+        MAX(oper_Time)
+        oper_Time,
+        SUM(count) as count
         FROM
-            t_log 
+        t_log
         GROUP BY user_Ip
-        ORDER BY oper_Time DESC
+        ORDER BY
+        oper_Time DESC
     </select>
-<!--     <select
-        id="selectLogPages"
-        resultMap="BaseResultMap"
-        parameterType="com.sttx.bookmanager.po.TLog"
-        useCache="false">
-        select
-        log_Id,user_Name,user_Nick_Name,user_Address,user_JWD,module,action,action_Time,user_Ip,oper_Time,(select
-        count(distinct log_Id) from t_log where user_Ip= b.user_Ip) as
-        count
-        from t_log as b where not exists(select 1 from t_log where user_Ip=
-        b.user_Ip
-        and b.oper_Time &lt; oper_Time ) ORDER BY oper_Time DESC
-    </select> -->
     <!-- 查询日志分页 -->
     <select
         id="selectLogPagesForIp"
@@ -274,9 +135,11 @@
         parameterType="string"
         useCache="false">
         select
-        <include refid="Base_Column_List" />
-        from t_log where user_Ip=#{userIp,jdbcType=VARCHAR}
-        order by oper_Time DESC
+        *
+        from t_log where
+        user_Ip=#{userIp,jdbcType=VARCHAR}
+        order by oper_Time
+        DESC
     </select>
     <select
         id="selectLogSumCount"
@@ -285,32 +148,37 @@
         select SUM(count) from t_log
     </select>
     <!-- todayCount -->
-    <select id="todayCount" resultType="com.sttx.bookmanager.web.vo.TodayCountVo">
+    <select
+        id="todayCount"
+        resultType="com.sttx.bookmanager.web.vo.TodayCountVo">
         SELECT
-          count(*) as todayVisitorCount,
-          SUM(sc) as todayCount
+        count(*) as todayVisitorCount,
+        SUM(sc) as
+        todayCount
         FROM
-          (
-            SELECT
-              *, SUM(count) sc
-            FROM
-              t_log t
-            WHERE
-              t.oper_Time BETWEEN #{0}
-            AND #{1}
-            GROUP BY
-              t.user_Ip
-          ) b
+        (
+        SELECT
+        *, SUM(count) sc
+        FROM
+        t_log t
+        WHERE
+        t.oper_Time BETWEEN #{arg0}
+        AND #{arg1}
+        GROUP BY
+        t.user_Ip
+        ) b
     </select>
-    <select id="totalPathCount" resultType="long">
+    <select
+        id="totalPathCount"
+        resultType="long">
         SELECT
-          count(1)
+        count(1)
         FROM
-          t_log
+        t_log
         <where>
-          <if test="path != null and path!=''">
-            action=#{path,jdbcType=VARCHAR}
-          </if>
+            <if test="path != null and path!=''">
+                action=#{path,jdbcType=VARCHAR}
+            </if>
         </where>
     </select>
 </mapper>

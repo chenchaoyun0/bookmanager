@@ -24,6 +24,14 @@ import com.sttx.bookmanager.util.map.vo.IPAddressData;
 import com.sttx.bookmanager.util.map.vo.IPAddressVo;
 
 import cn.itcast.commons.CommonUtils;
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.BrowserType;
+import eu.bitwalker.useragentutils.DeviceType;
+import eu.bitwalker.useragentutils.Manufacturer;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.RenderingEngine;
+import eu.bitwalker.useragentutils.UserAgent;
+import eu.bitwalker.useragentutils.Version;
 
 public class ControllerAOP {
   private static Logger log = Logger.getLogger(ControllerAOP.class);
@@ -84,6 +92,38 @@ public class ControllerAOP {
       TLog logDb = logService.selectByUserIp(userIp);
       log.info("查找访问来源是否存在日志...end");
       log.info("+++++保存日志 exit begin...logDb" + JSONObject.toJSONString(logDb));
+
+      /**
+       * 保存用户浏览器信息
+       */
+      String agentStr = req.getHeader("user-agent");
+      UserAgent agent = UserAgent.parseUserAgentString(agentStr);
+      // 浏览器
+      Browser browser = agent.getBrowser();
+      // 浏览器版本
+      Version version = agent.getBrowserVersion();
+      // 系统
+      OperatingSystem os = agent.getOperatingSystem();
+      /**
+       * 保存字段
+       */
+      // 浏览器类型
+      BrowserType browserType = browser.getBrowserType();
+      // 浏览器名称和版本
+      String browserAndVersion = String.format("%s-%s", browser.getGroup().getName(), version.getVersion());
+      // 浏览器厂商
+      Manufacturer manufacturer = browser.getManufacturer();
+      // 浏览器引擎
+      RenderingEngine renderingEngine = browser.getRenderingEngine();
+      // 系统名称
+      String sysName = os.getName();
+      // 产品系列
+      OperatingSystem operatingSystem = os.getGroup();
+      // 生成厂商
+      Manufacturer sysManufacturer = os.getManufacturer();
+      // 设备类型
+      DeviceType deviceType = os.getDeviceType();
+
       if (logDb == null) {
         //
         String userAddress = "";
@@ -114,6 +154,17 @@ public class ControllerAOP {
         tLog.setUserIp(userIp);
         tLog.setOperTime(operTime);
         tLog.setActionTime(actionTime);
+
+        // 浏览器信息
+        tLog.setBrowserAndVersion(browserAndVersion);
+        tLog.setBrowserType(browserType.name());
+        tLog.setManufacturer(manufacturer.name());
+        tLog.setRenderingEngine(renderingEngine.name());
+        tLog.setSysName(sysName);
+        tLog.setOperatingSystem(operatingSystem.name());
+        tLog.setSysManufacturer(sysManufacturer.name());
+        tLog.setDeviceType(deviceType.name());
+
         log.info("+++++保存日志 new begin...参数" + JSONObject.toJSONString(tLog));
         // ActiveMQUtil.sendObjectMessage("tLog", tLog);
         int insert = logService.insert(tLog);
@@ -125,6 +176,16 @@ public class ControllerAOP {
         logDb.setModule(className);
         logDb.setAction(methodName);
         logDb.setActionTime(actionTime);
+        // 浏览器信息
+        logDb.setBrowserAndVersion(browserAndVersion);
+        logDb.setBrowserType(browserType.name());
+        logDb.setManufacturer(manufacturer.name());
+        logDb.setRenderingEngine(renderingEngine.name());
+        logDb.setSysName(sysName);
+        logDb.setOperatingSystem(operatingSystem.name());
+        logDb.setSysManufacturer(sysManufacturer.name());
+        logDb.setDeviceType(deviceType.name());
+
         log.info("+++++保存日志 exit begin...参数" + JSONObject.toJSONString(logDb));
         // ActiveMQUtil.sendObjectMessage("tLog", tLog);
         int insert = logService.insert(logDb);

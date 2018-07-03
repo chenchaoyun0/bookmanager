@@ -118,28 +118,28 @@
             <scope>test</scope>
         </dependency>
         <!--mybatis依赖 -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>commons-dbutils</groupId>
             <artifactId>commons-dbutils</artifactId>
             <version>1.5</version>
         </dependency>
         <!-- mybatis/spring包 -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis-spring.version}</version>
-        </dependency>
+        </dependency> -->
         <!--通用Mapper插件 -->
-        <dependency>
+        <!-- <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
             <version>${mybatis.mapper.version}</version>
-        </dependency>
+        </dependency> -->
         <!-- mysql oracle驱动包 -->
         <dependency>
             <groupId>mysql</groupId>
@@ -419,6 +419,16 @@
          <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.20</version>
+        </dependency>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>${mapper.starter.version}</version>
         </dependency>
         <!-- cas -->
         <!-- <dependency> <groupId>org.jasig.cas.client</groupId> <artifactId>cas-client-core</artifactId> 

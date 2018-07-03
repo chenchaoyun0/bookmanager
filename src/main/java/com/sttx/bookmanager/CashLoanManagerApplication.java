@@ -19,8 +19,11 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 import com.sttx.bookmanager.util.spring.SpringUtils;
 
+import tk.mybatis.spring.annotation.MapperScan;
+
 @SpringBootApplication
 @ServletComponentScan
+@MapperScan("com.sttx.bookmanager.dao")
 public class CashLoanManagerApplication extends SpringBootServletInitializer
         implements EmbeddedServletContainerCustomizer, ApplicationListener<ContextRefreshedEvent> {
     private static final Logger log = LoggerFactory.getLogger(CashLoanManagerApplication.class);
