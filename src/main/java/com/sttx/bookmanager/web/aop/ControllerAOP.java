@@ -100,18 +100,18 @@ public class ControllerAOP {
       log.info("用户浏览器信息agentStr:{}",agentStr);
       UserAgent agent = UserAgent.parseUserAgentString(agentStr);
       // 浏览器
-      Browser browser = agent.getBrowser();
+      Browser browser = agent.getBrowser()==null?Browser.UNKNOWN:agent.getBrowser();
       // 浏览器版本
       Version version = agent.getBrowserVersion();
       // 系统
-      OperatingSystem os = agent.getOperatingSystem();
+      OperatingSystem os = agent.getOperatingSystem()==null?OperatingSystem.UNKNOWN:agent.getOperatingSystem();
       /**
        * 保存字段
        */
       // 浏览器类型
       BrowserType browserType = browser.getBrowserType();
       // 浏览器名称和版本
-      String browserAndVersion = String.format("%s-%s", browser.getGroup().getName(), version.getVersion());
+      String browserAndVersion = String.format("%s-%s", browser.getGroup().getName(), version==null?"未知":version.getVersion());
       // 浏览器厂商
       Manufacturer manufacturer = browser.getManufacturer();
       // 浏览器引擎
