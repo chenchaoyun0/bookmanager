@@ -32,9 +32,9 @@ import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.RenderingEngine;
 import eu.bitwalker.useragentutils.UserAgent;
 import eu.bitwalker.useragentutils.Version;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 public class ControllerAOP {
-  private static Logger log = Logger.getLogger(ControllerAOP.class);
   @Autowired
   private ILogService logService;
 
@@ -97,6 +97,7 @@ public class ControllerAOP {
        * 保存用户浏览器信息
        */
       String agentStr = req.getHeader("user-agent");
+      log.info("用户浏览器信息agentStr:{}",agentStr);
       UserAgent agent = UserAgent.parseUserAgentString(agentStr);
       // 浏览器
       Browser browser = agent.getBrowser();
