@@ -16,6 +16,38 @@
     <result column="oscpu" jdbcType="LONGVARCHAR" property="oscpu" />
     <result column="product_sub" jdbcType="LONGVARCHAR" property="productSub" />
     <result column="user_profile" jdbcType="LONGVARCHAR" property="userProfile" />
+     <result
+            column="browser_Type"
+            property="browserType"
+            jdbcType="VARCHAR" />
+        <result
+            column="browser_And_Version"
+            property="browserAndVersion"
+            jdbcType="VARCHAR" />
+        <result
+            column="manufacturer"
+            property="manufacturer"
+            jdbcType="VARCHAR" />
+        <result
+            column="rendering_Engine"
+            property="renderingEngine"
+            jdbcType="VARCHAR" />
+        <result
+            column="sys_Name"
+            property="sysName"
+            jdbcType="VARCHAR" />
+        <result
+            column="operating_System"
+            property="operatingSystem"
+            jdbcType="VARCHAR" />
+        <result
+            column="sys_Manufacturer"
+            property="sysManufacturer"
+            jdbcType="VARCHAR" />
+        <result
+            column="device_Type"
+            property="deviceType"
+            jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List">
     id, ip,address,app_name, platform, product, cookie_enabled, create_time
