@@ -58,6 +58,15 @@ import com.sttx.bookmanager.web.vo.LookResumeReq;
 import com.sttx.bookmanager.web.vo.LookResumeResp;
 import com.sttx.bookmanager.web.vo.TodayCountVo;
 
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.BrowserType;
+import eu.bitwalker.useragentutils.DeviceType;
+import eu.bitwalker.useragentutils.Manufacturer;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.RenderingEngine;
+import eu.bitwalker.useragentutils.UserAgent;
+import eu.bitwalker.useragentutils.Version;
+
 @Controller
 public class IndexHomeController {
   private static final Logger log = LoggerFactory.getLogger(IndexHomeController.class);
@@ -134,6 +143,48 @@ public class IndexHomeController {
       visitorProfile.setCreateTime(DateConvertUtils.format(new Date(), DateConvertUtils.DATE_TIME_FORMAT));
       visitorProfile.setIp(ipAddr);
       visitorProfile.setAddress(userAddress);
+      
+      /**
+       * 保存用户浏览器信息
+       */
+      String agentStr = request.getHeader("user-agent");
+      log.info("用户浏览器信息agentStr:{}",agentStr);
+      UserAgent agent = UserAgent.parseUserAgentString(agentStr);
+      // 浏览器
+      Browser browser = agent.getBrowser()==null?Browser.UNKNOWN:agent.getBrowser();
+      // 浏览器版本
+      Version version = agent.getBrowserVersion();
+      // 系统
+      OperatingSystem os = agent.getOperatingSystem()==null?OperatingSystem.UNKNOWN:agent.getOperatingSystem();
+      /**
+       * 保存字段
+       */
+      // 浏览器类型
+      BrowserType browserType = browser.getBrowserType();
+      // 浏览器名称和版本
+      String browserAndVersion = String.format("%s-%s", browser.getGroup().getName(), version==null?"未知":version.getVersion());
+      // 浏览器厂商
+      Manufacturer manufacturer = browser.getManufacturer();
+      // 浏览器引擎
+      RenderingEngine renderingEngine = browser.getRenderingEngine();
+      // 系统名称
+      String sysName = os.getName();
+      // 产品系列
+      OperatingSystem operatingSystem = os.getGroup();
+      // 生成厂商
+      Manufacturer sysManufacturer = os.getManufacturer();
+      // 设备类型
+      DeviceType deviceType = os.getDeviceType();
+   // 浏览器信息
+      visitorProfile.setBrowserAndVersion(browserAndVersion);
+      visitorProfile.setBrowserType(browserType.name());
+      visitorProfile.setManufacturer(manufacturer.name());
+      visitorProfile.setRenderingEngine(renderingEngine.name());
+      visitorProfile.setSysName(sysName);
+      visitorProfile.setOperatingSystem(operatingSystem.name());
+      visitorProfile.setSysManufacturer(sysManufacturer.name());
+      visitorProfile.setDeviceType(deviceType.name());
+      
       int insert = visitorProfileService.insert(visitorProfile);
       log.info("保存用户信息:{}", insert);
       //
