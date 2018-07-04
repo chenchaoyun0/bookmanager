@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sttx.bookmanager.dao.TLogMapper">
+    <!-- 缓存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
     <resultMap
         id="BaseResultMap"
         type="com.sttx.bookmanager.po.TLog">
         <id
-            column="log_Id"
-            property="logId"
-            jdbcType="VARCHAR" />
+            column="id"
+            property="id"
+            jdbcType="BIGINT" />
         <id
             column="user_Ip"
             property="userIp"
@@ -81,8 +83,6 @@
             property="deviceType"
             jdbcType="VARCHAR" />
     </resultMap>
-    <!-- 缓存 -->
-    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache" /> -->
     <!-- 通过ip查询 -->
     <select
         id="selectByUserIp"
@@ -106,7 +106,7 @@
         FROM
           (
             SELECT
-              log_Id,
+              id,
               user_Name,
               user_Nick_Name,
               user_Address,
@@ -128,13 +128,13 @@
             FROM
               t_log
             ORDER BY
-              oper_Time DESC
+              id DESC
             LIMIT 10000000000
           ) a
         GROUP BY
           a.user_Ip
         ORDER BY
-          a.oper_Time DESC
+          a.id DESC
     </select>
 <!--     <select
         id="selectLogPages"
@@ -142,7 +142,7 @@
         parameterType="com.sttx.bookmanager.po.TLog"
         useCache="false">
         SELECT
-        log_Id,
+        id,
         user_Name,
         user_Nick_Name,
         user_Address,
@@ -178,7 +178,7 @@
         *
         from t_log where
         user_Ip=#{userIp,jdbcType=VARCHAR}
-        order by oper_Time
+        order by id
         DESC
     </select>
     <select
@@ -190,7 +190,7 @@
     <!-- todayCount -->
     <select
         id="todayCount"
-        resultType="com.sttx.bookmanager.web.vo.TodayCountVo">
+        resultType="com.sttx.bookmanager.web.vo.TodayCountVo" useCache="false">
         SELECT
         count(*) as todayVisitorCount,
         SUM(sc) as
@@ -210,7 +210,7 @@
     </select>
     <select
         id="totalPathCount"
-        resultType="long">
+        resultType="long" useCache="false">
         SELECT
         count(1)
         FROM
@@ -221,4 +221,8 @@
             </if>
         </where>
     </select>
+    <update id="updateId">
+      update t_log_copy set id=#{arg0} where log_Id=#{arg1}
+    </update>
+    
 </mapper>

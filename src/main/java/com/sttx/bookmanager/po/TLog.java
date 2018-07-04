@@ -8,9 +8,13 @@ import lombok.Data;
 
 @Data
 @Table(name="t_log")
-public class TLog extends TLogKey implements Serializable {
+public class TLog implements Serializable {
   private static final long serialVersionUID = 1L;
 
+  private long id;
+  
+  private String userIp;
+  
   private String userName;
 
   private String userNickName;

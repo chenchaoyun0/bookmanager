@@ -72,7 +72,6 @@ public class MongoLogTest {
             String userName = basicDBObject.getString("userName");
             String userNickName = basicDBObject.getString("userNickName");
             TLog tLog = new TLog(userName, userNickName, userAddress, userJwd, module, action, actionTime, operTime, count);
-            tLog.setLogId(logId);
             tLog.setUserIp(userIp);
             logList.add(tLog);
         }
@@ -106,7 +105,6 @@ public class MongoLogTest {
         tLog.setAction("indexHome");
         tLog.setActionTime(29l);
         tLog.setCount(0l);
-        tLog.setLogId("A55D9D20B88D421D92FA96D986EC65D2");
         tLog.setModule("IndexHomeController");
         tLog.setUserJwd("未知");
         tLog.setOperTime("2017-03-09 02:29:38:655");

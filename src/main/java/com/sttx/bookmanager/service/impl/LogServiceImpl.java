@@ -49,10 +49,11 @@ public class LogServiceImpl implements ILogService {
     try {
       log.info("++++++++++++++++++++保存日志begin...");
       int save = baseMongoRepository.save(tLog);
-      tLogMapper.insertSelective(tLog);
-      log.info("++++++++++++++++++++保存日志end...");
+      int insertSelective = tLogMapper.insertSelective(tLog);
+      log.info("++++++++++++++++++++保存日志end...:{}",insertSelective);
       return save;
     } catch (UserException e) {
+      log.error("error,{}", e);
       throw new UserException("操作失败");
     }
   }
@@ -60,12 +61,14 @@ public class LogServiceImpl implements ILogService {
   @Override
   public TLog selectByUserIp(String userIp) {
     try {
-      Criteria criteria = new Criteria();
-      criteria.and("userIp").is(userIp);
-      Query query = Query.query(criteria);
-      TLog findOne = baseMongoRepository.findOne(query, TLog.class);
+//      Criteria criteria = new Criteria();
+//      criteria.and("userIp").is(userIp);
+//      Query query = Query.query(criteria);
+//      TLog findOne = baseMongoRepository.findOne(query, TLog.class);
+      TLog findOne = tLogMapper.selectByUserIp(userIp);
       return findOne;
     } catch (UserException e) {
+      log.error("error,{}", e);
       throw new UserException("操作失败");
     }
   }
@@ -75,6 +78,7 @@ public class LogServiceImpl implements ILogService {
     try {
       return insertSelective(tLog);
     } catch (UserException e) {
+      log.error("error,{}", e);
       throw new UserException("操作失败");
     }
   }
@@ -84,6 +88,7 @@ public class LogServiceImpl implements ILogService {
     try {
       return tLogMapper.updateByPrimaryKeySelective(record);
     } catch (UserException e) {
+      log.error("error,{}", e);
       throw new UserException("操作失败");
     }
   }
@@ -144,7 +149,6 @@ public class LogServiceImpl implements ILogService {
       String userNickName = basicDBObject.getString("userNickName");
       TLog tLogMongo
         = new TLog(userName, userNickName, userAddress, userJwd, module, action, actionTime, operTime, count);
-      tLogMongo.setLogId(logId);
       tLogMongo.setUserIp(userIp);
       logList.add(tLogMongo);
     }
@@ -228,7 +232,6 @@ public class LogServiceImpl implements ILogService {
       String userNickName = basicDBObject.getString("userNickName");
       TLog tLogMongo
         = new TLog(userName, userNickName, userAddress, userJwd, module, action, actionTime, operTime, count);
-      tLogMongo.setLogId(logId);
       tLogMongo.setUserIp(userIp2);
       logList.add(tLogMongo);
     }

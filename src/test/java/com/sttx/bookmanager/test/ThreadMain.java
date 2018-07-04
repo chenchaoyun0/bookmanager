@@ -29,7 +29,6 @@ public class ThreadMain {
                         tLog.setAction("indexHome");
                         tLog.setActionTime(29l);
                         tLog.setCount(0l);
-                        tLog.setLogId(CommonUtils.uuid());
                         tLog.setModule("IndexHomeController");
                         tLog.setUserJwd("未知");
                         tLog.setOperTime("2017-03-09 02:29:38:655");

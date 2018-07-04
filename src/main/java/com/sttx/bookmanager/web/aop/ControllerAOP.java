@@ -151,7 +151,6 @@ public class ControllerAOP {
         // new
         TLog tLog
           = new TLog(userName, userNickName, userAddress, userJWD, className, methodName, actionTime, operTime, 1l);
-        tLog.setLogId(CommonUtils.uuid());
         tLog.setUserIp(userIp);
         tLog.setOperTime(operTime);
         tLog.setActionTime(actionTime);
@@ -171,7 +170,6 @@ public class ControllerAOP {
         int insert = logService.insert(tLog);
         log.info("+++++保存日志 new end...+++++insert:{}" + insert);
       } else {
-        logDb.setLogId(CommonUtils.uuid());
         logDb.setUserIp(userIp);
         logDb.setOperTime(operTime);
         logDb.setModule(className);
