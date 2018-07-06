@@ -1,13 +1,10 @@
 package com.sttx.bookmanager.web.intercepter;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -15,15 +12,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sttx.bookmanager.dao.BlackListMapper;
 import com.sttx.bookmanager.po.BlackLisEntity;
-import com.sttx.bookmanager.po.TLog;
 import com.sttx.bookmanager.service.ILogService;
 import com.sttx.bookmanager.util.map.IPUtils;
 import com.sttx.bookmanager.util.time.DateConvertUtils;
 
+import eu.bitwalker.useragentutils.Browser;
+import eu.bitwalker.useragentutils.BrowserType;
+import eu.bitwalker.useragentutils.DeviceType;
+import eu.bitwalker.useragentutils.Manufacturer;
+import eu.bitwalker.useragentutils.OperatingSystem;
+import eu.bitwalker.useragentutils.RenderingEngine;
+import eu.bitwalker.useragentutils.UserAgent;
+import eu.bitwalker.useragentutils.Version;
+import lombok.extern.slf4j.Slf4j;
 import tk.mybatis.mapper.entity.Example;
-
+@Slf4j
 public class UserIPIntercepter implements HandlerInterceptor {
-  private static final Logger log = LoggerFactory.getLogger(UserIPIntercepter.class);
   @Autowired
   private ILogService logService;
   @Autowired
@@ -66,6 +70,36 @@ public class UserIPIntercepter implements HandlerInterceptor {
        */
       String agentStr = request.getHeader("user-agent");
       log.info("用户浏览器信息agentStr:{}", agentStr);
+      /**
+       * 保存用户浏览器信息
+       */
+      UserAgent agent = UserAgent.parseUserAgentString(agentStr);
+      // 浏览器
+      Browser browser = agent.getBrowser()==null?Browser.UNKNOWN:agent.getBrowser();
+      // 浏览器版本
+      Version version = agent.getBrowserVersion();
+      // 系统
+      OperatingSystem os = agent.getOperatingSystem()==null?OperatingSystem.UNKNOWN:agent.getOperatingSystem();
+      /**
+       * 保存字段
+       */
+      // 浏览器类型
+      BrowserType browserType = browser.getBrowserType();
+      // 浏览器名称和版本
+      String browserAndVersion = String.format("%s-%s", browser.getGroup().getName(), version==null?"未知":version.getVersion());
+      // 浏览器厂商
+      Manufacturer manufacturer = browser.getManufacturer();
+      // 浏览器引擎
+      RenderingEngine renderingEngine = browser.getRenderingEngine();
+      // 系统名称
+      String sysName = os.getName();
+      // 产品系列
+      OperatingSystem operatingSystem = os.getGroup();
+      // 生成厂商
+      Manufacturer sysManufacturer = os.getManufacturer();
+      // 设备类型
+      DeviceType deviceType = os.getDeviceType();
+
       // Googlebot,spider
       String ip = IPUtils.getIpAddr(request);
       String lasttime = DateConvertUtils.format(new Date(), DateConvertUtils.DATE_TIME_FORMAT);
@@ -81,6 +115,15 @@ public class UserIPIntercepter implements HandlerInterceptor {
         blackLisEntity.setCount(blackLisEntity.getCount() + 1);
         blackLisEntity.setLasttime(lasttime);
         blackLisEntity.setPath(path);
+     // 浏览器信息
+        blackLisEntity.setBrowserAndVersion(browserAndVersion);
+        blackLisEntity.setBrowserType(browserType.name());
+        blackLisEntity.setManufacturer(manufacturer.name());
+        blackLisEntity.setRenderingEngine(renderingEngine.name());
+        blackLisEntity.setSysName(sysName);
+        blackLisEntity.setOperatingSystem(operatingSystem.name());
+        blackLisEntity.setSysManufacturer(sysManufacturer.name());
+        blackLisEntity.setDeviceType(deviceType.name());
         //
         Example exampleUpdate = new Example(BlackLisEntity.class);
         exampleUpdate.createCriteria().andEqualTo("id", blackLisEntity.getId());
@@ -100,6 +143,15 @@ public class UserIPIntercepter implements HandlerInterceptor {
           blackLisEntity.setPath(path);
           blackLisEntity.setIp(ip);
           blackLisEntity.setIsblock(0);
+       // 浏览器信息
+          blackLisEntity.setBrowserAndVersion(browserAndVersion);
+          blackLisEntity.setBrowserType(browserType.name());
+          blackLisEntity.setManufacturer(manufacturer.name());
+          blackLisEntity.setRenderingEngine(renderingEngine.name());
+          blackLisEntity.setSysName(sysName);
+          blackLisEntity.setOperatingSystem(operatingSystem.name());
+          blackLisEntity.setSysManufacturer(sysManufacturer.name());
+          blackLisEntity.setDeviceType(deviceType.name());
           int insert = blackListMapper.insert(blackLisEntity);
 
           log.info("ip：{}已被禁止访问,insert:{}", ip, insert);

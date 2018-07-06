@@ -38,11 +38,12 @@ public class BlackListTest {
     String path ="/test";
     //
     Example example = new Example(BlackLisEntity.class);
-    example.createCriteria().andEqualTo("ip", "127.0.0.1");
+    example.createCriteria().andEqualTo("ip", "203.208.60.168");
     BlackLisEntity blackLisEntity = blackListMapper.selectOneByExample(example);
 
     if (blackLisEntity != null) {
       // 更新次数
+      blackLisEntity.setBrowserAndVersion("setBrowserAndVersion");
       blackLisEntity.setCount(blackLisEntity.getCount() + 1);
       blackLisEntity.setLasttime(lasttime);
       blackLisEntity.setPath(path);
