@@ -91,7 +91,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
 
         if (b) {
           blackLisEntity = new BlackLisEntity();
-          blackLisEntity.setCount(blackLisEntity.getCount() + 1);
+          blackLisEntity.setCount(1l);
           blackLisEntity.setLasttime(lasttime);
           blackLisEntity.setPath(path);
           blackLisEntity.setIp(ip);
