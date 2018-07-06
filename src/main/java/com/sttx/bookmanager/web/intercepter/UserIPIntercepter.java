@@ -48,7 +48,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
       HandlerMethod h = (HandlerMethod)handler;
 
     }
-    log.info("执行Handler完成执行此方法...");
+    //log.info("执行Handler完成执行此方法...");
   }
 
   // 进入Handler方法之后，返回modelAndView之前执行
@@ -56,14 +56,14 @@ public class UserIPIntercepter implements HandlerInterceptor {
   // 也可以在这里统一指定视图
   public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
     throws Exception {
-    log.info("进入Handler方法之后，返回modelAndView之前执行...");
+    //log.info("进入Handler方法之后，返回modelAndView之前执行...");
   }
 
   // 进入 Handler方法之前执行
   // 用于身份认证、身份授权
   // 比如身份认证，如果认证通过表示当前用户没有登陆，需要此方法拦截不再向下执行
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    log.info("进入 Handler方法之前执行...");
+    //log.info("进入 Handler方法之前执行...");
     try {
       /**
        * 保存用户浏览器信息
