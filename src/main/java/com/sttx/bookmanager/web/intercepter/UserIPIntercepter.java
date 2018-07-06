@@ -32,6 +32,9 @@ public class UserIPIntercepter implements HandlerInterceptor {
   private static final String GOOGLEBOT = "Googlebot";
 
   private static final String SPIDER = "spider";
+  private static final String UBUNTU = "Ubuntu";
+  private static final String CENTOS = "Centos";
+  private static final String CENTOS_UP = "CentOS";
 
   // 执行Handler完成执行此方法
   // 应用场景：统一异常处理，统一日志处理
@@ -87,7 +90,8 @@ public class UserIPIntercepter implements HandlerInterceptor {
 
       } else {
 
-        boolean b = agentStr.contains(SPIDER) || agentStr.contains(GOOGLEBOT);
+        boolean b = agentStr.contains(SPIDER) || agentStr.contains(GOOGLEBOT) || agentStr.contains(UBUNTU)
+          || agentStr.contains(CENTOS) || agentStr.contains(CENTOS_UP);
 
         if (b) {
           blackLisEntity = new BlackLisEntity();
@@ -100,7 +104,7 @@ public class UserIPIntercepter implements HandlerInterceptor {
 
           log.info("ip：{}已被禁止访问,insert:{}", ip, insert);
           return false;
-        }else{
+        } else {
           return true;
         }
       }
