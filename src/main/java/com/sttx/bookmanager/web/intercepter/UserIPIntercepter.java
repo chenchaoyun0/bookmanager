@@ -135,8 +135,10 @@ public class UserIPIntercepter implements HandlerInterceptor {
 
         boolean b = agentStr.contains(SPIDER) || agentStr.contains(GOOGLEBOT) || agentStr.contains(UBUNTU)
           || agentStr.contains(CENTOS) || agentStr.contains(CENTOS_UP);
+        boolean c=sysName.contains(CENTOS)||sysName.contains(CENTOS_UP)||sysName.contains(UBUNTU);
+        boolean d = operatingSystem.name().equalsIgnoreCase("LINUX");
 
-        if (b) {
+        if (b||c||d) {
           blackLisEntity = new BlackLisEntity();
           blackLisEntity.setCount(1l);
           blackLisEntity.setLasttime(lasttime);
