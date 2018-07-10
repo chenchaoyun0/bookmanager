@@ -34,7 +34,8 @@ public class UserIPIntercepter implements HandlerInterceptor {
   private BlackListMapper blackListMapper;
 
   private static final String GOOGLEBOT = "Googlebot";
-
+  private static final String ROBOT = "Robot";
+  private static final String SPIDER_UP = "Spider";
   private static final String SPIDER = "spider";
   private static final String UBUNTU = "Ubuntu";
   private static final String CENTOS = "Centos";
@@ -137,8 +138,10 @@ public class UserIPIntercepter implements HandlerInterceptor {
           || agentStr.contains(CENTOS) || agentStr.contains(CENTOS_UP);
         boolean c=sysName.contains(CENTOS)||sysName.contains(CENTOS_UP)||sysName.contains(UBUNTU);
         boolean d = operatingSystem.name().equalsIgnoreCase("LINUX");
+        
+        boolean e=browserAndVersion.contains(SPIDER_UP)||browserAndVersion.contains(ROBOT);
 
-        if (b||c||d) {
+        if (b||c||d||e) {
           blackLisEntity = new BlackLisEntity();
           blackLisEntity.setCount(1l);
           blackLisEntity.setLasttime(lasttime);
