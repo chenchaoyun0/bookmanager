@@ -8,7 +8,7 @@
 
 README
 ===========================
-本项目是由本人另一个项目bookmanager项目,项目主要负责人：陈超允、王永龙、闫晓俞。改造后采用spring cloud进行重构，主要用于日常学习。技术栈见下图
+本项目是由本人另一个项目bookmanager项目，采用spring cloud进行重构，主要用于日常学习。技术栈见下图
 
 ****
 |Author|陈超允|
@@ -34,3 +34,6 @@ README
 # 网站流程图
 ****
 ![](https://github.com/chenchaoyun0/cloudbook/blob/master/framework.svg)
+# 项目部分截图
+****
+![](https://github.com/chenchaoyun0/cloudbook/blob/master/index.jpg)
